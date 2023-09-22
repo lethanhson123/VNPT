@@ -4,7 +4,17 @@
     {
         public static IServiceCollection AddBusinessService(this IServiceCollection services)
         {
-            
+            services.AddTransient<IDichVuBusiness, DichVuBusiness>();
+            services.AddTransient<IDoanhNghiepBusiness, DoanhNghiepBusiness>();
+            services.AddTransient<IDoanhNghiepDichVuBusiness, DoanhNghiepDichVuBusiness>();
+            services.AddTransient<IDoanhNghiepThanhVienBusiness, DoanhNghiepThanhVienBusiness>();
+            services.AddTransient<IHuyenBusiness, HuyenBusiness>();
+            services.AddTransient<ILoaiDoanhNghiepBusiness, LoaiDoanhNghiepBusiness>();
+            services.AddTransient<ILoaiDoanhNghiepThanhVienBusiness, LoaiDoanhNghiepThanhVienBusiness>();
+            services.AddTransient<ILoaiTrangThaiBusiness, LoaiTrangThaiBusiness>();
+            services.AddTransient<INganhNgheKinhDoanhBusiness, NganhNgheKinhDoanhBusiness>();
+            services.AddTransient<ITinhBusiness, TinhBusiness>();
+            services.AddTransient<IXaBusiness, XaBusiness>();        
 
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             return services;
@@ -18,7 +28,17 @@
         }
         public static IServiceCollection AddRepositoryService(this IServiceCollection services)
         {
-            
+            services.AddTransient<IDichVuRepository, DichVuRepository>();
+            services.AddTransient<IDoanhNghiepDichVuRepository, DoanhNghiepDichVuRepository>();
+            services.AddTransient<IDoanhNghiepRepository, DoanhNghiepRepository>();
+            services.AddTransient<IDoanhNghiepThanhVienRepository, DoanhNghiepThanhVienRepository>();
+            services.AddTransient<IHuyenRepository, HuyenRepository>();
+            services.AddTransient<ILoaiDoanhNghiepRepository, LoaiDoanhNghiepRepository>();
+            services.AddTransient<ILoaiDoanhNghiepThanhVienRepository, LoaiDoanhNghiepThanhVienRepository>();
+            services.AddTransient<ILoaiTrangThaiRepository, LoaiTrangThaiRepository>();
+            services.AddTransient<INganhNgheKinhDoanhRepository, NganhNgheKinhDoanhRepository>();
+            services.AddTransient<ITinhRepository, TinhRepository>();
+            services.AddTransient<IXaRepository, XaRepository>();           
 
             return services;
         }

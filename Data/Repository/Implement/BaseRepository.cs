@@ -14,6 +14,19 @@
         }
         public virtual void Initialization(T model)
         {
+            model.LastUpdatedDate = DateTime.Now;
+            if (model.CreatedDate == null)
+            {
+                model.CreatedDate = DateTime.Now;
+            }
+            if (model.Active == null)
+            {
+                model.Active = true;
+            }
+            if (model.Display == null)
+            {
+                model.Display = model.Name;
+            }
         }
         public virtual int Add(T model)
         {
@@ -192,7 +205,8 @@
             var result = _context.Set<T>().AsNoTracking().FirstOrDefault(model => model.ID == ID);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));                
+                result = (T)Activator.CreateInstance(typeof(T));
+                result.Active = GlobalHelper.InitializationBool;
             }
             return result;
         }
@@ -201,7 +215,8 @@
             var result = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(model => model.ID == ID);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));                
+                result = (T)Activator.CreateInstance(typeof(T));
+                result.Active = GlobalHelper.InitializationBool;
             }
             return result;
         }
@@ -210,7 +225,8 @@
             var result = _context.Set<T>().AsNoTracking().FirstOrDefault(model => model.Name == name);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));                
+                result = (T)Activator.CreateInstance(typeof(T));
+                result.Active = GlobalHelper.InitializationBool;
             }
             return result;
         }
@@ -219,7 +235,8 @@
             var result = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(model => model.Name == name);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));                
+                result = (T)Activator.CreateInstance(typeof(T));
+                result.Active = GlobalHelper.InitializationBool;
             }
             return result;
         }
@@ -228,7 +245,8 @@
             var result = _context.Set<T>().AsNoTracking().FirstOrDefault(model => model.Code == code);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));                
+                result = (T)Activator.CreateInstance(typeof(T));
+                result.Active = GlobalHelper.InitializationBool;
             }
             return result;
         }
@@ -237,7 +255,8 @@
             var result = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(model => model.Code == code);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));                
+                result = (T)Activator.CreateInstance(typeof(T));
+                result.Active = GlobalHelper.InitializationBool;
             }
             return result;
         }

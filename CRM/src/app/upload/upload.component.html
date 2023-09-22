@@ -1,0 +1,79 @@
+<div class="row">
+    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
+        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Upload</h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
+                        </li>
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Upload
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="col s12 m12 l4">
+                            <div class="input-field col s12">
+                                Bước 01: <a target="_blank" href="{{excelDoanhNghiepURL}}">Tải về</a> file
+                                excel mẫu
+                            </div>
+                            <div class="input-field col s12">
+                                Bước 02: Chọn file excel có dữ liệu:
+                                <input type="file" #uploadDoanhNghiep (change)="changeDoanhNghiep($event.target.files)">
+                            </div>
+                            <div class="input-field col s12">
+                                <button [disabled]="!isDoanhNghiep" class="btn btn-primary" (click)="onSubmit()">Upload</button>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l8">
+                            <div class="KhungOverflow">
+                                <mat-table [dataSource]="dataSource" matSort>                                                                                                                                                                                                                                               
+                                    <ng-container matColumnDef="Code">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Mã số
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{element.Code}}</mat-cell>
+                                    </ng-container>                      
+                                    <ng-container matColumnDef="Name">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
+                                    </ng-container>                                                                                                                                                                                             
+                                    <ng-container matColumnDef="loading">
+                                        <mat-footer-cell *matFooterCellDef colspan="4">
+                                            Đang tải dữ liệu...
+                                        </mat-footer-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="noData">
+                                        <mat-footer-cell *matFooterCellDef colspan="4">
+                                            Chưa có dữ liệu.
+                                        </mat-footer-cell>
+                                    </ng-container>
+                                    <mat-header-row *matHeaderRowDef="DoanhNghiepService.displayColumnsSub"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: DoanhNghiepService.displayColumnsSub;"></mat-row>
+                                    <mat-footer-row *matFooterRowDef="['loading']"
+                                        [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                                    <mat-footer-row *matFooterRowDef="['noData']"
+                                        [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                    </mat-footer-row>
+                                </mat-table>
+                                <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                    [showFirstLastButtons]></mat-paginator>                
+                            </div>                            
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>

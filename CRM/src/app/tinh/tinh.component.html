@@ -1,0 +1,123 @@
+<div class="row">
+    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
+        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Tỉnh <span
+                            *ngIf="TinhService.list">({{TinhService.list.length - 1}} items)</span></h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
+                        </li>
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Tỉnh
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="col s12 m12 l9">
+                            <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
+                                class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
+                                (keyup.enter)="onSearch()">
+                        </div>
+                        <div class="col s12 m12 l3">
+                            <a title="Tìm" (click)="onSearch()"
+                                class="btn-floating waves-effect waves-light green darken-1"><i
+                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
+                            <a style="display: none;" title="Lưu thay đổi danh sách" (click)="onSaveList()"
+                                class="btn-floating waves-effect waves-light cyan"><i
+                                    class="material-icons">save</i></a>
+                        </div>
+                        <div class="KhungOverflow">
+                            <mat-table [dataSource]="dataSource" matSort>       
+                                <ng-container matColumnDef="Code">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Code
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="Code" name="Code{{element.ID}}"
+                                            [(ngModel)]="element.Code" type="text">
+                                    </mat-cell>
+                                </ng-container>                                                            
+                                <ng-container matColumnDef="Name">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tỉnh
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="Tỉnh" name="Name{{element.ID}}"
+                                            [(ngModel)]="element.Name" type="text">
+                                    </mat-cell>
+                                </ng-container>            
+                                <ng-container matColumnDef="Note">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="Ghi chú" name="Note{{element.ID}}"
+                                            [(ngModel)]="element.Note" type="text">
+                                    </mat-cell>
+                                </ng-container>                          
+                                <ng-container matColumnDef="SortOrder">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="0" name="SortOrder{{element.ID}}" style="text-align: right;"
+                                            [(ngModel)]="element.SortOrder" type="number">
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="Active">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <label>
+                                            <input type="checkbox" class="filled-in" name="Active{{element.ID}}"
+                                                [(ngModel)]="element.Active" />
+                                            <span>.</span>
+                                        </label>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="Save">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <a title="Lưu thay đổi" (click)="onSave(element)"
+                                            class="btn-floating waves-effect waves-light cyan"><i
+                                                class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
+                                        <a (click)="onDelete(element)" *ngIf="element.ID>0"
+                                            class="btn-floating waves-effect waves-light red"><i
+                                                class="material-icons">delete_outline</i></a>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                        Đang tải dữ liệu...
+                                    </mat-footer-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="noData">
+                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                        Chưa có dữ liệu.
+                                    </mat-footer-cell>
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="TinhService.displayColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: TinhService.displayColumns;"></mat-row>
+                                <mat-footer-row *matFooterRowDef="['loading']"
+                                    [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                                <mat-footer-row *matFooterRowDef="['noData']"
+                                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                </mat-footer-row>
+                            </mat-table>
+                            <!-- <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                [showFirstLastButtons]></mat-paginator>                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Business.Implement
+﻿namespace Business.Implement
 {
     public class BaseBusiness<T, TRepository> : IBaseBusiness<T>
         where T : BaseModel
@@ -13,70 +11,73 @@ namespace Business.Implement
         }
         public virtual void Initialization(T model)
         {
-            model.LastUpdatedDate = DateTime.Now;
-            if (model.CreatedDate == null)
+            if (string.IsNullOrEmpty(model.Code))
             {
-                model.CreatedDate = DateTime.Now;
+                model.Code = GlobalHelper.InitializationDateTimeCode0001;
             }
-            if (model.Active == null)
+            model.Display = model.Name + "-" + model.Code;
+            if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))
             {
-                model.Active = true;
-            }
-            if (!string.IsNullOrEmpty(model.ContentHTML))
-            {
-                //model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
-                //model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
-                model.ContentHTML = model.ContentHTML.Replace(@"<html>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</html>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"<head>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</head>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"<title>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</title>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"<body>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</body>", @"");
-            }
-            if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationSortOrder))
-            {
-                model.SortOrder = GlobalHelper.InitializationNumber;
-            }
-            if (!string.IsNullOrEmpty(model.FileName))
-            {
-                if (model.FileName.Contains("https") == false)
-                {
-                    model.FileName = GlobalHelper.APISite + GlobalHelper.Image + @"/" + model.GetType().Name + @"/" + model.FileName;
-                }
-            }
-            if (!string.IsNullOrEmpty(model.FileThumbnailName))
-            {
-                if (model.FileThumbnailName.Contains("https") == false)
-                {
-                    model.FileThumbnailName = GlobalHelper.APISite + GlobalHelper.Image + @"/" + model.GetType().Name + @"/" + model.FileThumbnailName;
-                }
-            }
+                model.SortOrder = 1;
+            }            
         }
         public virtual T Save(T model)
         {
             Initialization(model);
-            if (model.ID > 0)
+            if (!string.IsNullOrEmpty(model.Code))
             {
-                _repository.Update(model);
-            }
-            else
-            {
-                _repository.Add(model);
+                T modelExist = _repository.GetByCode(model.Code);                
+                if (model.ID > 0)
+                {
+                    if (modelExist.ID == 0)
+                    {
+                        _repository.Update(model);
+                    }
+                    else
+                    {
+                        if (modelExist.ID == model.ID)
+                        {
+                            _repository.Update(model);
+                        }
+                    }
+                }
+                else
+                {
+                    if (modelExist.ID == 0)
+                    {
+                        _repository.Add(model);
+                    }
+                }
             }
             return model;
         }
         public virtual async Task<T> SaveAsync(T model)
         {
             Initialization(model);
-            if (model.ID > 0)
+            if (!string.IsNullOrEmpty(model.Code))
             {
-                await _repository.UpdateAsync(model);
-            }
-            else
-            {
-                await _repository.AddAsync(model);
+                T modelExist = await _repository.GetByCodeAsync(model.Code);
+                if (model.ID > 0)
+                {
+                    if (modelExist.ID == 0)
+                    {
+                        await _repository.UpdateAsync(model);
+                    }
+                    else
+                    {
+                        if (modelExist.ID == model.ID)
+                        {
+                            await _repository.UpdateAsync(model);
+                        }
+                    }
+                }
+                else
+                {
+                    if (modelExist.ID == 0)
+                    {
+                        await _repository.AddAsync(model);
+                    }
+                }
             }
             return model;
         }
@@ -135,7 +136,8 @@ namespace Business.Implement
         public virtual List<T> GetAllAndEmptyToList()
         {
             List<T> result = new List<T>();
-            T empty = (T)Activator.CreateInstance(typeof(T));            
+            T empty = (T)Activator.CreateInstance(typeof(T));
+            empty.SortOrder = GlobalHelper.InitializationNumber;
             result.Add(empty);
             List<T> list = _repository.GetAllToList();
             if (list.Count > 0)
@@ -149,7 +151,8 @@ namespace Business.Implement
             List<T> result = new List<T>();
             try
             {
-                T empty = (T)Activator.CreateInstance(typeof(T));                
+                T empty = (T)Activator.CreateInstance(typeof(T));
+                empty.SortOrder = GlobalHelper.InitializationNumber;
                 result.Add(empty);
                 List<T> list = await _repository.GetAllToListAsync();
                 if (list.Count > 0)
@@ -184,7 +187,8 @@ namespace Business.Implement
             List<T> result = new List<T>();
             try
             {
-                T empty = (T)Activator.CreateInstance(typeof(T));                
+                T empty = (T)Activator.CreateInstance(typeof(T));
+                empty.SortOrder = GlobalHelper.InitializationNumber;
                 result.Add(empty);
                 List<T> list = _repository.GetByParentIDToList(parentID);
                 if (list.Count > 0)
@@ -203,7 +207,8 @@ namespace Business.Implement
             List<T> result = new List<T>();
             try
             {
-                T empty = (T)Activator.CreateInstance(typeof(T));                
+                T empty = (T)Activator.CreateInstance(typeof(T));
+                empty.SortOrder = GlobalHelper.InitializationNumber;
                 result.Add(empty);
                 List<T> list = await _repository.GetByParentIDToListAsync(parentID);
                 if (list.Count > 0)

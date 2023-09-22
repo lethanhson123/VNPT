@@ -6,6 +6,7 @@ global using Microsoft.AspNetCore.Mvc.Versioning;
 
 global using Swashbuckle.AspNetCore.SwaggerGen;
 global using Newtonsoft.Json;
+global using OfficeOpenXml;
 
 global using API;
 

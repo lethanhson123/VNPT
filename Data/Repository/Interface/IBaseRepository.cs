@@ -1,4 +1,6 @@
-﻿namespace Data.Repository.Interface
+﻿
+
+namespace Data.Repository.Interface
 {
     public interface IBaseRepository<T> where T : BaseModel
     {
