@@ -24,6 +24,7 @@ import { LoaiTrangThaiComponent } from './loai-trang-thai/loai-trang-thai.compon
 import { NganhNgheKinhDoanhComponent } from './nganh-nghe-kinh-doanh/nganh-nghe-kinh-doanh.component';
 import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
 import { UploadComponent } from './upload/upload.component';
+import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh-nghiep-info.component';
 
 
 
@@ -41,7 +42,8 @@ import { UploadComponent } from './upload/upload.component';
     LoaiTrangThaiComponent,
     NganhNgheKinhDoanhComponent,
     DoanhNghiepComponent,
-    UploadComponent,    
+    UploadComponent,
+    DoanhNghiepInfoComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

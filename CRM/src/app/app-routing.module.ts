@@ -11,6 +11,7 @@ import { LoaiDoanhNghiepThanhVienComponent } from './loai-doanh-nghiep-thanh-vie
 import { NganhNgheKinhDoanhComponent } from './nganh-nghe-kinh-doanh/nganh-nghe-kinh-doanh.component';
 import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
 import { UploadComponent } from './upload/upload.component';
+import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh-nghiep-info.component';
 
 
 const routes: Routes = [  
@@ -45,6 +46,9 @@ const routes: Routes = [
   {
     path: 'DoanhNghiep', component: DoanhNghiepComponent,
   },  
+  {
+    path: 'DoanhNghiepInfo/:ID', component: DoanhNghiepInfoComponent,
+  },
   {
     path: 'Upload', component: UploadComponent,
   },   

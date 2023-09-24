@@ -7,7 +7,8 @@
         public string? Email { get; set; }
         public string? CCCD { get; set; }
         public DateTime? CCCD_NgayCap { get; set; }
-        public string? CCCD_NoiCap { get; set; }        
+        public string? CCCD_NoiCap { get; set; }
+        public DateTime? NgaySinh { get; set; }
         public DoanhNghiepThanhVien()
         {
         }

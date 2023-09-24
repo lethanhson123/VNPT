@@ -62,7 +62,7 @@
                                         Xã
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <input placeholder="Huyện" name="Name{{element.ID}}"
+                                        <input placeholder="Xã" name="Name{{element.ID}}"
                                                [(ngModel)]="element.Name" type="text">
                                     </mat-cell>
                                 </ng-container>
@@ -128,8 +128,8 @@
                                                 [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
                                 </mat-footer-row>
                             </mat-table>
-                            <!-- <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                [showFirstLastButtons]></mat-paginator>                            -->
+                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                [showFirstLastButtons]></mat-paginator>                           
                         </div>
                     </div>
                 </div>
