@@ -602,6 +602,13 @@
         }
         #endregion
         #region Functions
+        public static string InitializationURLCode(string URLCode)
+        {
+            URLCode = URLCode.Split('/')[URLCode.Split('/').Length - 1];
+            URLCode = URLCode.Split('.')[0];
+            URLCode = URLCode.Replace(@".html", @"");
+            return URLCode;
+        }
         public static string SetName(string fileName)
         {
             string fileNameReturn = fileName;

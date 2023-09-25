@@ -25,7 +25,31 @@
                 <div class="card">
                     <div id="1">
                         <div class="card-content">
-                            <div class="col s12 m12 l9">
+                            <div class="col s12 m12 l3">
+                                <mat-select
+                                    style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                    name="HuyenID" class="browser-default" [(ngModel)]="huyenID" (selectionChange)="onChangeHuyenID()">
+                                    <mat-option [value]="0">
+                                        Tất cả
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of HuyenService.list" [value]="item.ID">
+                                        {{item.Name}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col s12 m12 l3">
+                                <mat-select
+                                    style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                    name="XaID" class="browser-default" [(ngModel)]="xaID">
+                                    <mat-option [value]="0">
+                                        Tất cả
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of XaService.list" [value]="item.ID">
+                                        {{item.Name}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col s12 m12 l3">
                                 <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
                                     class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
                                     (keyup.enter)="onSearch()">
@@ -47,7 +71,12 @@
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
-                                    </ng-container>                                   
+                                    </ng-container>               
+                                    <ng-container matColumnDef="DienThoai">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{element.DienThoai}}</mat-cell>
+                                    </ng-container>                               
                                     <ng-container matColumnDef="loading">
                                         <mat-footer-cell *matFooterCellDef colspan="4">
                                             Đang tải dữ liệu...
