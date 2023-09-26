@@ -13,7 +13,7 @@
         {
             if (string.IsNullOrEmpty(model.Code))
             {
-                model.Code = GlobalHelper.InitializationDateTimeCode0001;
+                model.Code = GlobalHelper.InitializationDateTimeCode;
             }
             model.Display = model.Name + "-" + model.Code;
             if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))

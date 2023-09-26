@@ -4,14 +4,14 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Gói cước <span
-                            *ngIf="DichVuService.list">({{DichVuService.list.length - 1}} items)</span></h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Nhân viên <span
+                            *ngIf="NhanVienService.list">({{NhanVienService.list.length - 1}} items)</span></h5>
                 </div>
                 <div class="col s12 m6 l6 right-align-md">
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
                         </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">Gói cước
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Nhân viên
                         </li>
                     </ol>
                 </div>
@@ -39,18 +39,18 @@
                         <div class="KhungOverflow">
                             <mat-table [dataSource]="dataSource" matSort>       
                                 <ng-container matColumnDef="Code">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Code
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <input placeholder="Code" name="Code{{element.ID}}"
+                                        <input placeholder="Điện thoại" name="Code{{element.ID}}"
                                             [(ngModel)]="element.Code" type="text">
                                     </mat-cell>
                                 </ng-container>                                                            
                                 <ng-container matColumnDef="Name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <input placeholder="Dịch vụ" name="Name{{element.ID}}"
+                                        <input placeholder="Nhân viên" name="Name{{element.ID}}"
                                             [(ngModel)]="element.Name" type="text">
                                     </mat-cell>
                                 </ng-container>            
@@ -103,16 +103,16 @@
                                         Chưa có dữ liệu.
                                     </mat-footer-cell>
                                 </ng-container>
-                                <mat-header-row *matHeaderRowDef="DichVuService.displayColumns"></mat-header-row>
-                                <mat-row *matRowDef="let row; columns: DichVuService.displayColumns;"></mat-row>
+                                <mat-header-row *matHeaderRowDef="NhanVienService.displayColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: NhanVienService.displayColumns;"></mat-row>
                                 <mat-footer-row *matFooterRowDef="['loading']"
                                     [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
                                 <mat-footer-row *matFooterRowDef="['noData']"
                                     [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
                                 </mat-footer-row>
                             </mat-table>
-                            <!-- <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                [showFirstLastButtons]></mat-paginator>                            -->
+                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                [showFirstLastButtons]></mat-paginator>                           
                         </div>
                     </div>
                 </div>

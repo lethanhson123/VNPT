@@ -19,6 +19,7 @@
         public virtual DbSet<Data.Model.LoaiDoanhNghiepThanhVien> LoaiDoanhNghiepThanhVien { get; set; }
         public virtual DbSet<Data.Model.LoaiTrangThai> LoaiTrangThai { get; set; }
         public virtual DbSet<Data.Model.NganhNgheKinhDoanh> NganhNgheKinhDoanh { get; set; }
+        public virtual DbSet<Data.Model.NhanVien> NhanVien { get; set; }
         public virtual DbSet<Data.Model.Tinh> Tinh { get; set; }
         public virtual DbSet<Data.Model.Xa> Xa { get; set; }        
 

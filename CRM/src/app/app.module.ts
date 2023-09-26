@@ -25,6 +25,7 @@ import { NganhNgheKinhDoanhComponent } from './nganh-nghe-kinh-doanh/nganh-nghe-
 import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
 import { UploadComponent } from './upload/upload.component';
 import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh-nghiep-info.component';
+import { NhanVienComponent } from './nhan-vien/nhan-vien.component';
 
 
 
@@ -43,7 +44,8 @@ import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh
     NganhNgheKinhDoanhComponent,
     DoanhNghiepComponent,
     UploadComponent,
-    DoanhNghiepInfoComponent,    
+    DoanhNghiepInfoComponent,
+    NhanVienComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

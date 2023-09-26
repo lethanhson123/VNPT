@@ -13,6 +13,7 @@
             services.AddTransient<ILoaiDoanhNghiepThanhVienBusiness, LoaiDoanhNghiepThanhVienBusiness>();
             services.AddTransient<ILoaiTrangThaiBusiness, LoaiTrangThaiBusiness>();
             services.AddTransient<INganhNgheKinhDoanhBusiness, NganhNgheKinhDoanhBusiness>();
+            services.AddTransient<INhanVienBusiness, NhanVienBusiness>();
             services.AddTransient<ITinhBusiness, TinhBusiness>();
             services.AddTransient<IXaBusiness, XaBusiness>();        
 
@@ -37,6 +38,7 @@
             services.AddTransient<ILoaiDoanhNghiepThanhVienRepository, LoaiDoanhNghiepThanhVienRepository>();
             services.AddTransient<ILoaiTrangThaiRepository, LoaiTrangThaiRepository>();
             services.AddTransient<INganhNgheKinhDoanhRepository, NganhNgheKinhDoanhRepository>();
+            services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<ITinhRepository, TinhRepository>();
             services.AddTransient<IXaRepository, XaRepository>();           
 
