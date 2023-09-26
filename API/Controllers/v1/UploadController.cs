@@ -1,6 +1,8 @@
 ﻿using Data.Model;
 using Helper;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -22,6 +24,8 @@ namespace API.Controllers.v1
         private readonly ILoaiTrangThaiBusiness _ILoaiTrangThaiBusiness;
         private readonly INganhNgheKinhDoanhBusiness _INganhNgheKinhDoanhBusiness;
         private readonly IXaBusiness _IXaBusiness;
+        private readonly IPhongBanBusiness _IPhongBanBusiness;
+        private readonly IDoanhNghiepDichVuLichSuBusiness _IDoanhNghiepDichVuLichSuBusiness;
 
         public UploadController(IWebHostEnvironment WebHostEnvironment
             , IDoanhNghiepBusiness IDoanhNghiepBusiness
@@ -34,6 +38,8 @@ namespace API.Controllers.v1
             , ILoaiTrangThaiBusiness ILoaiTrangThaiBusiness
             , INganhNgheKinhDoanhBusiness INganhNgheKinhDoanhBusiness
             , IXaBusiness IXaBusiness
+            , IPhongBanBusiness IPhongBanBusiness
+            , IDoanhNghiepDichVuLichSuBusiness IDoanhNghiepDichVuLichSuBusiness
             ) : base(IDoanhNghiepBusiness)
         {
             _WebHostEnvironment = WebHostEnvironment;
@@ -47,9 +53,11 @@ namespace API.Controllers.v1
             _ILoaiTrangThaiBusiness = ILoaiTrangThaiBusiness;
             _INganhNgheKinhDoanhBusiness = INganhNgheKinhDoanhBusiness;
             _IXaBusiness = IXaBusiness;
+            _IPhongBanBusiness = IPhongBanBusiness;
+            _IDoanhNghiepDichVuLichSuBusiness = IDoanhNghiepDichVuLichSuBusiness;
         }
         [HttpPost]
-        [Route("PostDoanhNghiepListByExcelFile")]
+        [Route("PostDoanhNghiepListByExcelFileAsync")]
         public virtual async Task<List<DoanhNghiep>> PostDoanhNghiepListByExcelFileAsync()
         {
             List<DoanhNghiep> result = new List<DoanhNghiep>();
@@ -183,7 +191,7 @@ namespace API.Controllers.v1
                                                         }
                                                         if (workSheet.Cells[i, 18].Value != null)
                                                         {
-                                                            doanhNghiep.NganhNgheKinhDoanh = workSheet.Cells[i, 18].Value.ToString().Trim();                                                            
+                                                            doanhNghiep.NganhNgheKinhDoanh = workSheet.Cells[i, 18].Value.ToString().Trim();
                                                         }
                                                         if (workSheet.Cells[i, 19].Value != null)
                                                         {
@@ -223,7 +231,7 @@ namespace API.Controllers.v1
                                                             {
                                                                 loaiDoanhNghiepExist = new LoaiDoanhNghiep();
                                                                 loaiDoanhNghiepExist.SortOrder = 1;
-                                                                loaiDoanhNghiepExist.Name = doanhNghiep.Note;                                                                
+                                                                loaiDoanhNghiepExist.Name = doanhNghiep.Note;
                                                                 await _ILoaiDoanhNghiepBusiness.AddAsync(loaiDoanhNghiepExist);
                                                             }
                                                             doanhNghiep.LoaiDoanhNghiepID = loaiDoanhNghiepExist.ID;
@@ -251,6 +259,7 @@ namespace API.Controllers.v1
                                                         await _IDoanhNghiepBusiness.SaveAsync(doanhNghiep);
                                                         if (doanhNghiep.ID > 0)
                                                         {
+                                                            result.Add(doanhNghiep);
                                                             if (workSheet.Cells[i, 26].Value != null)
                                                             {
                                                                 doanhNghiep.Note = workSheet.Cells[i, 26].Value.ToString().Trim();
@@ -436,6 +445,176 @@ namespace API.Controllers.v1
                                                                     }
                                                                 }
                                                             }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        string mes = e.Message;
+                    }
+                }
+            }
+            return result;
+        }
+
+        [HttpPost]
+        [Route("PostDoanhThuByYearAndMonthListByExcelFileAsync")]
+        public virtual async Task<List<DoanhNghiep>> PostDoanhThuByYearAndMonthListByExcelFileAsync()
+        {
+            List<DoanhNghiep> result = new List<DoanhNghiep>();
+            int yearDoanhThu = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+            int monthDoanhThu = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+            if (Request.Form.Files.Count > 0)
+            {
+                var file = Request.Form.Files[0];
+                if (file == null || file.Length == 0)
+                {
+                }
+                if (file != null)
+                {
+                    string fileExtension = Path.GetExtension(file.FileName);
+                    string fileName = "DoanhThu_" + yearDoanhThu + "_" + monthDoanhThu + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                    var physicalPath = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Upload, fileName);
+                    using (var stream = new FileStream(physicalPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    try
+                    {
+                        FileInfo fileLocation = new FileInfo(physicalPath);
+                        if (fileLocation.Length > 0)
+                        {
+                            if ((fileExtension == ".xlsx") || (fileExtension == ".xls"))
+                            {
+                                using (ExcelPackage package = new ExcelPackage(fileLocation))
+                                {
+                                    if (package.Workbook.Worksheets.Count > 0)
+                                    {
+                                        ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+                                        if (workSheet != null)
+                                        {
+                                            int totalRows = workSheet.Dimension.Rows;
+                                            for (int i = 2; i <= totalRows; i++)
+                                            {
+                                                DoanhNghiep doanhNghiep = new DoanhNghiep();
+                                                if (workSheet.Cells[i, 2].Value != null)
+                                                {
+                                                    doanhNghiep.Code = workSheet.Cells[i, 2].Value.ToString().Trim();
+                                                }
+                                                if (workSheet.Cells[i, 1].Value != null)
+                                                {
+                                                    doanhNghiep.KHACHHANG_ID = workSheet.Cells[i, 1].Value.ToString().Trim();
+                                                }
+                                                if (!string.IsNullOrEmpty(doanhNghiep.Code))
+                                                {
+                                                    DoanhNghiep doanhNghiepExist = await _IDoanhNghiepBusiness.GetByCodeAsync(doanhNghiep.Code);
+                                                    if (doanhNghiepExist.ID == 0)
+                                                    {
+                                                        if (workSheet.Cells[i, 3].Value != null)
+                                                        {
+                                                            doanhNghiep.Name = workSheet.Cells[i, 3].Value.ToString().Trim();
+                                                        }
+                                                        if (workSheet.Cells[i, 4].Value != null)
+                                                        {
+                                                            doanhNghiep.DiaChi = workSheet.Cells[i, 4].Value.ToString().Trim();
+                                                        }
+                                                        if (workSheet.Cells[i, 5].Value != null)
+                                                        {
+                                                            doanhNghiep.DienThoai = workSheet.Cells[i, 5].Value.ToString().Trim();
+                                                        }                                                        
+                                                    }                                                    
+                                                    await _IDoanhNghiepBusiness.SaveAsync(doanhNghiep);
+                                                    result.Add(doanhNghiep);
+                                                    DichVu dichVu = new DichVu();
+                                                    if (workSheet.Cells[i, 10].Value != null)
+                                                    {
+                                                        dichVu.Name = workSheet.Cells[i, 10].Value.ToString().Trim();
+                                                    }
+                                                    DichVu dichVuExist = await _IDichVuBusiness.GetByCondition(item => item.Name.Contains(dichVu.Name) || dichVu.Name.Contains(item.Name)).FirstOrDefaultAsync();
+                                                    if (dichVuExist == null)
+                                                    {
+                                                        dichVuExist = new DichVu();
+                                                    }
+                                                    if (dichVuExist.ID > 0)
+                                                    {
+                                                        DoanhNghiepDichVu doanhNghiepDichVu = new DoanhNghiepDichVu();
+                                                        doanhNghiepDichVu.ParentID = doanhNghiep.ID;
+                                                        doanhNghiepDichVu.DichVuID = dichVuExist.ID;
+                                                        if (workSheet.Cells[i, 6].Value != null)
+                                                        {
+                                                            try
+                                                            {
+                                                                doanhNghiepDichVu.Note = workSheet.Cells[i, 6].Value.ToString().Trim();
+                                                                int day = int.Parse(doanhNghiepDichVu.Note.Split('/')[0]);
+                                                                int month = int.Parse(doanhNghiepDichVu.Note.Split('/')[1]);
+                                                                int year = int.Parse(doanhNghiepDichVu.Note.Split('/')[2].Split(' ')[0]);
+                                                                doanhNghiepDichVu.NgayKyHopDong = new DateTime(year, month, day);
+                                                            }
+                                                            catch (Exception ex)
+                                                            {
+                                                                string mes = ex.Message;
+                                                            }
+                                                        }
+                                                        if (workSheet.Cells[i, 7].Value != null)
+                                                        {
+                                                            doanhNghiepDichVu.MaThueBao = workSheet.Cells[i, 7].Value.ToString().Trim();
+                                                        }
+                                                        if (workSheet.Cells[i, 9].Value != null)
+                                                        {
+                                                            doanhNghiepDichVu.DiaChiLapDat = workSheet.Cells[i, 9].Value.ToString().Trim();
+                                                        }
+                                                        if (workSheet.Cells[i, 11].Value != null)
+                                                        {
+                                                            doanhNghiepDichVu.DichVuVienThong = workSheet.Cells[i, 11].Value.ToString().Trim();
+                                                        }
+                                                        if (workSheet.Cells[i, 12].Value != null)
+                                                        {
+                                                            PhongBan phongBan = new PhongBan();
+                                                            phongBan.Name = workSheet.Cells[i, 12].Value.ToString().Trim();
+                                                            PhongBan phongBanExist = await _IPhongBanBusiness.GetByNameAsync(phongBan.Name);
+                                                            if (phongBanExist.ID == 0)
+                                                            {
+                                                                await _IPhongBanBusiness.SaveAsync(phongBan);
+                                                            }
+                                                            doanhNghiepDichVu.PhongBanID = phongBan.ID;
+                                                        }
+                                                        if (workSheet.Cells[i, 13].Value != null)
+                                                        {
+                                                            try
+                                                            {
+                                                                doanhNghiepDichVu.GiaTien = int.Parse(workSheet.Cells[i, 13].Value.ToString().Trim());
+                                                            }
+                                                            catch (Exception ex)
+                                                            {
+                                                                string mes = ex.Message;
+                                                            }
+                                                        }
+                                                        DoanhNghiepDichVu doanhNghiepDichVuExist = await _IDoanhNghiepDichVuBusiness.GetByCondition(item => item.ParentID == doanhNghiepDichVu.ParentID && item.DichVuID == doanhNghiepDichVu.DichVuID).FirstOrDefaultAsync();
+                                                        if (doanhNghiepDichVuExist == null)
+                                                        {
+                                                            doanhNghiepDichVuExist = new DoanhNghiepDichVu();
+                                                        }
+                                                        await _IDoanhNghiepDichVuBusiness.SaveAsync(doanhNghiepDichVu);                                                        
+                                                        DoanhNghiepDichVuLichSu doanhNghiepDichVuLichSu = new DoanhNghiepDichVuLichSu();
+                                                        doanhNghiepDichVuLichSu.ParentID = doanhNghiepDichVu.ID;
+                                                        doanhNghiepDichVuLichSu.Year = yearDoanhThu;
+                                                        doanhNghiepDichVuLichSu.Month = monthDoanhThu;
+                                                        doanhNghiepDichVuLichSu.GiaTien = doanhNghiepDichVu.GiaTien;
+                                                        DoanhNghiepDichVuLichSu doanhNghiepDichVuLichSuExist = await _IDoanhNghiepDichVuLichSuBusiness.GetByCondition(item => item.ParentID == doanhNghiepDichVuLichSu.ParentID && item.Year == doanhNghiepDichVuLichSu.Year && item.Month == doanhNghiepDichVuLichSu.Month).FirstOrDefaultAsync();
+                                                        if (doanhNghiepDichVuLichSuExist == null)
+                                                        {
+                                                            doanhNghiepDichVuLichSuExist = new DoanhNghiepDichVuLichSu();
+                                                        }
+                                                        if (doanhNghiepDichVuLichSuExist.ID == 0)
+                                                        {
+                                                            await _IDoanhNghiepDichVuLichSuBusiness.SaveAsync(doanhNghiepDichVuLichSu);
                                                         }
                                                     }
                                                 }

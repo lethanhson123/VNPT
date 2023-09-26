@@ -16,4 +16,5 @@ export class DoanhNghiep extends Base{
     SoLuongLaoDong?: number;
     NgayCap?: Date; 
     NgayDangKyThayDoi?: Date; 
+    KHACHHANG_ID?: string;  
 }

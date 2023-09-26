@@ -16,6 +16,20 @@ namespace API.Controllers.v1
         {
             _WebHostEnvironment = WebHostEnvironment;
             _IDoanhNghiepBusiness = IDoanhNghiepBusiness;            
-        }        
+        }
+        [HttpGet]
+        [Route("GetMonthToList")]
+        public List<YearMonth> GetMonthToList()
+        {
+            var result = YearMonth.GetMonthToList();
+            return result;
+        }
+        [HttpGet]
+        [Route("GetYearToList")]
+        public List<YearMonth> GetYearToList()
+        {
+            var result = YearMonth.GetYearToList();
+            return result;
+        }
     }
 }

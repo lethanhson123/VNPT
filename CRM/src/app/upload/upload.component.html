@@ -22,32 +22,77 @@
             <div class="section section-data-tables">
                 <div class="card">
                     <div class="card-content">
+
                         <div class="col s12 m12 l4">
-                            <div class="input-field col s12">
-                                Bước 01: <a target="_blank" href="{{excelDoanhNghiepURL}}">Tải về</a> file
-                                excel mẫu
+                            <div class="col s12 m12 l12">
+                                <h1>Upload Doanh nghiệp</h1>
+                                <div class="input-field col s12">
+                                    Bước 01: <a target="_blank" href="{{excelDoanhNghiepURL}}">Tải về</a> file
+                                    excel mẫu
+                                </div>
+                                <div class="input-field col s12">
+                                    Bước 02: Chọn file excel có dữ liệu:
+                                    <input type="file" #uploadDoanhNghiep
+                                        (change)="changeDoanhNghiep($event.target.files)">
+                                </div>
+                                <div class="input-field col s12">
+                                    <button [disabled]="!isDoanhNghiep" class="btn btn-primary"
+                                        (click)="onSubmit()">Upload</button>
+                                </div>
                             </div>
-                            <div class="input-field col s12">
-                                Bước 02: Chọn file excel có dữ liệu:
-                                <input type="file" #uploadDoanhNghiep (change)="changeDoanhNghiep($event.target.files)">
-                            </div>
-                            <div class="input-field col s12">
-                                <button [disabled]="!isDoanhNghiep" class="btn btn-primary" (click)="onSubmit()">Upload</button>
+                            <div class="col s12 m12 l12">
+                                <h1>Upload Doanh thu</h1>
+                                <div class="col s12 m12 l6">
+                                    <mat-select
+                                        style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                        name="year" class="browser-default" [(ngModel)]="year">
+                                        <mat-option *ngFor="let item of DownloadService.listYear" [value]="item.Display">
+                                            {{item.Display}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="col s12 m12 l6">
+                                    <mat-select
+                                        style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                        name="month" class="browser-default" [(ngModel)]="month">
+                                        <mat-option *ngFor="let item of DownloadService.listMonth" [value]="item.Display">
+                                            {{item.Display}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>       
+                                <div class="input-field col s12">
+                                    Bước 01: <a target="_blank" href="{{excelDoanhThuURL}}">Tải về</a> file
+                                    excel mẫu
+                                </div>
+                                <div class="input-field col s12">
+                                    Bước 02: Chọn file excel có dữ liệu:
+                                    <input type="file" #uploadDoanhThu
+                                        (change)="changeDoanhThu($event.target.files)">
+                                </div>
+                                <div class="input-field col s12">
+                                    <button [disabled]="!isDoanhThu" class="btn btn-primary"
+                                        (click)="onSubmitDoanhThu()">Upload</button>
+                                </div>
                             </div>
                         </div>
                         <div class="col s12 m12 l8">
                             <div class="KhungOverflow">
-                                <mat-table [dataSource]="dataSource" matSort>                                                                                                                                                                                                                                               
+                                <mat-table [dataSource]="dataSource" matSort>
                                     <ng-container matColumnDef="Code">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>Mã số
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{element.Code}}</mat-cell>
-                                    </ng-container>                      
+                                    </ng-container>
                                     <ng-container matColumnDef="Name">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
-                                    </ng-container>                                                                                                                                                                                             
+                                    </ng-container>
+                                    <ng-container matColumnDef="DienThoai">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{element.DienThoai}}</mat-cell>
+                                    </ng-container>
                                     <ng-container matColumnDef="loading">
                                         <mat-footer-cell *matFooterCellDef colspan="4">
                                             Đang tải dữ liệu...
@@ -58,8 +103,10 @@
                                             Chưa có dữ liệu.
                                         </mat-footer-cell>
                                     </ng-container>
-                                    <mat-header-row *matHeaderRowDef="DoanhNghiepService.displayColumnsSub"></mat-header-row>
-                                    <mat-row *matRowDef="let row; columns: DoanhNghiepService.displayColumnsSub;"></mat-row>
+                                    <mat-header-row
+                                        *matHeaderRowDef="DoanhNghiepService.displayColumnsSub"></mat-header-row>
+                                    <mat-row
+                                        *matRowDef="let row; columns: DoanhNghiepService.displayColumnsSub;"></mat-row>
                                     <mat-footer-row *matFooterRowDef="['loading']"
                                         [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
                                     <mat-footer-row *matFooterRowDef="['noData']"
@@ -67,11 +114,12 @@
                                     </mat-footer-row>
                                 </mat-table>
                                 <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                    [showFirstLastButtons]></mat-paginator>                
-                            </div>                            
-                        </div>                       
+                                    [showFirstLastButtons]></mat-paginator>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -6,4 +6,8 @@ export class DoanhNghiepDichVu extends Base{
     NgayKyHopDong?: Date;    
     GiaTien?: number;
     SoThang?: number;
+    MaThueBao?: string;
+    DiaChiLapDat?: string;
+    DichVuVienThong?: string;
+    PhongBanID?: number;
 }

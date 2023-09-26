@@ -13,6 +13,7 @@
         public virtual DbSet<Data.Model.DichVu> DichVu { get; set; }
         public virtual DbSet<Data.Model.DoanhNghiep> DoanhNghiep { get; set; }
         public virtual DbSet<Data.Model.DoanhNghiepDichVu> DoanhNghiepDichVu { get; set; }
+        public virtual DbSet<Data.Model.DoanhNghiepDichVuLichSu> DoanhNghiepDichVuLichSu { get; set; }
         public virtual DbSet<Data.Model.DoanhNghiepThanhVien> DoanhNghiepThanhVien { get; set; }
         public virtual DbSet<Data.Model.Huyen> Huyen { get; set; }
         public virtual DbSet<Data.Model.LoaiDoanhNghiep> LoaiDoanhNghiep { get; set; }
@@ -20,6 +21,7 @@
         public virtual DbSet<Data.Model.LoaiTrangThai> LoaiTrangThai { get; set; }
         public virtual DbSet<Data.Model.NganhNgheKinhDoanh> NganhNgheKinhDoanh { get; set; }
         public virtual DbSet<Data.Model.NhanVien> NhanVien { get; set; }
+        public virtual DbSet<Data.Model.PhongBan> PhongBan { get; set; }
         public virtual DbSet<Data.Model.Tinh> Tinh { get; set; }
         public virtual DbSet<Data.Model.Xa> Xa { get; set; }        
 

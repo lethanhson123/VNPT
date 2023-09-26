@@ -74,7 +74,23 @@
             }
         }
         #endregion
-        #region AppSettings     
+        #region AppSettings   
+        public static int DateBegin
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return int.Parse(builder.Build().GetSection("AppSettings").GetSection("DateBegin").Value);
+            }
+        }
+        public static int DateEnd
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return int.Parse(builder.Build().GetSection("AppSettings").GetSection("DateEnd").Value);
+            }
+        }
         public static string Download
         {
             get

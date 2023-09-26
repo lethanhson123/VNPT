@@ -19,6 +19,7 @@
         public long? XaID { get; set; }
         public string? NganhNgheKinhDoanh { get; set; }
         public long? NhanVienID { get; set; }
+        public string? KHACHHANG_ID { get; set; }
         public DoanhNghiep()
         {
         }

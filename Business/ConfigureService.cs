@@ -7,6 +7,7 @@
             services.AddTransient<IDichVuBusiness, DichVuBusiness>();
             services.AddTransient<IDoanhNghiepBusiness, DoanhNghiepBusiness>();
             services.AddTransient<IDoanhNghiepDichVuBusiness, DoanhNghiepDichVuBusiness>();
+            services.AddTransient<IDoanhNghiepDichVuLichSuBusiness, DoanhNghiepDichVuLichSuBusiness>();
             services.AddTransient<IDoanhNghiepThanhVienBusiness, DoanhNghiepThanhVienBusiness>();
             services.AddTransient<IHuyenBusiness, HuyenBusiness>();
             services.AddTransient<ILoaiDoanhNghiepBusiness, LoaiDoanhNghiepBusiness>();
@@ -14,6 +15,7 @@
             services.AddTransient<ILoaiTrangThaiBusiness, LoaiTrangThaiBusiness>();
             services.AddTransient<INganhNgheKinhDoanhBusiness, NganhNgheKinhDoanhBusiness>();
             services.AddTransient<INhanVienBusiness, NhanVienBusiness>();
+            services.AddTransient<IPhongBanBusiness, PhongBanBusiness>();
             services.AddTransient<ITinhBusiness, TinhBusiness>();
             services.AddTransient<IXaBusiness, XaBusiness>();        
 
@@ -30,6 +32,7 @@
         public static IServiceCollection AddRepositoryService(this IServiceCollection services)
         {
             services.AddTransient<IDichVuRepository, DichVuRepository>();
+            services.AddTransient<IDoanhNghiepDichVuLichSuRepository, DoanhNghiepDichVuLichSuRepository>();
             services.AddTransient<IDoanhNghiepDichVuRepository, DoanhNghiepDichVuRepository>();
             services.AddTransient<IDoanhNghiepRepository, DoanhNghiepRepository>();
             services.AddTransient<IDoanhNghiepThanhVienRepository, DoanhNghiepThanhVienRepository>();
@@ -39,6 +42,7 @@
             services.AddTransient<ILoaiTrangThaiRepository, LoaiTrangThaiRepository>();
             services.AddTransient<INganhNgheKinhDoanhRepository, NganhNgheKinhDoanhRepository>();
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
+            services.AddTransient<IPhongBanRepository, PhongBanRepository>();
             services.AddTransient<ITinhRepository, TinhRepository>();
             services.AddTransient<IXaRepository, XaRepository>();           
 
