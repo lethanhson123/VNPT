@@ -13,11 +13,14 @@
             services.AddTransient<ILoaiDoanhNghiepBusiness, LoaiDoanhNghiepBusiness>();
             services.AddTransient<ILoaiDoanhNghiepThanhVienBusiness, LoaiDoanhNghiepThanhVienBusiness>();
             services.AddTransient<ILoaiTrangThaiBusiness, LoaiTrangThaiBusiness>();
+            services.AddTransient<ILoaiDichVuBusiness, LoaiDichVuBusiness>();
             services.AddTransient<INganhNgheKinhDoanhBusiness, NganhNgheKinhDoanhBusiness>();
             services.AddTransient<INhanVienBusiness, NhanVienBusiness>();
             services.AddTransient<IPhongBanBusiness, PhongBanBusiness>();
             services.AddTransient<ITinhBusiness, TinhBusiness>();
-            services.AddTransient<IXaBusiness, XaBusiness>();        
+            services.AddTransient<IXaBusiness, XaBusiness>();
+
+            services.AddTransient<IReportBusiness, ReportBusiness>();
 
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             return services;
@@ -40,11 +43,14 @@
             services.AddTransient<ILoaiDoanhNghiepRepository, LoaiDoanhNghiepRepository>();
             services.AddTransient<ILoaiDoanhNghiepThanhVienRepository, LoaiDoanhNghiepThanhVienRepository>();
             services.AddTransient<ILoaiTrangThaiRepository, LoaiTrangThaiRepository>();
+            services.AddTransient<ILoaiDichVuRepository, LoaiDichVuRepository>();
             services.AddTransient<INganhNgheKinhDoanhRepository, NganhNgheKinhDoanhRepository>();
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<IPhongBanRepository, PhongBanRepository>();
             services.AddTransient<ITinhRepository, TinhRepository>();
-            services.AddTransient<IXaRepository, XaRepository>();           
+            services.AddTransient<IXaRepository, XaRepository>();
+
+            services.AddTransient<IReportRepository, ReportRepository>();
 
             return services;
         }

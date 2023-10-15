@@ -50,12 +50,13 @@ export class DoanhNghiepComponent implements OnInit {
     this.XaService.GetByParentIDToListAsync(this.huyenID).subscribe(
       res => {
         this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.onSearch();
       },
       err => {
       }
     );
   }
-  getToList() {
+  GetToList() {
     this.isShowLoading = true;
     this.DoanhNghiepService.GetByHuyenIDAndXaIDOrSearchStringToListAsync(this.huyenID, this.xaID, this.searchString).subscribe(
       res => {
@@ -71,7 +72,7 @@ export class DoanhNghiepComponent implements OnInit {
     );
   }
   onSearch() {
-    this.getToList();
+    this.GetToList();
   }
   onChangeHuyenID() {
     this.GetXaToListAsync();

@@ -26,5 +26,21 @@ export class UploadService {
         formUpload.append('month', JSON.stringify(month));
         return this.httpClient.post(url, formUpload);
     }
+    PostDoanhThuByYearAndMonthListByExcelFile(fileToUpload: File, year: number, month: number) {
+        let url = this.aPIURL + this.controller + '/PostDoanhThuByYearAndMonthListByExcelFile';
+        const formUpload: FormData = new FormData();
+        formUpload.append('file', fileToUpload, fileToUpload.name);
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));
+        return this.httpClient.post(url, formUpload);
+    }
+    PostDoanhThuByYearAndMonthList2023ByExcelFileAsync(fileToUpload: File, year: number, month: number) {
+        let url = this.aPIURL + this.controller + '/PostDoanhThuByYearAndMonthList2023ByExcelFileAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('file', fileToUpload, fileToUpload.name);
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

@@ -1,0 +1,291 @@
+<div class="row">
+    <div class="col s12">
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div id="basic-tabs" class="card card card-default scrollspy">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m12 l4">
+                                            <h5 class="card-title" style="font-size: 14px;">
+                                                <b>Tổng thể</b>
+                                            </h5>
+                                        </div>
+                                        <div class="col s12 m12 l8">
+                                            <ul class="tabs">
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#1">.</a></li>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">.</a>
+                                                </li>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#3">.</a>
+                                                </li>
+                                                <li class="tab col m3 s12 p-0"><a class="active p-0" href="#4">Tổng hợp
+                                                        khách hàng</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="4">
+                                    <div class="col s12 m12 l2">
+                                        <mat-select
+                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                            name="HuyenID" class="browser-default" [(ngModel)]="huyenID"
+                                            (selectionChange)="onChangeHuyenID()">
+                                            <mat-option [value]="0">
+                                                Tất cả
+                                            </mat-option>
+                                            <mat-option *ngFor="let item of HuyenService.list" [value]="item.ID">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="col s12 m12 l2">
+                                        <mat-select
+                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                            name="XaID" class="browser-default" [(ngModel)]="xaID">
+                                            <mat-option [value]="0">
+                                                Tất cả
+                                            </mat-option>
+                                            <mat-option *ngFor="let item of XaService.list" [value]="item.ID">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="col s12 m12 l2">
+                                        <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
+                                            class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
+                                            (keyup.enter)="onSearch()">
+                                    </div>
+                                    <div class="col s12 m12 l2">
+                                        <a title="Tìm" (click)="onSearch()"
+                                            class="btn-floating waves-effect waves-light green darken-1"><i
+                                                class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
+                                        <a title="Download excel" (click)="onDownloadExcelFile()"
+                                            class="btn-floating waves-effect waves-light green darken-1"><i
+                                                class="material-icons">get_app</i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div class="col s8 m8 l4">
+                                        <div class="input-field">
+                                            <div name="DoanhThu"
+                                                style="font-weight: bold; color: green; text-align: right; font-size: 20px;">
+                                                Doanh thu: {{doanhThu | number:
+                                                '1.0-0'}} đồng
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="KhungOverflow">
+                                        <mat-table [dataSource]="dataSourceReport004" matSort>
+                                            <ng-container matColumnDef="Name">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"><a title="{{element.Name}}"
+                                                        style="font-size: 10px;" target="_blank"
+                                                        href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="HuyenName">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Huyện
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"
+                                                    style="font-size: 10px;">{{element.HuyenName}}</mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="XaName">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Xã
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"
+                                                    style="font-size: 10px;">{{element.XaName}}</mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu01">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Cố định
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu01 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech01">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech01>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech01 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech01<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech01 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu03">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Di động
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu03 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech02">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech02>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech02 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech02<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech02 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu05">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Fiber
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu05 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech03">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech03>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech03 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech03<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech03 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu07">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>MyTV
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu07 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech04">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech04>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech04 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech04<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech04 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu09">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>An toàn
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu09 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech05">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech05>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech05 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech05<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech05 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu11">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>CNTT
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu11 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech06">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech06>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech06 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech06<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech06 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DoanhThu13">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Khác
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <b>{{element.DoanhThu13 | number:
+                                                        '1.0-0'}}</b></mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="ChenhLech07">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
+                                                    <div *ngIf="element.ChenhLech07>=0"
+                                                        style="color: green; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech07 | number:
+                                                        '1.0-0'}}</div>
+                                                    <div *ngIf="element.ChenhLech07<0"
+                                                        style="color: red; text-align: right; font-weight: bold;">
+                                                        {{element.ChenhLech07 | number:
+                                                        '1.0-0'}}</div>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="loading">
+                                                <mat-footer-cell *matFooterCellDef colspan="4">
+                                                    Đang tải dữ liệu...
+                                                </mat-footer-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="noData">
+                                                <mat-footer-cell *matFooterCellDef colspan="4">
+                                                    Chưa có dữ liệu.
+                                                </mat-footer-cell>
+                                            </ng-container>
+                                            <mat-header-row
+                                                *matHeaderRowDef="ReportService.displayColumnsReport004"></mat-header-row>
+                                            <mat-row
+                                                *matRowDef="let row; columns: ReportService.displayColumnsReport004;"></mat-row>
+                                            <mat-footer-row *matFooterRowDef="['loading']"
+                                                [ngClass]="{'hide':dataSourceReport004!=null}"></mat-footer-row>
+                                            <mat-footer-row *matFooterRowDef="['noData']"
+                                                [ngClass]="{'hide':!(dataSourceReport004!=null && dataSourceReport004.data.length==0)}">
+                                            </mat-footer-row>
+                                        </mat-table>
+                                        <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="100000"
+                                            [showFirstLastButtons]></mat-paginator>
+                                    </div>
+                                </div>
+                                <div id="2">
+
+                                </div>
+                                <div id="3">
+
+                                </div>
+                                <div id="1">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+<app-loading *ngIf="isShowLoading"></app-loading>

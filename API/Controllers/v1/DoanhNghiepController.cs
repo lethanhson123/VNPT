@@ -1,4 +1,6 @@
-﻿namespace API.Controllers.v1
+﻿using System.Collections.Generic;
+
+namespace API.Controllers.v1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -14,10 +16,19 @@
         [Route("GetByHuyenIDAndXaIDOrSearchStringToListAsync")]
         public virtual async Task<List<DoanhNghiep>> GetByHuyenIDAndXaIDOrSearchStringToListAsync()
         {
-            long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-            long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-            string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-            var result = await _DoanhNghiepBusiness.GetByHuyenIDAndXaIDOrSearchStringToListAsync(huyenID, xaID, searchString);
+            List<DoanhNghiep> result = new List<DoanhNghiep>();
+            try
+            {
+                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
+                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
+                result = await _DoanhNghiepBusiness.GetByHuyenIDAndXaIDOrSearchStringToListAsync(huyenID, xaID, searchString);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+
             return result;
         }
         [HttpGet]
@@ -28,7 +39,7 @@
             if (!string.IsNullOrEmpty(ID))
             {
                 ID = GlobalHelper.InitializationURLCode(ID);
-                result = await _DoanhNghiepBusiness.GetByIDAsync(int.Parse(ID));               
+                result = await _DoanhNghiepBusiness.GetByIDAsync(int.Parse(ID));
             }
             return result;
         }

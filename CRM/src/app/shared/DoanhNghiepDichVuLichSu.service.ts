@@ -6,13 +6,21 @@ import { DoanhNghiepDichVuLichSu } from './DoanhNghiepDichVuLichSu.model';
     providedIn: 'root'
 })
 export class DoanhNghiepDichVuLichSuService extends BaseService{
-    displayColumns: string[] = ['GiaTien','Note', 'SortOrder', 'Active', 'Save']; 
+    displayColumns: string[] = ['DichVuID', 'Year', 'Month', 'GiaTien','Note', 'Active']; 
     list: DoanhNghiepDichVuLichSu[] | undefined;        
     formData!: DoanhNghiepDichVuLichSu;
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "DoanhNghiepDichVuLichSu";
     }    
+    GetByDoanhNghiepIDAndYearAndMonthToListAsync(doanhNghiepID: number, year: number, month: number) {
+        let url = this.aPIURL + this.controller + '/GetByDoanhNghiepIDAndYearAndMonthToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('doanhNghiepID', JSON.stringify(doanhNghiepID));
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));        
+        return this.httpClient.post(url, formUpload);
+    }
 }
 
 

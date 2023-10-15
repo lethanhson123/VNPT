@@ -13,6 +13,7 @@ import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
 import { UploadComponent } from './upload/upload.component';
 import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh-nghiep-info.component';
 import { NhanVienComponent } from './nhan-vien/nhan-vien.component';
+import { LoaiDichVuComponent } from './loai-dich-vu/loai-dich-vu.component';
 
 
 const routes: Routes = [  
@@ -34,6 +35,9 @@ const routes: Routes = [
   },
   {
     path: 'DichVu', component: DichVuComponent,
+  },
+  {
+    path: 'LoaiDichVu', component: LoaiDichVuComponent,
   },
   {
     path: 'LoaiDoanhNghiep', component: LoaiDoanhNghiepComponent,

@@ -4,4 +4,6 @@ export class DoanhNghiepDichVuLichSu extends Base{
     GiaTien?: number;          
     Year?: number;              
     Month?: number;                 
+    DichVuID?: number;  
+    DoanhNghiepID?: number;  
 }

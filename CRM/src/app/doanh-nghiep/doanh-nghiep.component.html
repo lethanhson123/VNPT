@@ -62,15 +62,15 @@
                             <div class="KhungOverflow">
                                 <mat-table [dataSource]="dataSource" matSort>
                                     <ng-container matColumnDef="Code">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Mã số
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"><a title="{{element.Code}}" target="_blank"
-                                            href="{{URLSub}}/{{element.ID}}"><b>{{element.Code}}</b></a></mat-cell>
+                                        <mat-cell *matCellDef="let element">{{element.Code}}</mat-cell>
                                     </ng-container>                  
                                     <ng-container matColumnDef="Name">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
+                                        <mat-cell *matCellDef="let element"><a title="{{element.Name}}" target="_blank"
+                                            href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
                                     </ng-container>               
                                     <ng-container matColumnDef="DienThoai">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại

@@ -84,7 +84,7 @@ export class UploadComponent implements OnInit {
     let fileToUpload: File;
     fileToUpload = this.uploadDoanhThu.nativeElement.files[0];
     this.isShowLoading = true;
-    this.UploadService.PostDoanhThuByYearAndMonthListByExcelFileAsync(fileToUpload, this.year, this.month).subscribe(
+    this.UploadService.PostDoanhThuByYearAndMonthList2023ByExcelFileAsync(fileToUpload, this.year, this.month).subscribe(
       res => {
         this.isShowLoading = false;
         this.DoanhNghiepService.list = res as DoanhNghiep[];

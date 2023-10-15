@@ -6,7 +6,7 @@ import { DoanhNghiepDichVu } from './DoanhNghiepDichVu.model';
     providedIn: 'root'
 })
 export class DoanhNghiepDichVuService extends BaseService{
-    displayColumns: string[] = ['NhanVienID','DichVuID','NgayKyHopDong', 'Code','GiaTien','SoThang','Note', 'SortOrder', 'Active', 'Save']; 
+    displayColumns: string[] = ['NhanVienID','DichVuID','NgayKyHopDong', 'Code', 'MaThueBao', 'GiaTien', 'SoThang', 'Note', 'SortOrder', 'Active', 'Save']; 
     list: DoanhNghiepDichVu[] | undefined;        
     formData!: DoanhNghiepDichVu;
     constructor(public httpClient: HttpClient) {

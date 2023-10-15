@@ -10,5 +10,24 @@
         {
             _DoanhNghiepDichVuLichSuBusiness = DoanhNghiepDichVuLichSuBusiness;
         }
+        [HttpPost]
+        [Route("GetByDoanhNghiepIDAndYearAndMonthToListAsync")]
+        public virtual async Task<List<DoanhNghiepDichVuLichSu>> GetByDoanhNghiepIDAndYearAndMonthToListAsync()
+        {
+            List<DoanhNghiepDichVuLichSu> result = new List<DoanhNghiepDichVuLichSu>();
+            try
+            {
+                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _DoanhNghiepDichVuLichSuBusiness.GetByDoanhNghiepIDAndYearAndMonthToListAsync(doanhNghiepID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+
+            return result;
+        }
     }
 }

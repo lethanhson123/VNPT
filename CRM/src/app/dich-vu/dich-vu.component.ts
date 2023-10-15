@@ -6,7 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { DichVu } from 'src/app/shared/DichVu.model';
 import { DichVuService } from 'src/app/shared/DichVu.service';
-
+import { LoaiDichVu } from 'src/app/shared/LoaiDichVu.model';
+import { LoaiDichVuService } from 'src/app/shared/LoaiDichVu.service';
 @Component({
   selector: 'app-dich-vu',
   templateUrl: './dich-vu.component.html',
@@ -21,11 +22,28 @@ export class DichVuComponent implements OnInit {
   searchString: string = environment.InitializationString;
   constructor(
     public DichVuService: DichVuService,
+    public LoaiDichVuService: LoaiDichVuService,
     public NotificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
+    this.GetLoaiDichVuToListAsync();
     this.onSearch();
+  }
+  GetLoaiDichVuToListAsync() {
+    this.isShowLoading = true;
+    this.LoaiDichVuService.GetAllToListAsync().subscribe(
+      res => {
+        this.LoaiDichVuService.list = res as LoaiDichVu[];
+        this.dataSource = new MatTableDataSource(this.LoaiDichVuService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
   }
   getToList() {
     this.isShowLoading = true;

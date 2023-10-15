@@ -6,6 +6,6 @@
         public DoanhNghiepDichVuLichSuRepository(VNPTContext context) : base(context)
         {
             _context = context;            
-        }
+        }        
     }
 }

@@ -5,6 +5,7 @@ import { BaseService } from './Base.service';
     providedIn: 'root'
 })
 export class DichVuService extends BaseService{
+    displayColumns: string[] = ['ParentID', 'Code', 'Name', 'Note', 'SortOrder', 'Active', 'Save']; 
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "DichVu";

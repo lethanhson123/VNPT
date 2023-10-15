@@ -18,7 +18,7 @@ export class DoanhNghiepService extends BaseService{
         const formUpload: FormData = new FormData();        
         formUpload.append('huyenID', JSON.stringify(huyenID));
         formUpload.append('xaID', JSON.stringify(xaID));
-        formUpload.append('searchString', searchString);        
+        formUpload.append('searchString', JSON.stringify(searchString));        
         return this.httpClient.post(url, formUpload);
     }
     GetByIDStringAsync(ID: string) {

@@ -40,7 +40,7 @@ namespace Business.Implement
                 }
                 else
                 {
-                    result = await GetAllToListAsync();
+                    result = await _DoanhNghiepRepository.GetByPageAndPageSizeToListAsync(0,50);
                 }
 
             }
