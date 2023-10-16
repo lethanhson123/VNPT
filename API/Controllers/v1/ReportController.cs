@@ -76,5 +76,139 @@
             }
             return result;
         }
+        [HttpPost]
+        [Route("ReportDoanhNghiep001Async")]
+        public virtual async Task<List<Report>> ReportDoanhNghiep001Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportDoanhNghiep001Async(doanhNghiepID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportDoanhNghiep002Async")]
+        public virtual async Task<List<Report>> ReportDoanhNghiep002Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportDoanhNghiep002Async(doanhNghiepID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportDoanhNghiep003Async")]
+        public virtual async Task<List<Report>> ReportDoanhNghiep003Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportDoanhNghiep003Async(doanhNghiepID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportDoanhNghiep004Async")]
+        public virtual async Task<List<Report>> ReportDoanhNghiep004Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportDoanhNghiep004Async(doanhNghiepID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportVNPT001Async")]
+        public virtual async Task<List<Report>> ReportVNPT001Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
+                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportVNPT001Async(huyenID, xaID, searchString, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportVNPT002Async")]
+        public virtual async Task<List<Report>> ReportVNPT002Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
+                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
+                long loaiDichVuID = JsonConvert.DeserializeObject<long>(Request.Form["loaiDichVuID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportVNPT002Async(huyenID, xaID, searchString, loaiDichVuID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportVNPT003Async")]
+        public virtual async Task<List<Report>> ReportVNPT003Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
+                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
+                long dichVuID = JsonConvert.DeserializeObject<long>(Request.Form["dichVuID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+                result = await _ReportBusiness.ReportVNPT003Async(huyenID, xaID, searchString, dichVuID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
     }
 }

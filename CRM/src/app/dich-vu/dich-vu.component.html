@@ -101,10 +101,7 @@
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
                                         <a title="Lưu thay đổi" (click)="onSave(element)"
                                             class="btn-floating waves-effect waves-light cyan"><i
-                                                class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
-                                        <a (click)="onDelete(element)" *ngIf="element.ID>0"
-                                            class="btn-floating waves-effect waves-light red"><i
-                                                class="material-icons">delete_outline</i></a>
+                                                class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;                                        
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="loading">

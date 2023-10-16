@@ -45,17 +45,17 @@ import { Color, Label, SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChart
 })
 export class DoanhNghiepInfoComponent implements OnInit {
 
-  dataSourceDoanhNghiepThanhVien: MatTableDataSource<any>;
-  @ViewChild(MatSort) sortDoanhNghiepThanhVien: MatSort;
-  @ViewChild(MatPaginator) paginatorDoanhNghiepThanhVien: MatPaginator;
-
-  dataSourceDoanhNghiepDichVu: MatTableDataSource<any>;
-  @ViewChild(MatSort) sortDoanhNghiepDichVu: MatSort;
-  @ViewChild(MatPaginator) paginatorDoanhNghiepDichVu: MatPaginator;
-
   dataSourceDoanhNghiepDichVuLichSu: MatTableDataSource<any>;
   @ViewChild(MatSort) sortDoanhNghiepDichVuLichSu: MatSort;
   @ViewChild(MatPaginator) paginatorDoanhNghiepDichVuLichSu: MatPaginator;
+
+  dataSourceDoanhNghiepThanhVien: MatTableDataSource<any>;
+  @ViewChild('sortDoanhNghiepThanhVien') sortDoanhNghiepThanhVien: MatSort;
+  @ViewChild('paginatorDoanhNghiepThanhVien') paginatorDoanhNghiepThanhVien: MatPaginator;
+
+  dataSourceDoanhNghiepDichVu: MatTableDataSource<any>;
+  @ViewChild('sortDoanhNghiepDichVu') sortDoanhNghiepDichVu: MatSort;
+  @ViewChild('paginatorDoanhNghiepDichVu') paginatorDoanhNghiepDichVu: MatPaginator;  
 
   dataSourceReport001: MatTableDataSource<any>;
   @ViewChild(MatSort) sortReport001: MatSort;
@@ -66,7 +66,9 @@ export class DoanhNghiepInfoComponent implements OnInit {
   URLSub: string = environment.DomainDestination + "DoanhNghiepInfo";
 
   year: number = new Date().getFullYear();
-  month: number = new Date().getMonth() + 1;
+  month: number = new Date().getMonth();
+  yearTitle: number = new Date().getFullYear();
+  monthTitle: number = new Date().getMonth();
   doanhThuByMonth: number = environment.InitializationNumber;
   constructor(
     public router: Router,
@@ -206,13 +208,14 @@ export class DoanhNghiepInfoComponent implements OnInit {
   }
   GetDoanhNghiepDichVuLichSuToListAsync() {
     this.isShowLoading = true;
+    this.doanhThuByMonth = environment.InitializationNumber;
     this.DoanhNghiepDichVuLichSuService.GetByDoanhNghiepIDAndYearAndMonthToListAsync(this.DoanhNghiepService.formData.ID, this.year, this.month).subscribe(
       res => {
-        this.DoanhNghiepDichVuLichSuService.list = (res as DoanhNghiepDichVuLichSu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.dataSourceDoanhNghiepDichVuLichSu = new MatTableDataSource(this.DoanhNghiepDichVuLichSuService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.DoanhNghiepDichVuLichSuService.list = (res as DoanhNghiepDichVuLichSu[]).sort((a, b) => (a.GiaTien < b.GiaTien ? 1 : -1));
+        this.dataSourceDoanhNghiepDichVuLichSu = new MatTableDataSource(this.DoanhNghiepDichVuLichSuService.list.sort((a, b) => (a.GiaTien < b.GiaTien ? 1 : -1)));
         this.dataSourceDoanhNghiepDichVuLichSu.sort = this.sortDoanhNghiepDichVuLichSu;
         this.dataSourceDoanhNghiepDichVuLichSu.paginator = this.paginatorDoanhNghiepDichVuLichSu;
-
+        this.doanhThuByMonth = environment.InitializationNumber;        
         for (let i = 0; i < this.DoanhNghiepDichVuLichSuService.list.length; i++) {
           this.doanhThuByMonth = this.doanhThuByMonth + this.DoanhNghiepDichVuLichSuService.list[i].GiaTien;
         }
@@ -224,12 +227,12 @@ export class DoanhNghiepInfoComponent implements OnInit {
       }
     );
   }
-  Report001Async() {
+  ReportDoanhNghiep001Async() {
     this.isShowLoading = true;
-    this.ReportService.Report001Async(this.DoanhNghiepService.formData.ID).subscribe(
+    this.ReportService.ReportDoanhNghiep001Async(this.DoanhNghiepService.formData.ID, this.year, this.month).subscribe(
       res => {
-        this.ReportService.listReport001 = (res as Report[]).sort((a, b) => (a.DoanhThu > b.DoanhThu ? 1 : -1));
-        this.dataSourceReport001 = new MatTableDataSource(this.ReportService.listReport001.sort((a, b) => (a.DoanhThu > b.DoanhThu ? 1 : -1)));
+        this.ReportService.listReport001 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
+        this.dataSourceReport001 = new MatTableDataSource(this.ReportService.listReport001.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
         this.dataSourceReport001.sort = this.sortReport001;
         this.dataSourceReport001.paginator = this.paginatorReport001;
         this.isShowLoading = false;
@@ -239,7 +242,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
       }
     );
   }
-  public barChartOptionsReport002: ChartOptions = {
+  public ChartOptionsReportDoanhNghiep002: ChartOptions = {
     responsive: true,
     tooltips: {
       callbacks: {
@@ -251,18 +254,90 @@ export class DoanhNghiepInfoComponent implements OnInit {
       }
     }
   };
-  public barChartColorsReport002: Color[] = [
-    { backgroundColor: 'green' },
+  public ChartColorsReportDoanhNghiep002: Color[] = [
+    { backgroundColor: 'limegreen' },
   ]
-  public barChartLabelsReport002: Label[] = [];
-  public barChartTypeReport002: ChartType = 'bar';
-  public barChartLegendReport002 = true;
-  public barChartPluginsReport002 = [];
+  public ChartLabelsReportDoanhNghiep002: Label[] = [];
+  public ChartTypeReportDoanhNghiep002: ChartType = 'bar';
+  public ChartLegendReportDoanhNghiep002 = true;
+  public ChartPluginsReportDoanhNghiep002 = [];
 
-  public barChartDataReport002: ChartDataSets[] = [
+  public ChartDataReportDoanhNghiep002: ChartDataSets[] = [
   ];
 
-  public barChartOptionsReport003: ChartOptions = {
+  public ChartOptionsReportDoanhNghiep0021: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportDoanhNghiep0021: Color[] = [
+  ]
+  public ChartLabelsReportDoanhNghiep0021: Label[] = [];
+  public ChartTypeReportDoanhNghiep0021: ChartType = 'polarArea';
+  public ChartLegendReportDoanhNghiep0021 = true;
+  public ChartPluginsReportDoanhNghiep0021 = [];
+
+  public ChartDataReportDoanhNghiep0021: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportDoanhNghiep0022: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportDoanhNghiep0022: Color[] = [
+  ]
+  public ChartLabelsReportDoanhNghiep0022: Label[] = [];
+  public ChartTypeReportDoanhNghiep0022: ChartType = 'doughnut';
+  public ChartLegendReportDoanhNghiep0022 = true;
+  public ChartPluginsReportDoanhNghiep0022 = [];
+
+  public ChartDataReportDoanhNghiep0022: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportDoanhNghiep003: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label;
+          return label + ': ' + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportDoanhNghiep003: Color[] = [
+  ]
+  public ChartLabelsReportDoanhNghiep003: Label[] = ['Tháng 01', 'Tháng 02', 'Tháng 03', 'Tháng 04', 'Tháng 05', 'Tháng 06', 'Tháng 07', 'Tháng 08', 'Tháng 09', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+  public ChartTypeReportDoanhNghiep003: ChartType = 'line';
+  public ChartLegendReportDoanhNghiep003 = true;
+  public ChartPluginsReportDoanhNghiep003 = [
+  ];
+
+  public ChartDataReportDoanhNghiep003: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportDoanhNghiep004: ChartOptions = {
     responsive: true,
     tooltips: {
       callbacks: {
@@ -274,34 +349,88 @@ export class DoanhNghiepInfoComponent implements OnInit {
       }
     }
   };
-  public barChartColorsReport003: Color[] = [
-    { backgroundColor: 'green' },
+  public ChartColorsReportDoanhNghiep004: Color[] = [
+    { backgroundColor: 'limegreen' },
   ]
-  public barChartLabelsReport003: Label[] = ['Tháng 01', 'Tháng 02', 'Tháng 03', 'Tháng 04', 'Tháng 05', 'Tháng 06', 'Tháng 07', 'Tháng 08', 'Tháng 09', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
-  public barChartTypeReport003: ChartType = 'line';
-  public barChartLegendReport003 = true;
-  public barChartPluginsReport003 = [];
+  public ChartLabelsReportDoanhNghiep004: Label[] = [];
+  public ChartTypeReportDoanhNghiep004: ChartType = 'bar';
+  public ChartLegendReportDoanhNghiep004 = true;
+  public ChartPluginsReportDoanhNghiep004 = [];
 
-  public barChartDataReport003: ChartDataSets[] = [
+  public ChartDataReportDoanhNghiep004: ChartDataSets[] = [
   ];
-  Report002Async() {
+
+  public ChartOptionsReportDoanhNghiep0041: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportDoanhNghiep0041: Color[] = [
+  ]
+  public ChartLabelsReportDoanhNghiep0041: Label[] = [];
+  public ChartTypeReportDoanhNghiep0041: ChartType = 'polarArea';
+  public ChartLegendReportDoanhNghiep0041 = true;
+  public ChartPluginsReportDoanhNghiep0041 = [];
+
+  public ChartDataReportDoanhNghiep0041: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportDoanhNghiep0042: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportDoanhNghiep0042: Color[] = [
+  ]
+  public ChartLabelsReportDoanhNghiep0042: Label[] = [];
+  public ChartTypeReportDoanhNghiep0042: ChartType = 'doughnut';
+  public ChartLegendReportDoanhNghiep0042 = true;
+  public ChartPluginsReportDoanhNghiep0042 = [];
+
+  public ChartDataReportDoanhNghiep0042: ChartDataSets[] = [
+  ];
+
+  ReportDoanhNghiep002Async() {
     this.isShowLoading = true;
-    this.ReportService.Report002Async(this.DoanhNghiepService.formData.ID).subscribe(
+    this.ReportService.ReportDoanhNghiep002Async(this.DoanhNghiepService.formData.ID, this.year, this.month).subscribe(
       res => {
         this.ReportService.listReport002 = (res as Report[]).sort((a, b) => (a.DoanhThu > b.DoanhThu ? 1 : -1));
-        let Year: number = environment.InitializationNumber;
-        let Month: number = environment.InitializationNumber;
         let DichVu = [];
         let DoanhThu = [];
         this.ReportService.listReport002.forEach(item => {
-          Year = item.Year;
-          Month = item.Month;
+          this.yearTitle = item.Year;
+          this.monthTitle = item.Month;
           DichVu.push(item.DichVu);
           DoanhThu.push(item.DoanhThu);
         });
-        let label: string = 'Doanh thu tháng ' + Month + '-' + Year + ' (Đơn vị tính: đồng)';
-        this.barChartLabelsReport002 = DichVu;
-        this.barChartDataReport002 = [{ data: DoanhThu, label: label, stack: 'a' }];
+        let label: string = 'Doanh thu tháng ' + this.monthTitle + '-' + this.yearTitle + ' (Đơn vị tính: đồng)';
+        this.ChartLabelsReportDoanhNghiep002 = DichVu;
+        this.ChartDataReportDoanhNghiep002 = [{ data: DoanhThu, label: label, stack: 'a' }];
+
+        this.ChartLabelsReportDoanhNghiep0021 = DichVu;
+        this.ChartDataReportDoanhNghiep0021 = [{ data: DoanhThu, label: label }];
+
+        this.ChartLabelsReportDoanhNghiep0022 = DichVu;
+        this.ChartDataReportDoanhNghiep0022 = [{ data: DoanhThu, label: label }];
+
         this.isShowLoading = false;
       },
       err => {
@@ -309,15 +438,17 @@ export class DoanhNghiepInfoComponent implements OnInit {
       }
     );
   }
-  Report003Async() {
+
+  ReportDoanhNghiep003Async() {
     this.isShowLoading = true;
-    this.ReportService.Report003Async(this.DoanhNghiepService.formData.ID).subscribe(
+    this.ReportService.ReportDoanhNghiep003Async(this.DoanhNghiepService.formData.ID, this.year, this.month).subscribe(
       res => {
         this.ReportService.listReport003 = (res as Report[]).sort((a, b) => (a.DichVuID > b.DichVuID ? 1 : -1));
         let Year: number = environment.InitializationNumber;
-        let DichVu: string = environment.InitializationString;
-        let DoanhThu = [];        
+        let ChartData = [];
         this.ReportService.listReport003.forEach(item => {
+          let DoanhThu = [];
+          let DichVu: string = environment.InitializationString;
           Year = item.Year;
           DichVu = item.DichVu
           DoanhThu.push(item.DoanhThu01);
@@ -333,12 +464,45 @@ export class DoanhNghiepInfoComponent implements OnInit {
           DoanhThu.push(item.DoanhThu11);
           DoanhThu.push(item.DoanhThu12);
           let data: any = {
-            DoanhThu,
-            DichVu
+            type: "line",
+            fill: false,
+            data: DoanhThu,
+            label: DichVu,
+            borderColor: this.DownloadService.GetRandomColor(DoanhThu.length)
           }
-          this.barChartDataReport003.push(data);
+          ChartData.push(data);
+          this.ChartDataReportDoanhNghiep003.push(data);
         });
         let label: string = 'Doanh thu năm ' + Year + ' (Đơn vị tính: đồng)';
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  ReportDoanhNghiep004Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportDoanhNghiep004Async(this.DoanhNghiepService.formData.ID, this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReport004 = (res as Report[]).sort((a, b) => (a.DoanhThu > b.DoanhThu ? 1 : -1));
+        let DichVu = [];
+        let DoanhThu = [];
+        this.ReportService.listReport004.forEach(item => {
+          this.yearTitle = item.Year;          
+          DichVu.push(item.DichVu);
+          DoanhThu.push(item.DoanhThu);
+        });
+        let label: string = 'Doanh thu năm ' + this.yearTitle + ' (Đơn vị tính: đồng)';
+        this.ChartLabelsReportDoanhNghiep004 = DichVu;
+        this.ChartDataReportDoanhNghiep004 = [{ data: DoanhThu, label: label, stack: 'a' }];
+
+        this.ChartLabelsReportDoanhNghiep0041 = DichVu;
+        this.ChartDataReportDoanhNghiep0041 = [{ data: DoanhThu, label: label }];
+
+        this.ChartLabelsReportDoanhNghiep0042 = DichVu;
+        this.ChartDataReportDoanhNghiep0042 = [{ data: DoanhThu, label: label }];
+
         this.isShowLoading = false;
       },
       err => {
@@ -357,14 +521,15 @@ export class DoanhNghiepInfoComponent implements OnInit {
         this.GetLoaiDoanhNghiepToListAsync();
         this.GetLoaiTrangThaiToListAsync();
         this.GetNhanVienToListAsync();
+        this.GetDoanhNghiepDichVuLichSuToListAsync();
         this.GetDoanhNghiepThanhVienToListAsync();
         this.GetLoaiDoanhNghiepThanhVienToListAsync();
         this.GetDoanhNghiepDichVuToListAsync();
-        this.GetDichVuToListAsync();
-        this.GetDoanhNghiepDichVuLichSuToListAsync();
-        this.Report001Async();
-        this.Report002Async();
-        //this.Report003Async();
+        this.GetDichVuToListAsync();        
+        this.ReportDoanhNghiep001Async();
+        this.ReportDoanhNghiep002Async();
+        this.ReportDoanhNghiep003Async();
+        this.ReportDoanhNghiep004Async();
       }
       this.isShowLoading = false;
     });
@@ -432,5 +597,9 @@ export class DoanhNghiepInfoComponent implements OnInit {
   }
   onSearchDoanhNghiepDichVuLichSu() {
     this.GetDoanhNghiepDichVuLichSuToListAsync();
+    this.ReportDoanhNghiep001Async();
+    this.ReportDoanhNghiep002Async();
+    this.ReportDoanhNghiep003Async();
+    this.ReportDoanhNghiep004Async();
   }
 }

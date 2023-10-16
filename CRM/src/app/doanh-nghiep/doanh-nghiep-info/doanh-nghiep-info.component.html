@@ -34,21 +34,388 @@
                                         </div>
                                         <div class="col s12 m12 l6">
                                             <ul class="tabs">
-                                                <li class="tab col m3 s12 p-0"><a class="active p-0" href="#1">Thông
-                                                        tin</a></li>
-                                                <!-- <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">Thành viên</a>
-                                                </li> -->
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">Gói cước</a>
+                                                <li class="tab col m3 s12 p-0"><a class="active p-0" href="#1">Doanh
+                                                        thu</a></li>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">Biểu đồ</a>
                                                 </li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#3">Doanh thu</a>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#3">Gói cước</a>
                                                 </li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#4">Thống kê</a>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#4">Thông
+                                                        tin</a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div id="1">
+                                    <div class="col s12 m12 l12">
+                                        <div class="col s12 m12 l3">
+                                            <mat-select
+                                                style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                name="year" class="browser-default" [(ngModel)]="year">
+                                                <mat-option *ngFor="let item of DownloadService.listYear"
+                                                    [value]="item.Display">
+                                                    {{item.Display}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="col s12 m12 l3">
+                                            <mat-select
+                                                style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                name="month" class="browser-default" [(ngModel)]="month">
+                                                <mat-option *ngFor="let item of DownloadService.listMonth"
+                                                    [value]="item.Display">
+                                                    {{item.Display}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <div class="col s12 m12 l2">
+                                            <a title="Tìm" (click)="onSearchDoanhNghiepDichVuLichSu()"
+                                                class="btn-floating waves-effect waves-light green darken-1"><i
+                                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col s12 m12 l4">
+                                            <div class="input-field">
+                                                <div name="DoanhThuByMonth"
+                                                    style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
+                                                    {{doanhThuByMonth | number:
+                                                    '1.0-0'}} đồng
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m12 l6">
+                                        <div class="KhungOverflow">
+                                            <mat-table [dataSource]="dataSourceDoanhNghiepDichVuLichSu" matSort>
+                                                <ng-container matColumnDef="DichVuID">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <mat-select
+                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                            name="DichVuID{{element.ID}}" class="browser-default"
+                                                            [(ngModel)]="element.DichVuID">
+                                                            <mat-option *ngFor="let item of DichVuService.list"
+                                                                [value]="item.ID">
+                                                                {{item.Name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="Year">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Năm
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        {{element.Year}}
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="Month">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        {{element.Month}}
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="GiaTien">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <b>{{element.GiaTien | number:
+                                                            '1.0-0'}}</b>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="Note">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        {{element.Note}}
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="loading">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Đang tải dữ liệu...
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="noData">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Chưa có dữ liệu.
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <mat-header-row
+                                                    *matHeaderRowDef="DoanhNghiepDichVuLichSuService.displayColumns"></mat-header-row>
+                                                <mat-row
+                                                    *matRowDef="let row; columns: DoanhNghiepDichVuLichSuService.displayColumns;"></mat-row>
+                                                <mat-footer-row *matFooterRowDef="['loading']"
+                                                    [ngClass]="{'hide':dataSourceDoanhNghiepDichVuLichSu!=null}"></mat-footer-row>
+                                                <mat-footer-row *matFooterRowDef="['noData']"
+                                                    [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVuLichSu!=null && dataSourceDoanhNghiepDichVuLichSu.data.length==0)}">
+                                                </mat-footer-row>
+                                            </mat-table>
+                                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                                [showFirstLastButtons]></mat-paginator>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m12 l6">
+                                        <div class="KhungOverflow">
+                                            <mat-table [dataSource]="dataSourceReport001" matSort>
+                                                <ng-container matColumnDef="DichVu">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">{{element.DichVu}}</mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="MaThueBao">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mã thuê bao
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">{{element.MaThueBao}}</mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="DoanhThu">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng {{month}}-{{year}}
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">
+                                                        <b>{{element.DoanhThu | number:
+                                                            '1.0-0'}}</b></mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="DoanhThuLast">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Liền kề
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">
+                                                        <b>{{element.DoanhThuLast | number:
+                                                            '1.0-0'}}</b></mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="ChenhLech">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">
+                                                        <div *ngIf="element.ChenhLech>=0"
+                                                            style="color: limegreen; text-align: right; font-weight: bold;">
+                                                            {{element.ChenhLech | number:
+                                                            '1.0-0'}}</div>
+                                                        <div *ngIf="element.ChenhLech<0"
+                                                            style="color: red; text-align: right; font-weight: bold;">
+                                                            {{element.ChenhLech | number:
+                                                            '1.0-0'}}</div>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="loading">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Đang tải dữ liệu...
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="noData">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Chưa có dữ liệu.
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <mat-header-row
+                                                    *matHeaderRowDef="ReportService.displayColumnsReport001"></mat-header-row>
+                                                <mat-row
+                                                    *matRowDef="let row; columns: ReportService.displayColumnsReport001;"></mat-row>
+                                                <mat-footer-row *matFooterRowDef="['loading']"
+                                                    [ngClass]="{'hide':dataSourceReport001!=null}"></mat-footer-row>
+                                                <mat-footer-row *matFooterRowDef="['noData']"
+                                                    [ngClass]="{'hide':!(dataSourceReport001!=null && dataSourceReport001.data.length==0)}">
+                                                </mat-footer-row>
+                                            </mat-table>
+                                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                                [showFirstLastButtons]></mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="2">
+                                    <div class="col s12 m12 l6">
+                                        <h3 style="text-align: center;"><b>Doanh thu tháng {{monthTitle}}-{{yearTitle}}
+                                                (Đơn vị tính:
+                                                đồng)</b></h3>
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep0021"
+                                            [labels]="ChartLabelsReportDoanhNghiep0021"
+                                            [chartType]="ChartTypeReportDoanhNghiep0021"
+                                            [options]="ChartOptionsReportDoanhNghiep0021">
+                                        </canvas>
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep0022"
+                                            [labels]="ChartLabelsReportDoanhNghiep0022"
+                                            [chartType]="ChartTypeReportDoanhNghiep0022"
+                                            [options]="ChartOptionsReportDoanhNghiep0022">
+                                        </canvas>
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep002"
+                                            [labels]="ChartLabelsReportDoanhNghiep002"
+                                            [chartType]="ChartTypeReportDoanhNghiep002"
+                                            [colors]="ChartColorsReportDoanhNghiep002"
+                                            [options]="ChartOptionsReportDoanhNghiep002">
+                                        </canvas>
+                                    </div>
+                                    <div class="col s12 m12 l6">
+                                        <h3 style="text-align: center;"><b>Doanh thu năm {{yearTitle}} (Đơn vị tính:
+                                                đồng)</b></h3>
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep0041"
+                                            [labels]="ChartLabelsReportDoanhNghiep0041"
+                                            [chartType]="ChartTypeReportDoanhNghiep0041"
+                                            [options]="ChartOptionsReportDoanhNghiep0041">
+                                        </canvas>
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep0042"
+                                            [labels]="ChartLabelsReportDoanhNghiep0042"
+                                            [chartType]="ChartTypeReportDoanhNghiep0042"
+                                            [options]="ChartOptionsReportDoanhNghiep0042">
+                                        </canvas>
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep004"
+                                            [labels]="ChartLabelsReportDoanhNghiep004"
+                                            [chartType]="ChartTypeReportDoanhNghiep004"
+                                            [colors]="ChartColorsReportDoanhNghiep004"
+                                            [options]="ChartOptionsReportDoanhNghiep004">
+                                        </canvas>
+                                    </div>
+                                    <div class="col s12 m12 l12">
+                                        <canvas baseChart [datasets]="ChartDataReportDoanhNghiep003"
+                                            [labels]="ChartLabelsReportDoanhNghiep003"
+                                            [options]="ChartOptionsReportDoanhNghiep003"
+                                            [plugins]="ChartPluginsReportDoanhNghiep003"
+                                            [legend]="ChartLegendReportDoanhNghiep003"
+                                            [chartType]="ChartTypeReportDoanhNghiep003">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div id="3">
+                                    <div class="KhungOverflow">
+                                        <mat-table [dataSource]="dataSourceDoanhNghiepDichVu" matSort #sortDoanhNghiepDichVu="matSort">
+                                            <ng-container matColumnDef="NhanVienID">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên AM
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <mat-select
+                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                        name="NhanVienID{{element.ID}}" class="browser-default"
+                                                        [(ngModel)]="element.NhanVienID">
+                                                        <mat-option *ngFor="let item of NhanVienService.list"
+                                                            [value]="item.ID">
+                                                            {{item.Name}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="DichVuID">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <mat-select
+                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                        name="DichVuID{{element.ID}}" class="browser-default"
+                                                        [(ngModel)]="element.DichVuID">
+                                                        <mat-option *ngFor="let item of DichVuService.list"
+                                                            [value]="item.ID">
+                                                            {{item.Name}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="NgayKyHopDong">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày ký
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input name="NgayKyHopDong{{element.ID}}" style="text-align: right;"
+                                                        [ngModel]="element.NgayKyHopDong | date:'yyyy-MM-dd'"
+                                                        (ngModelChange)="onChangeDoanhNghiepDichVuNgayKyHopDong(element, $event)"
+                                                        [ngModelOptions]="{ updateOn: 'blur' }" type="date">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="Code">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Số hợp đồng
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input placeholder="Số hợp đồng" name="Code{{element.ID}}"
+                                                        [(ngModel)]="element.Code" type="text">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="MaThueBao">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Mã thuê bao
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input placeholder="Mã thuê bao" name="MaThueBao{{element.ID}}"
+                                                        [(ngModel)]="element.MaThueBao" type="text">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="GiaTien">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Giá cước
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input placeholder="0" name="GiaTien{{element.ID}}"
+                                                        style="text-align: right;" [(ngModel)]="element.GiaTien"
+                                                        type="number">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="SoThang">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Số tháng
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input placeholder="0" name="SoThang{{element.ID}}"
+                                                        style="text-align: right;" [(ngModel)]="element.SoThang"
+                                                        type="number">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="Note">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input placeholder="Ghi chú" name="Note{{element.ID}}"
+                                                        [(ngModel)]="element.Note" type="text">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="SortOrder">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <input placeholder="0" name="SortOrder{{element.ID}}"
+                                                        style="text-align: right;" [(ngModel)]="element.SortOrder"
+                                                        type="number">
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="Active">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <label>
+                                                        <input type="checkbox" class="filled-in"
+                                                            name="Active{{element.ID}}" [(ngModel)]="element.Active" />
+                                                        <span>.</span>
+                                                    </label>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="Save">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                    <a title="Lưu thay đổi" (click)="onSaveDoanhNghiepDichVu(element)"
+                                                        class="btn-floating waves-effect waves-light cyan"><i
+                                                            class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
+                                                    <!-- <a (click)="onDeleteDoanhNghiepDichVu(element)" *ngIf="element.ID>0"
+                                                        class="btn-floating waves-effect waves-light red"><i
+                                                            class="material-icons">delete_outline</i></a> -->
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="loading">
+                                                <mat-footer-cell *matFooterCellDef colspan="4">
+                                                    Đang tải dữ liệu...
+                                                </mat-footer-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="noData">
+                                                <mat-footer-cell *matFooterCellDef colspan="4">
+                                                    Chưa có dữ liệu.
+                                                </mat-footer-cell>
+                                            </ng-container>
+                                            <mat-header-row
+                                                *matHeaderRowDef="DoanhNghiepDichVuService.displayColumns"></mat-header-row>
+                                            <mat-row
+                                                *matRowDef="let row; columns: DoanhNghiepDichVuService.displayColumns;"></mat-row>
+                                            <mat-footer-row *matFooterRowDef="['loading']"
+                                                [ngClass]="{'hide':dataSourceDoanhNghiepDichVu!=null}"></mat-footer-row>
+                                            <mat-footer-row *matFooterRowDef="['noData']"
+                                                [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVu!=null && dataSourceDoanhNghiepDichVu.data.length==0)}">
+                                            </mat-footer-row>
+                                        </mat-table>
+                                        <mat-paginator #paginatorDoanhNghiepDichVu="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                            [showFirstLastButtons]></mat-paginator>
+                                    </div>
+                                </div>
+                                <div id="4">
                                     <div class="row">
                                         <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
                                             <div class="col s6 m6 l12">
@@ -326,7 +693,7 @@
                                     </div>
                                     <hr />
                                     <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepThanhVien" matSort>
+                                        <mat-table [dataSource]="dataSourceDoanhNghiepThanhVien" matSort #sortDoanhNghiepThanhVien="matSort">
                                             <ng-container matColumnDef="LoaiDoanhNghiepThanhVienID">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Thành viên
                                                 </mat-header-cell>
@@ -465,384 +832,8 @@
                                                 [ngClass]="{'hide':!(dataSourceDoanhNghiepThanhVien!=null && dataSourceDoanhNghiepThanhVien.data.length==0)}">
                                             </mat-footer-row>
                                         </mat-table>
-                                        <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                        <mat-paginator #paginatorDoanhNghiepThanhVien="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
                                             [showFirstLastButtons]></mat-paginator>
-                                    </div>
-                                </div>
-                                <div id="2">
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepDichVu" matSort>
-                                            <ng-container matColumnDef="NhanVienID">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên AM
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="NhanVienID{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.NhanVienID">
-                                                        <mat-option *ngFor="let item of NhanVienService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DichVuID">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="DichVuID{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.DichVuID">
-                                                        <mat-option *ngFor="let item of DichVuService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="NgayKyHopDong">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày ký
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input name="NgayKyHopDong{{element.ID}}" style="text-align: right;"
-                                                        [ngModel]="element.NgayKyHopDong | date:'yyyy-MM-dd'"
-                                                        (ngModelChange)="onChangeDoanhNghiepDichVuNgayKyHopDong(element, $event)"
-                                                        [ngModelOptions]="{ updateOn: 'blur' }" type="date">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Code">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Số hợp đồng
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Số hợp đồng" name="Code{{element.ID}}"
-                                                        [(ngModel)]="element.Code" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="MaThueBao">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Mã thuê bao
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Mã thuê bao" name="MaThueBao{{element.ID}}"
-                                                        [(ngModel)]="element.MaThueBao" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="GiaTien">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Giá cước
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="GiaTien{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.GiaTien"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="SoThang">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Số tháng
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="SoThang{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.SoThang"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Note">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Ghi chú" name="Note{{element.ID}}"
-                                                        [(ngModel)]="element.Note" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="SortOrder">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="SortOrder{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.SortOrder"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Active">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">
-                                                    <label>
-                                                        <input type="checkbox" class="filled-in"
-                                                            name="Active{{element.ID}}" [(ngModel)]="element.Active" />
-                                                        <span>.</span>
-                                                    </label>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Save">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <a title="Lưu thay đổi" (click)="onSaveDoanhNghiepDichVu(element)"
-                                                        class="btn-floating waves-effect waves-light cyan"><i
-                                                            class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
-                                                    <!-- <a (click)="onDeleteDoanhNghiepDichVu(element)" *ngIf="element.ID>0"
-                                                        class="btn-floating waves-effect waves-light red"><i
-                                                            class="material-icons">delete_outline</i></a> -->
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="DoanhNghiepDichVuService.displayColumns"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: DoanhNghiepDichVuService.displayColumns;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceDoanhNghiepDichVu!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVu!=null && dataSourceDoanhNghiepDichVu.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                            [showFirstLastButtons]></mat-paginator>
-                                    </div>
-                                </div>
-                                <div id="3">
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="year" class="browser-default" [(ngModel)]="year">
-                                            <mat-option *ngFor="let item of DownloadService.listYear"
-                                                [value]="item.Display">
-                                                {{item.Display}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="month" class="browser-default" [(ngModel)]="month">
-                                            <mat-option *ngFor="let item of DownloadService.listMonth"
-                                                [value]="item.Display">
-                                                {{item.Display}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                    <div class="col s12 m12 l2">
-                                        <a title="Tìm" (click)="onSearchDoanhNghiepDichVuLichSu()"
-                                            class="btn-floating waves-effect waves-light green darken-1"><i
-                                                class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                                    </div>
-                                    <div class="col s8 m8 l6">
-                                        <div class="input-field">
-                                            <div name="DoanhThuByMonth"
-                                                style="font-weight: bold; color: green; text-align: right; font-size: 20px;">
-                                                Doanh thu: {{doanhThuByMonth | number:
-                                                '1.0-0'}} đồng
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepDichVuLichSu" matSort>
-                                            <ng-container matColumnDef="DichVuID">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="DichVuID{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.DichVuID">
-                                                        <mat-option *ngFor="let item of DichVuService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Year">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Năm
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="Year{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.Year">
-                                                        <mat-option *ngFor="let item of DownloadService.listYear"
-                                                            [value]="item.Display">
-                                                            {{item.Display}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Month">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="Month{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.Month">
-                                                        <mat-option *ngFor="let item of DownloadService.listMonth"
-                                                            [value]="item.Display">
-                                                            {{item.Display}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="GiaTien">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="GiaTien{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.GiaTien"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Note">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Ghi chú" name="Note{{element.ID}}"
-                                                        [(ngModel)]="element.Note" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <!-- <ng-container matColumnDef="SortOrder">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="SortOrder{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.SortOrder"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container> -->
-                                            <ng-container matColumnDef="Active">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">
-                                                    <label>
-                                                        <input type="checkbox" class="filled-in"
-                                                            name="Active{{element.ID}}" [(ngModel)]="element.Active" />
-                                                        <span>.</span>
-                                                    </label>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <!-- <ng-container matColumnDef="Save">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <a title="Lưu thay đổi"
-                                                        (click)="onSaveDoanhNghiepDichVuLichSu(element)"
-                                                        class="btn-floating waves-effect waves-light cyan"><i
-                                                            class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
-                                                    <a (click)="onDeleteDoanhNghiepDichVu(element)" *ngIf="element.ID>0"
-                                                        class="btn-floating waves-effect waves-light red"><i
-                                                            class="material-icons">delete_outline</i></a>
-                                                </mat-cell>
-                                            </ng-container> -->
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="DoanhNghiepDichVuLichSuService.displayColumns"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: DoanhNghiepDichVuLichSuService.displayColumns;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceDoanhNghiepDichVuLichSu!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVuLichSu!=null && dataSourceDoanhNghiepDichVuLichSu.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                            [showFirstLastButtons]></mat-paginator>
-                                    </div>
-                                </div>
-                                <div id="4">
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceReport001" matSort>
-                                            <ng-container matColumnDef="DichVu">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">{{element.DichVu}}</mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="MaThueBao">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Mã thuê bao
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">{{element.MaThueBao}}</mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng hiện tại
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">{{element.Month}}/{{element.Year}}:
-                                                    <b>{{element.DoanhThu | number:
-                                                        '1.0-0'}} đồng</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThuLast">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng liền kề
-                                                </mat-header-cell>
-                                                <mat-cell
-                                                    *matCellDef="let element">{{element.MonthLast}}/{{element.YearLast}}:
-                                                    <b>{{element.DoanhThuLast | number:
-                                                        '1.0-0'}} đồng</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">
-                                                    <div *ngIf="element.ChenhLech>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech | number:
-                                                        '1.0-0'}} đồng</div>
-                                                    <div *ngIf="element.ChenhLech<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech | number:
-                                                        '1.0-0'}} đồng</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="ReportService.displayColumnsReport001"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: ReportService.displayColumnsReport001;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceReport001!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceReport001!=null && dataSourceReport001.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="1000"
-                                            [showFirstLastButtons]></mat-paginator>
-                                    </div>
-                                    <hr />
-                                    <div class="col s12 m12 l12">
-                                        <canvas baseChart [datasets]="barChartDataReport002" [labels]="barChartLabelsReport002"
-                                            [options]="barChartOptionsReport002" [plugins]="barChartPluginsReport002"
-                                            [legend]="barChartLegendReport002" [chartType]="barChartTypeReport002" [colors]="barChartColorsReport002">
-                                        </canvas>
-                                    </div>                                    
-                                    <div class="col s12 m12 l12">
-                                        <!-- <canvas baseChart [datasets]="barChartDataReport003" [labels]="barChartLabelsReport003"
-                                            [options]="barChartOptionsReport003" [plugins]="barChartPluginsReport003"
-                                            [legend]="barChartLegendReport003" [chartType]="barChartTypeReport003" [colors]="barChartColorsReport003">
-                                        </canvas> -->
                                     </div>
                                 </div>
                             </div>
@@ -855,6 +846,4 @@
 </div>
 <br />
 <br />
-
-
 <app-loading *ngIf="isShowLoading"></app-loading>
