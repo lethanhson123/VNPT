@@ -40,9 +40,41 @@ namespace Business.Implement
                 }
                 else
                 {
-                    result = await _DoanhNghiepRepository.GetByPageAndPageSizeToListAsync(0,50);
+                    result = await _DoanhNghiepRepository.GetByPageAndPageSizeToListAsync(0, 50);
                 }
 
+            }
+            return result;
+        }
+        public virtual async Task<List<DoanhNghiep>> GetByNhanVienIDOrSearchStringToListAsync(long nhanVienID, string searchString)
+        {
+            List<DoanhNghiep> result = new List<DoanhNghiep>();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                result = await GetBySearchStringToListAsync(searchString);
+            }
+            else
+            {
+                if (nhanVienID > 0)
+                {
+                    result = await _DoanhNghiepRepository.GetByCondition(item => item.NhanVienID == nhanVienID).ToListAsync();
+                }
+            }
+            return result;
+        }
+        public virtual async Task<List<DoanhNghiep>> GetByPhongBanIDOrSearchStringToListAsync(long phongBanID, string searchString)
+        {
+            List<DoanhNghiep> result = new List<DoanhNghiep>();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                result = await GetBySearchStringToListAsync(searchString);
+            }
+            else
+            {
+                if (phongBanID > 0)
+                {
+                    result = await _DoanhNghiepRepository.GetByCondition(item => item.PhongBanID == phongBanID).ToListAsync();
+                }
             }
             return result;
         }

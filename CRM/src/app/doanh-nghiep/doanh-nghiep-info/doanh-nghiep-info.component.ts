@@ -23,6 +23,8 @@ import { DichVu } from 'src/app/shared/DichVu.model';
 import { DichVuService } from 'src/app/shared/DichVu.service';
 import { NhanVien } from 'src/app/shared/NhanVien.model';
 import { NhanVienService } from 'src/app/shared/NhanVien.service';
+import { PhongBan } from 'src/app/shared/PhongBan.model';
+import { PhongBanService } from 'src/app/shared/PhongBan.service';
 import { DoanhNghiep } from 'src/app/shared/DoanhNghiep.model';
 import { DoanhNghiepService } from 'src/app/shared/DoanhNghiep.service';
 import { DoanhNghiepThanhVien } from 'src/app/shared/DoanhNghiepThanhVien.model';
@@ -80,6 +82,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
     public NganhNgheKinhDoanhService: NganhNgheKinhDoanhService,
     public LoaiTrangThaiService: LoaiTrangThaiService,
     public NhanVienService: NhanVienService,
+    public PhongBanService: PhongBanService,
     public LoaiDoanhNghiepThanhVienService: LoaiDoanhNghiepThanhVienService,
     public DoanhNghiepDichVuService: DoanhNghiepDichVuService,
     public DoanhNghiepDichVuLichSuService: DoanhNghiepDichVuLichSuService,
@@ -132,6 +135,15 @@ export class DoanhNghiepInfoComponent implements OnInit {
     this.NhanVienService.GetAllToListAsync().subscribe(
       res => {
         this.NhanVienService.list = (res as NhanVien[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+      },
+      err => {
+      }
+    );
+  }
+  GetPhongBanToListAsync() {
+    this.PhongBanService.GetAllToListAsync().subscribe(
+      res => {
+        this.PhongBanService.list = (res as PhongBan[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
       },
       err => {
       }
@@ -521,6 +533,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
         this.GetLoaiDoanhNghiepToListAsync();
         this.GetLoaiTrangThaiToListAsync();
         this.GetNhanVienToListAsync();
+        this.GetPhongBanToListAsync();
         this.GetDoanhNghiepDichVuLichSuToListAsync();
         this.GetDoanhNghiepThanhVienToListAsync();
         this.GetLoaiDoanhNghiepThanhVienToListAsync();

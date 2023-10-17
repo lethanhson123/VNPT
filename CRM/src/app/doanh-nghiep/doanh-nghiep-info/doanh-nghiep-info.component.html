@@ -496,19 +496,19 @@
                                                             placeholder="Địa chỉ" type="text">
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col s12 m12 l4">
                                                     <div class="input-field">
-                                                        <label for="NganhNgheKinhDoanh">Ngành nghề</label>
+                                                        <label for="Note">Ghi chú</label>
                                                     </div>
                                                 </div>
                                                 <div class="col s12 m12 l8">
                                                     <div class="input-field">
-                                                        <input name="NganhNgheKinhDoanh"
-                                                            [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanh"
-                                                            placeholder="Ngành nghề" type="text">
+                                                        <input name="Note"
+                                                            [(ngModel)]="DoanhNghiepService.formData.Note"
+                                                            placeholder="Ghi chú" type="text">
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <div class="col s12 m12 l4">
                                                 <div class="col s12 m12 l4">
@@ -564,21 +564,57 @@
                                                             [(ngModel)]="DoanhNghiepService.formData.SoLuongLaoDong"
                                                             type="number">
                                                     </div>
-                                                </div>
+                                                </div>                                                       
                                                 <div class="col s12 m12 l4">
                                                     <div class="input-field">
-                                                        <label for="Note">Ghi chú</label>
+                                                        <label for="NganhNgheKinhDoanh">Ngành nghề</label>
                                                     </div>
                                                 </div>
                                                 <div class="col s12 m12 l8">
                                                     <div class="input-field">
-                                                        <input name="Note"
-                                                            [(ngModel)]="DoanhNghiepService.formData.Note"
-                                                            placeholder="Ghi chú" type="text">
+                                                        <input name="NganhNgheKinhDoanh"
+                                                            [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanh"
+                                                            placeholder="Ngành nghề" type="text">
+                                                    </div>
+                                                </div>   
+                                                <div class="col s6 m6 l4">
+                                                    <div class="input-field">
+                                                        <label for="NganhNgheKinhDoanhChinhID">Ngành nghề chính</label>
                                                     </div>
                                                 </div>
+                                                <div class="col s6 m6 l8">
+                                                    <mat-select
+                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                        name="NganhNgheKinhDoanhChinhID" class="browser-default"
+                                                        [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanhChinhID">
+                                                        <mat-option *ngFor="let item of NganhNgheKinhDoanhService.list"
+                                                            [value]="item.ID">
+                                                            {{item.Name}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                    <br />
+                                                    <br />
+                                                </div>                                  
                                             </div>
                                             <div class="col s12 m12 l4">
+                                                <div class="col s6 m6 l4">
+                                                    <div class="input-field">
+                                                        <label for="PhongBanID">Phòng ban</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s6 m6 l8">
+                                                    <mat-select
+                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                        name="PhongBanID" class="browser-default"
+                                                        [(ngModel)]="DoanhNghiepService.formData.PhongBanID">
+                                                        <mat-option *ngFor="let item of PhongBanService.list"
+                                                            [value]="item.ID">
+                                                            {{item.Name}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                    <br />
+                                                    <br />
+                                                </div>
                                                 <div class="col s6 m6 l4">
                                                     <div class="input-field">
                                                         <label for="NhanVienID">Nhân viên AM</label>
@@ -633,24 +669,7 @@
                                                     <br />
                                                     <br />
                                                 </div>
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="NganhNgheKinhDoanhChinhID">Ngành nghề chính</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="NganhNgheKinhDoanhChinhID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanhChinhID">
-                                                        <mat-option *ngFor="let item of NganhNgheKinhDoanhService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
+                                                
                                                 <div class="col s6 m6 l4">
                                                     <div class="input-field">
                                                         <label for="LoaiDoanhNghiepID">Loại doanh nghiệp</label>

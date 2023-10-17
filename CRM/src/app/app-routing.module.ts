@@ -14,6 +14,9 @@ import { UploadComponent } from './upload/upload.component';
 import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh-nghiep-info.component';
 import { NhanVienComponent } from './nhan-vien/nhan-vien.component';
 import { LoaiDichVuComponent } from './loai-dich-vu/loai-dich-vu.component';
+import { NhanVienInfoComponent } from './nhan-vien/nhan-vien-info/nhan-vien-info.component';
+import { PhongBanInfoComponent } from './phong-ban/phong-ban-info/phong-ban-info.component';
+import { PhongBanComponent } from './phong-ban/phong-ban.component';
 
 
 const routes: Routes = [  
@@ -52,10 +55,19 @@ const routes: Routes = [
     path: 'NhanVien', component: NhanVienComponent,
   },  
   {
+    path: 'NhanVienInfo/:ID', component: NhanVienInfoComponent,
+  },
+  {
     path: 'DoanhNghiep', component: DoanhNghiepComponent,
   },  
   {
     path: 'DoanhNghiepInfo/:ID', component: DoanhNghiepInfoComponent,
+  },
+  {
+    path: 'PhongBan', component: PhongBanComponent,
+  },  
+  {
+    path: 'PhongBanInfo/:ID', component: PhongBanInfoComponent,
   },
   {
     path: 'Upload', component: UploadComponent,

@@ -27,6 +27,9 @@ import { UploadComponent } from './upload/upload.component';
 import { DoanhNghiepInfoComponent } from './doanh-nghiep/doanh-nghiep-info/doanh-nghiep-info.component';
 import { NhanVienComponent } from './nhan-vien/nhan-vien.component';
 import { LoaiDichVuComponent } from './loai-dich-vu/loai-dich-vu.component';
+import { PhongBanComponent } from './phong-ban/phong-ban.component';
+import { PhongBanInfoComponent } from './Phong-Ban/phong-ban-info/phong-ban-info.component';
+import { NhanVienInfoComponent } from './nhan-vien/nhan-vien-info/nhan-vien-info.component';
 
 
 
@@ -47,7 +50,10 @@ import { LoaiDichVuComponent } from './loai-dich-vu/loai-dich-vu.component';
     UploadComponent,
     DoanhNghiepInfoComponent,
     NhanVienComponent,
-    LoaiDichVuComponent,    
+    LoaiDichVuComponent,
+    PhongBanComponent,
+    PhongBanInfoComponent,
+    NhanVienInfoComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -1,0 +1,402 @@
+<div class="row">
+    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
+        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Nhân viên
+                    </h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
+                        </li>
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Nhân viên
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div id="basic-tabs" class="card card card-default scrollspy">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m12 l6">
+                                            <h5 class="card-title" style="font-size: 14px;">
+                                                <b>{{NhanVienService.formData.Name}}</b>
+                                            </h5>
+                                        </div>
+                                        <div class="col s12 m12 l6">
+                                            <ul class="tabs">
+                                                <li class="tab col m3 s12 p-0"><a class="active p-0" href="#1">Doanh
+                                                        thu</a></li>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">Biểu đồ</a>
+                                                </li>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#3">Khu vực</a>
+                                                </li>
+                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#4">Thông
+                                                        tin</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="1">
+
+                                </div>
+                                <div id="2">
+                                </div>
+                                <div id="3">
+                                    <div class="col s12 m12 l4">
+                                        <div class="KhungOverflow">
+                                            <mat-table [dataSource]="dataSourceNhanVienKhuVuc" matSort
+                                                #sortNhanVienKhuVuc="matSort">
+                                                <ng-container matColumnDef="HuyenID">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Huyện
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <mat-select
+                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                            name="HuyenID{{element.ID}}" class="browser-default"
+                                                            [(ngModel)]="element.HuyenID">
+                                                            <mat-option *ngFor="let item of HuyenService.list"
+                                                                [value]="item.ID">
+                                                                {{item.Name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="XaID">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Xã
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <mat-select
+                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                            name="XaID{{element.ID}}" class="browser-default"
+                                                            [(ngModel)]="element.XaID">
+                                                            <mat-option *ngFor="let item of XaService.list"
+                                                                [value]="item.ID">
+                                                                {{item.Name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="Active">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">
+                                                        <label>
+                                                            <input type="checkbox" class="filled-in"
+                                                                name="Active{{element.ID}}"
+                                                                (change)="onNhanVienKhuVucActiveChange(element)"
+                                                                [(ngModel)]="element.Active" />
+                                                            <span>.</span>
+                                                        </label>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="loading">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Đang tải dữ liệu...
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="noData">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Chưa có dữ liệu.
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <mat-header-row
+                                                    *matHeaderRowDef="NhanVienKhuVucService.displayColumns"></mat-header-row>
+                                                <mat-row
+                                                    *matRowDef="let row; columns: NhanVienKhuVucService.displayColumns;"></mat-row>
+                                                <mat-footer-row *matFooterRowDef="['loading']"
+                                                    [ngClass]="{'hide':dataSourceNhanVienKhuVuc!=null}"></mat-footer-row>
+                                                <mat-footer-row *matFooterRowDef="['noData']"
+                                                    [ngClass]="{'hide':!(dataSourceNhanVienKhuVuc!=null && dataSourceNhanVienKhuVuc.data.length==0)}">
+                                                </mat-footer-row>
+                                            </mat-table>
+                                            <mat-paginator #paginatorNhanVienKhuVuc="matPaginator"
+                                                [pageSizeOptions]="[10,20,50,100]" [pageSize]="13"
+                                                [showFirstLastButtons]></mat-paginator>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m12 l8">
+                                        <div class="col s12 m12 l8">
+                                            <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
+                                                class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
+                                                (keyup.enter)="onSearch()">
+                                        </div>
+                                        <div class="col s12 m12 l4">
+                                            <a title="Tìm" (click)="onSearch()"
+                                                class="btn-floating waves-effect waves-light green darken-1"><i
+                                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;                               
+                                                    <a title="Lưu thay đổi" (click)="onSave()"
+                                                class="btn-floating waves-effect waves-light cyan"><i
+                                                    class="material-icons">save</i></a>
+                                        </div> 
+                                        <div class="KhungOverflow">
+                                            <mat-table [dataSource]="dataSourceDoanhNghiep" matSort #sortDoanhNghiep="matSort">
+                                                <ng-container matColumnDef="Code">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>MST
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element">
+                                                        {{element.Code}}
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="Name">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element"><a title="{{element.Name}}"
+                                                            target="_blank"
+                                                            href="{{URLSubDoanhNghiep}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="HuyenID">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Huyện
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <mat-select
+                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                            name="HuyenID{{element.ID}}" class="browser-default"
+                                                            [(ngModel)]="element.HuyenID">
+                                                            <mat-option *ngFor="let item of HuyenService.list"
+                                                                [value]="item.ID">
+                                                                {{item.Name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="XaID">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Xã
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <mat-select
+                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                            name="XaID{{element.ID}}" class="browser-default"
+                                                            [(ngModel)]="element.XaID">
+                                                            <mat-option *ngFor="let item of XaService.list"
+                                                                [value]="item.ID">
+                                                                {{item.Name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="NhanVienID">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                                        <mat-select
+                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                            name="NhanVienID{{element.ID}}" class="browser-default"
+                                                            [(ngModel)]="element.NhanVienID">
+                                                            <mat-option *ngFor="let item of NhanVienService.list"
+                                                                [value]="item.ID">
+                                                                {{item.Name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="loading">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Đang tải dữ liệu...
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <ng-container matColumnDef="noData">
+                                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                                        Chưa có dữ liệu.
+                                                    </mat-footer-cell>
+                                                </ng-container>
+                                                <mat-header-row
+                                                    *matHeaderRowDef="DoanhNghiepService.displayColumnsNhanVien"></mat-header-row>
+                                                <mat-row
+                                                    *matRowDef="let row; columns: DoanhNghiepService.displayColumnsNhanVien;"></mat-row>
+                                                <mat-footer-row *matFooterRowDef="['loading']"
+                                                    [ngClass]="{'hide':dataSourceDoanhNghiep!=null}"></mat-footer-row>
+                                                <mat-footer-row *matFooterRowDef="['noData']"
+                                                    [ngClass]="{'hide':!(dataSourceDoanhNghiep!=null && dataSourceDoanhNghiep.data.length==0)}">
+                                                </mat-footer-row>
+                                            </mat-table>
+                                            <mat-paginator #paginatorDoanhNghiep="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                                [showFirstLastButtons]></mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="4">
+                                    <div class="row">
+                                        <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
+                                            <div class="col s6 m6 l12">
+                                                <div class="card-title">
+                                                    <a title="Danh sách"
+                                                        href="javascript:window.open('','_self').close();"
+                                                        style="padding-top: 3px;"
+                                                        class="btn-floating waves-effect waves-light green darken-1"><i
+                                                            class="material-icons">arrow_back</i></a>&nbsp;&nbsp;&nbsp;
+                                                    <a title="Thêm mới" href="{{URLSub}}/0" style="padding-top: 3px;"
+                                                        class="btn-floating waves-effect waves-light green darken-1"><i
+                                                            class="material-icons">add</i></a>&nbsp;&nbsp;&nbsp;
+                                                    <button [disabled]="!NhanVienService.formData.Name"
+                                                        title="Lưu thay đổi" type="submit" style="padding-top: 3px;"
+                                                        class="btn-floating waves-effect waves-light cyan"><i
+                                                            class="material-icons">save</i></button>&nbsp;&nbsp;&nbsp;
+                                                </div>
+                                            </div>
+                                            <input name="ID" [(ngModel)]="NhanVienService.formData.ID" type="hidden">
+                                            <div class="col s12 m12 l6">
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="Name">Nhân viên</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="Name" [(ngModel)]="NhanVienService.formData.Name"
+                                                            placeholder="Nhân viên" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="Code">Mã nhân viên</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="Code" [(ngModel)]="NhanVienService.formData.Code"
+                                                            placeholder="Mã nhân viên" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="Email">Email</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="Email" [(ngModel)]="NhanVienService.formData.Email"
+                                                            placeholder="Email" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="DienThoai">Điện thoại</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="DienThoai"
+                                                            [(ngModel)]="NhanVienService.formData.DienThoai"
+                                                            placeholder="Điện thoại" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="MatKhau">Mật khẩu</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="MatKhau" [(ngModel)]="NhanVienService.formData.MatKhau"
+                                                            placeholder="Mật khẩu" type="password">
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col s12 m12 l6">
+                                                <div class="col s6 m6 l4">
+                                                    <div class="input-field">
+                                                        <label for="ParentID">Phòng ban</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s6 m6 l8">
+                                                    <mat-select
+                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                                        name="ParentID" class="browser-default"
+                                                        [(ngModel)]="NhanVienService.formData.ParentID">
+                                                        <mat-option *ngFor="let item of PhongBanService.list"
+                                                            [value]="item.ID">
+                                                            {{item.Name}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="CCCD">CCCD</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="CCCD" [(ngModel)]="NhanVienService.formData.CCCD"
+                                                            placeholder="CCCD" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="DiaChi">Địa chỉ</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="DiaChi"
+                                                            [(ngModel)]="NhanVienService.formData.DiaChi"
+                                                            placeholder="Địa chỉ" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="Note">Ghi chú</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="Note" [(ngModel)]="NhanVienService.formData.Note"
+                                                            placeholder="Ghi chú" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="SortOrder">Sắp xếp</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <input name="SortOrder"
+                                                            [(ngModel)]="NhanVienService.formData.SortOrder"
+                                                            placeholder="Ghi chú" type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l4">
+                                                    <div class="input-field">
+                                                        <label for="Active">Kích hoạt</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m12 l8">
+                                                    <div class="input-field">
+                                                        <p>
+                                                            <label>
+                                                                <input type="checkbox" class="filled-in" name="Active"
+                                                                    [(ngModel)]="NhanVienService.formData.Active" />
+                                                                <span>.</span>
+                                                            </label>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<app-loading *ngIf="isShowLoading"></app-loading>

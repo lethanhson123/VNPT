@@ -10,5 +10,17 @@
         {
             _NhanVienBusiness = NhanVienBusiness;
         }
+        [HttpGet]
+        [Route("GetByIDStringAsync")]
+        public async Task<NhanVien> GetByIDStringAsync(string ID)
+        {
+            NhanVien result = new NhanVien();
+            if (!string.IsNullOrEmpty(ID))
+            {
+                ID = GlobalHelper.InitializationURLCode(ID);
+                result = await _NhanVienBusiness.GetByIDAsync(int.Parse(ID));
+            }
+            return result;
+        }
     }
 }

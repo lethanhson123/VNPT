@@ -17,6 +17,8 @@
             services.AddTransient<INganhNgheKinhDoanhBusiness, NganhNgheKinhDoanhBusiness>();
             services.AddTransient<INhanVienBusiness, NhanVienBusiness>();
             services.AddTransient<IPhongBanBusiness, PhongBanBusiness>();
+            services.AddTransient<IPhongBanKhuVucBusiness, PhongBanKhuVucBusiness>();
+            services.AddTransient<INhanVienKhuVucBusiness, NhanVienKhuVucBusiness>();
             services.AddTransient<ITinhBusiness, TinhBusiness>();
             services.AddTransient<IXaBusiness, XaBusiness>();
 
@@ -47,6 +49,8 @@
             services.AddTransient<INganhNgheKinhDoanhRepository, NganhNgheKinhDoanhRepository>();
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<IPhongBanRepository, PhongBanRepository>();
+            services.AddTransient<IPhongBanKhuVucRepository, PhongBanKhuVucRepository>();
+            services.AddTransient<INhanVienKhuVucRepository, NhanVienKhuVucRepository>();
             services.AddTransient<ITinhRepository, TinhRepository>();
             services.AddTransient<IXaRepository, XaRepository>();
 

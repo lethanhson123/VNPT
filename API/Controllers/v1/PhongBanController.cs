@@ -10,5 +10,17 @@
         {
             _PhongBanBusiness = PhongBanBusiness;
         }
+        [HttpGet]
+        [Route("GetByIDStringAsync")]
+        public async Task<PhongBan> GetByIDStringAsync(string ID)
+        {
+            PhongBan result = new PhongBan();
+            if (!string.IsNullOrEmpty(ID))
+            {
+                ID = GlobalHelper.InitializationURLCode(ID);
+                result = await _PhongBanBusiness.GetByIDAsync(int.Parse(ID));
+            }
+            return result;
+        }
     }
 }

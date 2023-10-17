@@ -20,6 +20,7 @@
         public string? NganhNgheKinhDoanh { get; set; }
         public long? NhanVienID { get; set; }
         public string? KHACHHANG_ID { get; set; }
+        public long? PhongBanID { get; set; }
         public DoanhNghiep()
         {
         }

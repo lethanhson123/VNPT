@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { NhanVien } from 'src/app/shared/NhanVien.model';
 import { NhanVienService } from 'src/app/shared/NhanVien.service';
+import { PhongBan } from 'src/app/shared/PhongBan.model';
+import { PhongBanService } from 'src/app/shared/PhongBan.service';
 
 @Component({
   selector: 'app-nhan-vien',
@@ -19,17 +21,20 @@ export class NhanVienComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
+  URLSub: string = environment.DomainDestination + "NhanVienInfo";
   constructor(
     public NhanVienService: NhanVienService,
+    public PhongBanService: PhongBanService,
     public NotificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
+    this.GetPhongBanToListAsync();
     this.onSearch();
   }
   getToList() {
     this.isShowLoading = true;
-    this.NhanVienService.GetAllAndEmptyToListAsync().subscribe(
+    this.NhanVienService.GetAllToListAsync().subscribe(
       res => {
         this.NhanVienService.list = res as NhanVien[];
         this.dataSource = new MatTableDataSource(this.NhanVienService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
@@ -39,6 +44,15 @@ export class NhanVienComponent implements OnInit {
       },
       err => {
         this.isShowLoading = false;
+      }
+    );
+  }
+  GetPhongBanToListAsync() {
+    this.PhongBanService.GetAllToListAsync().subscribe(
+      res => {
+        this.PhongBanService.list = (res as PhongBan[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+      },
+      err => {
       }
     );
   }
