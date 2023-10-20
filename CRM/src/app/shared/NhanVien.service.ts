@@ -7,6 +7,7 @@ import { NhanVien } from './NhanVien.model';
 })
 export class NhanVienService extends BaseService {
     displayColumns: string[] = ['ParentID', 'Code', 'Name', 'DienThoai', 'CCCD', 'Email'];
+    displayColumns001: string[] = ['Code', 'Name', 'DienThoai'];
     list: NhanVien[] | undefined;
     formData!: NhanVien;
     constructor(public httpClient: HttpClient) {

@@ -6,7 +6,7 @@ import { PhongBanKhuVuc } from './PhongBanKhuVuc.model';
     providedIn: 'root'
 })
 export class PhongBanKhuVucService extends BaseService{
-    displayColumns: string[] = ['ParentID', 'HuyenID', 'XaID', 'Active']; 
+    displayColumns: string[] = ['HuyenID', 'XaID', 'Active']; 
     list: PhongBanKhuVuc[] | undefined;
     formData!: PhongBanKhuVuc;
     constructor(public httpClient: HttpClient) {

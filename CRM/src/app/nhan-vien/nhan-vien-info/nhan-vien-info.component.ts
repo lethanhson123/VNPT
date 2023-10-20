@@ -154,16 +154,13 @@ export class NhanVienInfoComponent implements OnInit {
       }
     );
   }
-  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {
-    this.isShowLoading = true;
+  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {    
     this.NhanVienKhuVucService.SaveAsync(element).subscribe(
-      res => {
-        this.GetNhanVienKhuVucToListAsync();
-        this.isShowLoading = true;
+      res => {        
+        this.NotificationService.warn(environment.SaveSuccess);
       },
       err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);
-        this.isShowLoading = true;
+        this.NotificationService.warn(environment.SaveNotSuccess);        
       }
     );
   }

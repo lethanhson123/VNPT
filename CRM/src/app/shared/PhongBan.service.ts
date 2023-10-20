@@ -5,6 +5,7 @@ import { BaseService } from './Base.service';
     providedIn: 'root'
 })
 export class PhongBanService extends BaseService{
+    displayColumns: string[] = ['Code', 'Name', 'Note', 'SortOrder', 'Active'];
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "PhongBan";

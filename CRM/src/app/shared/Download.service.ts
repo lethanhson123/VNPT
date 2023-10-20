@@ -63,5 +63,19 @@ export class DownloadService {
         formUpload.append('month', JSON.stringify(month));  
         return this.httpClient.post(url, formUpload);
     }
+    ReportVNPT004ToExcelAsync(phongBanID: number, year: number) {
+        let url = this.aPIURL + this.controller + '/ReportVNPT004ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('phongBanID', JSON.stringify(phongBanID));        
+        formUpload.append('year', JSON.stringify(year));        
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportVNPT005ToExcelAsync(nhanVienID: number, year: number) {
+        let url = this.aPIURL + this.controller + '/ReportVNPT005ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));        
+        formUpload.append('year', JSON.stringify(year));        
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

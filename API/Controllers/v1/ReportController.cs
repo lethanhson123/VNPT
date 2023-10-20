@@ -1,4 +1,6 @@
-﻿namespace API.Controllers.v1
+﻿using Data.Model;
+
+namespace API.Controllers.v1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -203,6 +205,40 @@
                 int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
                 int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
                 result = await _ReportBusiness.ReportVNPT003Async(huyenID, xaID, searchString, dichVuID, year, month);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportVNPT004Async")]
+        public virtual async Task<List<Report>> ReportVNPT004Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long phongBanID = JsonConvert.DeserializeObject<long>(Request.Form["phongBanID"]);                              
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);                
+                result = await _ReportBusiness.ReportVNPT004Async(phongBanID, year);
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("ReportVNPT005Async")]
+        public virtual async Task<List<Report>> ReportVNPT005Async()
+        {
+            List<Report> result = new List<Report>();
+            try
+            {
+                long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+                result = await _ReportBusiness.ReportVNPT005Async(nhanVienID, year);
             }
             catch (Exception ex)
             {

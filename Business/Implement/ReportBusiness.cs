@@ -175,5 +175,27 @@ namespace Business.Implement
 
             return result;
         }
+        public virtual async Task<List<Report>> ReportVNPT004Async(long phongBanID, int year)
+        {
+            List<Report> result = new List<Report>();
+            SqlParameter[] parameters =
+             {
+                    new SqlParameter("@PhongBanID",phongBanID),
+                    new SqlParameter("@Year",year),                    
+                };
+            result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT004", parameters);
+            return result;
+        }
+        public virtual async Task<List<Report>> ReportVNPT005Async(long nhanVienID, int year)
+        {
+            List<Report> result = new List<Report>();
+            SqlParameter[] parameters =
+             {
+                    new SqlParameter("@NhanVienID",nhanVienID),
+                    new SqlParameter("@Year",year),
+                };
+            result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT005", parameters);
+            return result;
+        }
     }
 }

@@ -15,6 +15,8 @@ export class ReportService extends BaseService{
     listReport004: Report[] | undefined;        
     listReportVNPT001: Report[] | undefined;
     listReportVNPT003: Report[] | undefined;
+    listReportVNPT004: Report[] | undefined;
+    listReportVNPT005: Report[] | undefined;
     formData!: Report;
     constructor(public httpClient: HttpClient) {
         super(httpClient);
@@ -108,6 +110,20 @@ export class ReportService extends BaseService{
         formUpload.append('dichVuID', JSON.stringify(dichVuID));
         formUpload.append('year', JSON.stringify(year));
         formUpload.append('month', JSON.stringify(month));      
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportVNPT004Async(phongBanID: number, year: number) {
+        let url = this.aPIURL + this.controller + '/ReportVNPT004Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('phongBanID', JSON.stringify(phongBanID));        
+        formUpload.append('year', JSON.stringify(year));         
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportVNPT005Async(nhanVienID: number, year: number) {
+        let url = this.aPIURL + this.controller + '/ReportVNPT005Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));        
+        formUpload.append('year', JSON.stringify(year));         
         return this.httpClient.post(url, formUpload);
     }
 }
