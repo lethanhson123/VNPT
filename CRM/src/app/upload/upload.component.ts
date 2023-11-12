@@ -28,7 +28,7 @@ export class UploadComponent implements OnInit {
   excelDoanhThuURL: string = environment.APIRootURL + environment.Download + "/DoanhThu.xlsx";
   @ViewChild('uploadDoanhNghiep') uploadDoanhNghiep!: ElementRef;
   @ViewChild('uploadDoanhThu') uploadDoanhThu!: ElementRef;
-  dataSource: MatTableDataSource<any>;  
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
@@ -40,16 +40,16 @@ export class UploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetYearToList();
-    this.GetMonthToList();    
+    this.GetMonthToList();
   }
-  GetYearToList() {    
+  GetYearToList() {
     this.DownloadService.GetYearToList().then(res => {
-      this.DownloadService.listYear = res as YearMonth[];      
+      this.DownloadService.listYear = res as YearMonth[];
     });
   }
-  GetMonthToList() {    
+  GetMonthToList() {
     this.DownloadService.GetMonthToList().then(res => {
-      this.DownloadService.listMonth = res as YearMonth[];      
+      this.DownloadService.listMonth = res as YearMonth[];
     });
   }
   changeDoanhNghiep(files: FileList) {
@@ -69,8 +69,8 @@ export class UploadComponent implements OnInit {
     this.UploadService.PostDoanhNghiepListByExcelFileAsync(fileToUpload).subscribe(
       res => {
         this.isShowLoading = false;
-        this.DoanhNghiepService.list = res as DoanhNghiep[];
-        this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list.sort((a, b) => (a.Code > b.Code ? 1 : -1)));
+        this.DoanhNghiepService.list = (res as DoanhNghiep[]).sort((a, b) => (a.Code > b.Code ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
@@ -87,8 +87,8 @@ export class UploadComponent implements OnInit {
     this.UploadService.PostDoanhThuByYearAndMonthList2023ByExcelFileAsync(fileToUpload, this.year, this.month).subscribe(
       res => {
         this.isShowLoading = false;
-        this.DoanhNghiepService.list = res as DoanhNghiep[];
-        this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list.sort((a, b) => (a.Code > b.Code ? 1 : -1)));
+        this.DoanhNghiepService.list = (res as DoanhNghiep[]).sort((a, b) => (a.Code > b.Code ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },

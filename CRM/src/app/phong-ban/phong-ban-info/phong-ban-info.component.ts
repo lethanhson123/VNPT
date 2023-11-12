@@ -49,7 +49,7 @@ export class PhongBanInfoComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public NhanVienService: NhanVienService,    
+    public NhanVienService: NhanVienService,
     public PhongBanService: PhongBanService,
     public PhongBanKhuVucService: PhongBanKhuVucService,
     public HuyenService: HuyenService,
@@ -66,31 +66,40 @@ export class PhongBanInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }  
+  }
   GetHuyenToListAsync() {
+    this.isShowLoading = true;
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
   GetXaToListAsync() {
+    this.isShowLoading = true;
     this.XaService.GetAllToListAsync().subscribe(
       res => {
         this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
   GetPhongBanToListAsync() {
+    this.isShowLoading = true;
     this.PhongBanService.GetAllToListAsync().subscribe(
       res => {
         this.PhongBanService.list = (res as PhongBan[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
@@ -110,14 +119,17 @@ export class PhongBanInfoComponent implements OnInit {
     );
   }
   GetPhongBanKhuVucToListAsync() {
+    this.isShowLoading = true;
     this.PhongBanKhuVucService.GetSQLByParentIDAsync(this.PhongBanService.formData.ID).subscribe(
       res => {
         this.PhongBanKhuVucService.list = (res as PhongBanKhuVuc[]);
         this.dataSourcePhongBanKhuVuc = new MatTableDataSource(this.PhongBanKhuVucService.list);
         this.dataSourcePhongBanKhuVuc.sort = this.sortPhongBanKhuVuc;
         this.dataSourcePhongBanKhuVuc.paginator = this.paginatorPhongBanKhuVuc;
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
@@ -140,12 +152,12 @@ export class PhongBanInfoComponent implements OnInit {
     this.isShowLoading = true;
     this.PhongBanService.GetByIDStringAsync(this.queryString).then(res => {
       this.PhongBanService.formData = res as PhongBan;
+      this.GetHuyenToListAsync();
+      this.GetXaToListAsync();
+      this.GetPhongBanToListAsync();
+      this.GetDoanhNghiepToListAsync();
       if (this.PhongBanService.formData) {
-        this.GetPhongBanToListAsync();        
-        this.GetHuyenToListAsync();
-        this.GetXaToListAsync();
         this.GetPhongBanKhuVucToListAsync();
-        this.GetDoanhNghiepToListAsync();
         this.GetNhanVienToListAsync();
         this.isShowLoading = false;
       }
@@ -165,13 +177,13 @@ export class PhongBanInfoComponent implements OnInit {
       }
     );
   }
-  onPhongBanKhuVucActiveChange(element: PhongBanKhuVuc) {    
+  onPhongBanKhuVucActiveChange(element: PhongBanKhuVuc) {
     this.PhongBanKhuVucService.SaveAsync(element).subscribe(
-      res => {        
+      res => {
         this.NotificationService.warn(environment.SaveSuccess);
       },
       err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);        
+        this.NotificationService.warn(environment.SaveNotSuccess);
       }
     );
   }
@@ -193,11 +205,11 @@ export class PhongBanInfoComponent implements OnInit {
           }
         );
       }
-      else{
+      else {
         this.NotificationService.warn(environment.SaveNotSuccess);
       }
     }
-    else{
+    else {
       this.NotificationService.warn(environment.SaveNotSuccess);
     }
   }

@@ -1,113 +1,88 @@
-<div class="row">
-    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
-        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Nhân viên <span
-                            *ngIf="NhanVienService.list">({{NhanVienService.list.length}} items)</span></h5>
-                </div>
-                <div class="col s12 m6 l6 right-align-md">
-                    <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
-                        </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">Nhân viên
-                        </li>
-                    </ol>
-                </div>
-            </div>
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 300px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-emoji-sunglasses fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h2 class="mb-1">Nhân viên</h2>
+            <h6 class="m-0 text-dark fw-light">
+                Nhân viên
+            </h6>
         </div>
     </div>
-    <div class="col s12">
-        <div class="container">
-            <div class="section section-data-tables">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="col s12 m12 l9">
-                            <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
-                                class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
-                                (keyup.enter)="onSearch()">
-                        </div>
-                        <div class="col s12 m12 l3">
-                            <a title="Tìm" (click)="onSearch()"
-                                class="btn-floating waves-effect waves-light green darken-1"><i
-                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                            <a style="display: none;" title="Lưu thay đổi danh sách" (click)="onSaveList()"
-                                class="btn-floating waves-effect waves-light cyan"><i
-                                    class="material-icons">save</i></a>
-                        </div>
-                        <div class="KhungOverflow">
-                            <mat-table [dataSource]="dataSource" matSort>
-                                <ng-container matColumnDef="ParentID">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                        Phòng ban
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <mat-select style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                    name="ParentID{{element.ID}}" class="browser-default"
-                                                    [(ngModel)]="element.ParentID">
-                                            <mat-option *ngFor="let item of PhongBanService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Code">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mã nhân viên
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        {{element.Code}}
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <a title="{{element.Name}}" target="_blank"
-                                            href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="DienThoai">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        {{element.DienThoai}}
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="CCCD">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        {{element.CCCD}}
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Email">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        {{element.Email}}
-                                    </mat-cell>
-                                </ng-container>                                                            
-                                <ng-container matColumnDef="loading">
-                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                        Đang tải dữ liệu...
-                                    </mat-footer-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="noData">
-                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                        Chưa có dữ liệu.
-                                    </mat-footer-cell>
-                                </ng-container>
-                                <mat-header-row *matHeaderRowDef="NhanVienService.displayColumns"></mat-header-row>
-                                <mat-row *matRowDef="let row; columns: NhanVienService.displayColumns;"></mat-row>
-                                <mat-footer-row *matFooterRowDef="['loading']"
-                                    [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
-                                <mat-footer-row *matFooterRowDef="['noData']"
-                                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
-                                </mat-footer-row>
-                            </mat-table>
-                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                [showFirstLastButtons]></mat-paginator>
+    <div class="col-lg-6 col-sm-6 col-12">
+    </div>
+    <div class="col-lg-3 col-sm-6 col-12">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Tìm ..." [(ngModel)]="searchString"
+                (keyup.enter)="onSearch()">
+            <a class="btn btn-success" title="Tìm..." (click)="onSearch()">
+                <i class="bi bi-search"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">
+            <a class="btn btn-success" title="In biểu mẫu">
+                <i class="bi bi-printer"></i>
+            </a>
+            <a class="btn btn-success" title="Download excel">
+                <i class="bi bi-cloud-download"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-xxl-12">
+            <div class="card mb-4 card-info">
+                <div class="card-header">
+                    <h5 class="card-title text-white">Danh sách ({{NhanVienService.list.length}} items)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-outer">
+                        <div class="table-responsive">
+                            <table class="table table-striped m-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Phòng ban</th>
+                                        <th>Mã nhân viên</th>
+                                        <th>Nhân viên</th>
+                                        <th>Điện thoại</th>
+                                        <th>CCCD</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let element of NhanVienService.list; index as i">
+                                        <td>{{i + 1}}</td>
+                                        <td>
+                                            <div *ngFor="let item of PhongBanService.list;">
+                                                <div *ngIf="item.ID==element.ParentID">
+                                                    {{item.Name}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{element.Code}}
+                                        </td>
+                                        <td>
+                                            <a class="link-primary" target="_blank" title="{{element.Name}}"
+                                                href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                        </td>
+                                        <td>
+                                            {{element.DienThoai}}
+                                        </td>
+                                        <td>
+                                            {{element.CCCD}}
+                                        </td>   
+                                        <td>
+                                            {{element.Email}}
+                                        </td>                                     
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

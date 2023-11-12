@@ -1,125 +1,126 @@
-<div class="row">
-    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
-        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Upload</h5>
-                </div>
-                <div class="col s12 m6 l6 right-align-md">
-                    <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
-                        </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">Upload
-                        </li>
-                    </ol>
-                </div>
-            </div>
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 150px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-cloud-arrow-up fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h2 class="mb-1">Upload</h2>
+            <h6 class="m-0 text-dark fw-light">
+                Upload
+            </h6>
         </div>
     </div>
-    <div class="col s12">
-        <div class="container">
-            <div class="section section-data-tables">
-                <div class="card">
-                    <div class="card-content">
-
-                        <div class="col s12 m12 l4">
-                            <div class="col s12 m12 l12">
-                                <h1>Upload Doanh nghiệp</h1>
-                                <div class="input-field col s12">
-                                    Bước 01: <a target="_blank" href="{{excelDoanhNghiepURL}}">Tải về</a> file
-                                    excel mẫu
-                                </div>
-                                <div class="input-field col s12">
-                                    Bước 02: Chọn file excel có dữ liệu:
-                                    <input type="file" #uploadDoanhNghiep
-                                        (change)="changeDoanhNghiep($event.target.files)">
-                                </div>
-                                <div class="input-field col s12">
-                                    <button [disabled]="!isDoanhNghiep" class="btn btn-primary"
-                                        (click)="onSubmit()">Upload</button>
-                                </div>
-                            </div>
-                            <div class="col s12 m12 l12">
-                                <h1>Upload Doanh thu</h1>
-                                <div class="col s12 m12 l6">
-                                    <mat-select
-                                        style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                        name="year" class="browser-default" [(ngModel)]="year">
-                                        <mat-option *ngFor="let item of DownloadService.listYear" [value]="item.Display">
-                                            {{item.Display}}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col s12 m12 l6">
-                                    <mat-select
-                                        style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                        name="month" class="browser-default" [(ngModel)]="month">
-                                        <mat-option *ngFor="let item of DownloadService.listMonth" [value]="item.Display">
-                                            {{item.Display}}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>       
-                                <div class="input-field col s12">
-                                    Bước 01: <a target="_blank" href="{{excelDoanhThuURL}}">Tải về</a> file
-                                    excel mẫu
-                                </div>
-                                <div class="input-field col s12">
-                                    Bước 02: Chọn file excel có dữ liệu:
-                                    <input type="file" #uploadDoanhThu
-                                        (change)="changeDoanhThu($event.target.files)">
-                                </div>
-                                <div class="input-field col s12">
-                                    <button [disabled]="!isDoanhThu" class="btn btn-primary"
-                                        (click)="onSubmitDoanhThu()">Upload</button>
-                                </div>
-                            </div>
+    <div class="col-lg-7 col-sm-6 col-12">
+    </div>
+    <div class="col-lg-3 col-sm-6 col-12">
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-lg-4 col-sm-12 col-12">
+            <div class="card mb-4 card-light">
+                <div class="card-header">
+                    <h5 class="card-title">Upload Doanh nghiệp</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row gx-4">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <label class="form-label">Bước 01:</label> <a class="link-primary" target="_blank"
+                                href="{{excelDoanhNghiepURL}}" title="Tải về">Tải về</a> file excel mẫu
                         </div>
-                        <div class="col s12 m12 l8">
-                            <div class="KhungOverflow">
-                                <mat-table [dataSource]="dataSource" matSort>
-                                    <ng-container matColumnDef="Code">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Mã số
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let element">{{element.Code}}</mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="Name">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="DienThoai">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let element">{{element.DienThoai}}</mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="loading">
-                                        <mat-footer-cell *matFooterCellDef colspan="4">
-                                            Đang tải dữ liệu...
-                                        </mat-footer-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="noData">
-                                        <mat-footer-cell *matFooterCellDef colspan="4">
-                                            Chưa có dữ liệu.
-                                        </mat-footer-cell>
-                                    </ng-container>
-                                    <mat-header-row
-                                        *matHeaderRowDef="DoanhNghiepService.displayColumnsSub"></mat-header-row>
-                                    <mat-row
-                                        *matRowDef="let row; columns: DoanhNghiepService.displayColumnsSub;"></mat-row>
-                                    <mat-footer-row *matFooterRowDef="['loading']"
-                                        [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
-                                    <mat-footer-row *matFooterRowDef="['noData']"
-                                        [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
-                                    </mat-footer-row>
-                                </mat-table>
-                                <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                    [showFirstLastButtons]></mat-paginator>
-                            </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <label class="form-label">Bước 02:</label> Chọn file
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <input class="form-control" type="file" #uploadDoanhNghiep
+                                (change)="changeDoanhNghiep($event.target.files)">
                         </div>
                     </div>
                 </div>
-
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button [disabled]="!isDoanhNghiep" class="btn btn-info" (click)="onSubmit()">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 card-light">
+                <div class="card-header">
+                    <h5 class="card-title">Upload Doanh thu tháng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row gx-4">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <label class="form-label">Bước 01:</label> <a class="link-primary" target="_blank"
+                                href="{{excelDoanhThuURL}}" title="Tải về">Tải về</a> file excel mẫu
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <label class="form-label">Bước 02:</label> Chọn file
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <input class="form-control" type="file" #uploadDoanhThu
+                                (change)="changeDoanhThu($event.target.files)">
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <label class="form-label">Bước 03:</label> Chọn năm
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <select class="form-select" name="year" [(ngModel)]="year">
+                                <option *ngFor="let item of DownloadService.listYear;" [value]="item.Display">
+                                    {{item.Display}}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <label class="form-label">Bước 04:</label> Chọn tháng
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <select class="form-select" name="month" [(ngModel)]="month">
+                                <option *ngFor="let item of DownloadService.listMonth;" [value]="item.Display">
+                                    {{item.Display}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button [disabled]="!isDoanhThu" class="btn btn-info"
+                            (click)="onSubmitDoanhThu()">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-sm-12 col-12">
+            <div class="card mb-4 card-info">
+                <div class="card-header">
+                    <h5 class="card-title text-white">Doanh nghiệp</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-outer">
+                        <div class="table-responsive">
+                            <table class="table table-striped m-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Mã số</th>
+                                        <th>Doanh nghiệp</th>
+                                        <th>Điện thoại</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let element of DoanhNghiepService.list; index as i">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{element.Code}}</td>
+                                        <td>{{element.Name}}</td>
+                                        <td>{{element.DienThoai}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

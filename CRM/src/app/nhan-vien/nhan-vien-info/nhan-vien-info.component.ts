@@ -63,50 +63,65 @@ export class NhanVienInfoComponent implements OnInit {
   ngOnInit(): void {
   }
   GetNhanVienToListAsync() {
+    this.isShowLoading = true;
     this.NhanVienService.GetAllToListAsync().subscribe(
       res => {
         this.NhanVienService.list = (res as NhanVien[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
   GetHuyenToListAsync() {
+    this.isShowLoading = true;
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
   GetXaToListAsync() {
+    this.isShowLoading = true;
     this.XaService.GetAllToListAsync().subscribe(
       res => {
         this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
   GetPhongBanToListAsync() {
+    this.isShowLoading = true;
     this.PhongBanService.GetAllToListAsync().subscribe(
       res => {
         this.PhongBanService.list = (res as PhongBan[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
   GetNhanVienKhuVucToListAsync() {
+    this.isShowLoading = true;
     this.NhanVienKhuVucService.GetSQLByParentIDAsync(this.NhanVienService.formData.ID).subscribe(
       res => {
         this.NhanVienKhuVucService.list = (res as NhanVienKhuVuc[]);
         this.dataSourceNhanVienKhuVuc = new MatTableDataSource(this.NhanVienKhuVucService.list);
         this.dataSourceNhanVienKhuVuc.sort = this.sortNhanVienKhuVuc;
         this.dataSourceNhanVienKhuVuc.paginator = this.paginatorNhanVienKhuVuc;
+        this.isShowLoading = false;
       },
       err => {
+        this.isShowLoading = false;
       }
     );
   }
@@ -129,13 +144,13 @@ export class NhanVienInfoComponent implements OnInit {
     this.isShowLoading = true;
     this.NhanVienService.GetByIDStringAsync(this.queryString).then(res => {
       this.NhanVienService.formData = res as NhanVien;
-      if (this.NhanVienService.formData) {
-        this.GetNhanVienToListAsync();
-        this.GetPhongBanToListAsync();
-        this.GetHuyenToListAsync();
-        this.GetXaToListAsync();
-        this.GetNhanVienKhuVucToListAsync();
-        this.GetDoanhNghiepToListAsync();
+      this.GetNhanVienToListAsync();
+      this.GetPhongBanToListAsync();
+      this.GetHuyenToListAsync();
+      this.GetXaToListAsync();
+      this.GetDoanhNghiepToListAsync();
+      if (this.NhanVienService.formData) {       
+        this.GetNhanVienKhuVucToListAsync();        
         this.isShowLoading = false;
       }
       this.isShowLoading = false;

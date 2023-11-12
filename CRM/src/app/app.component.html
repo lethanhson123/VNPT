@@ -1,94 +1,142 @@
-<div class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns mat-typography"
-      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-column">
-      <header class="page-topbar" id="header">
-            <div class="navbar navbar-fixed">
-                  <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
-                        <div class="nav-wrapper">
-                              <div class="header-search-wrapper hide-on-med-and-down">
-                                    <input disabled class="header-search-input z-depth-2" type="text" name="Search"
-                                          placeholder="VNPT Bà Rịa - Vũng Tàu | Trung tâm kinh doanh">
-                              </div>
-                              <ul class="navbar-list right">
-                                    <li><a class="waves-effect waves-block waves-light profile-button"
-                                                href="javascript:void(0);" data-target="profile-dropdown"><span
-                                                      class="avatar-status avatar-online"><img
-                                                            src="https://crm.vnptvungtau.vn/image/logo.png"
-                                                            alt="avatar"><i></i></span></a></li>
-                                    <li><a class="waves-effect waves-block waves-light sidenav-trigger" href="#"
-                                                data-target="slide-out-right"><i
-                                                      class="material-icons">format_indent_increase</i></a></li>
-                              </ul>
-                              <ul class="dropdown-content" id="translation-dropdown">
-                              </ul>
-                              <ul class="dropdown-content" id="notifications-dropdown">
-                              </ul>
-                              <ul class="dropdown-content" id="profile-dropdown">
-                              </ul>
-                        </div>
-                        <nav class="display-none search-sm">
-                              <div class="nav-wrapper">
-                              </div>
-                        </nav>
-                  </nav>
-            </div>
-      </header>
-      <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
-            <div class="brand-sidebar">
-                  <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="#" style="color:#009f3c;"><span
-                                    class="logo-text hide-on-med-and-down" style="color:#009f3c;">CRM</span></a><a
-                              class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a>
-                  </h1>
-            </div>
-            <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow"
-                  id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">     
-                  <li class="bold"><a target="_blank" class="waves-effect waves-cyan " href="{{domainName}}Homepage"><i
-                        class="material-icons">business</i><span class="menu-title" data-i18n="">Dashboard</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}DoanhNghiep"><i
-                        class="material-icons">account_balance</i><span class="menu-title" data-i18n="">Doanh nghiệp</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}NhanVien"><i
-                        class="material-icons">face</i><span class="menu-title" data-i18n="">Nhân viên</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}PhongBan"><i
-                        class="material-icons">face</i><span class="menu-title" data-i18n="">Phòng ban</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}DichVu"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Gói cước</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}LoaiDichVu"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Loại gói cước</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}LoaiDoanhNghiep"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Loại doanh nghiệp</span></a>
-                  </li> 
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}LoaiDoanhNghiepThanhVien"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Thành viên doanh nghiệp</span></a>
-                  </li>  
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}NganhNgheKinhDoanh"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Ngành nghề kinh doanh</span></a>
-                  </li>  
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}LoaiTrangThai"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Loại trạng thái</span></a>
-                  </li>  
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}Xa"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Xã</span></a>
-                  </li>    
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}Huyen"><i
-                        class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Huyện</span></a>
-                  </li>           
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}Tinh"><i
-                                    class="material-icons">brightness_low</i><span class="menu-title" data-i18n="">Tỉnh</span></a>
+<nav id="sidebar" class="sidebar-wrapper">
+      <div class="app-brand p-3 mb-3">
+            <a href="#">
+                  <img src="https://crm.vnptvungtau.vn/image/logo.png" class="logo" alt="VNPT Bà Rịa - Vũng Tàu" />Bà
+                  Rịa - Vũng Tàu
+            </a>
+      </div>
+      <div class="sidebarMenuScroll">
+            <ul class="sidebar-menu">
+                  <li>
+                        <a href="{{domainName}}NhanVien" title="Nhân viên">
+                              <i class="bi bi-emoji-sunglasses"></i>
+                              <span class="menu-text">Nhân viên</span>
+                        </a>
                   </li>
-                  <li class="bold"><a class="waves-effect waves-cyan " href="{{domainName}}Upload"><i
-                        class="material-icons">cloud_upload</i><span class="menu-title" data-i18n="">Upload</span></a>
+                  <li>
+                        <a href="{{domainName}}PhongBan" title="Phòng ban">
+                              <i class="bi bi-emoji-sunglasses"></i>
+                              <span class="menu-text">Phòng ban</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}DichVu" title="Gói cước">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Gói cước</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}LoaiDichVu" title="Loại gói cước">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Loại gói cước</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}LoaiDoanhNghiep" title="Loại doanh nghiệp">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Loại doanh nghiệp</span>
+                        </a>
+                  </li>                  
+                  <li>
+                        <a href="{{domainName}}LoaiDoanhNghiepThanhVien" title="Thành viên doanh nghiệp">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Thành viên doanh nghiệp</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}NganhNgheKinhDoanh" title="Ngành nghề kinh doanh">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Ngành nghề kinh doanh</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}LoaiTrangThai" title="Loại trạng thái">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Loại trạng thái</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}Xa" title="Xã">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Xã</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}Huyen" title="Huyện">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Huyện</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}Tinh" title="Tỉnh">
+                              <i class="bi bi-gear"></i>
+                              <span class="menu-text">Tỉnh</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a href="{{domainName}}Upload" title="Upload">
+                              <i class="bi bi-cloud-arrow-up"></i>
+                              <span class="menu-text">Upload</span>
+                        </a>
                   </li>
             </ul>
-            <div class="navigation-background"></div><a
-                  class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"
-                  href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
-      </aside>
-      <div id="main">
-            <router-outlet></router-outlet>
       </div>
+      <div class="sidebar-settings gap-2 d-lg-flex d-none">
+            <a href="#" class="settings-icon bg-success" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Tài khoản">
+                  <i class="bi bi-person"></i>
+            </a>
+            <a href="#" class="settings-icon bg-success" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Đổi mật khẩu">
+                  <i class="bi bi-shield-lock"></i>
+            </a>
+            <a href="#" class="settings-icon bg-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Đăng xuất">
+                  <i class="bi bi-power"></i>
+            </a>
+      </div>
+</nav>
+<div class="app-container">
+      <div class="app-header d-flex align-items-center">
+            <div class="d-flex">
+                  <button class="pin-sidebar">
+                        <i class="bi bi-list lh-1"></i>
+                  </button>
+            </div>
+            <div class="app-brand-sm d-lg-none d-flex">
+                  <a href="#" title="Trung tâm khách hàng doanh nghiệp VNPT Bà Rịa - Vũng Tàu">
+                        <img src="assets/images/logo.svg" class="logo"
+                              alt="Trung tâm khách hàng doanh nghiệp VNPT Bà Rịa - Vũng Tàu">
+                  </a>
+            </div>
+            <div class="search-container d-lg-block d-none mx-3">
+                  <input type="text" class="form-control"
+                        placeholder="VNPT Bà Rịa - Vũng Tàu | Trung tâm khách hàng doanh nghiệp | Ứng dụng quản lý khách hàng + Doanh thu + Nhân viên | CRM" />
+            </div>
+            <div class="header-actions">
+                  <div class="dropdown ms-4">
+                        <a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center" href="#!"
+                              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src="assets/images/user3.png" class="rounded-4 img-3x"
+                                    alt="Trung tâm khách hàng doanh nghiệp VNPT Bà Rịa - Vũng Tàu" />
+                              <span class="ms-2 text-truncate d-lg-block d-none">Nguyễn Viết Dũng</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end shadow-lg">
+                              <a class="dropdown-item d-flex align-items-center" href="#"><i
+                                          class="bi bi-person fs-4 me-2"></i>Tài khoản</a>
+                              <a class="dropdown-item d-flex align-items-center" href="#"><i
+                                          class="bi bi-shield-lock fs-4 me-2"></i>Đổi mật khẩu</a>
+                              <div class="mx-3 mt-2 d-grid">
+                                    <a href="#" class="btn btn-primary">Đăng xuất</a>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="d-flex">
+                        <button class="toggle-sidebar">
+                              <i class="bi bi-list lh-1"></i>
+                        </button>
+                  </div>
+            </div>
+      </div>
+      <router-outlet></router-outlet>
 </div>

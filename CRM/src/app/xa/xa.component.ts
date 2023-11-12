@@ -29,14 +29,13 @@ export class XaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHuyenToList();
+    this.onSearch();
   }
   getHuyenToList() {
     this.isShowLoading = true;
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
-        this.HuyenService.list = res as Huyen[];
-        this.HuyenService.list = this.HuyenService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.onSearch();
+        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
         this.isShowLoading = false;
       },
       err => {
@@ -48,8 +47,8 @@ export class XaComponent implements OnInit {
     this.isShowLoading = true;
     this.XaService.GetAllAndEmptyToListAsync().subscribe(
       res => {
-        this.XaService.list = res as Xa[];
-        this.dataSource = new MatTableDataSource(this.XaService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.XaService.list = (res as Xa[]).sort((a, b) => (a.ParentID > b.ParentID ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.XaService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
@@ -62,6 +61,7 @@ export class XaComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
+      this.XaService.list = this.dataSource.filteredData as Huyen[];
     }
     else {
       this.getToList();

@@ -1,135 +1,96 @@
-<div class="row">
-    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
-         style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">
-                        Xã <span *ngIf="XaService.list">({{XaService.list.length - 1}} items)</span>
-                    </h5>
-                </div>
-                <div class="col s12 m6 l6 right-align-md">
-                    <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item">
-                            <a href="#" style="color: #ffffff;">CRM</a>
-                        </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">
-                            Xã
-                        </li>
-                    </ol>
-                </div>
-            </div>
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 300px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-gear fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h2 class="mb-1">Xã</h2>
+            <h6 class="m-0 text-dark fw-light">
+                Hệ thống
+            </h6>
         </div>
     </div>
-    <div class="col s12">
-        <div class="container">
-            <div class="section section-data-tables">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="col s12 m12 l9">
-                            <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
-                                   class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
-                                   (keyup.enter)="onSearch()">
-                        </div>
-                        <div class="col s12 m12 l3">
-                            <a title="Tìm" (click)="onSearch()"
-                               class="btn-floating waves-effect waves-light green darken-1">
-                                <i class="material-icons">search</i>
-                            </a>&nbsp;&nbsp;&nbsp;
-                            <a style="display: none;" title="Lưu thay đổi danh sách" (click)="onSaveList()"
-                               class="btn-floating waves-effect waves-light cyan">
-                                <i class="material-icons">save</i>
-                            </a>
-                        </div>
-                        <div class="KhungOverflow">
-                            <mat-table [dataSource]="dataSource" matSort>
-                                <ng-container matColumnDef="ParentID">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                        Huyện
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <mat-select style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                    name="ParentID{{element.ID}}" class="browser-default"
-                                                    [(ngModel)]="element.ParentID">
-                                            <mat-option *ngFor="let item of HuyenService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                        Xã
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <input placeholder="Xã" name="Name{{element.ID}}"
-                                               [(ngModel)]="element.Name" type="text">
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Note">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                        Ghi chú
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <input placeholder="Ghi chú" name="Note{{element.ID}}"
-                                               [(ngModel)]="element.Note" type="text">
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="SortOrder">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                        Sắp xếp
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <input placeholder="0" name="SortOrder{{element.ID}}" style="text-align: right;"
-                                               [(ngModel)]="element.SortOrder" type="number">
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Active">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                        Kích hoạt
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element">
-                                        <label>
-                                            <input type="checkbox" class="filled-in" name="Active{{element.ID}}"
-                                                   [(ngModel)]="element.Active" />
-                                            <span>.</span>
-                                        </label>
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="Save">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <a title="Lưu thay đổi" (click)="onSave(element)"
-                                           class="btn-floating waves-effect waves-light cyan">
-                                            <i class="material-icons">save</i>
-                                        </a>&nbsp;&nbsp;&nbsp;
-                                        <a style="padding-left: 8px;" (click)="onDelete(element)" *ngIf="element.ID>0"
-                                           class="btn-floating waves-effect waves-light red">
-                                            <i class="material-icons">delete_outline</i>
-                                        </a>
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="loading">
-                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                        Đang tải dữ liệu...
-                                    </mat-footer-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="noData">
-                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                        Chưa có dữ liệu.
-                                    </mat-footer-cell>
-                                </ng-container>
-                                <mat-header-row *matHeaderRowDef="XaService.displayColumns"></mat-header-row>
-                                <mat-row *matRowDef="let row; columns: XaService.displayColumns;"></mat-row>
-                                <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
-                                <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
-                                </mat-footer-row>
-                            </mat-table>
-                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                [showFirstLastButtons]></mat-paginator>                           
+    <div class="col-lg-6 col-sm-6 col-12">
+    </div>
+    <div class="col-lg-3 col-sm-6 col-12">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Tìm ..." [(ngModel)]="searchString"
+                (keyup.enter)="onSearch()">
+            <a class="btn btn-success" title="Tìm..." (click)="onSearch()">
+                <i class="bi bi-search"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">            
+            <a class="btn btn-success" title="In biểu mẫu">
+                <i class="bi bi-printer"></i>
+            </a>
+            <a class="btn btn-success" title="Download excel">
+                <i class="bi bi-cloud-download"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-xxl-12">
+            <div class="card mb-4 card-info">
+                <div class="card-header">
+                    <h5 class="card-title text-white">Danh sách ({{XaService.list.length}} items)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-outer">
+                        <div class="table-responsive">
+                            <table class="table table-striped m-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Huyện</th>
+                                        <th>Xã</th>
+                                        <th>Ghi chú</th>
+                                        <th>Sắp xếp</th>
+                                        <th>Kích hoạt</th>
+                                        <th>Lưu</th>
+                                        <th>Xoá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let element of XaService.list; index as i">
+                                        <td>{{i + 1}}</td>
+                                        <td>
+                                            <select class="form-select" name="ParentID{{element.ID}}"
+                                                [(ngModel)]="element.ParentID">
+                                                <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                    {{item.Name}}</option>
+                                            </select>
+                                        </td>
+                                        <td><input class="form-control" type="text" placeholder="Huyện"
+                                                name="Name{{element.ID}}" [(ngModel)]="element.Name"></td>
+                                        <td><input class="form-control" type="text" placeholder="Ghi chú"
+                                                name="Note{{element.ID}}" [(ngModel)]="element.Note"></td>
+                                        <td><input class="form-control" type="number" placeholder="0"
+                                                name="SortOrder{{element.ID}}" [(ngModel)]="element.SortOrder"
+                                                style="text-align: right;"></td>
+                                        <td>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox"
+                                                    name="Active{{element.ID}}" [(ngModel)]="element.Active">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info" (click)="onSave(element)"><i
+                                                    class="bi bi-sd-card"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger" (click)="onDelete(element)"
+                                                *ngIf="element.ID>0"><i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

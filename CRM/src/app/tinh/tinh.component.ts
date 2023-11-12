@@ -14,7 +14,7 @@ import { TinhService } from 'src/app/shared/Tinh.service';
 })
 export class TinhComponent implements OnInit {
 
-  dataSource: MatTableDataSource<any>;  
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -31,8 +31,8 @@ export class TinhComponent implements OnInit {
     this.isShowLoading = true;
     this.TinhService.GetAllAndEmptyToListAsync().subscribe(
       res => {
-        this.TinhService.list = res as Tinh[];
-        this.dataSource = new MatTableDataSource(this.TinhService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.TinhService.list = (res as Tinh[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.TinhService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
@@ -45,14 +45,15 @@ export class TinhComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
+      this.TinhService.list = this.dataSource.filteredData as Tinh[];
     }
     else {
       this.getToList();
     }
   }
-  onSave(element: Tinh) {    
+  onSave(element: Tinh) {
     this.TinhService.SaveAsync(element).subscribe(
-      res => {        
+      res => {
         this.onSearch();
         this.NotificationService.warn(environment.SaveSuccess);
       },
@@ -74,7 +75,7 @@ export class TinhComponent implements OnInit {
       );
     }
   }
-  onSaveList() {    
+  onSaveList() {
     this.TinhService.SaveListAsync(this.TinhService.list).subscribe(
       res => {
         this.onSearch();

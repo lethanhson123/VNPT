@@ -29,13 +29,13 @@ export class HuyenComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTinhToList();
+    this.onSearch();
   }
   getTinhToList() {
     this.isShowLoading = true;
     this.TinhService.GetAllToListAsync().subscribe(
       res => {
-        this.TinhService.list = res as Tinh[];
-        this.onSearch();
+        this.TinhService.list = (res as Tinh[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
         this.isShowLoading = false;
       },
       err => {
@@ -47,8 +47,8 @@ export class HuyenComponent implements OnInit {
     this.isShowLoading = true;
     this.HuyenService.GetAllAndEmptyToListAsync().subscribe(
       res => {
-        this.HuyenService.list = res as Huyen[];
-        this.dataSource = new MatTableDataSource(this.HuyenService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.HuyenService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
@@ -61,6 +61,7 @@ export class HuyenComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
+      this.HuyenService.list = this.dataSource.filteredData as Huyen[];
     }
     else {
       this.getToList();
