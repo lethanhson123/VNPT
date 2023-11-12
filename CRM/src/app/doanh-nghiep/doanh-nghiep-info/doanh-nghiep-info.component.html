@@ -1,23 +1,77 @@
-<div class="row">
-    <div id="breadcrumbs-wrapper" data-image="https://crm.vnptvungtau.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
-        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Doanh nghiệp
-                    </h5>
-                </div>
-                <div class="col s12 m6 l6 right-align-md">
-                    <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CRM</a>
-                        </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">Doanh nghiệp
-                        </li>
-                    </ol>
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 300px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-bank2 fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h2 class="mb-1">{{DoanhNghiepService.formData.Name}}</h2>
+            <h6 class="m-0 text-dark fw-light">
+                Doanh nghiệp
+            </h6>
+        </div>
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-xxl-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="custom-tabs-container">
+                        <ul class="nav nav-tabs justify-content-end" id="customTab5" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-1" data-bs-toggle="tab" href="#1" role="tab"
+                                    aria-controls="1" aria-selected="false">
+                                    <span class="badge bg-info">Doanh thu</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#2" role="tab"
+                                    aria-controls="2" aria-selected="false">
+                                    <span class="badge bg-danger">Biểu đồ</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#3" role="tab"
+                                    aria-controls="3" aria-selected="false">
+                                    <span class="badge bg-success">Gói cước</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="tab-4" data-bs-toggle="tab" href="#4" role="tab"
+                                    aria-controls="4" aria-selected="true">
+                                    <span class="badge bg-primary">Thông tin</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="customTabContent">
+                            <div class="tab-pane fade" id="1" role="tabpanel">
+                                1
+                            </div>
+                            <div class="tab-pane fade" id="2" role="tabpanel">
+                                2
+                            </div>
+                            <div class="tab-pane fade" id="3" role="tabpanel">
+                                3
+                            </div>
+                            <div class="tab-pane fade show active" id="4" role="tabpanel">
+                                4
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>
+
+
+
+<div class="row">
     <div class="col s12">
         <div class="container">
             <div class="section">
@@ -170,7 +224,8 @@
                                                     <mat-cell *matCellDef="let element">{{element.MaThueBao}}</mat-cell>
                                                 </ng-container>
                                                 <ng-container matColumnDef="DoanhThu">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng {{month}}-{{year}}
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng
+                                                        {{month}}-{{year}}
                                                     </mat-header-cell>
                                                     <mat-cell *matCellDef="let element">
                                                         <b>{{element.DoanhThu | number:
@@ -276,7 +331,8 @@
                                 </div>
                                 <div id="3">
                                     <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepDichVu" matSort #sortDoanhNghiepDichVu="matSort">
+                                        <mat-table [dataSource]="dataSourceDoanhNghiepDichVu" matSort
+                                            #sortDoanhNghiepDichVu="matSort">
                                             <ng-container matColumnDef="NhanVienID">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên AM
                                                 </mat-header-cell>
@@ -411,7 +467,8 @@
                                                 [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVu!=null && dataSourceDoanhNghiepDichVu.data.length==0)}">
                                             </mat-footer-row>
                                         </mat-table>
-                                        <mat-paginator #paginatorDoanhNghiepDichVu="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                        <mat-paginator #paginatorDoanhNghiepDichVu="matPaginator"
+                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
                                             [showFirstLastButtons]></mat-paginator>
                                     </div>
                                 </div>
@@ -496,7 +553,7 @@
                                                             placeholder="Địa chỉ" type="text">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col s12 m12 l4">
                                                     <div class="input-field">
                                                         <label for="Note">Ghi chú</label>
@@ -564,7 +621,7 @@
                                                             [(ngModel)]="DoanhNghiepService.formData.SoLuongLaoDong"
                                                             type="number">
                                                     </div>
-                                                </div>                                                       
+                                                </div>
                                                 <div class="col s12 m12 l4">
                                                     <div class="input-field">
                                                         <label for="NganhNgheKinhDoanh">Ngành nghề</label>
@@ -576,7 +633,7 @@
                                                             [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanh"
                                                             placeholder="Ngành nghề" type="text">
                                                     </div>
-                                                </div>   
+                                                </div>
                                                 <div class="col s6 m6 l4">
                                                     <div class="input-field">
                                                         <label for="NganhNgheKinhDoanhChinhID">Ngành nghề chính</label>
@@ -594,7 +651,7 @@
                                                     </mat-select>
                                                     <br />
                                                     <br />
-                                                </div>                                  
+                                                </div>
                                             </div>
                                             <div class="col s12 m12 l4">
                                                 <div class="col s6 m6 l4">
@@ -669,7 +726,7 @@
                                                     <br />
                                                     <br />
                                                 </div>
-                                                
+
                                                 <div class="col s6 m6 l4">
                                                     <div class="input-field">
                                                         <label for="LoaiDoanhNghiepID">Loại doanh nghiệp</label>
@@ -712,7 +769,8 @@
                                     </div>
                                     <hr />
                                     <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepThanhVien" matSort #sortDoanhNghiepThanhVien="matSort">
+                                        <mat-table [dataSource]="dataSourceDoanhNghiepThanhVien" matSort
+                                            #sortDoanhNghiepThanhVien="matSort">
                                             <ng-container matColumnDef="LoaiDoanhNghiepThanhVienID">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Thành viên
                                                 </mat-header-cell>
@@ -851,7 +909,8 @@
                                                 [ngClass]="{'hide':!(dataSourceDoanhNghiepThanhVien!=null && dataSourceDoanhNghiepThanhVien.data.length==0)}">
                                             </mat-footer-row>
                                         </mat-table>
-                                        <mat-paginator #paginatorDoanhNghiepThanhVien="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                        <mat-paginator #paginatorDoanhNghiepThanhVien="matPaginator"
+                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
                                             [showFirstLastButtons]></mat-paginator>
                                     </div>
                                 </div>

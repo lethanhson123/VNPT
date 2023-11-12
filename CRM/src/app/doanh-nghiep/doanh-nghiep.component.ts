@@ -34,13 +34,13 @@ export class DoanhNghiepComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.GetHuyenToListAsync();
+    this.GetHuyenToListAsync();    
   }
   GetHuyenToListAsync() {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.GetXaToListAsync();        
+        this.GetXaToListAsync();
       },
       err => {
       }
@@ -49,8 +49,8 @@ export class DoanhNghiepComponent implements OnInit {
   GetXaToListAsync() {
     this.XaService.GetByParentIDToListAsync(this.huyenID).subscribe(
       res => {
-        this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.onSearch();
+        this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)); 
+        this.onSearch();       
       },
       err => {
       }
@@ -60,10 +60,14 @@ export class DoanhNghiepComponent implements OnInit {
     this.isShowLoading = true;
     this.DoanhNghiepService.GetByHuyenIDAndXaIDOrSearchStringToListAsync(this.huyenID, this.xaID, this.searchString).subscribe(
       res => {
-        this.DoanhNghiepService.list = res as DoanhNghiep[];
-        this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        this.DoanhNghiepService.list = (res as DoanhNghiep[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+
+        if (this.DoanhNghiepService.list.length > environment.ItemCount) {
+          this.DoanhNghiepService.listView = this.DoanhNghiepService.list.slice(0, environment.ItemCount);
+        }
+        else {
+          this.DoanhNghiepService.listView = this.DoanhNghiepService.list;
+        }
         this.isShowLoading = false;
       },
       err => {

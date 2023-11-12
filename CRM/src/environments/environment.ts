@@ -23,6 +23,7 @@ export const environment = {
   DieuHanhID: 2, 
   ShopID: 3, 
   ShipperID: 4, 
+  ItemCount: 50, 
   AuthenticationToken: "AuthenticationToken",
   MembershipID: "MembershipID",  
   UploadSuccess: "Upload thành công.",

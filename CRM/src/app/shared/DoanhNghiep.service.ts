@@ -10,7 +10,8 @@ export class DoanhNghiepService extends BaseService{
     displayColumnsNhanVien: string[] = ['Code', 'Name', 'HuyenID', 'XaID', 'NhanVienID'];
     displayColumnsPhongBan: string[] = ['Code', 'Name', 'HuyenID', 'XaID', 'PhongBanID'];
     list: DoanhNghiep[] | undefined;        
-    listSearch: DoanhNghiep[] | undefined;        
+    listSearch: DoanhNghiep[] | undefined;   
+    listView: DoanhNghiep[] | undefined;      
     formData!: DoanhNghiep;
     constructor(public httpClient: HttpClient) {
         super(httpClient);
