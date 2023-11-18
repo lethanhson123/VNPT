@@ -11,6 +11,8 @@ import { NhanVien } from 'src/app/shared/NhanVien.model';
 import { NhanVienService } from 'src/app/shared/NhanVien.service';
 import { NhanVienKhuVuc } from 'src/app/shared/NhanVienKhuVuc.model';
 import { NhanVienKhuVucService } from 'src/app/shared/NhanVienKhuVuc.service';
+import { NhanVienTaiKhoan } from 'src/app/shared/NhanVienTaiKhoan.model';
+import { NhanVienTaiKhoanService } from 'src/app/shared/NhanVienTaiKhoan.service';
 import { PhongBan } from 'src/app/shared/PhongBan.model';
 import { PhongBanService } from 'src/app/shared/PhongBan.service';
 import { Huyen } from 'src/app/shared/Huyen.model';
@@ -47,6 +49,7 @@ export class NhanVienInfoComponent implements OnInit {
     public NhanVienService: NhanVienService,
     public PhongBanService: PhongBanService,
     public NhanVienKhuVucService: NhanVienKhuVucService,
+    public NhanVienTaiKhoanService: NhanVienTaiKhoanService,
     public HuyenService: HuyenService,
     public XaService: XaService,
     public DoanhNghiepService: DoanhNghiepService,
@@ -125,6 +128,18 @@ export class NhanVienInfoComponent implements OnInit {
       }
     );
   }
+  GetNhanVienTaiKhoanToListAsync() {
+    this.isShowLoading = true;
+    this.NhanVienTaiKhoanService.GetByParentIDAndEmptyToListAsync(this.NhanVienService.formData.ID).subscribe(
+      res => {
+        this.NhanVienTaiKhoanService.list = (res as NhanVienTaiKhoan[]);
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   GetDoanhNghiepToListAsync() {
     this.isShowLoading = true;
     this.DoanhNghiepService.GetBySearchStringToListAsync(this.searchString).subscribe(
@@ -149,8 +164,9 @@ export class NhanVienInfoComponent implements OnInit {
       this.GetHuyenToListAsync();
       this.GetXaToListAsync();
       this.GetDoanhNghiepToListAsync();
-      if (this.NhanVienService.formData) {       
-        this.GetNhanVienKhuVucToListAsync();        
+      if (this.NhanVienService.formData) {
+        this.GetNhanVienKhuVucToListAsync();
+        this.GetNhanVienTaiKhoanToListAsync();
         this.isShowLoading = false;
       }
       this.isShowLoading = false;
@@ -158,10 +174,20 @@ export class NhanVienInfoComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;
-    this.NhanVienService.SaveAsync(form.value).subscribe(
+    this.NhanVienService.SaveAsync(this.NhanVienService.formData).subscribe(
       res => {
-        this.GetByQueryString();
-        this.NotificationService.warn(environment.SaveSuccess);
+        if (this.NhanVienService.formData.ID == 0) {
+          this.NhanVienService.formData = res as NhanVien;
+          if (this.NhanVienService.formData.ID > 0) {
+            window.location.href = this.URLSub + "/" + this.NhanVienService.formData.ID;
+          }
+          else {
+            this.NotificationService.warn(environment.SaveSuccess);
+          }
+        }
+        else {
+          this.NotificationService.warn(environment.SaveSuccess);
+        }
         this.isShowLoading = false;
       },
       err => {
@@ -169,13 +195,13 @@ export class NhanVienInfoComponent implements OnInit {
       }
     );
   }
-  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {    
+  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {
     this.NhanVienKhuVucService.SaveAsync(element).subscribe(
-      res => {        
+      res => {
         this.NotificationService.warn(environment.SaveSuccess);
       },
       err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);        
+        this.NotificationService.warn(environment.SaveNotSuccess);
       }
     );
   }
@@ -197,12 +223,37 @@ export class NhanVienInfoComponent implements OnInit {
           }
         );
       }
-      else{
+      else {
         this.NotificationService.warn(environment.SaveNotSuccess);
       }
     }
-    else{
+    else {
       this.NotificationService.warn(environment.SaveNotSuccess);
+    }
+  }
+  onSaveNhanVienTaiKhoan(element: NhanVienTaiKhoan) {
+    element.ParentID = this.NhanVienService.formData.ID;
+    this.NhanVienTaiKhoanService.SaveAsync(element).subscribe(
+      res => {
+        this.GetNhanVienTaiKhoanToListAsync();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onDeleteNhanVienTaiKhoan(element: NhanVienTaiKhoan) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.NhanVienTaiKhoanService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.GetNhanVienTaiKhoanToListAsync();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
     }
   }
 }

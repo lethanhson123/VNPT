@@ -6,40 +6,36 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { NhanVien } from 'src/app/shared/NhanVien.model';
 import { NhanVienService } from 'src/app/shared/NhanVien.service';
-import { PhongBan } from 'src/app/shared/PhongBan.model';
-import { PhongBanService } from 'src/app/shared/PhongBan.service';
+import { NhanVienTaiKhoan } from 'src/app/shared/NhanVienTaiKhoan.model';
+import { NhanVienTaiKhoanService } from 'src/app/shared/NhanVienTaiKhoan.service';
 
 @Component({
-  selector: 'app-nhan-vien',
-  templateUrl: './nhan-vien.component.html',
-  styleUrls: ['./nhan-vien.component.css']
+  selector: 'app-nhan-vien-tai-khoan',
+  templateUrl: './nhan-vien-tai-khoan.component.html',
+  styleUrls: ['./nhan-vien-tai-khoan.component.css']
 })
-export class NhanVienComponent implements OnInit {
+export class NhanVienTaiKhoanComponent implements OnInit {
 
-  dataSource: MatTableDataSource<any>;  
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
-  URLSub: string = environment.DomainDestination + "NhanVienInfo";
   constructor(
     public NhanVienService: NhanVienService,
-    public PhongBanService: PhongBanService,
+    public NhanVienTaiKhoanService: NhanVienTaiKhoanService,
     public NotificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
-    this.GetPhongBanToListAsync();
+    this.getNhanVienToList();
     this.onSearch();
   }
-  getToList() {
+  getNhanVienToList() {
     this.isShowLoading = true;
     this.NhanVienService.GetAllToListAsync().subscribe(
       res => {
-        this.NhanVienService.list = res as NhanVien[];
-        this.dataSource = new MatTableDataSource(this.NhanVienService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        this.NhanVienService.list = (res as NhanVien[]).sort((a, b) => (a.Name > b.Name ? 1 : -1));
         this.isShowLoading = false;
       },
       err => {
@@ -47,11 +43,14 @@ export class NhanVienComponent implements OnInit {
       }
     );
   }
-  GetPhongBanToListAsync() {
+  getToList() {
     this.isShowLoading = true;
-    this.PhongBanService.GetAllToListAsync().subscribe(
+    this.NhanVienTaiKhoanService.GetAllAndEmptyToListAsync().subscribe(
       res => {
-        this.PhongBanService.list = (res as PhongBan[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.NhanVienTaiKhoanService.list = (res as NhanVienTaiKhoan[]).sort((a, b) => (a.ParentID > b.ParentID ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.NhanVienTaiKhoanService.list);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
       },
       err => {
@@ -62,15 +61,15 @@ export class NhanVienComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
-      this.NhanVienService.list = this.dataSource.filteredData;
+      this.NhanVienTaiKhoanService.list = this.dataSource.filteredData;
     }
     else {
       this.getToList();
     }
   }
-  onSave(element: NhanVien) {    
-    this.NhanVienService.SaveAsync(element).subscribe(
-      res => {        
+  onSave(element: NhanVienTaiKhoan) {
+    this.NhanVienTaiKhoanService.SaveAsync(element).subscribe(
+      res => {
         this.onSearch();
         this.NotificationService.warn(environment.SaveSuccess);
       },
@@ -79,9 +78,9 @@ export class NhanVienComponent implements OnInit {
       }
     );
   }
-  onDelete(element: NhanVien) {
+  onDelete(element: NhanVienTaiKhoan) {
     if (confirm(environment.DeleteConfirm)) {
-      this.NhanVienService.RemoveAsync(element.ID).subscribe(
+      this.NhanVienTaiKhoanService.RemoveAsync(element.ID).subscribe(
         res => {
           this.onSearch();
           this.NotificationService.warn(environment.DeleteSuccess);
@@ -91,16 +90,5 @@ export class NhanVienComponent implements OnInit {
         }
       );
     }
-  }
-  onSaveList() {    
-    this.NhanVienService.SaveListAsync(this.NhanVienService.list).subscribe(
-      res => {
-        this.onSearch();
-        this.NotificationService.warn(environment.SaveSuccess);
-      },
-      err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);
-      }
-    );
   }
 }

@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="ms-auto d-lg-flex d-none flex-row">
-        <div class="d-flex flex-row gap-2">            
+        <div class="d-flex flex-row gap-2">
             <a class="btn btn-success" title="In biểu mẫu">
                 <i class="bi bi-printer"></i>
             </a>
@@ -37,7 +37,8 @@
         <div class="col-xxl-12">
             <div class="card mb-4 card-info">
                 <div class="card-header">
-                    <h5 class="card-title text-white">Danh sách ({{XaService.list.length}} items)</h5>
+                    <h5 class="card-title text-white">Danh sách <span *ngIf="XaService.list">({{XaService.list.length}}
+                            items)</span></h5>
                 </div>
                 <div class="card-body">
                     <div class="table-outer">

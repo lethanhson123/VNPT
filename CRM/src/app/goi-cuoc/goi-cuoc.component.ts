@@ -4,37 +4,38 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { GoiCuoc } from 'src/app/shared/GoiCuoc.model';
+import { GoiCuocService } from 'src/app/shared/GoiCuoc.service';
 import { DichVu } from 'src/app/shared/DichVu.model';
 import { DichVuService } from 'src/app/shared/DichVu.service';
-import { LoaiDichVu } from 'src/app/shared/LoaiDichVu.model';
-import { LoaiDichVuService } from 'src/app/shared/LoaiDichVu.service';
-@Component({
-  selector: 'app-dich-vu',
-  templateUrl: './dich-vu.component.html',
-  styleUrls: ['./dich-vu.component.css']
-})
-export class DichVuComponent implements OnInit {
 
-  dataSource: MatTableDataSource<any>;  
+@Component({
+  selector: 'app-goi-cuoc',
+  templateUrl: './goi-cuoc.component.html',
+  styleUrls: ['./goi-cuoc.component.css']
+})
+export class GoiCuocComponent implements OnInit {
+
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
   constructor(
+    public GoiCuocService: GoiCuocService,
     public DichVuService: DichVuService,
-    public LoaiDichVuService: LoaiDichVuService,
     public NotificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
-    this.GetLoaiDichVuToListAsync();
+    this.getDichVuToList();
     this.onSearch();
   }
-  GetLoaiDichVuToListAsync() {
+  getDichVuToList() {
     this.isShowLoading = true;
-    this.LoaiDichVuService.GetAllToListAsync().subscribe(
+    this.DichVuService.GetAllToListAsync().subscribe(
       res => {
-        this.LoaiDichVuService.list = res as LoaiDichVu[];        
+        this.DichVuService.list = (res as DichVu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
         this.isShowLoading = false;
       },
       err => {
@@ -44,10 +45,10 @@ export class DichVuComponent implements OnInit {
   }
   getToList() {
     this.isShowLoading = true;
-    this.DichVuService.GetAllAndEmptyToListAsync().subscribe(
+    this.GoiCuocService.GetAllAndEmptyToListAsync().subscribe(
       res => {
-        this.DichVuService.list = res as DichVu[];
-        this.dataSource = new MatTableDataSource(this.DichVuService.list.sort((a, b) => (a.ParentID > b.ParentID ? 1 : -1)));
+        this.GoiCuocService.list = (res as GoiCuoc[]).sort((a, b) => (a.Thang > b.Thang ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.GoiCuocService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
@@ -60,37 +61,14 @@ export class DichVuComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
+      this.GoiCuocService.list = this.dataSource.filteredData;
     }
     else {
       this.getToList();
     }
   }
-  onSave(element: DichVu) {    
-    this.DichVuService.SaveAsync(element).subscribe(
-      res => {        
-        this.onSearch();
-        this.NotificationService.warn(environment.SaveSuccess);
-      },
-      err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);
-      }
-    );
-  }
-  onDelete(element: DichVu) {
-    if (confirm(environment.DeleteConfirm)) {
-      this.DichVuService.RemoveAsync(element.ID).subscribe(
-        res => {
-          this.onSearch();
-          this.NotificationService.warn(environment.DeleteSuccess);
-        },
-        err => {
-          this.NotificationService.warn(environment.DeleteNotSuccess);
-        }
-      );
-    }
-  }
-  onSaveList() {    
-    this.DichVuService.SaveListAsync(this.DichVuService.list).subscribe(
+  onSave(element: GoiCuoc) {
+    this.GoiCuocService.SaveAsync(element).subscribe(
       res => {
         this.onSearch();
         this.NotificationService.warn(environment.SaveSuccess);
@@ -100,4 +78,17 @@ export class DichVuComponent implements OnInit {
       }
     );
   }
+  onDelete(element: GoiCuoc) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.GoiCuocService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.onSearch();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
+  }  
 }

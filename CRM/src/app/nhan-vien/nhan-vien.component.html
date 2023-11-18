@@ -23,12 +23,15 @@
     </div>
     <div class="ms-auto d-lg-flex d-none flex-row">
         <div class="d-flex flex-row gap-2">
-            <a class="btn btn-success" title="In biểu mẫu">
+            <a class="btn btn-success" title="Thêm mới" target="_blank" href="{{URLSub}}/0">
+                <i class="bi bi-plus-circle"></i>
+            </a>
+            <!-- <a class="btn btn-success" title="In biểu mẫu">
                 <i class="bi bi-printer"></i>
             </a>
             <a class="btn btn-success" title="Download excel">
                 <i class="bi bi-cloud-download"></i>
-            </a>
+            </a> -->
         </div>
     </div>
 </div>
@@ -37,7 +40,10 @@
         <div class="col-xxl-12">
             <div class="card mb-4 card-info">
                 <div class="card-header">
-                    <h5 class="card-title text-white">Danh sách ({{NhanVienService.list.length}} items)</h5>
+                    <h5 class="card-title text-white">Danh sách
+                        <span *ngIf="NhanVienService.list">({{NhanVienService.list.length}}
+                            items)</span>
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="table-outer">
@@ -76,10 +82,10 @@
                                         </td>
                                         <td>
                                             {{element.CCCD}}
-                                        </td>   
+                                        </td>
                                         <td>
                                             {{element.Email}}
-                                        </td>                                     
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

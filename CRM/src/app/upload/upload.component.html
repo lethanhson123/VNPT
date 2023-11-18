@@ -21,32 +21,7 @@
 </div>
 <div class="app-body">
     <div class="row gx-4">
-        <div class="col-lg-4 col-sm-12 col-12">
-            <div class="card mb-4 card-light">
-                <div class="card-header">
-                    <h5 class="card-title">Upload Doanh nghiệp</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row gx-4">
-                        <div class="col-lg-12 col-sm-12 col-12">
-                            <label class="form-label">Bước 01:</label> <a class="link-primary" target="_blank"
-                                href="{{excelDoanhNghiepURL}}" title="Tải về">Tải về</a> file excel mẫu
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-12">
-                            <label class="form-label">Bước 02:</label> Chọn file
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-12">
-                            <input class="form-control" type="file" #uploadDoanhNghiep
-                                (change)="changeDoanhNghiep($event.target.files)">
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex gap-2 justify-content-end">
-                        <button [disabled]="!isDoanhNghiep" class="btn btn-info" (click)="onSubmit()">Upload</button>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-4 col-sm-12 col-12">            
             <div class="card mb-4 card-light">
                 <div class="card-header">
                     <h5 class="card-title">Upload Doanh thu tháng</h5>
@@ -88,6 +63,56 @@
                     <div class="d-flex gap-2 justify-content-end">
                         <button [disabled]="!isDoanhThu" class="btn btn-info"
                             (click)="onSubmitDoanhThu()">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 card-light">
+                <div class="card-header">
+                    <h5 class="card-title">Upload Doanh nghiệp</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row gx-4">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <label class="form-label">Bước 01:</label> <a class="link-primary" target="_blank"
+                                href="{{excelDoanhNghiepURL}}" title="Tải về">Tải về</a> file excel mẫu
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <label class="form-label">Bước 02:</label> Chọn file
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <input class="form-control" type="file" #uploadDoanhNghiep
+                                (change)="changeDoanhNghiep($event.target.files)">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button [disabled]="!isDoanhNghiep" class="btn btn-info" (click)="onSubmit()">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 card-light">
+                <div class="card-header">
+                    <h5 class="card-title">Upload Gói cước</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row gx-4">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <label class="form-label">Bước 01:</label> <a class="link-primary" target="_blank"
+                                href="{{excelGoiCuocURL}}" title="Tải về">Tải về</a> file excel mẫu
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <label class="form-label">Bước 02:</label> Chọn file
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12">
+                            <input class="form-control" type="file" #uploadGoiCuoc
+                                (change)="changeGoiCuoc($event.target.files)">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button [disabled]="!isGoiCuoc" class="btn btn-info" (click)="onSubmitGoiCuoc()">Upload</button>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,19 @@
             {
                 model.Display = model.Name;
             }
-        }
+			//if (model.SortOrder == null || model.SortOrder == 0)
+			//{
+			//	model.SortOrder = 10;
+			//	try
+			//	{
+			//		int maxSortOrder = _context.Set<T>().AsNoTracking().Select(x => x.SortOrder).Max().Value;
+			//		model.SortOrder = maxSortOrder + 10;
+			//	}
+			//	catch (Exception)
+			//	{
+			//	}
+			//}
+		}
         public virtual int Add(T model)
         {
             int result = 0;
