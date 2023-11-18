@@ -77,5 +77,10 @@ export class DownloadService {
         formUpload.append('year', JSON.stringify(year));        
         return this.httpClient.post(url, formUpload);
     }
+    DoanhNghiepMaSoThueKhongTonTaiToExcelAsync() {
+        let url = this.aPIURL + this.controller + '/DoanhNghiepMaSoThueKhongTonTaiToExcelAsync';
+        const formUpload: FormData = new FormData();        
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

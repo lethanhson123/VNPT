@@ -61,7 +61,7 @@ export class XaComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
-      this.XaService.list = this.dataSource.filteredData as Huyen[];
+      this.XaService.list = this.dataSource.filteredData as Xa[];
     }
     else {
       this.getToList();

@@ -17,6 +17,11 @@ export class DoanhNghiepService extends BaseService{
         super(httpClient);
         this.controller = "DoanhNghiep";
     }    
+    GetMaSoThueKhongTonTaiToListAsync() {
+        let url = this.aPIURL + this.controller + '/GetMaSoThueKhongTonTaiToListAsync';
+        const formUpload: FormData = new FormData();                
+        return this.httpClient.post(url, formUpload);
+    }
     GetBySearchStringToListAsync(searchString: string) {
         let url = this.aPIURL + this.controller + '/GetBySearchStringToListAsync';
         const formUpload: FormData = new FormData();        

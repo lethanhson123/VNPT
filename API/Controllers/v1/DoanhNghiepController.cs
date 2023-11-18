@@ -81,7 +81,22 @@ namespace API.Controllers.v1
             }
             return result;
         }
-        [HttpGet]
+		[HttpPost]
+		[Route("GetMaSoThueKhongTonTaiToListAsync")]
+		public virtual async Task<List<DoanhNghiep>> GetMaSoThueKhongTonTaiToListAsync()
+		{
+			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			try
+			{				
+				result = await _DoanhNghiepBusiness.GetMaSoThueKhongTonTaiToListAsync();
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpGet]
         [Route("GetByIDStringAsync")]
         public async Task<DoanhNghiep> GetByIDStringAsync(string ID)
         {

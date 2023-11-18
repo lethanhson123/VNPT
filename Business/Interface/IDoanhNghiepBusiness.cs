@@ -6,5 +6,7 @@
         Task<List<DoanhNghiep>> GetByHuyenIDAndXaIDOrSearchStringToListAsync(long huyenID, long xaID, string searchString);
         Task<List<DoanhNghiep>> GetByNhanVienIDOrSearchStringToListAsync(long nhanVienID, string searchString);
         Task<List<DoanhNghiep>> GetByPhongBanIDOrSearchStringToListAsync(long phongBanID, string searchString);
-    }
+		Task<List<DoanhNghiep>> GetMaSoThueKhongTonTaiToListAsync();
+
+	}
 }

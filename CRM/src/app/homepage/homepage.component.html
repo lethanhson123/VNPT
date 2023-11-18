@@ -1,473 +1,596 @@
-<div class="row">
-    <div class="col s12">
-        <div class="container">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12 m12 l12">
-                        <div id="basic-tabs" class="card card card-default scrollspy">
-                            <div class="card-content">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col s12 m12 l4">
-                                            <h1 class="card-title" style="font-size: 14px;">
-                                                <b>Dashboard</b>
-                                            </h1>
-                                        </div>
-                                        <div class="col s12 m12 l8">
-                                            <ul class="tabs">                                                
-                                                <li class="tab col m3 s12 p-0"><a class="active p-0" href="#1">Tổng
-                                                        hợp</a>
-                                                </li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">Dịch vụ</a>
-                                                </li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#3">Phòng ban</a></li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#4">Nhân viên</a>
-                                                </li>
-                                            </ul>
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 300px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-bar-chart fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h2 class="mb-1">Dashboard</h2>
+            <h6 class="m-0 text-dark fw-light">
+                Dashboard
+            </h6>
+        </div>
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-xxl-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="custom-tabs-container">
+                        <ul class="nav nav-tabs justify-content-end" id="customTab5" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#1" role="tab"
+                                    aria-controls="1" aria-selected="true">
+                                    <span class="badge bg-info">Tổng hợp</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#2" role="tab"
+                                    aria-controls="2" aria-selected="false">
+                                    <span class="badge bg-danger">Dịch vụ</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#3" role="tab"
+                                    aria-controls="3" aria-selected="false">
+                                    <span class="badge bg-success">Phòng ban</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-4" data-bs-toggle="tab" href="#4" role="tab"
+                                    aria-controls="4" aria-selected="false">
+                                    <span class="badge bg-primary">Nhân viên</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="customTabContent">
+                            <div class="tab-pane fade show active" id="1" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID"
+                                            (change)="onChangeHuyenID()">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="xaID" [(ngModel)]="xaID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of XaService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportVNPT001()">
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportVNPT001()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportVNPT001()"><i
+                                                class="bi bi-cloud-download"></i></a>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <div name="DoanhThu"
+                                            style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
+                                            {{doanhThuTongHop | number:
+                                            '1.0-0'}}
                                         </div>
                                     </div>
                                 </div>
-                                <div id="1">
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="HuyenID" class="browser-default" [(ngModel)]="huyenID"
-                                            (selectionChange)="onChangeHuyenID()">
-                                            <mat-option [value]="0">
-                                                Tất cả
-                                            </mat-option>
-                                            <mat-option *ngFor="let item of HuyenService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Tổng hợp
+                                            <span
+                                                *ngIf="ReportService.listReportVNPT001">({{ReportService.listReportVNPT001.length}}
+                                                items)</span>
+                                        </h5>
                                     </div>
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="XaID" class="browser-default" [(ngModel)]="xaID">
-                                            <mat-option [value]="0">
-                                                Tất cả
-                                            </mat-option>
-                                            <mat-option *ngFor="let item of XaService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                    <div class="col s12 m12 l2">
-                                        <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
-                                            class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
-                                            (keyup.enter)="onSearchReportVNPT001()">
-                                    </div>
-                                    <div class="col s12 m12 l2">
-                                        <a title="Tìm" (click)="onSearchReportVNPT001()"
-                                            class="btn-floating waves-effect waves-light green darken-1"><i
-                                                class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                                        <a title="Download excel" (click)="onDownloadExcelFileReportVNPT001()"
-                                            class="btn-floating waves-effect waves-light green darken-1"><i
-                                                class="material-icons">get_app</i></a>&nbsp;&nbsp;&nbsp;
-                                    </div>
-                                    <div class="col s8 m8 l4">
-                                        <div class="input-field">
-                                            <div name="DoanhThu"
-                                                style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
-                                                {{doanhThuTongHop | number:
-                                                '1.0-0'}}
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th style="width: 200px;">Doanh nghiệp</th>
+                                                            <th>Huyện</th>
+                                                            <th>Xã</th>
+                                                            <th>Tổng thu</th>
+                                                            <th>Cố định</th>
+                                                            <th>Di động</th>
+                                                            <th>Fiber</th>
+                                                            <th>MyTV</th>
+                                                            <th>An toàn</th>
+                                                            <th>CNTT</th>
+                                                            <th>Khác</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of ReportService.listReportVNPT001View; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td><a title="{{element.Name}}" class="link-primary"
+                                                                    target="_blank"
+                                                                    href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                                            </td>
+                                                            <td>{{element.HuyenName}}</td>
+                                                            <td>{{element.XaName}}</td>
+                                                            <td><b>{{element.DoanhThu | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu01 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech01>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech01 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech01<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech01 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu03 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech02>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech02 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech02<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech02 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu05 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech03>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech03 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech03<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech03 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu07 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech04>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech04 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech04<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech04 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu09 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech05>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech05 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech05<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech05 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu11 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech06>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech06 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech06<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech06 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                            <td><b>{{element.DoanhThu13 | number:
+                                                                    '1.0-0'}}</b>
+                                                                <br />
+                                                                <span *ngIf="element.ChenhLech07>=0"
+                                                                    style="color: green; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech07 | number:
+                                                                    '1.0-0'}})</span>
+                                                                <span *ngIf="element.ChenhLech07<0"
+                                                                    style="color: red; text-align: right; font-weight: bold;">
+                                                                    ({{element.ChenhLech07 | number:
+                                                                    '1.0-0'}})</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceReportVNPT001" matSort
-                                            #sortReportVNPT001="matSort">
-                                            <ng-container matColumnDef="Name">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"><a title="{{element.Name}}"
-                                                        style="font-size: 10px;" target="_blank"
-                                                        href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="HuyenName">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Huyện
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"
-                                                    style="font-size: 10px;">{{element.HuyenName}}</mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="XaName">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Xã
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"
-                                                    style="font-size: 10px;">{{element.XaName}}</mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu01">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Cố định
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu01 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech01">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech01>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech01 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech01<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech01 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu03">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Di động
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu03 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech02">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech02>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech02 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech02<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech02 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu05">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Fiber
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu05 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech03">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech03>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech03 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech03<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech03 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu07">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>MyTV
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu07 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech04">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech04>=0"
-                                                        style="color: limegreen; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech04 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech04<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech04 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu09">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>An toàn
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu09 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech05">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech05>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech05 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech05<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech05 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu11">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>CNTT
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu11 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech06">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech06>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech06 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech06<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech06 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu13">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Khác
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu13 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="ChenhLech07">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <div *ngIf="element.ChenhLech07>=0"
-                                                        style="color: green; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech07 | number:
-                                                        '1.0-0'}}</div>
-                                                    <div *ngIf="element.ChenhLech07<0"
-                                                        style="color: red; text-align: right; font-weight: bold;">
-                                                        {{element.ChenhLech07 | number:
-                                                        '1.0-0'}}</div>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="ReportService.displayColumnsReportVNPT001"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: ReportService.displayColumnsReportVNPT001;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceReportVNPT001!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceReportVNPT001!=null && dataSourceReportVNPT001.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator #paginatorReportVNPT001="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                            [showFirstLastButtons]></mat-paginator>
-                                    </div>
                                 </div>
-                                <div id="2">
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="HuyenID" class="browser-default" [(ngModel)]="huyenID"
-                                            (selectionChange)="onChangeHuyenID()">
-                                            <mat-option [value]="0">
-                                                Tất cả
-                                            </mat-option>
-                                            <mat-option *ngFor="let item of HuyenService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
+                            </div>
+                            <div class="tab-pane fade" id="2" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID"
+                                            (change)="onChangeHuyenID()">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
                                     </div>
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="XaID" class="browser-default" [(ngModel)]="xaID">
-                                            <mat-option [value]="0">
-                                                Tất cả
-                                            </mat-option>
-                                            <mat-option *ngFor="let item of XaService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="xaID" [(ngModel)]="xaID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of XaService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
                                     </div>
-                                    <div class="col s12 m12 l2">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="dichVuID" class="browser-default" [(ngModel)]="dichVuID">
-                                            <mat-option *ngFor="let item of DichVuService.list" [value]="item.ID">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="dichVuID" [(ngModel)]="dichVuID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of DichVuService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
                                     </div>
-                                    <div class="col s12 m12 l1">
-                                        <mat-select
-                                            style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                            name="year" class="browser-default" [(ngModel)]="year">
-                                            <mat-option *ngFor="let item of DownloadService.listYear"
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
                                                 [value]="item.Display">
-                                                {{item.Display}}
-                                            </mat-option>
-                                        </mat-select>
+                                                {{item.Display}}</option>
+                                        </select>
                                     </div>
-                                    <div class="col s12 m12 l1">
-                                        <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
-                                            class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
                                             (keyup.enter)="onSearchReportVNPT003()">
                                     </div>
-                                    <div class="col s12 m12 l3">
-                                        <a title="Tìm" (click)="onSearchReportVNPT003()"
-                                            class="btn-floating waves-effect waves-light green darken-1"><i
-                                                class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                                        <a title="Download excel" (click)="onDownloadExcelFileReportVNPT003()"
-                                            class="btn-floating waves-effect waves-light green darken-1"><i
-                                                class="material-icons">get_app</i></a>&nbsp;&nbsp;&nbsp;
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportVNPT003()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportVNPT003()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                         <span name="DoanhThu"
                                             style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
                                             {{doanhThuDichVu | number:
                                             '1.0-0'}}
                                         </span>
                                     </div>
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceReportVNPT003" matSort
-                                            #sortReportVNPT003="matSort">
-                                            <ng-container matColumnDef="Name">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh nghiệp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"><a title="{{element.Name}}"
-                                                        style="font-size: 10px;" target="_blank"
-                                                        href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="HuyenName">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Huyện
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"
-                                                    style="font-size: 10px;">{{element.HuyenName}}</mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="XaName">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Xã
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"
-                                                    style="font-size: 10px;">{{element.XaName}}</mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu01">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 01
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu01 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu02">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 02
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu02 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu03">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 03
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu03 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu04">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 04
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu04 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu05">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 05
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu05 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu06">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 06
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu06 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu07">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 07
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu07 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu08">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 08
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu08 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu09">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 09
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu09 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu10">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 10
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu10 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu11">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 11
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu11 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DoanhThu12">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng 12
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="font-size: 10px;">
-                                                    <b>{{element.DoanhThu12 | number:
-                                                        '1.0-0'}}</b></mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="ReportService.displayColumnsReportVNPT003"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: ReportService.displayColumnsReportVNPT003;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceReportVNPT003!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceReportVNPT003!=null && dataSourceReportVNPT003.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator #paginatorReportVNPT003="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                            [showFirstLastButtons]></mat-paginator>
+                                </div>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Dịch vụ
+                                            <span
+                                                *ngIf="ReportService.listReportVNPT003">({{ReportService.listReportVNPT003.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th style="width: 200px;">Doanh nghiệp</th>
+                                                            <th>Huyện</th>
+                                                            <th>Xã</th>
+                                                            <th>Doanh thu</th>
+                                                            <th>01</th>
+                                                            <th>02</th>
+                                                            <th>03</th>
+                                                            <th>04</th>
+                                                            <th>05</th>
+                                                            <th>06</th>
+                                                            <th>07</th>
+                                                            <th>08</th>
+                                                            <th>09</th>
+                                                            <th>10</th>
+                                                            <th>11</th>
+                                                            <th>12</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of ReportService.listReportVNPT003View; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td><a title="{{element.Name}}" class="link-primary"
+                                                                    target="_blank"
+                                                                    href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                                            </td>
+                                                            <td>{{element.HuyenName}}</td>
+                                                            <td>{{element.XaName}}</td>
+                                                            <td><b>{{element.DoanhThu | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu01 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu02 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu03 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu04 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu05 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu06 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu07 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu08 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu09 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu10 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu11 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu12 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="tab-pane fade" id="3" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <select class="form-select" name="phongBanID" [(ngModel)]="phongBanID">
+                                            <option *ngFor="let item of PhongBanService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportVNPT004()">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportVNPT004()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportVNPT004()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <span name="DoanhThu"
+                                            style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
+                                            {{doanhThuPhongBan | number:
+                                            '1.0-0'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Phòng ban
+                                            <span
+                                                *ngIf="ReportService.listReportVNPT004">({{ReportService.listReportVNPT004.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th style="width: 200px;">Doanh nghiệp</th>
+                                                            <th>Huyện</th>
+                                                            <th>Xã</th>
+                                                            <th>Doanh thu</th>
+                                                            <th>01</th>
+                                                            <th>02</th>
+                                                            <th>03</th>
+                                                            <th>04</th>
+                                                            <th>05</th>
+                                                            <th>06</th>
+                                                            <th>07</th>
+                                                            <th>08</th>
+                                                            <th>09</th>
+                                                            <th>10</th>
+                                                            <th>11</th>
+                                                            <th>12</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of ReportService.listReportVNPT004View; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td><a title="{{element.Name}}" class="link-primary"
+                                                                    target="_blank"
+                                                                    href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                                            </td>
+                                                            <td>{{element.HuyenName}}</td>
+                                                            <td>{{element.XaName}}</td>
+                                                            <td><b>{{element.DoanhThu | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu01 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu02 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu03 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu04 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu05 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu06 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu07 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu08 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu09 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu10 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu11 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu12 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="4" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <select class="form-select" name="nhanVienID" [(ngModel)]="nhanVienID">
+                                            <option *ngFor="let item of NhanVienService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportVNPT005()">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportVNPT005()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportVNPT005()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <span name="DoanhThu"
+                                            style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
+                                            {{doanhThuPhongBan | number:
+                                            '1.0-0'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Nhân viên
+                                            <span
+                                                *ngIf="ReportService.listReportVNPT005">({{ReportService.listReportVNPT005.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th style="width: 200px;">Doanh nghiệp</th>
+                                                            <th>Huyện</th>
+                                                            <th>Xã</th>
+                                                            <th>Doanh thu</th>
+                                                            <th>01</th>
+                                                            <th>02</th>
+                                                            <th>03</th>
+                                                            <th>04</th>
+                                                            <th>05</th>
+                                                            <th>06</th>
+                                                            <th>07</th>
+                                                            <th>08</th>
+                                                            <th>09</th>
+                                                            <th>10</th>
+                                                            <th>11</th>
+                                                            <th>12</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of ReportService.listReportVNPT005View; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td><a title="{{element.Name}}" class="link-primary"
+                                                                    target="_blank"
+                                                                    href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                                            </td>
+                                                            <td>{{element.HuyenName}}</td>
+                                                            <td>{{element.XaName}}</td>
+                                                            <td><b>{{element.DoanhThu | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu01 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu02 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu03 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu04 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu05 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu06 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu07 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu08 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu09 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu10 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu11 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu12 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>
+
+<!-- <div class="col s12">
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div id="basic-tabs" class="card card card-default scrollspy">
+                            <div class="card-content">                                                            
+                               
                                 <div id="3">                                                                      
                                     <div class="col s12 m12 l4">
                                         <mat-select
@@ -830,4 +953,4 @@
 <br />
 
 
-<app-loading *ngIf="isShowLoading"></app-loading>
+<app-loading *ngIf="isShowLoading"></app-loading>  -->

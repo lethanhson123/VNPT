@@ -30,6 +30,10 @@ import { LoaiDichVuComponent } from './loai-dich-vu/loai-dich-vu.component';
 import { PhongBanComponent } from './phong-ban/phong-ban.component';
 import { PhongBanInfoComponent } from './Phong-Ban/phong-ban-info/phong-ban-info.component';
 import { NhanVienInfoComponent } from './nhan-vien/nhan-vien-info/nhan-vien-info.component';
+import { DoanhNghiepMaSoThueKhongTonTaiComponent } from './doanh-nghiep-ma-so-thue-khong-ton-tai/doanh-nghiep-ma-so-thue-khong-ton-tai.component';
+import { DashboardCAComponent } from './dashboard-ca/dashboard-ca.component';
+import { DashboardHoaDonDienTuComponent } from './dashboard-hoa-don-dien-tu/dashboard-hoa-don-dien-tu.component';
+import { DashboardTenMienComponent } from './dashboard-ten-mien/dashboard-ten-mien.component';
 
 
 
@@ -53,7 +57,11 @@ import { NhanVienInfoComponent } from './nhan-vien/nhan-vien-info/nhan-vien-info
     LoaiDichVuComponent,
     PhongBanComponent,
     PhongBanInfoComponent,
-    NhanVienInfoComponent,    
+    NhanVienInfoComponent,
+    DoanhNghiepMaSoThueKhongTonTaiComponent,
+    DashboardCAComponent,
+    DashboardHoaDonDienTuComponent,
+    DashboardTenMienComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

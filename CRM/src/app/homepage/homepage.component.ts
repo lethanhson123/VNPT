@@ -124,6 +124,12 @@ export class HomepageComponent implements OnInit {
         for (let i = 0; i < this.ReportService.listReportVNPT001.length; i++) {
           this.doanhThuTongHop = this.doanhThuTongHop + this.ReportService.listReportVNPT001[i].DoanhThu;
         }
+        if (this.ReportService.listReportVNPT001.length > environment.ItemCount) {
+          this.ReportService.listReportVNPT001View = this.ReportService.listReportVNPT001.slice(0, environment.ItemCount);
+        }
+        else {
+          this.ReportService.listReportVNPT001View = this.ReportService.listReportVNPT001;
+        }
         this.isShowLoading = false;
       },
       err => {
@@ -142,6 +148,12 @@ export class HomepageComponent implements OnInit {
         for (let i = 0; i < this.ReportService.listReportVNPT003.length; i++) {
           this.doanhThuDichVu = this.doanhThuDichVu + this.ReportService.listReportVNPT003[i].DoanhThu;
         }
+        if (this.ReportService.listReportVNPT003.length > environment.ItemCount) {
+          this.ReportService.listReportVNPT003View = this.ReportService.listReportVNPT003.slice(0, environment.ItemCount);
+        }
+        else {
+          this.ReportService.listReportVNPT003View = this.ReportService.listReportVNPT003;
+        }
         this.isShowLoading = false;
       },
       err => {
@@ -149,7 +161,7 @@ export class HomepageComponent implements OnInit {
       }
     );
   }
-  ReportVNPT004Async() {    
+  ReportVNPT004Async() {
     this.isShowLoading = true;
     this.ReportService.ReportVNPT004Async(this.phongBanID, this.year).subscribe(
       res => {
@@ -159,6 +171,12 @@ export class HomepageComponent implements OnInit {
         this.dataSourceReportVNPT004.paginator = this.paginatorReportVNPT004;
         for (let i = 0; i < this.ReportService.listReportVNPT004.length; i++) {
           this.doanhThuPhongBan = this.doanhThuPhongBan + this.ReportService.listReportVNPT004[i].DoanhThu;
+        }
+        if (this.ReportService.listReportVNPT004.length > environment.ItemCount) {
+          this.ReportService.listReportVNPT004View = this.ReportService.listReportVNPT004.slice(0, environment.ItemCount);
+        }
+        else {
+          this.ReportService.listReportVNPT004View = this.ReportService.listReportVNPT004;
         }
         this.isShowLoading = false;
       },
@@ -177,6 +195,12 @@ export class HomepageComponent implements OnInit {
         this.dataSourceReportVNPT005.paginator = this.paginatorReportVNPT005;
         for (let i = 0; i < this.ReportService.listReportVNPT005.length; i++) {
           this.doanhThuNhanVien = this.doanhThuNhanVien + this.ReportService.listReportVNPT005[i].DoanhThu;
+        }
+        if (this.ReportService.listReportVNPT005.length > environment.ItemCount) {
+          this.ReportService.listReportVNPT005View = this.ReportService.listReportVNPT005.slice(0, environment.ItemCount);
+        }
+        else {
+          this.ReportService.listReportVNPT005View = this.ReportService.listReportVNPT005;
         }
         this.isShowLoading = false;
       },
@@ -214,13 +238,13 @@ export class HomepageComponent implements OnInit {
   onSearchReportVNPT003() {
     this.ReportVNPT003Async();
   }
-  onSearchReportVNPT004() {    
+  onSearchReportVNPT004() {
     if (this.searchString.length > 0) {
       this.dataSourceReportVNPT004.filter = this.searchString.toLowerCase();
     }
     else {
       this.ReportVNPT004Async();
-    }    
+    }
   }
   onSearchReportVNPT005() {
     if (this.searchString.length > 0) {
@@ -228,7 +252,7 @@ export class HomepageComponent implements OnInit {
     }
     else {
       this.ReportVNPT005Async();
-    }    
+    }
   }
   onDownloadExcelFileReportVNPT001() {
     this.isShowLoading = true;

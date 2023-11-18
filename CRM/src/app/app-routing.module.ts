@@ -17,13 +17,26 @@ import { LoaiDichVuComponent } from './loai-dich-vu/loai-dich-vu.component';
 import { NhanVienInfoComponent } from './nhan-vien/nhan-vien-info/nhan-vien-info.component';
 import { PhongBanInfoComponent } from './phong-ban/phong-ban-info/phong-ban-info.component';
 import { PhongBanComponent } from './phong-ban/phong-ban.component';
+import { DoanhNghiepMaSoThueKhongTonTaiComponent } from './doanh-nghiep-ma-so-thue-khong-ton-tai/doanh-nghiep-ma-so-thue-khong-ton-tai.component';
+import { DashboardCAComponent } from './dashboard-ca/dashboard-ca.component';
+import { DashboardTenMienComponent } from './dashboard-ten-mien/dashboard-ten-mien.component';
+import { DashboardHoaDonDienTuComponent } from './dashboard-hoa-don-dien-tu/dashboard-hoa-don-dien-tu.component';
 
 
 const routes: Routes = [  
-  { path: '', redirectTo: '/Homepage', pathMatch: 'full' },
+  { path: '', redirectTo: '/Homepage', pathMatch: 'full' },  
   {
     path: 'Homepage', component: HomepageComponent,
+  },
+  {
+    path: 'DashboardCA', component: DashboardCAComponent,
   },     
+  {
+    path: 'DashboardTenMien', component: DashboardTenMienComponent,
+  },  
+  {
+    path: 'DashboardHoaDonDienTu', component: DashboardHoaDonDienTuComponent,
+  },  
   {
     path: 'Tinh', component: TinhComponent,
   },
@@ -57,6 +70,9 @@ const routes: Routes = [
   {
     path: 'NhanVienInfo/:ID', component: NhanVienInfoComponent,
   },
+  {
+    path: 'DoanhNghiepMaSoThueKhongTonTai', component: DoanhNghiepMaSoThueKhongTonTaiComponent,
+  },  
   {
     path: 'DoanhNghiep', component: DoanhNghiepComponent,
   },  

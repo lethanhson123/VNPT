@@ -1,0 +1,152 @@
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 300px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-bar-chart fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h2 class="mb-1">CA - Chữ ký số</h2>
+            <h6 class="m-0 text-dark fw-light">
+                Dashboard
+            </h6>
+        </div>
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-xxl-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="custom-tabs-container">                        
+                        <div class="tab-content" id="customTabContent">                          
+                            <div class="tab-pane fade show active" id="1" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID"
+                                            (change)="onChangeHuyenID()">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="xaID" [(ngModel)]="xaID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of XaService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>                                   
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-14">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportVNPT003()">
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportVNPT003()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportVNPT003()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <span name="DoanhThu"
+                                            style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
+                                            {{doanhThuDichVu | number:
+                                            '1.0-0'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Danh sách
+                                            <span
+                                                *ngIf="ReportService.listReportVNPT003">({{ReportService.listReportVNPT003.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th style="width: 200px;">Doanh nghiệp</th>
+                                                            <th>Huyện</th>
+                                                            <th>Xã</th>
+                                                            <th>Doanh thu</th>
+                                                            <th>01</th>
+                                                            <th>02</th>
+                                                            <th>03</th>
+                                                            <th>04</th>
+                                                            <th>05</th>
+                                                            <th>06</th>
+                                                            <th>07</th>
+                                                            <th>08</th>
+                                                            <th>09</th>
+                                                            <th>10</th>
+                                                            <th>11</th>
+                                                            <th>12</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of ReportService.listReportVNPT003View; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td><a title="{{element.Name}}" class="link-primary"
+                                                                    target="_blank"
+                                                                    href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                                            </td>
+                                                            <td>{{element.HuyenName}}</td>
+                                                            <td>{{element.XaName}}</td>
+                                                            <td><b>{{element.DoanhThu | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu01 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu02 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu03 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu04 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu05 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu06 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu07 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu08 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu09 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu10 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu11 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                            <td><b>{{element.DoanhThu12 | number:
+                                                                    '1.0-0'}}</b></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>

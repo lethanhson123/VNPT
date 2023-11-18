@@ -29,8 +29,8 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#2" role="tab"
-                                    aria-controls="2" aria-selected="false">
+                                <a class="nav-link active" id="tab-2" data-bs-toggle="tab" href="#2" role="tab"
+                                    aria-controls="2" aria-selected="true">
                                     <span class="badge bg-danger">Biểu đồ</span>
                                 </a>
                             </li>
@@ -41,244 +41,154 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="tab-4" data-bs-toggle="tab" href="#4" role="tab"
-                                    aria-controls="4" aria-selected="true">
+                                <a class="nav-link" id="tab-4" data-bs-toggle="tab" href="#4" role="tab"
+                                    aria-controls="4" aria-selected="false">
+                                    <span class="badge bg-dark">Nhân sự</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-5" data-bs-toggle="tab" href="#5" role="tab"
+                                    aria-controls="5" aria-selected="false">
                                     <span class="badge bg-primary">Thông tin</span>
                                 </a>
                             </li>
                         </ul>
                         <div class="tab-content" id="customTabContent">
                             <div class="tab-pane fade" id="1" role="tabpanel">
-                                1
-                            </div>
-                            <div class="tab-pane fade" id="2" role="tabpanel">
-                                2
-                            </div>
-                            <div class="tab-pane fade" id="3" role="tabpanel">
-                                3
-                            </div>
-                            <div class="tab-pane fade show active" id="4" role="tabpanel">
-                                4
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<app-loading *ngIf="isShowLoading"></app-loading>
-
-
-
-<div class="row">
-    <div class="col s12">
-        <div class="container">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12 m12 l12">
-                        <div id="basic-tabs" class="card card card-default scrollspy">
-                            <div class="card-content">
-                                <div class="card-title">
-                                    <div class="row">
-                                        <div class="col s12 m12 l6">
-                                            <h5 class="card-title" style="font-size: 14px;">
-                                                <b>{{DoanhNghiepService.formData.Name}}</b>
-                                            </h5>
-                                        </div>
-                                        <div class="col s12 m12 l6">
-                                            <ul class="tabs">
-                                                <li class="tab col m3 s12 p-0"><a class="active p-0" href="#1">Doanh
-                                                        thu</a></li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#2">Biểu đồ</a>
-                                                </li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#3">Gói cước</a>
-                                                </li>
-                                                <li class="tab col m3 s12 p-0"><a class="p-0" href="#4">Thông
-                                                        tin</a>
-                                                </li>
-                                            </ul>
+                                <div class="row gx-4">
+                                    <div class="col-lg-3 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 col-12">
+                                        <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option *ngFor="let item of DownloadService.listMonth;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm..."
+                                            (click)="onSearchDoanhNghiepDichVuLichSu()">
+                                            <i class="bi bi-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 col-12">
+                                        <div name="DoanhThuByMonth"
+                                            style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
+                                            {{doanhThuByMonth | number:
+                                            '1.0-0'}} đồng
                                         </div>
                                     </div>
                                 </div>
-
-                                <div id="1">
-                                    <div class="col s12 m12 l12">
-                                        <div class="col s12 m12 l3">
-                                            <mat-select
-                                                style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                name="year" class="browser-default" [(ngModel)]="year">
-                                                <mat-option *ngFor="let item of DownloadService.listYear"
-                                                    [value]="item.Display">
-                                                    {{item.Display}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </div>
-                                        <div class="col s12 m12 l3">
-                                            <mat-select
-                                                style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                name="month" class="browser-default" [(ngModel)]="month">
-                                                <mat-option *ngFor="let item of DownloadService.listMonth"
-                                                    [value]="item.Display">
-                                                    {{item.Display}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </div>
-                                        <div class="col s12 m12 l2">
-                                            <a title="Tìm" (click)="onSearchDoanhNghiepDichVuLichSu()"
-                                                class="btn-floating waves-effect waves-light green darken-1"><i
-                                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                                        </div>
-                                        <div class="col s12 m12 l4">
-                                            <div class="input-field">
-                                                <div name="DoanhThuByMonth"
-                                                    style="font-weight: bold; color: limegreen; text-align: right; font-size: 20px;">
-                                                    {{doanhThuByMonth | number:
-                                                    '1.0-0'}} đồng
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <div class="card mb-4 card-info">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Doanh thu
+                                                    <span
+                                                        *ngIf="DoanhNghiepDichVuLichSuService.list">({{DoanhNghiepDichVuLichSuService.list.length}}
+                                                        items)</span>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-outer">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped m-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Gói cước</th>
+                                                                    <th>Năm</th>
+                                                                    <th>Tháng</th>
+                                                                    <th>Doanh thu</th>
+                                                                    <th>Mã thuê bao</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let element of DoanhNghiepDichVuLichSuService.list; index as i">
+                                                                    <td>{{i + 1}}</td>
+                                                                    <td>
+                                                                        <div *ngFor="let item of DichVuService.list;">
+                                                                            <div *ngIf="item.ID==element.DichVuID">
+                                                                                {{item.Name}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>{{element.Year}}</td>
+                                                                    <td>{{element.Month}}</td>
+                                                                    <td> <b>{{element.GiaTien | number:
+                                                                            '1.0-0'}}</b></td>
+                                                                    <td>{{element.Note}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col s12 m12 l6">
-                                        <div class="KhungOverflow">
-                                            <mat-table [dataSource]="dataSourceDoanhNghiepDichVuLichSu" matSort>
-                                                <ng-container matColumnDef="DichVuID">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                        <mat-select
-                                                            style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                            name="DichVuID{{element.ID}}" class="browser-default"
-                                                            [(ngModel)]="element.DichVuID">
-                                                            <mat-option *ngFor="let item of DichVuService.list"
-                                                                [value]="item.ID">
-                                                                {{item.Name}}
-                                                            </mat-option>
-                                                        </mat-select>
-                                                    </mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="Year">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Năm
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                        {{element.Year}}
-                                                    </mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="Month">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                        {{element.Month}}
-                                                    </mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="GiaTien">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                        <b>{{element.GiaTien | number:
-                                                            '1.0-0'}}</b>
-                                                    </mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="Note">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                        {{element.Note}}
-                                                    </mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="loading">
-                                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                                        Đang tải dữ liệu...
-                                                    </mat-footer-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="noData">
-                                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                                        Chưa có dữ liệu.
-                                                    </mat-footer-cell>
-                                                </ng-container>
-                                                <mat-header-row
-                                                    *matHeaderRowDef="DoanhNghiepDichVuLichSuService.displayColumns"></mat-header-row>
-                                                <mat-row
-                                                    *matRowDef="let row; columns: DoanhNghiepDichVuLichSuService.displayColumns;"></mat-row>
-                                                <mat-footer-row *matFooterRowDef="['loading']"
-                                                    [ngClass]="{'hide':dataSourceDoanhNghiepDichVuLichSu!=null}"></mat-footer-row>
-                                                <mat-footer-row *matFooterRowDef="['noData']"
-                                                    [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVuLichSu!=null && dataSourceDoanhNghiepDichVuLichSu.data.length==0)}">
-                                                </mat-footer-row>
-                                            </mat-table>
-                                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                                [showFirstLastButtons]></mat-paginator>
-                                        </div>
-                                    </div>
-                                    <div class="col s12 m12 l6">
-                                        <div class="KhungOverflow">
-                                            <mat-table [dataSource]="dataSourceReport001" matSort>
-                                                <ng-container matColumnDef="DichVu">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element">{{element.DichVu}}</mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="MaThueBao">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mã thuê bao
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element">{{element.MaThueBao}}</mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="DoanhThu">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tháng
-                                                        {{month}}-{{year}}
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element">
-                                                        <b>{{element.DoanhThu | number:
-                                                            '1.0-0'}}</b></mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="DoanhThuLast">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Liền kề
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element">
-                                                        <b>{{element.DoanhThuLast | number:
-                                                            '1.0-0'}}</b></mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="ChenhLech">
-                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Chênh lệch
-                                                    </mat-header-cell>
-                                                    <mat-cell *matCellDef="let element">
-                                                        <div *ngIf="element.ChenhLech>=0"
-                                                            style="color: limegreen; text-align: right; font-weight: bold;">
-                                                            {{element.ChenhLech | number:
-                                                            '1.0-0'}}</div>
-                                                        <div *ngIf="element.ChenhLech<0"
-                                                            style="color: red; text-align: right; font-weight: bold;">
-                                                            {{element.ChenhLech | number:
-                                                            '1.0-0'}}</div>
-                                                    </mat-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="loading">
-                                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                                        Đang tải dữ liệu...
-                                                    </mat-footer-cell>
-                                                </ng-container>
-                                                <ng-container matColumnDef="noData">
-                                                    <mat-footer-cell *matFooterCellDef colspan="4">
-                                                        Chưa có dữ liệu.
-                                                    </mat-footer-cell>
-                                                </ng-container>
-                                                <mat-header-row
-                                                    *matHeaderRowDef="ReportService.displayColumnsReport001"></mat-header-row>
-                                                <mat-row
-                                                    *matRowDef="let row; columns: ReportService.displayColumnsReport001;"></mat-row>
-                                                <mat-footer-row *matFooterRowDef="['loading']"
-                                                    [ngClass]="{'hide':dataSourceReport001!=null}"></mat-footer-row>
-                                                <mat-footer-row *matFooterRowDef="['noData']"
-                                                    [ngClass]="{'hide':!(dataSourceReport001!=null && dataSourceReport001.data.length==0)}">
-                                                </mat-footer-row>
-                                            </mat-table>
-                                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                                [showFirstLastButtons]></mat-paginator>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <div class="card mb-4 card-success">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">So sánh
+                                                    <span *ngIf="ReportService.listReport001">({{ReportService.listReport001.length}}
+                                                        items)</span>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-outer">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped m-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Dịch vụ</th>
+                                                                    <th>Mã thuê bao</th>
+                                                                    <th>{{month}}-{{year}}</th>
+                                                                    <th>Liền kề</th>
+                                                                    <th>Chênh lệch</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let element of ReportService.listReport001; index as i">
+                                                                    <td>{{i + 1}}</td>
+                                                                    <td>
+                                                                        {{element.DichVu}}
+                                                                    </td>
+                                                                    <td>{{element.MaThueBao}}</td>
+                                                                    <td><b>{{element.DoanhThu | number:
+                                                                            '1.0-0'}}</b></td>
+                                                                    <td> <b>{{element.DoanhThuLast | number:
+                                                                            '1.0-0'}}</b></td>
+                                                                    <td>
+                                                                        <div *ngIf="element.ChenhLech>=0"
+                                                                            style="color: limegreen; text-align: right; font-weight: bold;">
+                                                                            {{element.ChenhLech | number:
+                                                                            '1.0-0'}}</div>
+                                                                        <div *ngIf="element.ChenhLech<0"
+                                                                            style="color: red; text-align: right; font-weight: bold;">
+                                                                            {{element.ChenhLech | number:
+                                                                            '1.0-0'}}</div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="2">
-                                    <div class="col s12 m12 l6">
+                            </div>
+                            <div class="tab-pane fade show active" id="2" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
                                         <h3 style="text-align: center;"><b>Doanh thu tháng {{monthTitle}}-{{yearTitle}}
                                                 (Đơn vị tính:
                                                 đồng)</b></h3>
@@ -299,7 +209,7 @@
                                             [options]="ChartOptionsReportDoanhNghiep002">
                                         </canvas>
                                     </div>
-                                    <div class="col s12 m12 l6">
+                                    <div class="col-lg-6 col-sm-12 col-12">
                                         <h3 style="text-align: center;"><b>Doanh thu năm {{yearTitle}} (Đơn vị tính:
                                                 đồng)</b></h3>
                                         <canvas baseChart [datasets]="ChartDataReportDoanhNghiep0041"
@@ -319,7 +229,7 @@
                                             [options]="ChartOptionsReportDoanhNghiep004">
                                         </canvas>
                                     </div>
-                                    <div class="col s12 m12 l12">
+                                    <div class="col-lg-12 col-sm-12 col-12">
                                         <canvas baseChart [datasets]="ChartDataReportDoanhNghiep003"
                                             [labels]="ChartLabelsReportDoanhNghiep003"
                                             [options]="ChartOptionsReportDoanhNghiep003"
@@ -329,589 +239,402 @@
                                         </canvas>
                                     </div>
                                 </div>
-                                <div id="3">
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepDichVu" matSort
-                                            #sortDoanhNghiepDichVu="matSort">
-                                            <ng-container matColumnDef="NhanVienID">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên AM
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="NhanVienID{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.NhanVienID">
-                                                        <mat-option *ngFor="let item of NhanVienService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DichVuID">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="DichVuID{{element.ID}}" class="browser-default"
-                                                        [(ngModel)]="element.DichVuID">
-                                                        <mat-option *ngFor="let item of DichVuService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="NgayKyHopDong">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày ký
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input name="NgayKyHopDong{{element.ID}}" style="text-align: right;"
-                                                        [ngModel]="element.NgayKyHopDong | date:'yyyy-MM-dd'"
-                                                        (ngModelChange)="onChangeDoanhNghiepDichVuNgayKyHopDong(element, $event)"
-                                                        [ngModelOptions]="{ updateOn: 'blur' }" type="date">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Code">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Số hợp đồng
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Số hợp đồng" name="Code{{element.ID}}"
-                                                        [(ngModel)]="element.Code" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="MaThueBao">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Mã thuê bao
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Mã thuê bao" name="MaThueBao{{element.ID}}"
-                                                        [(ngModel)]="element.MaThueBao" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="GiaTien">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Giá cước
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="GiaTien{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.GiaTien"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="SoThang">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Số tháng
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="SoThang{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.SoThang"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Note">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Ghi chú" name="Note{{element.ID}}"
-                                                        [(ngModel)]="element.Note" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="SortOrder">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="SortOrder{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.SortOrder"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Active">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">
-                                                    <label>
-                                                        <input type="checkbox" class="filled-in"
-                                                            name="Active{{element.ID}}" [(ngModel)]="element.Active" />
-                                                        <span>.</span>
-                                                    </label>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Save">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <a title="Lưu thay đổi" (click)="onSaveDoanhNghiepDichVu(element)"
-                                                        class="btn-floating waves-effect waves-light cyan"><i
-                                                            class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
-                                                    <!-- <a (click)="onDeleteDoanhNghiepDichVu(element)" *ngIf="element.ID>0"
-                                                        class="btn-floating waves-effect waves-light red"><i
-                                                            class="material-icons">delete_outline</i></a> -->
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="DoanhNghiepDichVuService.displayColumns"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: DoanhNghiepDichVuService.displayColumns;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceDoanhNghiepDichVu!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceDoanhNghiepDichVu!=null && dataSourceDoanhNghiepDichVu.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator #paginatorDoanhNghiepDichVu="matPaginator"
-                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                            [showFirstLastButtons]></mat-paginator>
+                            </div>
+                            <div class="tab-pane fade" id="3" role="tabpanel">
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Gói cước
+                                            <span
+                                                *ngIf="DoanhNghiepDichVuService.list">({{DoanhNghiepDichVuService.list.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nhân viên AM</th>
+                                                            <th>Gói cước</th>
+                                                            <th>Ngày ký</th>
+                                                            <th>Số hợp đồng</th>
+                                                            <th>Mã thuê bao</th>
+                                                            <th>Giá cước</th>
+                                                            <th>Số tháng</th>
+                                                            <th>Ghi chú</th>
+                                                            <th>Sắp xếp</th>
+                                                            <th>Kích hoạt</th>
+                                                            <th>Lưu</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of DoanhNghiepDichVuService.list; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td>
+                                                                <select class="form-select"
+                                                                    name="NhanVienID{{element.ID}}"
+                                                                    [(ngModel)]="element.NhanVienID">
+                                                                    <option *ngFor="let item of NhanVienService.list;"
+                                                                        [value]="item.ID">
+                                                                        {{item.Name}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-select"
+                                                                    name="DichVuID{{element.ID}}"
+                                                                    [(ngModel)]="element.DichVuID">
+                                                                    <option *ngFor="let item of DichVuService.list;"
+                                                                        [value]="item.ID">
+                                                                        {{item.Name}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><input name="NgayKyHopDong{{element.ID}}"
+                                                                    style="text-align: right;" class="form-control"
+                                                                    [ngModel]="element.NgayKyHopDong | date:'yyyy-MM-dd'"
+                                                                    (ngModelChange)="onChangeDoanhNghiepDichVuNgayKyHopDong(element, $event)"
+                                                                    [ngModelOptions]="{ updateOn: 'blur' }" type="date">
+                                                            </td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Số hợp đồng" name="Code{{element.ID}}"
+                                                                    [(ngModel)]="element.Code"></td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Mã thuê bao"
+                                                                    name="MaThueBao{{element.ID}}"
+                                                                    [(ngModel)]="element.MaThueBao"></td>
+                                                            <td><input class="form-control" type="number"
+                                                                    placeholder="Giá cước" name="GiaTien{{element.ID}}"
+                                                                    [(ngModel)]="element.GiaTien"></td>
+                                                            <td><input class="form-control" type="number"
+                                                                    placeholder="Số tháng" name="SoThang{{element.ID}}"
+                                                                    [(ngModel)]="element.SoThang"></td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Ghi chú" name="Note{{element.ID}}"
+                                                                    [(ngModel)]="element.Note"></td>
+                                                            <td><input class="form-control" type="number"
+                                                                    placeholder="Sắp xếp" name="SortOrder{{element.ID}}"
+                                                                    [(ngModel)]="element.SortOrder"></td>
+                                                            <td>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="Active{{element.ID}}"
+                                                                        [(ngModel)]="element.Active">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-info"
+                                                                    (click)="onSaveDoanhNghiepThanhVien(element)"><i
+                                                                        class="bi bi-sd-card"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div id="4">
-                                    <div class="row">
+                            </div>
+                            <div class="tab-pane fade" id="4" role="tabpanel">
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Nhân sự
+                                            <span
+                                                *ngIf="DoanhNghiepThanhVienService.list">({{DoanhNghiepThanhVienService.list.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Thành viên</th>
+                                                            <th>Nhân viên</th>
+                                                            <th>Điện thoại</th>
+                                                            <th>Email</th>
+                                                            <th>Ngày sinh</th>
+                                                            <th>CCCD</th>
+                                                            <th>Ngày cấp</th>
+                                                            <th>Nơi cấp</th>
+                                                            <th>Kích hoạt</th>
+                                                            <th>Lưu</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let element of DoanhNghiepThanhVienService.list; index as i">
+                                                            <td>{{i + 1}}</td>
+                                                            <td>
+                                                                <select class="form-select"
+                                                                    name="LoaiDoanhNghiepThanhVienID{{element.ID}}"
+                                                                    [(ngModel)]="element.LoaiDoanhNghiepThanhVienID">
+                                                                    <option
+                                                                        *ngFor="let item of LoaiDoanhNghiepThanhVienService.list;"
+                                                                        [value]="item.ID">
+                                                                        {{item.Name}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Nhân viên" name="Name{{element.ID}}"
+                                                                    [(ngModel)]="element.Name"></td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Điện thoại"
+                                                                    name="DienThoai{{element.ID}}"
+                                                                    [(ngModel)]="element.DienThoai"></td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Email" name="Email{{element.ID}}"
+                                                                    [(ngModel)]="element.Email"></td>
+                                                            <td> <input name="NgaySinh{{element.ID}}"
+                                                                    style="text-align: right;" class="form-control"
+                                                                    [ngModel]="element.NgaySinh | date:'yyyy-MM-dd'"
+                                                                    (ngModelChange)="onChangeDoanhNghiepThanhVienNgaySinh(element, $event)"
+                                                                    [ngModelOptions]="{ updateOn: 'blur' }" type="date">
+                                                            </td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="CCCD" name="CCCD{{element.ID}}"
+                                                                    [(ngModel)]="element.CCCD"></td>
+                                                            <td> <input name="CCCD_NgayCap{{element.ID}}"
+                                                                    style="text-align: right;" class="form-control"
+                                                                    [ngModel]="element.CCCD_NgayCap | date:'yyyy-MM-dd'"
+                                                                    (ngModelChange)="onChangeDoanhNghiepThanhVienCCCD_NgayCap(element, $event)"
+                                                                    [ngModelOptions]="{ updateOn: 'blur' }" type="date">
+                                                            </td>
+                                                            <td><input class="form-control" type="text"
+                                                                    placeholder="Nơi cấp"
+                                                                    name="CCCD_NoiCap{{element.ID}}"
+                                                                    [(ngModel)]="element.CCCD_NoiCap"></td>
+                                                            <td>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="Active{{element.ID}}"
+                                                                        [(ngModel)]="element.Active">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-info"
+                                                                    (click)="onSaveDoanhNghiepThanhVien(element)"><i
+                                                                        class="bi bi-sd-card"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="5" role="tabpanel">
+                                <div class="card mb-4 card-light">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Thông tin Doanh nghiệp
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
                                         <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
-                                            <div class="col s6 m6 l12">
-                                                <div class="card-title">
-                                                    <a title="Danh sách"
-                                                        href="javascript:window.open('','_self').close();"
-                                                        style="padding-top: 3px;"
-                                                        class="btn-floating waves-effect waves-light green darken-1"><i
-                                                            class="material-icons">arrow_back</i></a>&nbsp;&nbsp;&nbsp;
-                                                    <a title="Thêm mới" href="{{URLSub}}/0" style="padding-top: 3px;"
-                                                        class="btn-floating waves-effect waves-light green darken-1"><i
-                                                            class="material-icons">add</i></a>&nbsp;&nbsp;&nbsp;
+                                            <div class="row gx-4">
+                                                <div class="col-lg-12 col-sm-12 col-12">
+                                                    <a title="Danh sách" class="btn btn-success"
+                                                        href="javascript:window.open('','_self').close();"><i
+                                                            class="bi bi-arrow-left-square"></i></a>&nbsp;&nbsp;&nbsp;
+                                                    <a title="Thêm mới" href="{{URLSub}}/0" class="btn btn-success"><i
+                                                            class="bi bi-plus-square-dotted"></i></a>&nbsp;&nbsp;&nbsp;
                                                     <button [disabled]="!DoanhNghiepService.formData.Name"
-                                                        title="Lưu thay đổi" type="submit" style="padding-top: 3px;"
-                                                        class="btn-floating waves-effect waves-light cyan"><i
-                                                            class="material-icons">save</i></button>&nbsp;&nbsp;&nbsp;
+                                                        title="Lưu thay đổi" type="submit" class="btn btn-info"><i
+                                                            class="bi bi-sd-card"></i></button>
                                                 </div>
                                             </div>
                                             <input name="ID" [(ngModel)]="DoanhNghiepService.formData.ID" type="hidden">
-                                            <div class="col s12 m12 l4">
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="Name">Doanh nghiệp</label>
+                                            <div class="row gx-4">
+                                                <div class="col-lg-4 col-sm-12 col-12">
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Doanh nghiệp</label>
+                                                            <input name="Name"
+                                                                [(ngModel)]="DoanhNghiepService.formData.Name"
+                                                                placeholder="Doanh nghiệp" type="text"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Mã số</label>
+                                                            <input name="Code"
+                                                                [(ngModel)]="DoanhNghiepService.formData.Code"
+                                                                placeholder="Mã số" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Điện thoại</label>
+                                                            <input name="DienThoai"
+                                                                [(ngModel)]="DoanhNghiepService.formData.DienThoai"
+                                                                placeholder="Điện thoại" type="text"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Email</label>
+                                                            <input name="Email"
+                                                                [(ngModel)]="DoanhNghiepService.formData.Email"
+                                                                placeholder="Email" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Địa chỉ</label>
+                                                            <input name="DiaChi"
+                                                                [(ngModel)]="DoanhNghiepService.formData.DiaChi"
+                                                                placeholder="Địa chỉ" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Ghi chú</label>
+                                                            <input name="Note"
+                                                                [(ngModel)]="DoanhNghiepService.formData.Note"
+                                                                placeholder="Ghi chú" type="text" class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="Name"
-                                                            [(ngModel)]="DoanhNghiepService.formData.Name"
-                                                            placeholder="Doanh nghiệp" type="text">
+                                                <div class="col-lg-4 col-sm-12 col-12">
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Ngày cấp</label>
+                                                            <input name="NgayCap"
+                                                                [ngModel]="DoanhNghiepService.formData.NgayCap | date:'yyyy-MM-dd'"
+                                                                (ngModelChange)="onChangeNgayCap($event)"
+                                                                [ngModelOptions]="{ updateOn: 'blur' }" type="date"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Ngày thay đổi</label>
+                                                            <input name="NgayDangKyThayDoi"
+                                                                [ngModel]="DoanhNghiepService.formData.NgayDangKyThayDoi | date:'yyyy-MM-dd'"
+                                                                (ngModelChange)="onChangeNgayDangKyThayDoi($event)"
+                                                                [ngModelOptions]="{ updateOn: 'blur' }" type="date"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Vốn điều lệ</label>
+                                                            <input name="VonDieuLe"
+                                                                [(ngModel)]="DoanhNghiepService.formData.VonDieuLe"
+                                                                placeholder="Vốn điều lệ" type="number"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Số lao động</label>
+                                                            <input name="SoLuongLaoDong"
+                                                                [(ngModel)]="DoanhNghiepService.formData.SoLuongLaoDong"
+                                                                placeholder="Số lao động" type="number"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Ngành nghề</label>
+                                                            <input name="NganhNgheKinhDoanh"
+                                                                [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanh"
+                                                                placeholder="Ngành nghề" type="text"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Ngành nghề chính</label>
+                                                            <select class="form-select" name="NganhNgheKinhDoanhChinhID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanhChinhID">
+                                                                <option
+                                                                    *ngFor="let item of NganhNgheKinhDoanhService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="Code">Mã số</label>
+                                                <div class="col-lg-4 col-sm-12 col-12">
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Phòng ban</label>
+                                                            <select class="form-select" name="PhongBanID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.PhongBanID">
+                                                                <option *ngFor="let item of PhongBanService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Nhân viên AM</label>
+                                                            <select class="form-select" name="NhanVienID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.NhanVienID">
+                                                                <option *ngFor="let item of NhanVienService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Huyện</label>
+                                                            <select class="form-select" name="HuyenID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.HuyenID">
+                                                                <option *ngFor="let item of HuyenService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Xã</label>
+                                                            <select class="form-select" name="XaID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.XaID">
+                                                                <option *ngFor="let item of XaService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Loại doanh nghiệp</label>
+                                                            <select class="form-select" name="LoaiDoanhNghiepID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.LoaiDoanhNghiepID">
+                                                                <option
+                                                                    *ngFor="let item of LoaiDoanhNghiepService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-sm-4 col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Trạng thái</label>
+                                                            <select class="form-select" name="LoaiTrangThaiID"
+                                                                [(ngModel)]="DoanhNghiepService.formData.LoaiTrangThaiID">
+                                                                <option *ngFor="let item of LoaiTrangThaiService.list;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="Code"
-                                                            [(ngModel)]="DoanhNghiepService.formData.Code"
-                                                            placeholder="Mã số" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="DienThoai">Điện thoại</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="DienThoai"
-                                                            [(ngModel)]="DoanhNghiepService.formData.DienThoai"
-                                                            placeholder="Điện thoại" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="Email">Email</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="Email"
-                                                            [(ngModel)]="DoanhNghiepService.formData.Email"
-                                                            placeholder="Email" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="DiaChi">Địa chỉ</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="DiaChi"
-                                                            [(ngModel)]="DoanhNghiepService.formData.DiaChi"
-                                                            placeholder="Địa chỉ" type="text">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="Note">Ghi chú</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="Note"
-                                                            [(ngModel)]="DoanhNghiepService.formData.Note"
-                                                            placeholder="Ghi chú" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col s12 m12 l4">
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="NgayCap">Ngày cấp</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="NgayCap"
-                                                            style="text-align: right; font-weight: bold; width: 100%;"
-                                                            [ngModel]="DoanhNghiepService.formData.NgayCap | date:'yyyy-MM-dd'"
-                                                            (ngModelChange)="onChangeNgayCap($event)"
-                                                            [ngModelOptions]="{ updateOn: 'blur' }" type="date">
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="NgayDangKyThayDoi">Ngày thay đổi</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="NgayDangKyThayDoi"
-                                                            style="text-align: right; font-weight: bold; width: 100%;"
-                                                            [ngModel]="DoanhNghiepService.formData.NgayDangKyThayDoi | date:'yyyy-MM-dd'"
-                                                            (ngModelChange)="onChangeNgayDangKyThayDoi($event)"
-                                                            [ngModelOptions]="{ updateOn: 'blur' }" type="date">
-                                                    </div>
-                                                </div>
-                                                <div class="col s4 m4 l4">
-                                                    <div class="input-field">
-                                                        <label for="VonDieuLe">Vốn điều lệ</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s8 m8 l8">
-                                                    <div class="input-field">
-                                                        <input placeholder="Vốn điều lệ" name="VonDieuLe"
-                                                            style="text-align: right; font-weight: bold;"
-                                                            [(ngModel)]="DoanhNghiepService.formData.VonDieuLe"
-                                                            type="number">
-                                                    </div>
-                                                </div>
-                                                <div class="col s4 m4 l4">
-                                                    <div class="input-field">
-                                                        <label for="SoLuongLaoDong">Số lao động</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s8 m8 l8">
-                                                    <div class="input-field">
-                                                        <input placeholder="Số lao động" name="SoLuongLaoDong"
-                                                            style="text-align: right; font-weight: bold;"
-                                                            [(ngModel)]="DoanhNghiepService.formData.SoLuongLaoDong"
-                                                            type="number">
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l4">
-                                                    <div class="input-field">
-                                                        <label for="NganhNgheKinhDoanh">Ngành nghề</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m12 l8">
-                                                    <div class="input-field">
-                                                        <input name="NganhNgheKinhDoanh"
-                                                            [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanh"
-                                                            placeholder="Ngành nghề" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="NganhNgheKinhDoanhChinhID">Ngành nghề chính</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="NganhNgheKinhDoanhChinhID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.NganhNgheKinhDoanhChinhID">
-                                                        <mat-option *ngFor="let item of NganhNgheKinhDoanhService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                            </div>
-                                            <div class="col s12 m12 l4">
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="PhongBanID">Phòng ban</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="PhongBanID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.PhongBanID">
-                                                        <mat-option *ngFor="let item of PhongBanService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="NhanVienID">Nhân viên AM</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="NhanVienID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.NhanVienID">
-                                                        <mat-option *ngFor="let item of NhanVienService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="HuyenID">Huyện</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="HuyenID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.HuyenID">
-                                                        <mat-option *ngFor="let item of HuyenService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="XaID">Xã</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="XaID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.XaID">
-                                                        <mat-option *ngFor="let item of XaService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="LoaiDoanhNghiepID">Loại doanh nghiệp</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="LoaiDoanhNghiepID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.LoaiDoanhNghiepID">
-                                                        <mat-option *ngFor="let item of LoaiDoanhNghiepService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-                                                <div class="col s6 m6 l4">
-                                                    <div class="input-field">
-                                                        <label for="LoaiTrangThaiID">Trạng thái</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 m6 l8">
-                                                    <mat-select
-                                                        style="padding-top:30px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="LoaiTrangThaiID" class="browser-default"
-                                                        [(ngModel)]="DoanhNghiepService.formData.LoaiTrangThaiID">
-                                                        <mat-option *ngFor="let item of LoaiTrangThaiService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <br />
-                                                    <br />
-                                                </div>
-
                                             </div>
                                         </form>
-                                    </div>
-                                    <hr />
-                                    <div class="KhungOverflow">
-                                        <mat-table [dataSource]="dataSourceDoanhNghiepThanhVien" matSort
-                                            #sortDoanhNghiepThanhVien="matSort">
-                                            <ng-container matColumnDef="LoaiDoanhNghiepThanhVienID">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Thành viên
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <mat-select
-                                                        style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                                        name="LoaiDoanhNghiepThanhVienID{{element.ID}}"
-                                                        class="browser-default"
-                                                        [(ngModel)]="element.LoaiDoanhNghiepThanhVienID">
-                                                        <mat-option
-                                                            *ngFor="let item of LoaiDoanhNghiepThanhVienService.list"
-                                                            [value]="item.ID">
-                                                            {{item.Name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Name">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Họ tên
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Họ tên" name="Name{{element.ID}}"
-                                                        [(ngModel)]="element.Name" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="DienThoai">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Điện thoại" name="DienThoai{{element.ID}}"
-                                                        [(ngModel)]="element.DienThoai" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Email">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Email
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Email" name="Name{{element.ID}}"
-                                                        [(ngModel)]="element.Name" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="NgaySinh">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sinh
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input name="NgaySinh{{element.ID}}" style="text-align: right;"
-                                                        [ngModel]="element.NgaySinh | date:'yyyy-MM-dd'"
-                                                        (ngModelChange)="onChangeDoanhNghiepThanhVienNgaySinh(element, $event)"
-                                                        [ngModelOptions]="{ updateOn: 'blur' }" type="date">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="CCCD">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="CCCD" name="CCCD{{element.ID}}"
-                                                        [(ngModel)]="element.CCCD" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="CCCD_NgayCap">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày cấp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input name="CCCD_NgayCap{{element.ID}}" style="text-align: right;"
-                                                        [ngModel]="element.CCCD_NgayCap | date:'yyyy-MM-dd'"
-                                                        (ngModelChange)="onChangeDoanhNghiepThanhVienCCCD_NgayCap(element, $event)"
-                                                        [ngModelOptions]="{ updateOn: 'blur' }" type="date">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="CCCD_NoiCap">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Nơi cấp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Nơi cấp" name="CCCD_NoiCap{{element.ID}}"
-                                                        [(ngModel)]="element.CCCD_NoiCap" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Note">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="Ghi chú" name="Note{{element.ID}}"
-                                                        [(ngModel)]="element.Note" type="text">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="SortOrder">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <input placeholder="0" name="SortOrder{{element.ID}}"
-                                                        style="text-align: right;" [(ngModel)]="element.SortOrder"
-                                                        type="number">
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Active">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element">
-                                                    <label>
-                                                        <input type="checkbox" class="filled-in"
-                                                            name="Active{{element.ID}}" [(ngModel)]="element.Active" />
-                                                        <span>.</span>
-                                                    </label>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Save">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                                    <a title="Lưu thay đổi"
-                                                        (click)="onSaveDoanhNghiepThanhVien(element)"
-                                                        class="btn-floating waves-effect waves-light cyan"><i
-                                                            class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
-                                                    <!-- <a (click)="onDeleteDoanhNghiepThanhVien(element)" *ngIf="element.ID>0"
-                                                                class="btn-floating waves-effect waves-light red"><i
-                                                                    class="material-icons">delete_outline</i></a> -->
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Đang tải dữ liệu...
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="4">
-                                                    Chưa có dữ liệu.
-                                                </mat-footer-cell>
-                                            </ng-container>
-                                            <mat-header-row
-                                                *matHeaderRowDef="DoanhNghiepThanhVienService.displayColumns"></mat-header-row>
-                                            <mat-row
-                                                *matRowDef="let row; columns: DoanhNghiepThanhVienService.displayColumns;"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSourceDoanhNghiepThanhVien!=null}"></mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSourceDoanhNghiepThanhVien!=null && dataSourceDoanhNghiepThanhVien.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <mat-paginator #paginatorDoanhNghiepThanhVien="matPaginator"
-                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                            [showFirstLastButtons]></mat-paginator>
                                     </div>
                                 </div>
                             </div>
@@ -922,6 +645,4 @@
         </div>
     </div>
 </div>
-<br />
-<br />
 <app-loading *ngIf="isShowLoading"></app-loading>

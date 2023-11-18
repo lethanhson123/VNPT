@@ -14,9 +14,13 @@ export class ReportService extends BaseService{
     listReport003: Report[] | undefined;        
     listReport004: Report[] | undefined;        
     listReportVNPT001: Report[] | undefined;
+    listReportVNPT001View: Report[] | undefined;
     listReportVNPT003: Report[] | undefined;
+    listReportVNPT003View: Report[] | undefined;
     listReportVNPT004: Report[] | undefined;
+    listReportVNPT004View: Report[] | undefined;
     listReportVNPT005: Report[] | undefined;
+    listReportVNPT005View: Report[] | undefined;
     formData!: Report;
     constructor(public httpClient: HttpClient) {
         super(httpClient);

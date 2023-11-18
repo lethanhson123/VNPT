@@ -11,6 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   title = 'CRM';
   domainName = environment.DomainDestination;
+  domainURL = environment.DomainURL;
   queryString: string = environment.InitializationString;
   constructor(
     public router: Router,
