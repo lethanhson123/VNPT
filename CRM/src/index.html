@@ -20,7 +20,7 @@
 	<meta http-equiv="Expires" content="Mon, 22 Jul 2002 11:12:01 GMT" />
 	<meta name="robots" content="index,follow">
 	<meta name="Googlebot" content="index,follow">
-	<meta name="revisit-after" content="1 days">	
+	<meta name="revisit-after" content="1 days">
 	<title>CRM | VNPT Vũng Tàu</title>
 	<meta name="description" content="Hệ quản trị khách hàng doanh nghiệp của VNPT Bà Rịa - Vũng Tàu" />
 	<meta name="keywords" content="Hệ quản trị khách hàng doanh nghiệp của VNPT Bà Rịa - Vũng Tàu" />
@@ -74,34 +74,56 @@
 	<link rel="stylesheet" href="/assets/css/main.min.css" />
 	<link rel="stylesheet" href="/assets/vendor/overlay-scroll/OverlayScrollbars.min.css" />
 
+	<link rel="stylesheet" href="/assets/vendor/datatables/dataTables.bs5.css" />
+	<link rel="stylesheet" href="/assets/vendor/datatables/dataTables.bs5-custom.css" />
+	<link rel="stylesheet" href="/assets/vendor/datatables/buttons/dataTables.bs5-custom.css" />
+
 	<style>
-		.KhungOverflow {
-			height: auto;
-			width: 100%;
-			overflow: auto;
+		.table-striped,
+		.table-striped td,
+		.table-striped th {
+			border-color: #000000;
+			border-style: solid;
+			border-width: 1px;
+			padding: 2px;									
+		}
+
+		.table-striped {
+			border-collapse: collapse;
 		}
 
 		.mat-sort-header-content {
+			color: #000000;
+			font-weight: bold;
+			font-size: 16px;
+			width: 100%;
+			padding: 10px;
+			padding-top: 0px;
 			display: flex !important;
 			text-align: center !important;
 			justify-content: center !important;
-			color: #000000;
-			font-weight: bold;
 		}
+
+		.mat-row .mat-cell {
+			padding: 10px;			
+		}		
 	</style>
 </head>
 
 <body>
-	<div class="page-wrapper">		
-		<div class="main-container">		
-			<app-root></app-root>		
+	<div class="page-wrapper">
+		<div class="main-container">
+			<app-root></app-root>
 		</div>
-	</div>	
+	</div>
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="/assets/js/moment.min.js"></script>
 	<script src="/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
 	<script src="/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+	<script src="/assets/vendor/datatables/dataTables.min.js"></script>
+	<script src="/assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="/assets/vendor/datatables/custom/custom-datatables.js"></script>
 	<script src="/assets/js/custom.js"></script>
 </body>
 

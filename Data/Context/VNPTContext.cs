@@ -14,7 +14,8 @@
 		public virtual DbSet<Data.Model.GoiCuoc> GoiCuoc { get; set; }
 		public virtual DbSet<Data.Model.DoanhNghiep> DoanhNghiep { get; set; }
         public virtual DbSet<Data.Model.DoanhNghiepDichVu> DoanhNghiepDichVu { get; set; }
-        public virtual DbSet<Data.Model.DoanhNghiepDichVuLichSu> DoanhNghiepDichVuLichSu { get; set; }
+		public virtual DbSet<Data.Model.DoanhNghiepDichVuCA> DoanhNghiepDichVuCA { get; set; }
+		public virtual DbSet<Data.Model.DoanhNghiepDichVuLichSu> DoanhNghiepDichVuLichSu { get; set; }
         public virtual DbSet<Data.Model.DoanhNghiepThanhVien> DoanhNghiepThanhVien { get; set; }
         public virtual DbSet<Data.Model.Huyen> Huyen { get; set; }
         public virtual DbSet<Data.Model.LoaiDoanhNghiep> LoaiDoanhNghiep { get; set; }

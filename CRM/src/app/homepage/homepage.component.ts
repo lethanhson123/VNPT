@@ -118,18 +118,12 @@ export class HomepageComponent implements OnInit {
     this.ReportService.ReportVNPT001Async(this.huyenID, this.xaID, this.searchString, this.year, this.month).subscribe(
       res => {
         this.ReportService.listReportVNPT001 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
-        this.dataSourceReportVNPT001 = new MatTableDataSource(this.ReportService.listReportVNPT001.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
+        this.dataSourceReportVNPT001 = new MatTableDataSource(this.ReportService.listReportVNPT001);
         this.dataSourceReportVNPT001.sort = this.sortReportVNPT001;
         this.dataSourceReportVNPT001.paginator = this.paginatorReportVNPT001;
         for (let i = 0; i < this.ReportService.listReportVNPT001.length; i++) {
           this.doanhThuTongHop = this.doanhThuTongHop + this.ReportService.listReportVNPT001[i].DoanhThu;
-        }
-        if (this.ReportService.listReportVNPT001.length > environment.ItemCount) {
-          this.ReportService.listReportVNPT001View = this.ReportService.listReportVNPT001.slice(0, environment.ItemCount);
-        }
-        else {
-          this.ReportService.listReportVNPT001View = this.ReportService.listReportVNPT001;
-        }
+        }        
         this.isShowLoading = false;
       },
       err => {
@@ -142,18 +136,12 @@ export class HomepageComponent implements OnInit {
     this.ReportService.ReportVNPT003Async(this.huyenID, this.xaID, this.searchString, this.dichVuID, this.year, this.month).subscribe(
       res => {
         this.ReportService.listReportVNPT003 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
-        this.dataSourceReportVNPT003 = new MatTableDataSource(this.ReportService.listReportVNPT003.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
+        this.dataSourceReportVNPT003 = new MatTableDataSource(this.ReportService.listReportVNPT003);
         this.dataSourceReportVNPT003.sort = this.sortReportVNPT003;
         this.dataSourceReportVNPT003.paginator = this.paginatorReportVNPT003;
         for (let i = 0; i < this.ReportService.listReportVNPT003.length; i++) {
           this.doanhThuDichVu = this.doanhThuDichVu + this.ReportService.listReportVNPT003[i].DoanhThu;
-        }
-        if (this.ReportService.listReportVNPT003.length > environment.ItemCount) {
-          this.ReportService.listReportVNPT003View = this.ReportService.listReportVNPT003.slice(0, environment.ItemCount);
-        }
-        else {
-          this.ReportService.listReportVNPT003View = this.ReportService.listReportVNPT003;
-        }
+        }        
         this.isShowLoading = false;
       },
       err => {
@@ -166,18 +154,12 @@ export class HomepageComponent implements OnInit {
     this.ReportService.ReportVNPT004Async(this.phongBanID, this.year).subscribe(
       res => {
         this.ReportService.listReportVNPT004 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
-        this.dataSourceReportVNPT004 = new MatTableDataSource(this.ReportService.listReportVNPT004.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
+        this.dataSourceReportVNPT004 = new MatTableDataSource(this.ReportService.listReportVNPT004);
         this.dataSourceReportVNPT004.sort = this.sortReportVNPT004;
         this.dataSourceReportVNPT004.paginator = this.paginatorReportVNPT004;
         for (let i = 0; i < this.ReportService.listReportVNPT004.length; i++) {
           this.doanhThuPhongBan = this.doanhThuPhongBan + this.ReportService.listReportVNPT004[i].DoanhThu;
-        }
-        if (this.ReportService.listReportVNPT004.length > environment.ItemCount) {
-          this.ReportService.listReportVNPT004View = this.ReportService.listReportVNPT004.slice(0, environment.ItemCount);
-        }
-        else {
-          this.ReportService.listReportVNPT004View = this.ReportService.listReportVNPT004;
-        }
+        }        
         this.isShowLoading = false;
       },
       err => {
@@ -190,18 +172,12 @@ export class HomepageComponent implements OnInit {
     this.ReportService.ReportVNPT005Async(this.nhanVienID, this.year).subscribe(
       res => {
         this.ReportService.listReportVNPT005 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
-        this.dataSourceReportVNPT005 = new MatTableDataSource(this.ReportService.listReportVNPT005.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
+        this.dataSourceReportVNPT005 = new MatTableDataSource(this.ReportService.listReportVNPT005);
         this.dataSourceReportVNPT005.sort = this.sortReportVNPT005;
         this.dataSourceReportVNPT005.paginator = this.paginatorReportVNPT005;
         for (let i = 0; i < this.ReportService.listReportVNPT005.length; i++) {
           this.doanhThuNhanVien = this.doanhThuNhanVien + this.ReportService.listReportVNPT005[i].DoanhThu;
-        }
-        if (this.ReportService.listReportVNPT005.length > environment.ItemCount) {
-          this.ReportService.listReportVNPT005View = this.ReportService.listReportVNPT005.slice(0, environment.ItemCount);
-        }
-        else {
-          this.ReportService.listReportVNPT005View = this.ReportService.listReportVNPT005;
-        }
+        }        
         this.isShowLoading = false;
       },
       err => {
@@ -210,13 +186,13 @@ export class HomepageComponent implements OnInit {
     );
   }
   onChangeHuyenID() {
-    this.GetXaToListAsync();
+    this.onSearchReportVNPT001();
   }
   GetHuyenToListAsync() {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.GetXaToListAsync();
+        this.onSearchReportVNPT001();
       },
       err => {
       }

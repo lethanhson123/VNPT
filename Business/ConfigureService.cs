@@ -10,7 +10,8 @@ namespace Business
 			services.AddTransient<IGoiCuocBusiness, GoiCuocBusiness>();
 			services.AddTransient<IDoanhNghiepBusiness, DoanhNghiepBusiness>();
             services.AddTransient<IDoanhNghiepDichVuBusiness, DoanhNghiepDichVuBusiness>();
-            services.AddTransient<IDoanhNghiepDichVuLichSuBusiness, DoanhNghiepDichVuLichSuBusiness>();
+			services.AddTransient<IDoanhNghiepDichVuCABusiness, DoanhNghiepDichVuCABusiness>();
+			services.AddTransient<IDoanhNghiepDichVuLichSuBusiness, DoanhNghiepDichVuLichSuBusiness>();
             services.AddTransient<IDoanhNghiepThanhVienBusiness, DoanhNghiepThanhVienBusiness>();
             services.AddTransient<IHuyenBusiness, HuyenBusiness>();
             services.AddTransient<ILoaiDoanhNghiepBusiness, LoaiDoanhNghiepBusiness>();
@@ -44,7 +45,8 @@ namespace Business
 			services.AddTransient<IGoiCuocRepository, GoiCuocRepository>();
             services.AddTransient<IDoanhNghiepDichVuLichSuRepository, DoanhNghiepDichVuLichSuRepository>();
             services.AddTransient<IDoanhNghiepDichVuRepository, DoanhNghiepDichVuRepository>();
-            services.AddTransient<IDoanhNghiepRepository, DoanhNghiepRepository>();
+			services.AddTransient<IDoanhNghiepDichVuCARepository, DoanhNghiepDichVuCARepository>();
+			services.AddTransient<IDoanhNghiepRepository, DoanhNghiepRepository>();
             services.AddTransient<IDoanhNghiepThanhVienRepository, DoanhNghiepThanhVienRepository>();
             services.AddTransient<IHuyenRepository, HuyenRepository>();
             services.AddTransient<ILoaiDoanhNghiepRepository, LoaiDoanhNghiepRepository>();

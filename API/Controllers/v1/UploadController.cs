@@ -18,6 +18,7 @@ namespace API.Controllers.v1
 		private readonly IDoanhNghiepBusiness _IDoanhNghiepBusiness;
 		private readonly IDichVuBusiness _IDichVuBusiness;
 		private readonly IDoanhNghiepDichVuBusiness _IDoanhNghiepDichVuBusiness;
+		private readonly IDoanhNghiepDichVuCABusiness _IDoanhNghiepDichVuCABusiness;
 		private readonly IDoanhNghiepThanhVienBusiness _IDoanhNghiepThanhVienBusiness;
 		private readonly IHuyenBusiness _IHuyenBusiness;
 		private readonly ILoaiDoanhNghiepBusiness _ILoaiDoanhNghiepBusiness;
@@ -35,6 +36,7 @@ namespace API.Controllers.v1
 			, IDoanhNghiepBusiness IDoanhNghiepBusiness
 			, IDichVuBusiness IDichVuBusiness
 			, IDoanhNghiepDichVuBusiness IDoanhNghiepDichVuBusiness
+			, IDoanhNghiepDichVuCABusiness IDoanhNghiepDichVuCABusiness
 			, IDoanhNghiepThanhVienBusiness IDoanhNghiepThanhVienBusiness
 			, IHuyenBusiness IHuyenBusiness
 			, ILoaiDoanhNghiepBusiness ILoaiDoanhNghiepBusiness
@@ -53,6 +55,7 @@ namespace API.Controllers.v1
 			_IDoanhNghiepBusiness = IDoanhNghiepBusiness;
 			_IDichVuBusiness = IDichVuBusiness;
 			_IDoanhNghiepDichVuBusiness = IDoanhNghiepDichVuBusiness;
+			_IDoanhNghiepDichVuCABusiness = IDoanhNghiepDichVuCABusiness;
 			_IDoanhNghiepThanhVienBusiness = IDoanhNghiepThanhVienBusiness;
 			_IHuyenBusiness = IHuyenBusiness;
 			_ILoaiDoanhNghiepBusiness = ILoaiDoanhNghiepBusiness;
@@ -604,15 +607,15 @@ namespace API.Controllers.v1
 
 											for (int i = 2; i <= totalRows; i++)
 											{
-												DoanhNghiepDichVu doanhNghiepDichVu = new DoanhNghiepDichVu();
-												doanhNghiepDichVu.DichVuID = 20;
+												DoanhNghiepDichVuCA doanhNghiepDichVu = new DoanhNghiepDichVuCA();
+												
 												if (workSheet.Cells[i, 2].Value != null)
 												{
 													doanhNghiepDichVu.UserName = workSheet.Cells[i, 2].Value.ToString().Trim();
 												}
 												if (workSheet.Cells[i, 3].Value != null)
 												{
-													doanhNghiepDichVu.UserName = workSheet.Cells[i, 3].Value.ToString().Trim();
+													doanhNghiepDichVu.SoChungThu = workSheet.Cells[i, 3].Value.ToString().Trim();
 												}
 												if (workSheet.Cells[i, 4].Value != null)
 												{
@@ -750,9 +753,9 @@ namespace API.Controllers.v1
 												if (!string.IsNullOrEmpty(doanhNghiepDichVu.SubjectDN))
 												{
 													string subjectDN = doanhNghiepDichVu.SubjectDN;
-													if (doanhNghiepDichVu.SubjectDN.Contains(@"MST="))
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"MST:"))
 													{
-														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"MST=", @"~");
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"MST:", @"~");
 														if (subjectDN.Split('~').Length > 0)
 														{
 															doanhNghiep.Code = subjectDN.Split('~')[1];
@@ -831,15 +834,16 @@ namespace API.Controllers.v1
 													doanhNghiepThanhVien.DienThoai = doanhNghiepDichVu.DienThoai;
 													doanhNghiepThanhVien.Email = doanhNghiepDichVu.Email;
 													doanhNghiepThanhVien.Name = doanhNghiepDichVu.NguoiLienHe;
+													doanhNghiepThanhVien.Code = doanhNghiepThanhVien.DienThoai;
 													await _IDoanhNghiepThanhVienBusiness.SaveAsync(doanhNghiepThanhVien);
 
-													if (doanhNghiepDichVu.SubjectDN.Contains(@"CMND="))
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"CMND:"))
 													{
 														doanhNghiepThanhVien = new DoanhNghiepThanhVien();
 														doanhNghiepThanhVien.Active = true;
 														doanhNghiepThanhVien.ParentID = doanhNghiepSearch.ID;
 														doanhNghiepThanhVien.LoaiDoanhNghiepThanhVienID = 4;
-														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CMND=", @"~");
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CMND:", @"~");
 														if (subjectDN.Split('~').Length > 0)
 														{
 															doanhNghiepThanhVien.CCCD = subjectDN.Split('~')[1];
@@ -867,10 +871,11 @@ namespace API.Controllers.v1
 													}
 													doanhNghiepDichVu.ParentID = doanhNghiepSearch.ID;
 													int thoiGianGoiCuoc = doanhNghiepDichVu.ThoiGianGoiCuoc.Value + doanhNghiepDichVu.ThoiGianKhuyenMai.Value;
-													GoiCuoc goiCuoc = listGoiCuoc.Where(item => item.Name == doanhNghiepDichVu.Name && item.Thang <= thoiGianGoiCuoc && item.ThangKhuyenMai >= thoiGianGoiCuoc).FirstOrDefault();
+													GoiCuoc goiCuoc = listGoiCuoc.Where(item => item.Name == doanhNghiepDichVu.TenGoiCuoc && item.Thang <= thoiGianGoiCuoc && item.ThangKhuyenMai >= thoiGianGoiCuoc).FirstOrDefault();
 													if (goiCuoc != null)
 													{
 														doanhNghiepDichVu.GoiCuocID = goiCuoc.ID;
+														doanhNghiepDichVu.GiaTien = goiCuoc.GiaCuoc;
 														doanhNghiepDichVu.Code = doanhNghiepDichVu.SoChungThu;
 														NhanVienTaiKhoan nhanVienTaiKhoan = listNhanVienTaiKhoan.Where(item => item.Code == doanhNghiepDichVu.TaiKhoanTaoYeuCau).FirstOrDefault();
 														if (nhanVienTaiKhoan != null)
@@ -882,7 +887,8 @@ namespace API.Controllers.v1
 																doanhNghiepDichVu.PhongBanID = nhanVien.ParentID;
 															}
 														}
-														await _IDoanhNghiepDichVuBusiness.SaveAsync(doanhNghiepDichVu);
+														doanhNghiepDichVu.DichVuID = 20;
+														await _IDoanhNghiepDichVuCABusiness.SaveAsync(doanhNghiepDichVu);
 													}
 												}
 											}

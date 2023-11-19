@@ -23,7 +23,7 @@ export const environment = {
   DieuHanhID: 2, 
   ShopID: 3, 
   ShipperID: 4, 
-  ItemCount: 30, 
+  ItemCount: 10, 
   CAID: 20,
   TenMienID: 42,
   HoaDonDienTuID: 14,

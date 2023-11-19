@@ -7,8 +7,8 @@ import { Report } from './Report.model';
 })
 export class ReportService extends BaseService{
     displayColumnsReport001: string[] = ['DichVu', 'MaThueBao', 'DoanhThu', 'DoanhThuLast', 'ChenhLech']; 
-    displayColumnsReportVNPT001: string[] = ['Name', 'HuyenName', 'XaName', 'DoanhThu01', 'ChenhLech01', 'DoanhThu03', 'ChenhLech02', 'DoanhThu05', 'ChenhLech03', 'DoanhThu07', 'ChenhLech04', 'DoanhThu09', 'ChenhLech05', 'DoanhThu11', 'ChenhLech06', 'DoanhThu13', 'ChenhLech07']; 
-    displayColumnsReportVNPT003: string[] = ['Name', 'HuyenName', 'XaName', 'DoanhThu', 'DoanhThu01', 'DoanhThu02', 'DoanhThu03', 'DoanhThu04', 'DoanhThu05', 'DoanhThu06', 'DoanhThu07', 'DoanhThu08', 'DoanhThu09', 'DoanhThu10', 'DoanhThu11', 'DoanhThu12']; 
+    displayColumnsReportVNPT001: string[] = ['No', 'Name', 'HuyenName', 'DoanhThu', 'DoanhThu01', 'DoanhThu03', 'DoanhThu05', 'DoanhThu07', 'DoanhThu09', 'DoanhThu11', 'DoanhThu13']; 
+    displayColumnsReportVNPT003: string[] = ['No', 'Name', 'HuyenName', 'DoanhThu', 'DoanhThu01', 'DoanhThu02', 'DoanhThu03', 'DoanhThu04', 'DoanhThu05', 'DoanhThu06', 'DoanhThu07', 'DoanhThu08', 'DoanhThu09', 'DoanhThu10', 'DoanhThu11', 'DoanhThu12']; 
     listReport001: Report[] | undefined;        
     listReport002: Report[] | undefined;        
     listReport003: Report[] | undefined;        

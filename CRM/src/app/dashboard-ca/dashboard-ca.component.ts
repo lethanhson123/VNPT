@@ -70,18 +70,12 @@ export class DashboardCAComponent implements OnInit {
     this.ReportService.ReportVNPT003Async(this.huyenID, this.xaID, this.searchString, this.dichVuID, this.year, this.month).subscribe(
       res => {
         this.ReportService.listReportVNPT003 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
-        this.dataSourceReportVNPT003 = new MatTableDataSource(this.ReportService.listReportVNPT003.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
+        this.dataSourceReportVNPT003 = new MatTableDataSource(this.ReportService.listReportVNPT003);
         this.dataSourceReportVNPT003.sort = this.sortReportVNPT003;
         this.dataSourceReportVNPT003.paginator = this.paginatorReportVNPT003;
         for (let i = 0; i < this.ReportService.listReportVNPT003.length; i++) {
           this.doanhThuDichVu = this.doanhThuDichVu + this.ReportService.listReportVNPT003[i].DoanhThu;
-        }
-        if (this.ReportService.listReportVNPT003.length > environment.ItemCount) {
-          this.ReportService.listReportVNPT003View = this.ReportService.listReportVNPT003.slice(0, environment.ItemCount);
-        }
-        else {
-          this.ReportService.listReportVNPT003View = this.ReportService.listReportVNPT003;
-        }
+        }        
         this.isShowLoading = false;
       },
       err => {
@@ -90,14 +84,11 @@ export class DashboardCAComponent implements OnInit {
     );
   }
   
-  onChangeHuyenID() {
-    this.GetXaToListAsync();
-  }
+ 
   GetHuyenToListAsync() {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
-        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.GetXaToListAsync();
+        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));        
       },
       err => {
       }
