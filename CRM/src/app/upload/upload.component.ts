@@ -25,12 +25,15 @@ export class UploadComponent implements OnInit {
   isDoanhNghiep: boolean = false;
   isDoanhThu: boolean = false;
   isGoiCuoc: boolean = false;
+  isCA: boolean = false;
   excelDoanhNghiepURL: string = environment.APIRootURL + environment.Download + "/DoanhNghiep.xlsx";
   excelDoanhThuURL: string = environment.APIRootURL + environment.Download + "/DoanhThu.xlsx";
   excelGoiCuocURL: string = environment.APIRootURL + environment.Download + "/GoiCuoc.xlsx";
+  excelCAURL: string = environment.APIRootURL + environment.Download + "/CA.xlsx";
   @ViewChild('uploadDoanhNghiep') uploadDoanhNghiep!: ElementRef;
   @ViewChild('uploadDoanhThu') uploadDoanhThu!: ElementRef;
   @ViewChild('uploadGoiCuoc') uploadGoiCuoc!: ElementRef;
+  @ViewChild('uploadCA') uploadCA!: ElementRef;
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -70,6 +73,11 @@ export class UploadComponent implements OnInit {
       this.isGoiCuoc = true;
     }
   }
+  changeCA(files: FileList) {
+    if (files) {
+      this.isCA = true;
+    }
+  }
   onSubmit() {
     let fileToUpload: File;
     fileToUpload = this.uploadDoanhNghiep.nativeElement.files[0];
@@ -99,6 +107,21 @@ export class UploadComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+      },
+      err => {
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.UploadNotSuccess);
+      }
+    );
+  }
+  onSubmitCA() {
+    let fileToUpload: File;
+    fileToUpload = this.uploadCA.nativeElement.files[0];
+    this.isShowLoading = true;
+    this.UploadService.PostCA20ListByExcelFileAsync(fileToUpload).subscribe(
+      res => {
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.UploadSuccess);
       },
       err => {
         this.isShowLoading = false;

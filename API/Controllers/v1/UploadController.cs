@@ -28,6 +28,8 @@ namespace API.Controllers.v1
 		private readonly IPhongBanBusiness _IPhongBanBusiness;
 		private readonly IDoanhNghiepDichVuLichSuBusiness _IDoanhNghiepDichVuLichSuBusiness;
 		private readonly IGoiCuocBusiness _IGoiCuocBusiness;
+		private readonly INhanVienBusiness _INhanVienBusiness;
+		private readonly INhanVienTaiKhoanBusiness _INhanVienTaiKhoanBusiness;
 
 		public UploadController(IWebHostEnvironment WebHostEnvironment
 			, IDoanhNghiepBusiness IDoanhNghiepBusiness
@@ -43,6 +45,8 @@ namespace API.Controllers.v1
 			, IPhongBanBusiness IPhongBanBusiness
 			, IDoanhNghiepDichVuLichSuBusiness IDoanhNghiepDichVuLichSuBusiness
 			, IGoiCuocBusiness IGoiCuocBusiness
+			, INhanVienBusiness INhanVienBusiness
+			, INhanVienTaiKhoanBusiness INhanVienTaiKhoanBusiness
 			) : base(IDoanhNghiepBusiness)
 		{
 			_WebHostEnvironment = WebHostEnvironment;
@@ -59,6 +63,8 @@ namespace API.Controllers.v1
 			_IPhongBanBusiness = IPhongBanBusiness;
 			_IDoanhNghiepDichVuLichSuBusiness = IDoanhNghiepDichVuLichSuBusiness;
 			_IGoiCuocBusiness = IGoiCuocBusiness;
+			_INhanVienBusiness = INhanVienBusiness;
+			_INhanVienTaiKhoanBusiness = INhanVienTaiKhoanBusiness;
 		}
 		[HttpPost]
 		[Route("PostDoanhNghiepListByExcelFileAsync")]
@@ -533,13 +539,352 @@ namespace API.Controllers.v1
 												}
 												if (workSheet.Cells[i, 4].Value != null)
 												{
-													goiCuoc.Code = workSheet.Cells[i, 4].Value.ToString().Trim();
+													goiCuoc.Description = workSheet.Cells[i, 4].Value.ToString().Trim();
 												}
 												if (workSheet.Cells[i, 5].Value != null)
 												{
 													goiCuoc.Note = workSheet.Cells[i, 5].Value.ToString().Trim();
 												}
 												await _IGoiCuocBusiness.SaveAsync(goiCuoc);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					catch (Exception e)
+					{
+						string mes = e.Message;
+					}
+				}
+			}
+			return result;
+		}
+
+		[HttpPost]
+		[Route("PostCA20ListByExcelFileAsync")]
+		public virtual async Task<List<DoanhNghiep>> PostCA20ListByExcelFileAsync()
+		{
+			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			if (Request.Form.Files.Count > 0)
+			{
+				var file = Request.Form.Files[0];
+				if (file == null || file.Length == 0)
+				{
+				}
+				if (file != null)
+				{
+					string fileExtension = Path.GetExtension(file.FileName);
+					string fileName = "CA20_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+					var physicalPath = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Upload, fileName);
+					using (var stream = new FileStream(physicalPath, FileMode.Create))
+					{
+						file.CopyTo(stream);
+					}
+					try
+					{
+						FileInfo fileLocation = new FileInfo(physicalPath);
+						if (fileLocation.Length > 0)
+						{
+							if ((fileExtension == ".xlsx") || (fileExtension == ".xls"))
+							{
+								using (ExcelPackage package = new ExcelPackage(fileLocation))
+								{
+									if (package.Workbook.Worksheets.Count > 0)
+									{
+										ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+										if (workSheet != null)
+										{
+											int totalRows = workSheet.Dimension.Rows;
+											List<NhanVienTaiKhoan> listNhanVienTaiKhoan = await _INhanVienTaiKhoanBusiness.GetAllToListAsync();
+											List<NhanVien> listNhanVien = await _INhanVienBusiness.GetAllToListAsync();
+											List<GoiCuoc> listGoiCuoc = await _IGoiCuocBusiness.GetAllToListAsync();
+											List<Huyen> listHuyen = await _IHuyenBusiness.GetAllToListAsync();
+
+											for (int i = 2; i <= totalRows; i++)
+											{
+												DoanhNghiepDichVu doanhNghiepDichVu = new DoanhNghiepDichVu();
+												doanhNghiepDichVu.DichVuID = 20;
+												if (workSheet.Cells[i, 2].Value != null)
+												{
+													doanhNghiepDichVu.UserName = workSheet.Cells[i, 2].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 3].Value != null)
+												{
+													doanhNghiepDichVu.UserName = workSheet.Cells[i, 3].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 4].Value != null)
+												{
+													doanhNghiepDichVu.SubjectDN = workSheet.Cells[i, 4].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 5].Value != null)
+												{
+													doanhNghiepDichVu.NgayHieuLuc = GlobalHelper.InitializationDateTime;
+													try
+													{
+														doanhNghiepDichVu.NgayHieuLuc = DateTime.Parse(workSheet.Cells[i, 5].Value.ToString().Trim());
+													}
+													catch (Exception ex)
+													{
+														string mes = ex.Message;
+													}
+												}
+												if (workSheet.Cells[i, 6].Value != null)
+												{
+													doanhNghiepDichVu.NgayHetHan = GlobalHelper.InitializationDateTime;
+													try
+													{
+														doanhNghiepDichVu.NgayHetHan = DateTime.Parse(workSheet.Cells[i, 6].Value.ToString().Trim());
+													}
+													catch (Exception ex)
+													{
+														string mes = ex.Message;
+													}
+												}
+												if (workSheet.Cells[i, 7].Value != null)
+												{
+													doanhNghiepDichVu.SoNgayNoKhach = GlobalHelper.InitializationNumber;
+													try
+													{
+														doanhNghiepDichVu.SoNgayNoKhach = int.Parse(workSheet.Cells[i, 7].Value.ToString().Trim());
+													}
+													catch (Exception ex)
+													{
+														string mes = ex.Message;
+													}
+												}
+												if (workSheet.Cells[i, 8].Value != null)
+												{
+													doanhNghiepDichVu.TenGoiCuoc = workSheet.Cells[i, 8].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 9].Value != null)
+												{
+													doanhNghiepDichVu.ThoiGianGoiCuoc = GlobalHelper.InitializationNumber;
+													try
+													{
+														doanhNghiepDichVu.ThoiGianGoiCuoc = int.Parse(workSheet.Cells[i, 9].Value.ToString().Trim());
+													}
+													catch (Exception ex)
+													{
+														string mes = ex.Message;
+													}
+												}
+												if (workSheet.Cells[i, 10].Value != null)
+												{
+													doanhNghiepDichVu.ThoiGianKhuyenMai = GlobalHelper.InitializationNumber;
+													try
+													{
+														doanhNghiepDichVu.ThoiGianKhuyenMai = int.Parse(workSheet.Cells[i, 10].Value.ToString().Trim());
+													}
+													catch (Exception ex)
+													{
+														string mes = ex.Message;
+													}
+												}
+												if (workSheet.Cells[i, 11].Value != null)
+												{
+													doanhNghiepDichVu.DienThoai = workSheet.Cells[i, 11].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 12].Value != null)
+												{
+													doanhNghiepDichVu.Email = workSheet.Cells[i, 12].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 13].Value != null)
+												{
+													doanhNghiepDichVu.TaiKhoanTaoYeuCau = workSheet.Cells[i, 13].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 14].Value != null)
+												{
+													doanhNghiepDichVu.TaiKhoanDuyetYeuCau = workSheet.Cells[i, 14].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 15].Value != null)
+												{
+													doanhNghiepDichVu.MaNhanVien = workSheet.Cells[i, 15].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 16].Value != null)
+												{
+													doanhNghiepDichVu.NhanVien = workSheet.Cells[i, 16].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 17].Value != null)
+												{
+													doanhNghiepDichVu.DonVi = workSheet.Cells[i, 17].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 18].Value != null)
+												{
+													doanhNghiepDichVu.LoaiYeuCau = workSheet.Cells[i, 18].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 19].Value != null)
+												{
+													doanhNghiepDichVu.TrangThaiChungThu = workSheet.Cells[i, 19].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 20].Value != null)
+												{
+													doanhNghiepDichVu.SoChungThuCu = workSheet.Cells[i, 20].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 21].Value != null)
+												{
+													doanhNghiepDichVu.IDThucThe = workSheet.Cells[i, 21].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 22].Value != null)
+												{
+													doanhNghiepDichVu.IDChungThu = workSheet.Cells[i, 22].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 23].Value != null)
+												{
+													doanhNghiepDichVu.DiaChiLapDat = workSheet.Cells[i, 23].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 24].Value != null)
+												{
+													doanhNghiepDichVu.NguoiLienHe = workSheet.Cells[i, 24].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 25].Value != null)
+												{
+													doanhNghiepDichVu.MaThueBao = workSheet.Cells[i, 25].Value.ToString().Trim();
+												}
+												if (workSheet.Cells[i, 26].Value != null)
+												{
+													doanhNghiepDichVu.IDYeuCau = workSheet.Cells[i, 26].Value.ToString().Trim();
+												}
+												DoanhNghiep doanhNghiep = new DoanhNghiep();
+												if (!string.IsNullOrEmpty(doanhNghiepDichVu.SubjectDN))
+												{
+													string subjectDN = doanhNghiepDichVu.SubjectDN;
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"MST="))
+													{
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"MST=", @"~");
+														if (subjectDN.Split('~').Length > 0)
+														{
+															doanhNghiep.Code = subjectDN.Split('~')[1];
+															doanhNghiep.Code = doanhNghiep.Code.Split(',')[0];
+														}
+													}
+													if (string.IsNullOrEmpty(doanhNghiep.Code))
+													{
+														doanhNghiep.Code = doanhNghiepDichVu.MaThueBao;
+													}
+													if (string.IsNullOrEmpty(doanhNghiep.Code))
+													{
+														doanhNghiep.Code = doanhNghiepDichVu.UserName;
+													}
+													DoanhNghiep doanhNghiepSearch = await _IDoanhNghiepBusiness.GetByCondition(item => item.Code == doanhNghiep.Code).FirstOrDefaultAsync();
+													if (doanhNghiepSearch == null)
+													{
+														doanhNghiepSearch = new DoanhNghiep();
+														doanhNghiepSearch.Code = doanhNghiep.Code;
+														doanhNghiepSearch.HuyenID = 1;
+														if (doanhNghiepDichVu.SubjectDN.Contains(@"O="))
+														{
+															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"O=", @"~");
+														}
+														else
+														{
+															if (doanhNghiepDichVu.SubjectDN.Contains(@"OU="))
+															{
+																subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"OU=", @"~");
+															}
+															else
+															{
+																subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CN=", @"~");
+															}
+														}
+														if (subjectDN.Split('~').Length > 0)
+														{
+															doanhNghiepSearch.Name = subjectDN.Split('~')[1];
+															doanhNghiepSearch.Name = doanhNghiepSearch.Name.Split(',')[0];
+														}
+														if (doanhNghiepDichVu.SubjectDN.Contains(@"L="))
+														{
+															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"L=", @"~");
+															if (subjectDN.Split('~').Length > 0)
+															{
+																subjectDN = subjectDN.Split('~')[1];
+																subjectDN = subjectDN.Split(',')[0];
+																subjectDN = subjectDN.Replace("thành phố", "");
+																subjectDN = subjectDN.Replace("huyện", "");
+																subjectDN = subjectDN.Replace("thị xã", "");
+																subjectDN = subjectDN.Replace("tp", "");
+																subjectDN = subjectDN.Replace("tx", "");
+																subjectDN = subjectDN.Replace("h.", "");
+																subjectDN = subjectDN.Replace("tx.", "");
+																subjectDN = subjectDN.Replace("tp.", "");
+																subjectDN = subjectDN.Trim();
+
+																Huyen huyen = listHuyen.Where(item => item.Name.Contains(subjectDN)).FirstOrDefault();
+																if (huyen != null)
+																{
+																	doanhNghiepSearch.HuyenID = huyen.ID;
+																}
+															}
+														}
+
+														doanhNghiepSearch.DiaChi = doanhNghiepDichVu.DiaChiLapDat;
+														doanhNghiepSearch.DienThoai = doanhNghiepDichVu.DienThoai;
+														doanhNghiepSearch.Email = doanhNghiepDichVu.Email;
+														await _IDoanhNghiepBusiness.SaveAsync(doanhNghiepSearch);
+													}
+
+													DoanhNghiepThanhVien doanhNghiepThanhVien = new DoanhNghiepThanhVien();
+													doanhNghiepThanhVien.Active = true;
+													doanhNghiepThanhVien.ParentID = doanhNghiepSearch.ID;
+													doanhNghiepThanhVien.LoaiDoanhNghiepThanhVienID = 4;
+													doanhNghiepThanhVien.DienThoai = doanhNghiepDichVu.DienThoai;
+													doanhNghiepThanhVien.Email = doanhNghiepDichVu.Email;
+													doanhNghiepThanhVien.Name = doanhNghiepDichVu.NguoiLienHe;
+													await _IDoanhNghiepThanhVienBusiness.SaveAsync(doanhNghiepThanhVien);
+
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"CMND="))
+													{
+														doanhNghiepThanhVien = new DoanhNghiepThanhVien();
+														doanhNghiepThanhVien.Active = true;
+														doanhNghiepThanhVien.ParentID = doanhNghiepSearch.ID;
+														doanhNghiepThanhVien.LoaiDoanhNghiepThanhVienID = 4;
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CMND=", @"~");
+														if (subjectDN.Split('~').Length > 0)
+														{
+															doanhNghiepThanhVien.CCCD = subjectDN.Split('~')[1];
+															doanhNghiepThanhVien.CCCD = doanhNghiepThanhVien.CCCD.Split(',')[0];
+														}
+														if (doanhNghiepDichVu.SubjectDN.Contains(@"CN="))
+														{
+															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CN=", @"~");
+															if (subjectDN.Split('~').Length > 0)
+															{
+																doanhNghiepThanhVien.Name = subjectDN.Split('~')[1];
+																doanhNghiepThanhVien.Name = doanhNghiepThanhVien.Name.Split(',')[0];
+															}
+														}
+														if (doanhNghiepDichVu.SubjectDN.Contains(@"T="))
+														{
+															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"T=", @"~");
+															if (subjectDN.Split('~').Length > 0)
+															{
+																doanhNghiepThanhVien.Code = subjectDN.Split('~')[1];
+																doanhNghiepThanhVien.Code = doanhNghiepThanhVien.Code.Split(',')[0];
+															}
+														}
+														await _IDoanhNghiepThanhVienBusiness.SaveAsync(doanhNghiepThanhVien);
+													}
+													doanhNghiepDichVu.ParentID = doanhNghiepSearch.ID;
+													int thoiGianGoiCuoc = doanhNghiepDichVu.ThoiGianGoiCuoc.Value + doanhNghiepDichVu.ThoiGianKhuyenMai.Value;
+													GoiCuoc goiCuoc = listGoiCuoc.Where(item => item.Name == doanhNghiepDichVu.Name && item.Thang <= thoiGianGoiCuoc && item.ThangKhuyenMai >= thoiGianGoiCuoc).FirstOrDefault();
+													if (goiCuoc != null)
+													{
+														doanhNghiepDichVu.GoiCuocID = goiCuoc.ID;
+														doanhNghiepDichVu.Code = doanhNghiepDichVu.SoChungThu;
+														NhanVienTaiKhoan nhanVienTaiKhoan = listNhanVienTaiKhoan.Where(item => item.Code == doanhNghiepDichVu.TaiKhoanTaoYeuCau).FirstOrDefault();
+														if (nhanVienTaiKhoan != null)
+														{
+															NhanVien nhanVien = listNhanVien.Where(item => item.ID == nhanVienTaiKhoan.ParentID.Value).FirstOrDefault();
+															if (nhanVien != null)
+															{
+																doanhNghiepDichVu.NhanVienID = nhanVien.ID;
+																doanhNghiepDichVu.PhongBanID = nhanVien.ParentID;
+															}
+														}
+														await _IDoanhNghiepDichVuBusiness.SaveAsync(doanhNghiepDichVu);
+													}
+												}
 											}
 										}
 									}
