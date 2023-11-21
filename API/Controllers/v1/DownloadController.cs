@@ -139,6 +139,147 @@ namespace API.Controllers.v1
 			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
 			return Json(result);
 		}
+
+		[HttpPost]
+		[Route("ReportCA001ToExcelAsync")]
+		public async Task<JsonResult> ReportCA001ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA001Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA002ToExcelAsync")]
+		public async Task<JsonResult> ReportCA002ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA002Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA003ToExcelAsync")]
+		public async Task<JsonResult> ReportCA003ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA003Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA004ToExcelAsync")]
+		public async Task<JsonResult> ReportCA004ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA004Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA005ToExcelAsync")]
+		public async Task<JsonResult> ReportCA005ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA005Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA006ToExcelAsync")]
+		public async Task<JsonResult> ReportCA006ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA006Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA007ToExcelAsync")]
+		public async Task<JsonResult> ReportCA007ToExcelAsync()
+		{
+			long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> list = await _ReportBusiness.ReportCA007Async(huyenID, year, month);
+			string fileName = @"Report_CA" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+			var streamExport = new MemoryStream();
+			InitializationExcelReportCA(list, streamExport);
+			var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+			{
+				streamExport.CopyTo(stream);
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
 		private void InitializationExcelReportVNPT001(List<Report> list, MemoryStream streamExport)
 		{
 			using (var package = new ExcelPackage(streamExport))
@@ -2470,6 +2611,249 @@ namespace API.Controllers.v1
 					}
 
 					workSheet.Cells[row, 6].Value = item.DiaChi;
+
+					for (int i = 1; i <= column; i++)
+					{
+						workSheet.Cells[row, i].Style.Font.Name = "Times New Roman";
+						workSheet.Cells[row, i].Style.Font.Size = 11;
+						workSheet.Cells[row, i].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+						workSheet.Cells[row, i].Style.Border.Top.Color.SetColor(Color.Black);
+						workSheet.Cells[row, i].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+						workSheet.Cells[row, i].Style.Border.Left.Color.SetColor(Color.Black);
+						workSheet.Cells[row, i].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+						workSheet.Cells[row, i].Style.Border.Right.Color.SetColor(Color.Black);
+						workSheet.Cells[row, i].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+						workSheet.Cells[row, i].Style.Border.Bottom.Color.SetColor(Color.Black);
+					}
+					row = row + 1;
+				}
+				for (int i = 1; i <= column; i++)
+				{
+					workSheet.Column(i).AutoFit();
+				}
+				package.Save();
+			}
+			streamExport.Position = 0;
+
+		}
+
+		private void InitializationExcelReportCA(List<Report> list, MemoryStream streamExport)
+		{
+			using (var package = new ExcelPackage(streamExport))
+			{
+				Color color = Color.FromArgb(int.Parse("#c00000".Replace("#", ""), System.Globalization.NumberStyles.AllowHexSpecifier));
+				var workSheet = package.Workbook.Worksheets.Add("Sheet1");
+				int row = 1;
+				int column = 1;
+				workSheet.Cells[row, column].Value = "Huyện";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Doanh nghiệp";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "UserName";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Chứng thư";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Chứng thư cũ";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Hiệu lực";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Hết hạn";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Nhân viên";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Yêu cầu";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);
+
+				column = column + 1;
+				workSheet.Cells[row, column].Value = "Duyệt";
+				workSheet.Cells[row, column].Style.Font.Bold = true;
+				workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				workSheet.Cells[row, column].Style.Font.Color.SetColor(System.Drawing.Color.White);
+				workSheet.Cells[row, column].Style.Fill.PatternType = ExcelFillStyle.Solid;
+				workSheet.Cells[row, column].Style.Fill.BackgroundColor.SetColor(color);
+				workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+				workSheet.Cells[row, column].Style.Font.Size = 11;
+				workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Top.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Left.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Right.Color.SetColor(Color.Black);
+				workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				workSheet.Cells[row, column].Style.Border.Bottom.Color.SetColor(Color.Black);				
+
+				row = row + 1;
+				foreach (Report item in list)
+				{
+					workSheet.Cells[row, 1].Value = item.HuyenName;
+					workSheet.Cells[row, 2].Value = item.DoanhNghiepName;
+					workSheet.Cells[row, 3].Value = item.UserName;
+					workSheet.Cells[row, 4].Value = item.SoChungThu;
+					workSheet.Cells[row, 5].Value = item.SoChungThuCu;
+					try
+					{
+						workSheet.Cells[row, 6].Value = item.NgayHieuLuc.Value.ToString("yyyy-MM-dd");
+					}
+					catch(Exception ex)
+					{
+						workSheet.Cells[row, 6].Value = "";
+						string mes = ex.Message;
+					}
+					try
+					{
+						workSheet.Cells[row, 7].Value = item.NgayHetHan.Value.ToString("yyyy-MM-dd");
+					}
+					catch (Exception ex)
+					{
+						workSheet.Cells[row, 67].Value = "";
+						string mes = ex.Message;
+					}					
+					workSheet.Cells[row, 8].Value = item.NhanVienName;
+					workSheet.Cells[row, 9].Value = item.TaiKhoanTaoYeuCau;
+					workSheet.Cells[row, 10].Value = item.TaiKhoanDuyetYeuCau;
+
 
 					for (int i = 1; i <= column; i++)
 					{

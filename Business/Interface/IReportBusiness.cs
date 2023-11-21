@@ -15,6 +15,13 @@
         Task<List<Report>> ReportVNPT003Async(long huyenID, long xaID, string searchString, long dichVuID, int year, int month);
         Task<List<Report>> ReportVNPT004Async(long phongBanID, int year);
         Task<List<Report>> ReportVNPT005Async(long nhanVienID, int year);
+        Task<List<Report>> ReportCA001Async(long huyenID, int year, int month);
+		Task<List<Report>> ReportCA002Async(long huyenID, int year, int month);
+		Task<List<Report>> ReportCA003Async(long huyenID, int year, int month);
+		Task<List<Report>> ReportCA004Async(long huyenID, int year, int month);
+		Task<List<Report>> ReportCA005Async(long huyenID, int year, int month);
+		Task<List<Report>> ReportCA006Async(long huyenID, int year, int month);
+		Task<List<Report>> ReportCA007Async(long huyenID, int year, int month);	
 
-    }
+	}
 }

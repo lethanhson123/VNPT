@@ -608,7 +608,7 @@ namespace API.Controllers.v1
 											for (int i = 2; i <= totalRows; i++)
 											{
 												DoanhNghiepDichVuCA doanhNghiepDichVu = new DoanhNghiepDichVuCA();
-												
+
 												if (workSheet.Cells[i, 2].Value != null)
 												{
 													doanhNghiepDichVu.UserName = workSheet.Cells[i, 2].Value.ToString().Trim();
@@ -803,17 +803,14 @@ namespace API.Controllers.v1
 															{
 																subjectDN = subjectDN.Split('~')[1];
 																subjectDN = subjectDN.Split(',')[0];
-																subjectDN = subjectDN.Replace("thành phố", "");
-																subjectDN = subjectDN.Replace("huyện", "");
-																subjectDN = subjectDN.Replace("thị xã", "");
-																subjectDN = subjectDN.Replace("tp", "");
-																subjectDN = subjectDN.Replace("tx", "");
-																subjectDN = subjectDN.Replace("h.", "");
-																subjectDN = subjectDN.Replace("tx.", "");
-																subjectDN = subjectDN.Replace("tp.", "");
-																subjectDN = subjectDN.Trim();
 
-																Huyen huyen = listHuyen.Where(item => item.Name.Contains(subjectDN)).FirstOrDefault();
+																string huyenName = GlobalHelper.InitializationString;
+																for (int j = 1; j < subjectDN.Split(' ').Length; j++)
+																{
+																	huyenName = subjectDN.Split(' ')[j] + " ";
+																}
+																huyenName = huyenName.Trim();
+																Huyen huyen = listHuyen.Where(item => item.Name.Contains(huyenName)).FirstOrDefault();
 																if (huyen != null)
 																{
 																	doanhNghiepSearch.HuyenID = huyen.ID;

@@ -246,5 +246,131 @@ namespace API.Controllers.v1
             }
             return result;
         }
-    }
+		[HttpPost]
+		[Route("ReportCA001Async")]
+		public virtual async Task<List<Report>> ReportCA001Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA001Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA002Async")]
+		public virtual async Task<List<Report>> ReportCA002Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA002Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA003Async")]
+		public virtual async Task<List<Report>> ReportCA003Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA003Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA004Async")]
+		public virtual async Task<List<Report>> ReportCA004Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA004Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA005Async")]
+		public virtual async Task<List<Report>> ReportCA005Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA005Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA006Async")]
+		public virtual async Task<List<Report>> ReportCA006Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA006Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA007Async")]
+		public virtual async Task<List<Report>> ReportCA007Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA007Async(huyenID, year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+	}
 }

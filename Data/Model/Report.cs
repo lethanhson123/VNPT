@@ -9,7 +9,8 @@
         public string? HuyenName { get; set; }
         public string? XaName { get; set; }
         public long? DoanhNghiepID { get; set; }
-        public long? DichVuID { get; set; }
+		public string? DoanhNghiepName { get; set; }
+		public long? DichVuID { get; set; }
         public string? DichVu { get; set; }
         public string? MaThueBao { get; set; }
         public int? Year { get; set; }
@@ -40,7 +41,18 @@
         public decimal? DoanhThu12 { get; set; }
         public decimal? DoanhThu13 { get; set; }
         public decimal? DoanhThu14 { get; set; }
-        public Report()
+
+		public string? UserName { get; set; }
+		public string? SoChungThu { get; set; }
+		public string? SoChungThuCu { get; set; }
+		public DateTime? NgayHieuLuc { get; set; }
+		public DateTime? NgayHetHan { get; set; }
+		public string? TaiKhoanTaoYeuCau { get; set; }
+		public string? TaiKhoanDuyetYeuCau { get; set; }
+		public long? NhanVienID { get; set; }
+		public string? NhanVienName { get; set; }
+		public string? NhanVienDienThoai { get; set; }
+		public Report()
         {
         }
     }

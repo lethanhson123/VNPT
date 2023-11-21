@@ -6,7 +6,6 @@
         public ReportRepository(VNPTContext context) : base(context)
         {
             _context = context;            
-        }
-        
-    }
+        }		
+	}
 }

@@ -35,4 +35,16 @@ export class Report extends Base{
     DoanhThu12?: number;    
     DoanhThu13?: number;   
     DoanhThu14?: number;   
+
+    UserName?: string;   
+    SoChungThu?: string;   
+    SoChungThuCu?: string;   
+    NgayHieuLuc?: Date;   
+    NgayHetHan?: Date;   
+    TaiKhoanTaoYeuCau?: string;   
+    TaiKhoanDuyetYeuCau?: string;   
+    NhanVienID?: number;   
+    NhanVienName?: string;   
+    NhanVienDienThoai?: string;   
+    DoanhNghiepName?: string;      
 }
