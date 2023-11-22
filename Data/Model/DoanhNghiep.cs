@@ -21,7 +21,8 @@
         public long? NhanVienID { get; set; }
         public string? KHACHHANG_ID { get; set; }
         public long? PhongBanID { get; set; }
-        public DoanhNghiep()
+		public string? CodeCA { get; set; }
+		public DoanhNghiep()
         {
         }
     }

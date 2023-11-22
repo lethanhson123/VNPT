@@ -753,22 +753,31 @@ namespace API.Controllers.v1
 												if (!string.IsNullOrEmpty(doanhNghiepDichVu.SubjectDN))
 												{
 													string subjectDN = doanhNghiepDichVu.SubjectDN;
-													if (doanhNghiepDichVu.SubjectDN.Contains(@"MST:"))
+
+
+													if (doanhNghiepDichVu.UserName.Length > 6)
 													{
-														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"MST:", @"~");
-														if (subjectDN.Split('~').Length > 0)
+														doanhNghiep.Code = doanhNghiepDichVu.UserName.Substring(5);
+													}
+													else
+													{
+														if (doanhNghiepDichVu.SubjectDN.Contains(@"MST:"))
 														{
-															doanhNghiep.Code = subjectDN.Split('~')[1];
-															doanhNghiep.Code = doanhNghiep.Code.Split(',')[0];
+															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"MST:", @"~");
+															if (subjectDN.Split('~').Length > 0)
+															{
+																doanhNghiep.Code = subjectDN.Split('~')[1];
+																doanhNghiep.Code = doanhNghiep.Code.Split(',')[0];
+															}
 														}
-													}
-													if (string.IsNullOrEmpty(doanhNghiep.Code))
-													{
-														doanhNghiep.Code = doanhNghiepDichVu.MaThueBao;
-													}
-													if (string.IsNullOrEmpty(doanhNghiep.Code))
-													{
-														doanhNghiep.Code = doanhNghiepDichVu.UserName;
+														if (string.IsNullOrEmpty(doanhNghiep.Code))
+														{
+															doanhNghiep.Code = doanhNghiepDichVu.MaThueBao;
+														}
+														if (string.IsNullOrEmpty(doanhNghiep.Code))
+														{
+															doanhNghiep.Code = doanhNghiepDichVu.UserName;
+														}
 													}
 													DoanhNghiep doanhNghiepSearch = await _IDoanhNghiepBusiness.GetByCondition(item => item.Code == doanhNghiep.Code).FirstOrDefaultAsync();
 													if (doanhNghiepSearch == null)
