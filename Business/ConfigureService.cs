@@ -7,6 +7,7 @@ namespace Business
         public static IServiceCollection AddBusinessService(this IServiceCollection services)
         {
             services.AddTransient<IDichVuBusiness, DichVuBusiness>();
+			services.AddTransient<IDichVuChiTieuBusiness, DichVuChiTieuBusiness>();
 			services.AddTransient<IGoiCuocBusiness, GoiCuocBusiness>();
 			services.AddTransient<IDoanhNghiepBusiness, DoanhNghiepBusiness>();
             services.AddTransient<IDoanhNghiepDichVuBusiness, DoanhNghiepDichVuBusiness>();
@@ -20,7 +21,8 @@ namespace Business
             services.AddTransient<ILoaiDichVuBusiness, LoaiDichVuBusiness>();
             services.AddTransient<INganhNgheKinhDoanhBusiness, NganhNgheKinhDoanhBusiness>();
             services.AddTransient<INhanVienBusiness, NhanVienBusiness>();
-            services.AddTransient<IPhongBanBusiness, PhongBanBusiness>();
+			services.AddTransient<INhanVienTokenBusiness, NhanVienTokenBusiness>();
+			services.AddTransient<IPhongBanBusiness, PhongBanBusiness>();
             services.AddTransient<IPhongBanKhuVucBusiness, PhongBanKhuVucBusiness>();
             services.AddTransient<INhanVienKhuVucBusiness, NhanVienKhuVucBusiness>();
 			services.AddTransient<INhanVienTaiKhoanBusiness, NhanVienTaiKhoanBusiness>();
@@ -42,6 +44,7 @@ namespace Business
         public static IServiceCollection AddRepositoryService(this IServiceCollection services)
         {
 			services.AddTransient<IDichVuRepository, DichVuRepository>();
+			services.AddTransient<IDichVuChiTieuRepository, DichVuChiTieuRepository>();
 			services.AddTransient<IGoiCuocRepository, GoiCuocRepository>();
             services.AddTransient<IDoanhNghiepDichVuLichSuRepository, DoanhNghiepDichVuLichSuRepository>();
             services.AddTransient<IDoanhNghiepDichVuRepository, DoanhNghiepDichVuRepository>();
@@ -55,7 +58,8 @@ namespace Business
             services.AddTransient<ILoaiDichVuRepository, LoaiDichVuRepository>();
             services.AddTransient<INganhNgheKinhDoanhRepository, NganhNgheKinhDoanhRepository>();
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
-            services.AddTransient<IPhongBanRepository, PhongBanRepository>();
+			services.AddTransient<INhanVienTokenRepository, NhanVienTokenRepository>();
+			services.AddTransient<IPhongBanRepository, PhongBanRepository>();
             services.AddTransient<IPhongBanKhuVucRepository, PhongBanKhuVucRepository>();
             services.AddTransient<INhanVienKhuVucRepository, NhanVienKhuVucRepository>();
 			services.AddTransient<INhanVienTaiKhoanRepository, NhanVienTaiKhoanRepository>();

@@ -36,6 +36,8 @@ import { DashboardHoaDonDienTuComponent } from './dashboard-hoa-don-dien-tu/dash
 import { DashboardTenMienComponent } from './dashboard-ten-mien/dashboard-ten-mien.component';
 import { NhanVienTaiKhoanComponent } from './nhan-vien-tai-khoan/nhan-vien-tai-khoan.component';
 import { GoiCuocComponent } from './goi-cuoc/goi-cuoc.component';
+import { DoanhNghiepDichVuCAComponent } from './doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-ca.component';
+import { DoanhNghiepDichVuCADetailComponent } from './doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
 
 
 
@@ -65,7 +67,9 @@ import { GoiCuocComponent } from './goi-cuoc/goi-cuoc.component';
     DashboardHoaDonDienTuComponent,
     DashboardTenMienComponent,
     NhanVienTaiKhoanComponent,
-    GoiCuocComponent,    
+    GoiCuocComponent,
+    DoanhNghiepDichVuCAComponent,
+    DoanhNghiepDichVuCADetailComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

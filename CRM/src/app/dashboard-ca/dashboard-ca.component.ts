@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,8 +15,15 @@ import { YearMonth } from 'src/app/shared/YearMonth.model';
 import { DownloadService } from 'src/app/shared/Download.service';
 import { NhanVien } from 'src/app/shared/NhanVien.model';
 import { NhanVienService } from 'src/app/shared/NhanVien.service';
+import { PhongBan } from 'src/app/shared/PhongBan.model';
+import { PhongBanService } from 'src/app/shared/PhongBan.service';
 import { NhanVienTaiKhoan } from 'src/app/shared/NhanVienTaiKhoan.model';
 import { NhanVienTaiKhoanService } from 'src/app/shared/NhanVienTaiKhoan.service';
+import { DoanhNghiepDichVuCA } from 'src/app/shared/DoanhNghiepDichVuCA.model';
+import { DoanhNghiepDichVuCAService } from 'src/app/shared/DoanhNghiepDichVuCA.service';
+import { DichVuChiTieu } from 'src/app/shared/DichVuChiTieu.model';
+import { DichVuChiTieuService } from 'src/app/shared/DichVuChiTieu.service';
+import { DoanhNghiepDichVuCADetailComponent } from '../doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
 
 @Component({
   selector: 'app-dashboard-ca',
@@ -61,9 +69,13 @@ export class DashboardCAComponent implements OnInit {
   @ViewChild('sort8') sort8: MatSort;
   @ViewChild('paginator8') paginator8: MatPaginator;
 
+  dataSource9: MatTableDataSource<any>;
+  @ViewChild('sort9') sort9: MatSort;
+  @ViewChild('paginator9') paginator9: MatPaginator;
+
 
   isShowLoading: boolean = false;
-  huyenID: number = environment.InitializationNumber;
+  huyenID: number = 1;
   xaID: number = 1;
   dichVuID: number = environment.CAID;
   phongBanID: number = 1;
@@ -76,7 +88,7 @@ export class DashboardCAComponent implements OnInit {
   searchString5: string = environment.InitializationString;
   searchString6: string = environment.InitializationString;
   searchString7: string = environment.InitializationString;
-  searchString8: string = environment.InitializationString;  
+  searchString8: string = environment.InitializationString;
   URLSub: string = environment.DomainDestination + "DoanhNghiepInfo";
   URLNhanVien: string = environment.DomainDestination + "NhanVienInfo";
   doanhThuTongHop: number = environment.InitializationNumber;
@@ -84,15 +96,19 @@ export class DashboardCAComponent implements OnInit {
   doanhThuPhongBan: number = environment.InitializationNumber;
   doanhThuNhanVien: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
-  month: number = new Date().getMonth();
+  month: number = new Date().getMonth() + 1;
   constructor(
     public HuyenService: HuyenService,
     public XaService: XaService,
     public ReportService: ReportService,
     public NhanVienService: NhanVienService,
+    public PhongBanService: PhongBanService,
     public NhanVienTaiKhoanService: NhanVienTaiKhoanService,
+    public DoanhNghiepDichVuCAService: DoanhNghiepDichVuCAService,
+    public DichVuChiTieuService: DichVuChiTieuService,
     public NotificationService: NotificationService,
     public DownloadService: DownloadService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +116,7 @@ export class DashboardCAComponent implements OnInit {
     this.GetYearToList();
     this.GetMonthToList();
     this.NhanVienGetToList();
+    this.PhongBanGetToList();
     this.NhanVienTaiKhoanGetToList();
   }
 
@@ -132,7 +149,7 @@ export class DashboardCAComponent implements OnInit {
     );
   }
 
-  
+
 
   NhanVienTaiKhoanGetToList() {
     this.isShowLoading = true;
@@ -161,10 +178,23 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
+  PhongBanGetToList() {
+    this.isShowLoading = true;
+    this.PhongBanService.GetAllToListAsync().subscribe(
+      res => {
+        this.PhongBanService.list = (res as PhongBan[]).sort((a, b) => (a.Name > b.Name ? 1 : -1));
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   GetHuyenToListAsync() {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.onSearchReportCA001();
       },
       err => {
       }
@@ -174,13 +204,12 @@ export class DashboardCAComponent implements OnInit {
     this.XaService.GetByParentIDToListAsync(this.huyenID).subscribe(
       res => {
         this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.ReportVNPT003Async();
       },
       err => {
       }
     );
   }
-  onSearchReportVNPT003() {    
+  onSearchReportVNPT003() {
     if (this.searchString.length > 0) {
       this.dataSourceReportVNPT003.filter = this.searchString.toLowerCase();
     }
@@ -202,8 +231,8 @@ export class DashboardCAComponent implements OnInit {
         this.isShowLoading = false;
       }
     );
-  }  
-  onSearchReportCA001() {    
+  }
+  onSearchReportCA001() {
     if (this.searchString.length > 0) {
       this.dataSource1.filter = this.searchString.toLowerCase();
     }
@@ -238,7 +267,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA002() {    
+  onSearchReportCA002() {
     if (this.searchString.length > 0) {
       this.dataSource2.filter = this.searchString.toLowerCase();
     }
@@ -273,7 +302,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA003() {    
+  onSearchReportCA003() {
     if (this.searchString.length > 0) {
       this.dataSource3.filter = this.searchString.toLowerCase();
     }
@@ -308,7 +337,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA004() {    
+  onSearchReportCA004() {
     if (this.searchString.length > 0) {
       this.dataSource4.filter = this.searchString.toLowerCase();
     }
@@ -343,7 +372,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA005() {    
+  onSearchReportCA005() {
     if (this.searchString.length > 0) {
       this.dataSource5.filter = this.searchString.toLowerCase();
     }
@@ -378,7 +407,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA006() {    
+  onSearchReportCA006() {
     if (this.searchString.length > 0) {
       this.dataSource6.filter = this.searchString.toLowerCase();
     }
@@ -413,7 +442,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA007() {    
+  onSearchReportCA007() {
     if (this.searchString.length > 0) {
       this.dataSource7.filter = this.searchString.toLowerCase();
     }
@@ -442,6 +471,134 @@ export class DashboardCAComponent implements OnInit {
       },
       err => {
         this.isShowLoading = false;
+      }
+    );
+  }
+  onSearch009() {
+    if (this.searchString.length > 0) {
+      this.dataSource9.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.DichVuChiTieuGetToList();
+    }
+  }
+  DichVuChiTieuGetToList() {
+    this.isShowLoading = true;
+    this.DichVuChiTieuService.GetByNam_ThangToListAsync(this.year, this.month).subscribe(
+      res => {
+        this.DichVuChiTieuService.list = (res as DichVuChiTieu[]).sort((a, b) => (a.NhanVienID > b.NhanVienID ? 1 : -1));
+        this.dataSource9 = new MatTableDataSource(this.DichVuChiTieuService.list);
+        this.dataSource9.sort = this.sort9;
+        this.dataSource9.paginator = this.paginator9;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSaveDichVuChiTieu(element: DichVuChiTieu) {
+    this.isShowLoading = true;
+    this.DichVuChiTieuService.SaveAsync(element).subscribe(
+      res => {
+        this.onSearch009();
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+
+  onAddReportCA001(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA001();
+        });
+      },
+      err => {
+      }
+    );
+  }
+  onAddReportCA002(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA002();
+        });
+      },
+      err => {
+      }
+    );
+  }
+  onAddReportCA003(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA003();
+        });
+      },
+      err => {
+      }
+    );
+  }
+  onAddReportCA004(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA004();
+        });
+      },
+      err => {
+      }
+    );
+  }
+  onAddReportCA005(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA005();
+        });
+      },
+      err => {
       }
     );
   }

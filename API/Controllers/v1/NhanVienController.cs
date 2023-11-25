@@ -22,5 +22,21 @@
             }
             return result;
         }
-    }
+		[HttpPost]
+		[Route("AuthenticationAsync")]
+		public virtual async Task<NhanVien> AuthenticationAsync()
+		{
+			NhanVien result = new NhanVien();
+			try
+			{
+				NhanVien model= JsonConvert.DeserializeObject<NhanVien>(Request.Form["data"]);
+				result = await _NhanVienBusiness.AuthenticationAsync(model);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+	}
 }

@@ -2,17 +2,22 @@
 {
     public partial class Report : BaseModel
     {
-        public string? PhongBan { get; set; }
-        public string? NhanVien { get; set; }
-        public string? DiaChi { get; set; }
-        public string? DienThoai { get; set; }
+		public long? NhanVienTaoYeuCauID { get; set; }
+		public string? NhanVienTaoYeuCauName { get; set; }
+		public long? NhanVienDuyetYeuCauID { get; set; }
+		public long? PhongBanDuyetYeuCauID { get; set; }
+		public string? PhongBanDuyetYeuCauName { get; set; }
+
+		public string? PhongBan { get; set; }
+		public string? NhanVienName { get; set; }
+		public string? DiaChi { get; set; }        
         public string? HuyenName { get; set; }
         public string? XaName { get; set; }
         public long? DoanhNghiepID { get; set; }
 		public string? DoanhNghiepName { get; set; }
-		public long? DichVuID { get; set; }
-        public string? DichVu { get; set; }
-        public string? MaThueBao { get; set; }
+		public string? CodeCA { get; set; }		
+		public string? LoaiGoiCuoc { get; set; }		
+		public string? DichVu { get; set; }        
         public int? Year { get; set; }
         public int? Month { get; set; }
         public decimal? DoanhThu { get; set; }
@@ -42,16 +47,55 @@
         public decimal? DoanhThu13 { get; set; }
         public decimal? DoanhThu14 { get; set; }
 
+		public long? NhanVienID { get; set; }
+		public long? DichVuID { get; set; }
+		public DateTime? NgayKyHopDong { get; set; }
+		public decimal? GiaTien { get; set; }
+		public int? SoThang { get; set; }
+		public string? MaThueBao { get; set; }
+		public string? DiaChiLapDat { get; set; }
+		public string? DichVuVienThong { get; set; }
+		public long? PhongBanID { get; set; }
+		public long? GoiCuocID { get; set; }
 		public string? UserName { get; set; }
 		public string? SoChungThu { get; set; }
-		public string? SoChungThuCu { get; set; }
+		public string? SubjectDN { get; set; }
 		public DateTime? NgayHieuLuc { get; set; }
 		public DateTime? NgayHetHan { get; set; }
+		public int? SoNgayNoKhach { get; set; }
+		public string? TenGoiCuoc { get; set; }
+		public int? ThoiGianGoiCuoc { get; set; }
+		public int? ThoiGianKhuyenMai { get; set; }
+		public string? DienThoai { get; set; }
+		public string? Email { get; set; }
 		public string? TaiKhoanTaoYeuCau { get; set; }
 		public string? TaiKhoanDuyetYeuCau { get; set; }
-		public long? NhanVienID { get; set; }
-		public string? NhanVienName { get; set; }
-		public string? NhanVienDienThoai { get; set; }
+		public long? LoaiYeuCauID { get; set; }
+		public string? LoaiYeuCau { get; set; }
+		public string? TrangThaiChungThu { get; set; }
+		public long? LoaiTrangThaiID { get; set; }
+		public string? SoChungThuCu { get; set; }
+		public string? IDThucThe { get; set; }
+		public string? IDChungThu { get; set; }
+		public string? NguoiLienHe { get; set; }
+		public string? IDYeuCau { get; set; }
+		public string? DonVi { get; set; }
+		public string? MaNhanVien { get; set; }
+		public string? NhanVien { get; set; }
+		public bool? IsHopDong { get; set; }
+		public string? HopDong { get; set; }
+		public bool? IsDonXinCapChungThuSo { get; set; }
+		public string? DonXinCapChungThuSo { get; set; }
+		public bool? IsGiayPhepKinhDoanh { get; set; }
+		public string? GiayPhepKinhDoanh { get; set; }
+		public bool? IsBienBanNghiemThu { get; set; }
+		public string? BienBanNghiemThu { get; set; }
+		public bool? IsHoaDon { get; set; }
+		public string? HoaDon { get; set; }
+		public bool? IsCCCD { get; set; }
+		public string? CCCD { get; set; }
+		public bool? IsKetLuan { get; set; }
+		public string? KetLuan { get; set; }
 		public Report()
         {
         }

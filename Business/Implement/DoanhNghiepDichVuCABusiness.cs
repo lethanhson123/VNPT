@@ -7,6 +7,6 @@ namespace Business.Implement
         public DoanhNghiepDichVuCABusiness(IDoanhNghiepDichVuCARepository DoanhNghiepDichVuCARepository) : base(DoanhNghiepDichVuCARepository)
         {
             _DoanhNghiepDichVuCARepository = DoanhNghiepDichVuCARepository;
-        }
-    }
+        }		
+	}
 }

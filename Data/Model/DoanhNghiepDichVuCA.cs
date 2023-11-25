@@ -37,6 +37,20 @@
 		public string? DonVi { get; set; }
 		public string? MaNhanVien { get; set; }
 		public string? NhanVien { get; set; }
+		public bool? IsHopDong { get; set; }
+		public string? HopDong { get; set; }
+		public bool? IsDonXinCapChungThuSo { get; set; }
+		public string? DonXinCapChungThuSo { get; set; }
+		public bool? IsGiayPhepKinhDoanh { get; set; }
+		public string? GiayPhepKinhDoanh { get; set; }
+		public bool? IsBienBanNghiemThu { get; set; }
+		public string? BienBanNghiemThu { get; set; }
+		public bool? IsHoaDon { get; set; }
+		public string? HoaDon { get; set; }
+		public bool? IsCCCD { get; set; }
+		public string? CCCD { get; set; }
+		public bool? IsKetLuan { get; set; }
+		public string? KetLuan { get; set; }
 		public DoanhNghiepDichVuCA()
         {            
         }
