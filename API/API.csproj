@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Download\" />
     <Folder Include="wwwroot\Image\" />
     <Folder Include="wwwroot\DoanhNghiepDichVuCA\" />
   </ItemGroup>

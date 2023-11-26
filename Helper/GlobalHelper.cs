@@ -336,7 +336,7 @@
             get
             {
                 var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-                return builder.Build().GetSection("AppSettings").GetSection("MasterEmailDisplays").Value;
+                return builder.Build().GetSection("AppSettings").GetSection("MasterEmailDisplay").Value;
             }
         }
         public static string MailTo

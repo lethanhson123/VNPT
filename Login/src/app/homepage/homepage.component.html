@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col s12">
+        <div class="container">
+            <div id="login-page" class="row">
+                <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+                    <div class="row">
+                        <div class="input-field col s12" style="text-align: center; padding-top: 5px;">
+                            <img width="200" height="200" src="https://crm.vnptvungtau.vn/image/logo.png"
+                                title="Hệ sinh thái VNPT Bà Rịa - Vũng Tàu" alt="Hệ sinh thái VNPT Bà Rịa - Vũng Tàu">
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix pt-2">email</i>
+                            <input placeholder="Email" name="Email" [(ngModel)]="NhanVienService.formData.Email">
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix pt-2">lock_outline</i>
+                            <input placeholder="Mật khẩu" name="MatKhau" [(ngModel)]="NhanVienService.formData.MatKhau"
+                                type="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button (click)="onAuthenticationAsync()"
+                                [disabled]="!NhanVienService.formData.Email || !NhanVienService.formData.MatKhau"
+                                class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Đăng
+                                nhập</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 m6 l6">
+                            <p class="margin medium-small"><a target="_blank" href="tel:0941869986"
+                                    title="Hotline: 0941 86 99 86">Hotline: 0941 86 99 86</a>
+                            </p>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>

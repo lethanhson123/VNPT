@@ -17,5 +17,7 @@ global using Helper;
 global using OfficeOpenXml.Style;
 global using OfficeOpenXml;
 
+global using System.Text;
+
 
 
