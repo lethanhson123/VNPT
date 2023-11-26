@@ -26,7 +26,7 @@ import { GoiCuocComponent } from './goi-cuoc/goi-cuoc.component';
 
 
 const routes: Routes = [  
-  { path: '', redirectTo: '/Homepage', pathMatch: 'full' },  
+  { path: '', redirectTo: '/DashboardCA', pathMatch: 'full' },  
   {
     path: 'Homepage', component: HomepageComponent,
   },

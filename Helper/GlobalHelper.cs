@@ -59,7 +59,14 @@
                 return DateTime.Now.ToString("yyyyMMddHHmmss");
             }
         }
-        public static int InitializationNumber
+		public static string InitializationTicks
+		{
+			get
+			{
+				return DateTime.Now.Ticks.ToString();
+			}
+		}
+		public static int InitializationNumber
         {
             get
             {

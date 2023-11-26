@@ -31,12 +31,20 @@ export class BaseService {
         return this.httpClient.post(url, formUpload);
     }
     Save(formData: Base) {
+        var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
+        if (lastUpdatedMembershipID) {
+            formData.LastUpdatedMembershipID = Number(lastUpdatedMembershipID);
+        }
         let url = this.aPIURL + this.controller + '/Save';
         const formUpload: FormData = new FormData();
         formUpload.append('data', JSON.stringify(formData));
         return this.httpClient.post(url, formUpload);
     }
     SaveAsync(formData: Base) {
+        var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
+        if (lastUpdatedMembershipID) {
+            formData.LastUpdatedMembershipID = Number(lastUpdatedMembershipID);
+        }
         let url = this.aPIURL + this.controller + '/SaveAsync';
         const formUpload: FormData = new FormData();
         formUpload.append('data', JSON.stringify(formData));

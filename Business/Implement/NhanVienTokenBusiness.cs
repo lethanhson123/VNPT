@@ -20,6 +20,19 @@ namespace Business.Implement
 			}
 			return result;
 		}
+		public async Task<NhanVienToken> GetByTokenAsync(string token)
+		{
+			NhanVienToken result = new NhanVienToken();
+			if (!string.IsNullOrEmpty(token))
+			{
+				result = await _NhanVienTokenRepository.GetByCondition(model => model.Token == token && model.Active == true).FirstOrDefaultAsync();
+				if (result == null)
+				{
+					result = new NhanVienToken();
+				}
+			}			
+			return result;
+		}
 	}
 }
 

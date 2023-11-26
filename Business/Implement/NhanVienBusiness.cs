@@ -25,7 +25,7 @@ namespace Business.Implement
 				NhanVienToken nhanVienToken = new NhanVienToken();
 				nhanVienToken.ParentID = result.ID;
 				nhanVienToken.Token = GlobalHelper.InitializationGUICode;
-				nhanVienToken.OTP001 = result.ID.ToString() + GlobalHelper.InitializationDateTimeCode0001;
+				nhanVienToken.OTP001 = result.ID.ToString() + GlobalHelper.InitializationTicks;
 				nhanVienToken.NgayBatDau = GlobalHelper.InitializationDateTime;
 				nhanVienToken.NgayKetThuc = nhanVienToken.NgayBatDau.Value.AddMonths(1);
 				nhanVienToken.Active = true;

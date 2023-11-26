@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { BaseService } from './Base.service';
 import { DoanhNghiepDichVuCA } from './DoanhNghiepDichVuCA.model';
 @Injectable({
@@ -14,6 +15,10 @@ export class DoanhNghiepDichVuCAService extends BaseService{
         this.controller = "DoanhNghiepDichVuCA";
     }    
     SaveAndUploadFilesAsync(formData: DoanhNghiepDichVuCA, fileHopDong: File, fileDonXinCapChungThuSo: File, fileGiayPhepKinhDoanh: File, fileBienBanNghiemThu: File, fileHoaDon: File, fileCCCD: File) {
+        var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
+        if (lastUpdatedMembershipID) {
+            formData.LastUpdatedMembershipID = Number(lastUpdatedMembershipID);
+        }
         let url = this.aPIURL + this.controller + '/SaveAndUploadFilesAsync';
         const formUpload: FormData = new FormData();
         if (fileHopDong == null) {

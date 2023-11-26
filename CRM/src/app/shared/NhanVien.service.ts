@@ -10,6 +10,7 @@ export class NhanVienService extends BaseService {
     displayColumns001: string[] = ['Code', 'Name', 'DienThoai'];
     list: NhanVien[] | undefined;
     formData!: NhanVien;
+    formDataLogin!: NhanVien;
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "NhanVien";

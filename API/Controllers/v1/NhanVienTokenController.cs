@@ -26,6 +26,22 @@
 			}
 			return result;
 		}
+		[HttpPost]
+		[Route("GetByTokenAsync")]
+		public virtual async Task<NhanVienToken> GetByTokenAsync()
+		{
+			NhanVienToken result = new NhanVienToken();
+			try
+			{
+				string token = JsonConvert.DeserializeObject<string>(Request.Form["token"]);
+				result = await _NhanVienTokenBusiness.GetByTokenAsync(token);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }
 
