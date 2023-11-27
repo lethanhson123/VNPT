@@ -82,8 +82,8 @@
                                 <div class="row gx-4">
                                     <div class="col-lg-2 col-sm-12 col-12">
                                         <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
-                                            <option [value]="0">
-                                                Tất cả</option>
+                                            <!-- <option [value]="0">
+                                                Tất cả</option> -->
                                             <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
                                                 {{item.Name}}</option>
                                         </select>

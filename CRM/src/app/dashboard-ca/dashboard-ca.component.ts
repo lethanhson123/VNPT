@@ -191,7 +191,7 @@ export class DashboardCAComponent implements OnInit {
     );
   }
   GetHuyenToListAsync() {
-    this.HuyenService.GetAllToListAsync().subscribe(
+    this.HuyenService.GetSQLByNhanVienID_ActiveAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
         this.onSearchReportCA001();
