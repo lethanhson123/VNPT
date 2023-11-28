@@ -1,4 +1,6 @@
-﻿namespace Business.Interface
+﻿using Data.Model;
+
+namespace Business.Interface
 {
 	public interface IReportBusiness : IBaseBusiness<Report>
 	{
@@ -21,7 +23,17 @@
 		Task<List<Report>> ReportCA004Async(long huyenID, int year, int month);
 		Task<List<Report>> ReportCA005Async(long huyenID, int year, int month);
 		Task<List<Report>> ReportCA006Async(long huyenID, int year, int month);
-		Task<List<Report>> ReportCA007Async(long huyenID, int year, int month);	
+		Task<List<Report>> ReportCA007Async(long huyenID, int year, int month);
 
+		Task<List<Report>> ReportCA101Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA102Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA103Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA104Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA105Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA106Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA107Async(long huyenID, int year, int month, long nhanVienID);
+
+		Task<List<Report>> ReportCA201Async(int year, int month);
+		Task<List<Report>> ReportCA202Async(int year, int month);
 	}
 }

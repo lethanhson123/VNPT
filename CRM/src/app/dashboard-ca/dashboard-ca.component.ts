@@ -79,7 +79,7 @@ export class DashboardCAComponent implements OnInit {
   xaID: number = 1;
   dichVuID: number = environment.CAID;
   phongBanID: number = 1;
-  nhanVienID: number = 1;
+  nhanVienID: number = environment.InitializationNumber;
   searchString: string = environment.InitializationString;
   searchString1: string = environment.InitializationString;
   searchString2: string = environment.InitializationString;
@@ -109,7 +109,12 @@ export class DashboardCAComponent implements OnInit {
     public NotificationService: NotificationService,
     public DownloadService: DownloadService,
     private dialog: MatDialog
-  ) { }
+  ) {
+    var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
+    if (lastUpdatedMembershipID) {
+      this.nhanVienID = Number(lastUpdatedMembershipID);
+    }
+  }
 
   ngOnInit(): void {
     this.GetHuyenToListAsync();
@@ -219,7 +224,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA001Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA001Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA101Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA001 = (res as Report[]);
         this.dataSource1 = new MatTableDataSource(this.ReportService.listReportCA001);
@@ -254,7 +259,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA002Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA002Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA102Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA002 = (res as Report[]);
         this.dataSource2 = new MatTableDataSource(this.ReportService.listReportCA002);
@@ -289,7 +294,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA003Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA003Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA103Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA003 = (res as Report[]);
         this.dataSource3 = new MatTableDataSource(this.ReportService.listReportCA003);
@@ -324,7 +329,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA004Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA004Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA104Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA004 = (res as Report[]);
         this.dataSource4 = new MatTableDataSource(this.ReportService.listReportCA004);
@@ -359,7 +364,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA005Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA005Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA105Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA005 = (res as Report[]);
         this.dataSource5 = new MatTableDataSource(this.ReportService.listReportCA005);
@@ -394,7 +399,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA006Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA006Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA106Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA006 = (res as Report[]);
         this.dataSource6 = new MatTableDataSource(this.ReportService.listReportCA006);
@@ -429,7 +434,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA007Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA007Async(this.huyenID, this.year, this.month).subscribe(
+    this.ReportService.ReportCA107Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.listReportCA007 = (res as Report[]);
         this.dataSource7 = new MatTableDataSource(this.ReportService.listReportCA007);

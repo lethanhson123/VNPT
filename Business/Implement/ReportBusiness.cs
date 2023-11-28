@@ -282,5 +282,120 @@ namespace Business.Implement
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA007", parameters);
 			return result;
 		}
+
+		public virtual async Task<List<Report>> ReportCA101Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA101", parameters);
+			return result;
+		}
+
+		public virtual async Task<List<Report>> ReportCA102Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA102", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA103Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA103", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA104Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA104", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA105Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA105", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA106Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA106", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA107Async(long huyenID, int year, int month, long nhanVienID)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@HuyenID",huyenID),
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA107", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA201Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {					
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),					
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA201", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA202Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA202", parameters);
+			return result;
+		}
 	}
 }
