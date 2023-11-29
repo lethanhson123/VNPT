@@ -4,9 +4,9 @@
             <i class="bi bi-emoji-sunglasses fs-3 text-primary"></i>
         </div>
         <div>
-            <h2 class="mb-1">{{NhanVienService.formData.Name}}</h2>
+            <h2 class="mb-1">{{NhanVienService.formDataLogin.Name}}</h2>
             <h6 class="m-0 text-dark fw-light">
-                Nhân viên
+                Nhân viên đăng nhập
             </h6>
         </div>
     </div>
@@ -278,19 +278,19 @@
                                                             class="bi bi-arrow-left-square"></i></a>&nbsp;&nbsp;&nbsp;
                                                     <a title="Thêm mới" href="{{URLSub}}/0" class="btn btn-success"><i
                                                             class="bi bi-plus-square-dotted"></i></a>&nbsp;&nbsp;&nbsp;
-                                                    <button [disabled]="!NhanVienService.formData.Name"
+                                                    <button [disabled]="!NhanVienService.formDataLogin.Name"
                                                         title="Lưu thay đổi" type="submit" class="btn btn-info"><i
                                                             class="bi bi-sd-card"></i></button>
                                                 </div>
                                             </div>
-                                            <input name="ID" [(ngModel)]="NhanVienService.formData.ID" type="hidden">
+                                            <input name="ID" [(ngModel)]="NhanVienService.formDataLogin.ID" type="hidden">
                                             <div class="row gx-4">
                                                 <div class="col-lg-4 col-sm-12 col-12">
                                                     <div class="col-lg-12 col-sm-4 col-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Email</label>
                                                             <input name="Email"
-                                                                [(ngModel)]="NhanVienService.formData.Email"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.Email"
                                                                 placeholder="Email" type="text" class="form-control">
                                                         </div>
                                                     </div>
@@ -298,7 +298,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Mật khẩu</label>
                                                             <input name="MatKhau"
-                                                                [(ngModel)]="NhanVienService.formData.MatKhau"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.MatKhau"
                                                                 placeholder="Mật khẩu" type="text" class="form-control">
                                                         </div>
                                                     </div>
@@ -306,7 +306,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Nhân viên</label>
                                                             <input name="Name"
-                                                                [(ngModel)]="NhanVienService.formData.Name"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.Name"
                                                                 placeholder="Nhân viên" type="text"
                                                                 class="form-control">
                                                         </div>
@@ -315,7 +315,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Mã nhân viên</label>
                                                             <input name="Code"
-                                                                [(ngModel)]="NhanVienService.formData.Code"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.Code"
                                                                 placeholder="Mã nhân viên" type="text"
                                                                 class="form-control">
                                                         </div>
@@ -324,7 +324,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Điện thoại</label>
                                                             <input name="DienThoai"
-                                                                [(ngModel)]="NhanVienService.formData.DienThoai"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.DienThoai"
                                                                 placeholder="Điện thoại" type="text"
                                                                 class="form-control">
                                                         </div>
@@ -336,7 +336,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Phòng ban</label>
                                                             <select class="form-select" name="ParentID"
-                                                                [(ngModel)]="NhanVienService.formData.ParentID">
+                                                                [(ngModel)]="NhanVienService.formDataLogin.ParentID">
                                                                 <option *ngFor="let item of PhongBanService.list;"
                                                                     [value]="item.ID">
                                                                     {{item.Name}}</option>
@@ -347,7 +347,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">CCCD</label>
                                                             <input name="CCCD"
-                                                                [(ngModel)]="NhanVienService.formData.CCCD"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.CCCD"
                                                                 placeholder="CCCD" type="text" class="form-control">
                                                         </div>
                                                     </div>
@@ -355,7 +355,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Địa chỉ</label>
                                                             <input name="DiaChi"
-                                                                [(ngModel)]="NhanVienService.formData.DiaChi"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.DiaChi"
                                                                 placeholder="Địa chỉ" type="text" class="form-control">
                                                         </div>
                                                     </div>
@@ -363,7 +363,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Sắp xếp</label>
                                                             <input name="SortOrder"
-                                                                [(ngModel)]="NhanVienService.formData.SortOrder"
+                                                                [(ngModel)]="NhanVienService.formDataLogin.SortOrder"
                                                                 style="text-align: right;" placeholder="0" type="number"
                                                                 class="form-control">
                                                         </div>
@@ -372,7 +372,7 @@
                                                         <div class="form-check form-check-inline mb-3">
                                                             <input type="checkbox" class="form-check-input"
                                                                 name="Active"
-                                                                [(ngModel)]="NhanVienService.formData.Active" />
+                                                                [(ngModel)]="NhanVienService.formDataLogin.Active" />
                                                             <label class="form-check-label" for="Active">Kích
                                                                 hoạt</label>
                                                         </div>
@@ -388,8 +388,8 @@
                                                     </div>
                                                     <div class="col-lg-12 col-sm-4 col-12">
                                                         <div class="mb-3">
-                                                            <img class="img-fluid rounded" title="{{NhanVienService.formData.Note}}" alt="NhanVienService.formData.Note"
-                                                                [src]="NhanVienService.formData.Note">
+                                                            <img class="img-fluid rounded" title="{{NhanVienService.formDataLogin.Note}}" alt="NhanVienService.formDataLogin.Note"
+                                                                [src]="NhanVienService.formDataLogin.Note">
                                                         </div>
                                                     </div>
                                                 </div>

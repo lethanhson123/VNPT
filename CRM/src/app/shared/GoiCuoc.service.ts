@@ -6,6 +6,7 @@ import { GoiCuoc } from './GoiCuoc.model';
     providedIn: 'root'
 })
 export class GoiCuocService extends BaseService{    
+    displayColumns: string[] = ['No', 'Name','Description', 'Note', 'Thang','ThangKhuyenMai','GiaCuoc', 'Active', 'Save']; 
     list: GoiCuoc[] | undefined;
     formData!: GoiCuoc; 
     constructor(public httpClient: HttpClient) {

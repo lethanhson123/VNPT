@@ -111,20 +111,20 @@
                   </li>
             </ul>
       </div>
-      <!-- <div class="sidebar-settings gap-2 d-lg-flex d-none">
-            <a href="#" class="settings-icon bg-success" data-bs-toggle="tooltip" data-bs-placement="top"
+      <div class="sidebar-settings gap-2 d-lg-flex d-none">
+            <a href="{{domainName}}NhanVienDangNhap" class="settings-icon bg-success" data-bs-toggle="tooltip" data-bs-placement="top"
                   title="Tài khoản">
                   <i class="bi bi-person"></i>
             </a>
-            <a href="#" class="settings-icon bg-success" data-bs-toggle="tooltip" data-bs-placement="top"
+            <a href="{{domainName}}NhanVienDangNhap" class="settings-icon bg-success" data-bs-toggle="tooltip" data-bs-placement="top"
                   title="Đổi mật khẩu">
                   <i class="bi bi-shield-lock"></i>
             </a>
-            <a href="#" class="settings-icon bg-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+            <a style="cursor: pointer;" (click)="onLogout()" class="settings-icon bg-danger" data-bs-toggle="tooltip" data-bs-placement="top"
                   title="Đăng xuất">
                   <i class="bi bi-power"></i>
             </a>
-      </div> -->
+      </div>
 </nav>
 <div class="app-container">
       <div class="app-header d-flex align-items-center">
@@ -147,17 +147,17 @@
                   <div class="dropdown ms-4">
                         <a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center" href="#!"
                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <img src="assets/images/user3.png" class="rounded-4 img-3x"
-                                    alt="Trung tâm khách hàng doanh nghiệp VNPT Bà Rịa - Vũng Tàu" />
-                              <span class="ms-2 text-truncate d-lg-block d-none">Nguyễn Viết Dũng</span>
+                              <img src="{{NhanVienService.formDataLogin.Note}}" class="rounded-4 img-3x"
+                                    alt="{{NhanVienService.formDataLogin.Name}}" title="{{NhanVienService.formDataLogin.Name}}" />
+                              <span class="ms-2 text-truncate d-lg-block d-none">{{NhanVienService.formDataLogin.Name}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end shadow-lg">
-                              <a class="dropdown-item d-flex align-items-center" href="#"><i
+                              <a class="dropdown-item d-flex align-items-center" href="{{domainName}}NhanVienDangNhap"><i
                                           class="bi bi-person fs-4 me-2"></i>Tài khoản</a>
-                              <a class="dropdown-item d-flex align-items-center" href="#"><i
+                              <a class="dropdown-item d-flex align-items-center" href="{{domainName}}NhanVienDangNhap"><i
                                           class="bi bi-shield-lock fs-4 me-2"></i>Đổi mật khẩu</a>
                               <div class="mx-3 mt-2 d-grid">
-                                    <a href="#" class="btn btn-primary">Đăng xuất</a>
+                                    <a style="cursor: pointer;" (click)="onLogout()" class="btn btn-primary">Đăng xuất</a>
                               </div>
                         </div>
                   </div>

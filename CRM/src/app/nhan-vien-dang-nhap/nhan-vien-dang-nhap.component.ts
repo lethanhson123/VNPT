@@ -23,11 +23,11 @@ import { DoanhNghiep } from 'src/app/shared/DoanhNghiep.model';
 import { DoanhNghiepService } from 'src/app/shared/DoanhNghiep.service';
 
 @Component({
-  selector: 'app-nhan-vien-info',
-  templateUrl: './nhan-vien-info.component.html',
-  styleUrls: ['./nhan-vien-info.component.css']
+  selector: 'app-nhan-vien-dang-nhap',
+  templateUrl: './nhan-vien-dang-nhap.component.html',
+  styleUrls: ['./nhan-vien-dang-nhap.component.css']
 })
-export class NhanVienInfoComponent implements OnInit {
+export class NhanVienDangNhapComponent implements OnInit {
 
   isShowLoading: boolean = false;
   queryString: string = environment.InitializationString;
@@ -55,12 +55,7 @@ export class NhanVienInfoComponent implements OnInit {
     public DoanhNghiepService: DoanhNghiepService,
     public NotificationService: NotificationService,
   ) {
-    this.router.events.forEach((event) => {
-      if (event instanceof NavigationEnd) {
-        this.queryString = event.url;
-        this.GetByQueryString();
-      }
-    });
+    this.GetByQueryString();
   }
 
   ngOnInit(): void {
@@ -115,7 +110,7 @@ export class NhanVienInfoComponent implements OnInit {
   }
   GetNhanVienKhuVucToListAsync() {
     this.isShowLoading = true;
-    this.NhanVienKhuVucService.GetSQLByParentIDAsync(this.NhanVienService.formData.ID).subscribe(
+    this.NhanVienKhuVucService.GetSQLByParentIDAsync(this.NhanVienService.formDataLogin.ID).subscribe(
       res => {
         this.NhanVienKhuVucService.list = (res as NhanVienKhuVuc[]);
         this.dataSourceNhanVienKhuVuc = new MatTableDataSource(this.NhanVienKhuVucService.list);
@@ -130,7 +125,7 @@ export class NhanVienInfoComponent implements OnInit {
   }
   GetNhanVienTaiKhoanToListAsync() {
     this.isShowLoading = true;
-    this.NhanVienTaiKhoanService.GetByParentIDAndEmptyToListAsync(this.NhanVienService.formData.ID).subscribe(
+    this.NhanVienTaiKhoanService.GetByParentIDAndEmptyToListAsync(this.NhanVienService.formDataLogin.ID).subscribe(
       res => {
         this.NhanVienTaiKhoanService.list = (res as NhanVienTaiKhoan[]);
         this.isShowLoading = false;
@@ -157,29 +152,38 @@ export class NhanVienInfoComponent implements OnInit {
   }
   GetByQueryString() {
     this.isShowLoading = true;
-    this.NhanVienService.GetByIDStringAsync(this.queryString).then(res => {
-      this.NhanVienService.formData = res as NhanVien;
-      this.GetNhanVienToListAsync();
-      this.GetPhongBanToListAsync();
-      this.GetHuyenToListAsync();
-      this.GetXaToListAsync();
-      this.GetDoanhNghiepToListAsync();
-      if (this.NhanVienService.formData) {
-        this.GetNhanVienKhuVucToListAsync();
-        this.GetNhanVienTaiKhoanToListAsync();
-        this.isShowLoading = false;
+    this.NhanVienService.GetLogin();
+    if (this.NhanVienService.formDataLogin) {
+      if (this.NhanVienService.formDataLogin.ID > 0) {
+        this.NhanVienService.GetByIDAsync(this.NhanVienService.formDataLogin.ID).subscribe(res => {
+          this.NhanVienService.formDataLogin = res as NhanVien;
+          this.GetNhanVienToListAsync();
+          this.GetPhongBanToListAsync();
+          this.GetHuyenToListAsync();
+          this.GetXaToListAsync();
+          this.GetDoanhNghiepToListAsync();
+          if (this.NhanVienService.formDataLogin) {
+            this.GetNhanVienKhuVucToListAsync();
+            this.GetNhanVienTaiKhoanToListAsync();
+            this.isShowLoading = false;
+          }
+          this.isShowLoading = false;
+        },
+          err => {
+            this.NotificationService.warn(environment.SaveNotSuccess);
+          }
+        );
       }
-      this.isShowLoading = false;
-    });
+    }
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;
-    this.NhanVienService.SaveAndUploadFileAsync(this.NhanVienService.formData, this.fileToUpload).subscribe(
+    this.NhanVienService.SaveAndUploadFileAsync(this.NhanVienService.formDataLogin, this.fileToUpload).subscribe(
       res => {
-        if (this.NhanVienService.formData.ID == 0) {
-          this.NhanVienService.formData = res as NhanVien;
-          if (this.NhanVienService.formData.ID > 0) {
-            window.location.href = this.URLSub + "/" + this.NhanVienService.formData.ID;
+        if (this.NhanVienService.formDataLogin.ID == 0) {
+          this.NhanVienService.formDataLogin = res as NhanVien;
+          if (this.NhanVienService.formDataLogin.ID > 0) {
+            window.location.href = this.URLSub + "/" + this.NhanVienService.formDataLogin.ID;
           }
           else {
             this.NotificationService.warn(environment.SaveSuccess);
@@ -213,7 +217,7 @@ export class NhanVienInfoComponent implements OnInit {
       if (this.DoanhNghiepService.listSearch.length > 0) {
         this.isShowLoading = true;
         for (let i = 0; i < this.DoanhNghiepService.listSearch.length; i++) {
-          this.DoanhNghiepService.listSearch[i].NhanVienID = this.NhanVienService.formData.ID;
+          this.DoanhNghiepService.listSearch[i].NhanVienID = this.NhanVienService.formDataLogin.ID;
         }
         this.DoanhNghiepService.SaveListAsync(this.DoanhNghiepService.listSearch).subscribe(
           res => {
@@ -235,7 +239,7 @@ export class NhanVienInfoComponent implements OnInit {
     }
   }
   onSaveNhanVienTaiKhoan(element: NhanVienTaiKhoan) {
-    element.ParentID = this.NhanVienService.formData.ID;
+    element.ParentID = this.NhanVienService.formDataLogin.ID;
     this.NhanVienTaiKhoanService.SaveAsync(element).subscribe(
       res => {
         this.GetNhanVienTaiKhoanToListAsync();
@@ -267,7 +271,7 @@ export class NhanVienInfoComponent implements OnInit {
       this.fileToUpload0 = files.item(0);
       var reader = new FileReader();
       reader.onload = (event: any) => {
-        this.NhanVienService.formData.Note = event.target.result;
+        this.NhanVienService.formDataLogin.Note = event.target.result;
       };
       reader.readAsDataURL(this.fileToUpload0);
     }

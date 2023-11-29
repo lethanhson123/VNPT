@@ -166,7 +166,7 @@ export class PhongBanInfoComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;
-    this.PhongBanService.SaveAsync(form.value).subscribe(
+    this.PhongBanService.SaveAsync(this.PhongBanService.formData).subscribe(
       res => {
         this.GetByQueryString();
         this.NotificationService.warn(environment.SaveSuccess);
@@ -194,6 +194,9 @@ export class PhongBanInfoComponent implements OnInit {
     if (this.DoanhNghiepService.listSearch) {
       if (this.DoanhNghiepService.listSearch.length > 0) {
         this.isShowLoading = true;
+        for (let i = 0; i < this.DoanhNghiepService.listSearch.length; i++) {
+          this.DoanhNghiepService.listSearch[i].PhongBanID = this.PhongBanService.formData.ID;
+        }
         this.DoanhNghiepService.SaveListAsync(this.DoanhNghiepService.listSearch).subscribe(
           res => {
             this.GetDoanhNghiepToListAsync();

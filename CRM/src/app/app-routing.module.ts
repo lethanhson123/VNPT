@@ -23,6 +23,7 @@ import { DashboardTenMienComponent } from './dashboard-ten-mien/dashboard-ten-mi
 import { DashboardHoaDonDienTuComponent } from './dashboard-hoa-don-dien-tu/dashboard-hoa-don-dien-tu.component';
 import { NhanVienTaiKhoanComponent } from './nhan-vien-tai-khoan/nhan-vien-tai-khoan.component';
 import { GoiCuocComponent } from './goi-cuoc/goi-cuoc.component';
+import { NhanVienDangNhapComponent } from './nhan-vien-dang-nhap/nhan-vien-dang-nhap.component';
 
 
 const routes: Routes = [  
@@ -77,6 +78,9 @@ const routes: Routes = [
   },  
   {
     path: 'NhanVienInfo/:ID', component: NhanVienInfoComponent,
+  },
+  {
+    path: 'NhanVienDangNhap', component: NhanVienDangNhapComponent,
   },
   {
     path: 'DoanhNghiepMaSoThueKhongTonTai', component: DoanhNghiepMaSoThueKhongTonTaiComponent,

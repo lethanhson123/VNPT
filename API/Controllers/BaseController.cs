@@ -10,6 +10,7 @@
         {
             _baseBusiness = baseBusiness;
         }
+
         [HttpPost]
         [Route("SaveList")]
         public virtual List<T> SaveList()

@@ -82,4 +82,12 @@ export class AppComponent {
       window.location.href =  environment.LoginURL;
     }
   }
+  onLogout() {
+    localStorage.setItem(environment.Token, environment.InitializationString);
+    localStorage.setItem(environment.NhanVienID, environment.InitializationString);
+    localStorage.setItem(environment.NhanVienName, environment.InitializationString);
+    localStorage.setItem(environment.NhanVienEmail, environment.InitializationString);
+    localStorage.setItem(environment.NhanVienNote, environment.InitializationString);    
+    window.location.href = environment.LoginURL;
+  }
 }
