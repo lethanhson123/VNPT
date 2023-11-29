@@ -13,8 +13,8 @@ namespace Business.Implement
 		public async Task<NhanVienToken> AuthenticationAsync(NhanVienToken nhanVienToken)
 		{
 			NhanVienToken result = new NhanVienToken();
-			result = await _NhanVienTokenRepository.GetByCondition(model => model.OTP001 == nhanVienToken.OTP001 && model.ParentID == nhanVienToken.ParentID && model.Active == true).FirstOrDefaultAsync();
-			if (result==null)
+			result = await _NhanVienTokenRepository.GetByCondition(model => model.OTP001 == nhanVienToken.OTP001 && model.ParentID == nhanVienToken.ParentID && model.Active == true).OrderByDescending(item => item.LastUpdatedDate).FirstOrDefaultAsync();
+			if (result == null)
 			{
 				result = new NhanVienToken();
 			}
@@ -25,12 +25,12 @@ namespace Business.Implement
 			NhanVienToken result = new NhanVienToken();
 			if (!string.IsNullOrEmpty(token))
 			{
-				result = await _NhanVienTokenRepository.GetByCondition(model => model.Token == token && model.Active == true).FirstOrDefaultAsync();
+				result = await _NhanVienTokenRepository.GetByCondition(model => model.Token == token && model.Active == true).OrderByDescending(item => item.LastUpdatedDate).FirstOrDefaultAsync();
 				if (result == null)
 				{
 					result = new NhanVienToken();
 				}
-			}			
+			}
 			return result;
 		}
 	}
