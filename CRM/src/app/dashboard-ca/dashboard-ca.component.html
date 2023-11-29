@@ -23,21 +23,27 @@
                     <div class="custom-tabs-container">
                         <ul class="nav nav-tabs justify-content-end" id="customTab5" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#1" role="tab"
-                                    aria-controls="1" aria-selected="true">
-                                    <span class="badge bg-info">Phát triển</span>
+                                <a class="nav-link active" id="tab-10" data-bs-toggle="tab" href="#10" role="tab"
+                                    aria-controls="10" aria-selected="true">
+                                    <span class="badge bg-info">Tổng hợp</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-1" data-bs-toggle="tab" href="#1" role="tab"
+                                    aria-controls="1" aria-selected="false">
+                                    <span class="badge bg-danger">Phát triển</span>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#2" role="tab"
                                     aria-controls="2" aria-selected="false">
-                                    <span class="badge bg-danger">Gia hạn</span>
+                                    <span class="badge bg-success">Gia hạn</span>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#3" role="tab"
                                     aria-controls="3" aria-selected="false">
-                                    <span class="badge bg-success">Thay đổi thông tin</span>
+                                    <span class="badge bg-warning">Thay đổi thông tin</span>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -61,13 +67,13 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-7" data-bs-toggle="tab" href="#7" role="tab"
                                     aria-controls="7" aria-selected="false">
-                                    <span class="badge bg-info">Chưa sử dụng</span>
+                                    <span class="badge bg-warning">Chưa sử dụng</span>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-8" data-bs-toggle="tab" href="#8" role="tab"
                                     aria-controls="8" aria-selected="false">
-                                    <span class="badge bg-success">Tài khoản</span>
+                                    <span class="badge bg-info">Tài khoản</span>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -78,7 +84,130 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="customTabContent">
-                            <div class="tab-pane fade show active" id="1" role="tabpanel">
+                            <div class="tab-pane fade show active" id="10" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option *ngFor="let item of DownloadService.listMonth;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA201()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="row gx-4">
+                                    <div class="col-xl-4 col-sm-6 col-12">
+                                        <div class="card my-2 card-success">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Doanh thu</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <h1 class="display-3 text-white m-0 lh-1">
+                                                    {{ReportService.formData.DoanhThu |
+                                                    number:
+                                                    '1.0-0'}}</h1>
+                                                <h6 class="text-white m-0">Đơn vị tính: đồng</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-sm-6 col-12">
+                                        <div class="card my-2 card-danger">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Sản lượng</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <h1 class="display-3 text-white m-0 lh-1">
+                                                    {{ReportService.formData.SanLuong |
+                                                    number:
+                                                    '1.0-0'}}</h1>
+                                                <h6 class="text-white m-0">Phát triển + Gia hạn</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-sm-6 col-12">
+                                        <div class="card my-2 card-info">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Phát triển mới</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <h1 class="display-3 text-white m-0 lh-1">
+                                                    {{ReportService.formData.PhatTrien |
+                                                    number:
+                                                    '1.0-0'}}</h1>
+                                                <h6 class="text-white m-0">Chỉ tiêu:
+                                                    {{ReportService.formData.PhatTrienChiTieu |
+                                                    number:
+                                                    '1.0-0'}} - Tỷ lệ: {{ReportService.formData.TyLePhatTrien
+                                                    |
+                                                    number:
+                                                    '1.0-1'}} %</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-sm-6 col-12">
+                                        <div class="card my-2 card-warning">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Gia hạn</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <h1 class="display-3 text-white m-0 lh-1">
+                                                    {{ReportService.formData.GiaHan |
+                                                    number:
+                                                    '1.0-0'}}</h1>
+                                                <h6 class="text-white m-0">Chỉ tiêu:
+                                                    {{ReportService.formData.GiaHanChiTieu |
+                                                    number:
+                                                    '1.0-0'}} - Tỷ lệ: {{ReportService.formData.TyLeGiaHan
+                                                    |
+                                                    number:
+                                                    '1.0-1'}} %</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-sm-6 col-12">
+                                        <div class="card my-2 card-success">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Hồ sơ hoàn thành</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <h1 class="display-3 text-white m-0 lh-1">
+                                                    {{ReportService.formData.HoSoHoanThanh |
+                                                    number:
+                                                    '1.0-0'}}</h1>
+                                                <h6 class="text-white m-0">Tỷ lệ: {{ReportService.formData.TyLeHoSo
+                                                    |
+                                                    number:
+                                                    '1.0-1'}} %</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <canvas baseChart [datasets]="ChartDataReportCA202PhatTrien"
+                                            [labels]="ChartLabelsReportCA202PhatTrien" [chartType]="ChartTypeReportCA202PhatTrien"
+                                            [colors]="ChartColorsReportCA202PhatTrien" [options]="ChartOptionsReportCA202PhatTrien">
+                                        </canvas>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <canvas baseChart [datasets]="ChartDataReportCA202GiaHan"
+                                        [labels]="ChartLabelsReportCA202GiaHan" [chartType]="ChartTypeReportCA202GiaHan"
+                                        [colors]="ChartColorsReportCA202GiaHan" [options]="ChartOptionsReportCA202GiaHan">
+                                    </canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="1" role="tabpanel">
                                 <div class="row gx-4">
                                     <div class="col-lg-2 col-sm-12 col-12">
                                         <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
@@ -114,7 +243,7 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
-                                <div class="card mb-4 card-info">
+                                <div class="card mb-4 card-danger">
                                     <div class="card-header">
                                         <h5 class="card-title text-white">Danh sách
                                             <span
@@ -451,7 +580,7 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
-                                <div class="card mb-4 card-danger">
+                                <div class="card mb-4 card-success">
                                     <div class="card-header">
                                         <h5 class="card-title text-white">Danh sách
                                             <span
@@ -788,7 +917,7 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
-                                <div class="card mb-4 card-success">
+                                <div class="card mb-4 card-warning">
                                     <div class="card-header">
                                         <h5 class="card-title text-white">Danh sách
                                             <span
@@ -1858,7 +1987,7 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
-                                <div class="card mb-4 card-info">
+                                <div class="card mb-4 card-warning">
                                     <div class="card-header">
                                         <h5 class="card-title text-white">Danh sách
                                             <span
@@ -1910,7 +2039,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="8" role="tabpanel">
-                                <div class="card mb-4 card-success">
+                                <div class="card mb-4 card-info">
                                     <div class="card-header">
                                         <h5 class="card-title text-white">Danh sách
                                             <span
@@ -2092,7 +2221,7 @@
                                                         <td mat-cell *matCellDef="let element">
                                                             {{element.Name}}
                                                         </td>
-                                                    </ng-container>                                                   
+                                                    </ng-container>
                                                     <ng-container matColumnDef="PhatTrien">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Phát triển
                                                         </th>
@@ -2102,22 +2231,22 @@
                                                                 [(ngModel)]="element.PhatTrien"
                                                                 style="text-align: right;">
                                                         </td>
-                                                    </ng-container>          
+                                                    </ng-container>
                                                     <ng-container matColumnDef="GiaHan">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Gia hạn
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
                                                             <input class="form-control" type="number" placeholder="0"
-                                                                name="GiaHan{{element.ID}}"
-                                                                [(ngModel)]="element.GiaHan"
+                                                                name="GiaHan{{element.ID}}" [(ngModel)]="element.GiaHan"
                                                                 style="text-align: right;">
                                                         </td>
-                                                    </ng-container>                                             
+                                                    </ng-container>
                                                     <ng-container matColumnDef="Save">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <a class="btn btn-info" (click)="onSaveDichVuChiTieu(element)"><i
+                                                            <a class="btn btn-info"
+                                                                (click)="onSaveDichVuChiTieu(element)"><i
                                                                     class="bi bi-sd-card"></i>
                                                             </a>
                                                         </td>

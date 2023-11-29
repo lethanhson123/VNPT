@@ -507,9 +507,9 @@ namespace API.Controllers.v1
 		}
 		[HttpPost]
 		[Route("ReportCA201Async")]
-		public virtual async Task<List<Report>> ReportCA201Async()
+		public virtual async Task<Report> ReportCA201Async()
 		{
-			List<Report> result = new List<Report>();
+			Report result = new Report();
 			try
 			{				
 				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);

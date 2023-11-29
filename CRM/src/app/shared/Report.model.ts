@@ -1,6 +1,16 @@
 import { Base } from "./Base.model";
 
-export class Report extends Base{     
+export class Report extends Base{    
+    SanLuong?: number;     
+    PhatTrien?: number;     
+    GiaHan?: number;     
+    HoSoHoanThanh?: number;     
+    PhatTrienChiTieu?: number;     
+    GiaHanChiTieu?: number;     
+    TyLeHoSo?: number; 
+    TyLePhatTrien?: number; 
+    TyLeGiaHan?: number; 
+
     NhanVienTaoYeuCauID?: number;     
     NhanVienTaoYeuCauName?: string;     
     NhanVienDuyetYeuCauID?: number;     
@@ -51,6 +61,7 @@ export class Report extends Base{
     DiaChiLapDat?: string;
     DichVuVienThong?: string;
     PhongBanID?: number;
+    PhongBanName?: string;
     GoiCuocID?: number;
     UserName?: string;
     SoChungThu?: string;

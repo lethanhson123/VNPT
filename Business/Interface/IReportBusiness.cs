@@ -33,7 +33,7 @@ namespace Business.Interface
 		Task<List<Report>> ReportCA106Async(long huyenID, int year, int month, long nhanVienID);
 		Task<List<Report>> ReportCA107Async(long huyenID, int year, int month, long nhanVienID);
 
-		Task<List<Report>> ReportCA201Async(int year, int month);
+		Task<Report> ReportCA201Async(int year, int month);
 		Task<List<Report>> ReportCA202Async(int year, int month);
 	}
 }

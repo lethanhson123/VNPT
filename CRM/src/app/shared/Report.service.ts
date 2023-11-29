@@ -33,6 +33,7 @@ export class ReportService extends BaseService{
     listReportCA006: Report[] | undefined;
     listReportCA007: DoanhNghiep[] | undefined;
     listReportCA008: DoanhNghiep[] | undefined;    
+    listReportCA202: Report[] | undefined;    
     formData!: Report;
     constructor(public httpClient: HttpClient) {
         super(httpClient);

@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartOptions, ChartType, ChartDataSets, Chart, ChartConfiguration, ChartData } from 'chart.js';
+import { Color, Label, SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -123,6 +125,7 @@ export class DashboardCAComponent implements OnInit {
     this.NhanVienGetToList();
     this.PhongBanGetToList();
     this.NhanVienTaiKhoanGetToList();
+    this.onSearchReportCA201();
   }
 
   GetYearToList() {
@@ -153,6 +156,108 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
+
+  ReportCA201Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA201Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.formData = (res as Report);
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );  
+  }
+  ReportCA202Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA202Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReportCA202 = (res as Report[]);
+        let labelArray = [];
+        let dataArray001 = [];
+        let dataArray002 = [];
+        let dataArray003 = [];
+        let dataArray004 = [];
+        for (let i = 0; i < this.ReportService.listReportCA202.length; i++) {
+          labelArray.push(this.ReportService.listReportCA202[i].PhongBanName);
+          dataArray001.push(this.ReportService.listReportCA202[i].PhatTrien);
+          dataArray002.push(this.ReportService.listReportCA202[i].PhatTrienChiTieu);
+          dataArray003.push(this.ReportService.listReportCA202[i].GiaHan);
+          dataArray004.push(this.ReportService.listReportCA202[i].GiaHanChiTieu);
+        }
+        let label001: string = 'Phát triển mới';
+        let label002: string = 'Chỉ tiêu';
+        let label003: string = 'Gia hạn';
+        let label004: string = 'Chỉ tiêu';
+        this.ChartLabelsReportCA202PhatTrien = labelArray;
+        this.ChartDataReportCA202PhatTrien = [
+          { data: dataArray001, label: label001, stack: 'a' },
+          { data: dataArray002, label: label002, stack: 'b' }
+        ];
+        this.ChartLabelsReportCA202GiaHan = labelArray;
+        this.ChartDataReportCA202GiaHan = [
+          { data: dataArray003, label: label003, stack: 'a' },
+          { data: dataArray004, label: label004, stack: 'b' }
+        ];
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchReportCA201() {
+    this.ReportCA201Async();
+    this.ReportCA202Async();
+  }
+
+  public ChartOptionsReportCA202PhatTrien: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA202PhatTrien: Color[] = [
+    { backgroundColor: 'blue' },
+  ]
+  public ChartLabelsReportCA202PhatTrien: Label[] = [];
+  public ChartTypeReportCA202PhatTrien: ChartType = 'bar';
+  public ChartLegendReportCA202PhatTrien = true;
+  public ChartPluginsReportCA202PhatTrien = [];
+
+  public ChartDataReportCA202PhatTrien: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA202GiaHan: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA202GiaHan: Color[] = [
+    { backgroundColor: 'blue' },
+  ]
+  public ChartLabelsReportCA202GiaHan: Label[] = [];
+  public ChartTypeReportCA202GiaHan: ChartType = 'bar';
+  public ChartLegendReportCA202GiaHan = true;
+  public ChartPluginsReportCA202GiaHan = [];
+
+  public ChartDataReportCA202GiaHan: ChartDataSets[] = [
+  ];
+
 
 
 

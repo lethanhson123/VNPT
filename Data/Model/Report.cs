@@ -2,6 +2,16 @@
 {
     public partial class Report : BaseModel
     {
+		public decimal? SanLuong { get; set; }
+		public decimal? PhatTrien { get; set; }
+		public decimal? GiaHan { get; set; }
+		public decimal? HoSoHoanThanh { get; set; }
+		public decimal? PhatTrienChiTieu { get; set; }
+		public decimal? GiaHanChiTieu { get; set; }
+		public decimal? TyLeHoSo { get; set; }
+		public decimal? TyLePhatTrien { get; set; }
+		public decimal? TyLeGiaHan { get; set; }
+
 		public long? NhanVienTaoYeuCauID { get; set; }
 		public string? NhanVienTaoYeuCauName { get; set; }
 		public long? NhanVienDuyetYeuCauID { get; set; }
@@ -9,6 +19,7 @@
 		public string? PhongBanDuyetYeuCauName { get; set; }
 
 		public string? PhongBan { get; set; }
+		public string? PhongBanName { get; set; }
 		public string? NhanVienName { get; set; }
 		public string? DiaChi { get; set; }        
         public string? HuyenName { get; set; }
