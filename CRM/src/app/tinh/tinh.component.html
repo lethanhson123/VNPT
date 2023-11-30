@@ -23,6 +23,12 @@
                     <div class="custom-tabs-container">
                         <ul class="nav nav-tabs justify-content-end" id="customTab5" role="tablist">
                             <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-10" data-bs-toggle="tab" href="#10" role="tab"
+                                    aria-controls="10" aria-selected="false">
+                                    <span class="badge bg-success">Email</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-9" data-bs-toggle="tab" href="#9" role="tab"
                                     aria-controls="9" aria-selected="false">
                                     <span class="badge bg-warning">Gói cước</span>
@@ -76,8 +82,162 @@
                                     <span class="badge bg-warning">Loại doanh nghiệp</span>
                                 </a>
                             </li>
+
                         </ul>
                         <div class="tab-content" id="customTabContent">
+                            <div class="tab-pane fade" id="10" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-10 col-sm-12 col-14">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchEmailConfig()">
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchEmailConfig()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-success">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Danh sách
+                                            <span *ngIf="EmailConfigService.list">({{EmailConfigService.list.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table mat-table matSort #sort10="matSort" [dataSource]="dataSource10"
+                                                    class="table table-striped m-0">
+                                                    <ng-container matColumnDef="No">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            No.
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element; index as i;">
+                                                            {{paginator10.pageSize *
+                                                            paginator10.pageIndex + i + 1}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="MasterEmailUser">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text" placeholder="Email"
+                                                                name="MasterEmailUser{{element.ID}}"
+                                                                [(ngModel)]="element.MasterEmailUser">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="MasterEmailPassword">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Password
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Password"
+                                                                name="MasterEmailPassword{{element.ID}}"
+                                                                [(ngModel)]="element.MasterEmailPassword">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="MasterEmailDisplay">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Display
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Display"
+                                                                name="MasterEmailDisplay{{element.ID}}"
+                                                                [(ngModel)]="element.MasterEmailDisplay">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SMTPServer">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>SMTPServer
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="SMTPServer" name="SMTPServer{{element.ID}}"
+                                                                [(ngModel)]="element.SMTPServer">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SMTPPort">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>SMTPPort
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="number" placeholder="0"
+                                                                name="SMTPPort{{element.ID}}"
+                                                                [(ngModel)]="element.SMTPPort"
+                                                                style="text-align: right;">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsMailUsingSSL">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            IsSSL
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="IsMailUsingSSL{{element.ID}}"
+                                                                    [(ngModel)]="element.IsMailUsingSSL">
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsMailBodyHtml">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            IsHtml
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="IsMailBodyHtml{{element.ID}}"
+                                                                    [(ngModel)]="element.IsMailBodyHtml">
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SortOrder">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="number" placeholder="0"
+                                                                name="SortOrder{{element.ID}}"
+                                                                [(ngModel)]="element.SortOrder"
+                                                                style="text-align: right;">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Active">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Active{{element.ID}}"
+                                                                    [(ngModel)]="element.Active">
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Save">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a class="btn btn-info"
+                                                                (click)="onSaveEmailConfig(element)"><i
+                                                                    class="bi bi-sd-card"></i>
+                                                            </a>&nbsp;&nbsp;&nbsp;
+                                                            <a class="btn btn-danger"
+                                                                (click)="onDeleteEmailConfig(element)"
+                                                                *ngIf="element.ID>0"><i class="bi bi-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="EmailConfigService.displayColumns">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: EmailConfigService.displayColumns;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginator10="matPaginator"
+                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                                    [showFirstLastButtons]></mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="tab-pane fade" id="9" role="tabpanel">
                                 <div class="row gx-4">
                                     <div class="col-lg-10 col-sm-12 col-14">
@@ -107,9 +267,9 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element; index as i;">
                                                             {{paginator9.pageSize *
-                                                                paginator9.pageIndex + i + 1}}
+                                                            paginator9.pageIndex + i + 1}}
                                                         </td>
-                                                    </ng-container>                                                   
+                                                    </ng-container>
                                                     <ng-container matColumnDef="Name">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
                                                         </th>
@@ -123,8 +283,8 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <input class="form-control" type="text"
-                                                                placeholder="Mô tả" name="Description{{element.ID}}"
+                                                            <input class="form-control" type="text" placeholder="Mô tả"
+                                                                name="Description{{element.ID}}"
                                                                 [(ngModel)]="element.Description">
                                                         </td>
                                                     </ng-container>
@@ -142,8 +302,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
                                                             <input class="form-control" type="number" placeholder="0"
-                                                                name="Thang{{element.ID}}"
-                                                                [(ngModel)]="element.Thang"
+                                                                name="Thang{{element.ID}}" [(ngModel)]="element.Thang"
                                                                 style="text-align: right;">
                                                         </td>
                                                     </ng-container>
@@ -166,7 +325,7 @@
                                                                 [(ngModel)]="element.GiaCuoc"
                                                                 style="text-align: right;">
                                                         </td>
-                                                    </ng-container>                                                   
+                                                    </ng-container>
                                                     <ng-container matColumnDef="Active">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
                                                         </th>
@@ -182,12 +341,10 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <a class="btn btn-info"
-                                                                (click)="onSaveGoiCuoc(element)"><i
+                                                            <a class="btn btn-info" (click)="onSaveGoiCuoc(element)"><i
                                                                     class="bi bi-sd-card"></i>
                                                             </a>&nbsp;&nbsp;&nbsp;
-                                                            <a class="btn btn-danger"
-                                                                (click)="onDeleteGoiCuoc(element)"
+                                                            <a class="btn btn-danger" (click)="onDeleteGoiCuoc(element)"
                                                                 *ngIf="element.ID>0"><i class="bi bi-trash"></i>
                                                             </a>
                                                         </td>
@@ -300,12 +457,10 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <a class="btn btn-info"
-                                                                (click)="onSaveDichVu(element)"><i
+                                                            <a class="btn btn-info" (click)="onSaveDichVu(element)"><i
                                                                     class="bi bi-sd-card"></i>
                                                             </a>&nbsp;&nbsp;&nbsp;
-                                                            <a class="btn btn-danger"
-                                                                (click)="onDeleteDichVu(element)"
+                                                            <a class="btn btn-danger" (click)="onDeleteDichVu(element)"
                                                                 *ngIf="element.ID>0"><i class="bi bi-trash"></i>
                                                             </a>
                                                         </td>

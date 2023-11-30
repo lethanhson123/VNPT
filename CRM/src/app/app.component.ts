@@ -30,7 +30,7 @@ export class AppComponent {
         this.queryString = event.url;
         if (this.queryString.indexOf(environment.Token) > -1) {
           localStorage.setItem(environment.Token, this.queryString.split('=')[this.queryString.split('=').length - 1]);
-        }
+        }        
         this.AuthenticationToken();
       }
     });

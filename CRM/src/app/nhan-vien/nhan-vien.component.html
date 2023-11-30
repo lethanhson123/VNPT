@@ -48,43 +48,77 @@
                 <div class="card-body">
                     <div class="table-outer">
                         <div class="table-responsive">
-                            <table class="table table-striped m-0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Phòng ban</th>
-                                        <th>Mã nhân viên</th>
-                                        <th>Nhân viên</th>
-                                        <th>Điện thoại</th>                                       
-                                        <th>Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let element of NhanVienService.list; index as i">
-                                        <td>{{i + 1}}</td>
-                                        <td>
-                                            <div *ngFor="let item of PhongBanService.list;">
-                                                <div *ngIf="item.ID==element.ParentID">
-                                                    {{item.Name}}
-                                                </div>
+                            <table mat-table matSort #sort="matSort" [dataSource]="dataSource"
+                                class="table table-striped m-0">
+                                <ng-container matColumnDef="No">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        No.
+                                    </th>
+                                    <td mat-cell *matCellDef="let element; index as i;">
+                                        {{paginator.pageSize *
+                                        paginator.pageIndex + i + 1}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="ParentID">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Phòng ban
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div *ngFor="let item of PhongBanService.list;">
+                                            <div *ngIf="item.ID==element.ParentID">
+                                                {{item.Name}}
                                             </div>
-                                        </td>
-                                        <td>
-                                            {{element.Code}}
-                                        </td>
-                                        <td>
-                                            <a class="link-primary" target="_blank" title="{{element.Name}}"
-                                                href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
-                                        </td>
-                                        <td>
-                                            {{element.DienThoai}}
-                                        </td>                                        
-                                        <td>
-                                            {{element.Email}}
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <a class="link-primary" target="_blank" title="{{element.Name}}"
+                                            href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="DienThoai">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.DienThoai}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Email">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.Email}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Active">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="Active{{element.ID}}"
+                                                [(ngModel)]="element.Active">
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Save">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <a class="btn btn-danger" (click)="onDelete(element)" *ngIf="element.ID>0"><i
+                                                class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="NhanVienService.displayColumns">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: NhanVienService.displayColumns;">
+                                </tr>
                             </table>
+                            <mat-paginator #paginator="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                [showFirstLastButtons]></mat-paginator>
+
                         </div>
                     </div>
                 </div>

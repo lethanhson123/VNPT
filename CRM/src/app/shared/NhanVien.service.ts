@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class NhanVienService extends BaseService {
-    displayColumns: string[] = ['ParentID', 'Code', 'Name', 'DienThoai', 'CCCD', 'Email'];
+    displayColumns: string[] = ['No', 'ParentID', 'Name', 'DienThoai', 'Email', 'Active', 'Save'];
     displayColumns001: string[] = ['Code', 'Name', 'DienThoai'];
     list: NhanVien[] | undefined;
     formData!: NhanVien;
@@ -15,6 +15,7 @@ export class NhanVienService extends BaseService {
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "NhanVien";
+        this.GetLogin();
     }
 
     GetLogin() {

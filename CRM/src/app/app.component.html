@@ -147,7 +147,7 @@
                   <div class="dropdown ms-4">
                         <a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center" href="#!"
                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <img src="{{NhanVienService.formDataLogin.Note}}" class="rounded-4 img-3x"
+                              <img *ngIf="NhanVienService.formDataLogin.Note" src="{{NhanVienService.formDataLogin.Note}}" class="rounded-4 img-3x"
                                     alt="{{NhanVienService.formDataLogin.Name}}" title="{{NhanVienService.formDataLogin.Name}}" />
                               <span class="ms-2 text-truncate d-lg-block d-none">{{NhanVienService.formDataLogin.Name}}</span>
                         </a>

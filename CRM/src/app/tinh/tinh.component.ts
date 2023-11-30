@@ -22,6 +22,8 @@ import { DichVu } from 'src/app/shared/DichVu.model';
 import { DichVuService } from 'src/app/shared/DichVu.service';
 import { GoiCuoc } from 'src/app/shared/GoiCuoc.model';
 import { GoiCuocService } from 'src/app/shared/GoiCuoc.service';
+import { EmailConfig } from 'src/app/shared/EmailConfig.model';
+import { EmailConfigService } from 'src/app/shared/EmailConfig.service';
 
 @Component({
   selector: 'app-tinh',
@@ -66,6 +68,10 @@ export class TinhComponent implements OnInit {
   @ViewChild('sort9') sort9: MatSort;
   @ViewChild('paginator9') paginator9: MatPaginator;
 
+  dataSource10: MatTableDataSource<any>;
+  @ViewChild('sort10') sort10: MatSort;
+  @ViewChild('paginator10') paginator10: MatPaginator;
+
 
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
@@ -79,12 +85,61 @@ export class TinhComponent implements OnInit {
     public LoaiDichVuService: LoaiDichVuService,
     public DichVuService: DichVuService,
     public GoiCuocService: GoiCuocService,
+    public EmailConfigService: EmailConfigService,
     public NotificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
     this.onSearchTinh();
-    this.onSearchHuyen();    
+    this.onSearchHuyen();
+  }
+
+  EmailConfigGetToList() {
+    this.isShowLoading = true;
+    this.EmailConfigService.GetAllAndEmptyToListAsync().subscribe(
+      res => {
+        this.EmailConfigService.list = (res as EmailConfig[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.dataSource10 = new MatTableDataSource(this.EmailConfigService.list);
+        this.dataSource10.sort = this.sort10;
+        this.dataSource10.paginator = this.paginator10;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchEmailConfig() {
+    if (this.searchString.length > 0) {
+      this.dataSource10.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.EmailConfigGetToList();
+    }
+  }
+  onSaveEmailConfig(element: EmailConfig) {
+    this.EmailConfigService.SaveAsync(element).subscribe(
+      res => {
+        this.onSearchEmailConfig();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onDeleteEmailConfig(element: EmailConfig) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.EmailConfigService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.onSearchEmailConfig();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
   }
 
   GoiCuocGetToList() {

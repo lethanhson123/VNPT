@@ -1,9 +1,9 @@
 export const environment = {
   production: false, 
-  DomainURL: "https://crm.vnptvungtau.vn/",  
-  DomainDestination: "https://crm.vnptvungtau.vn/#/",  
-  APIURL: "https://apicrm.vnptvungtau.vn/api/v1/",    
-  APIRootURL: "https://apicrm.vnptvungtau.vn/",    
+  DomainURL: "http://localhost:4200/",  
+  DomainDestination: "http://localhost:4200/#/",  
+  APIURL: "https://localhost:7226/api/v1/",    
+  APIRootURL: "https://localhost:7226/",    
   LoginURL: "https://login.vnptvungtau.vn/",
   Website: "https://vnptvungtau.vn/",
   Image: "Image",  

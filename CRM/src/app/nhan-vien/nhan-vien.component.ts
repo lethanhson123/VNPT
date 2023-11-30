@@ -16,7 +16,7 @@ import { PhongBanService } from 'src/app/shared/PhongBan.service';
 })
 export class NhanVienComponent implements OnInit {
 
-  dataSource: MatTableDataSource<any>;  
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -36,8 +36,8 @@ export class NhanVienComponent implements OnInit {
     this.isShowLoading = true;
     this.NhanVienService.GetAllToListAsync().subscribe(
       res => {
-        this.NhanVienService.list = res as NhanVien[];
-        this.dataSource = new MatTableDataSource(this.NhanVienService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.NhanVienService.list = (res as NhanVien[]).sort((a, b) => (a.ParentID > b.ParentID ? 1 : -1));
+        this.dataSource = new MatTableDataSource(this.NhanVienService.list);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
@@ -62,23 +62,11 @@ export class NhanVienComponent implements OnInit {
   onSearch() {
     if (this.searchString.length > 0) {
       this.dataSource.filter = this.searchString.toLowerCase();
-      this.NhanVienService.list = this.dataSource.filteredData;
     }
     else {
       this.getToList();
     }
-  }
-  onSave(element: NhanVien) {    
-    this.NhanVienService.SaveAsync(element).subscribe(
-      res => {        
-        this.onSearch();
-        this.NotificationService.warn(environment.SaveSuccess);
-      },
-      err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);
-      }
-    );
-  }
+  }  
   onDelete(element: NhanVien) {
     if (confirm(environment.DeleteConfirm)) {
       this.NhanVienService.RemoveAsync(element.ID).subscribe(
@@ -91,16 +79,5 @@ export class NhanVienComponent implements OnInit {
         }
       );
     }
-  }
-  onSaveList() {    
-    this.NhanVienService.SaveListAsync(this.NhanVienService.list).subscribe(
-      res => {
-        this.onSearch();
-        this.NotificationService.warn(environment.SaveSuccess);
-      },
-      err => {
-        this.NotificationService.warn(environment.SaveNotSuccess);
-      }
-    );
   }
 }

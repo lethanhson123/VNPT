@@ -167,7 +167,7 @@ export class DashboardCAComponent implements OnInit {
       err => {
         this.isShowLoading = false;
       }
-    );  
+    );
   }
   ReportCA202Async() {
     this.isShowLoading = true;
@@ -186,18 +186,18 @@ export class DashboardCAComponent implements OnInit {
           dataArray003.push(this.ReportService.listReportCA202[i].GiaHan);
           dataArray004.push(this.ReportService.listReportCA202[i].GiaHanChiTieu);
         }
-        let label001: string = 'Phát triển mới';
+        let label001: string = 'Phát triển';
         let label002: string = 'Chỉ tiêu';
         let label003: string = 'Gia hạn';
         let label004: string = 'Chỉ tiêu';
         this.ChartLabelsReportCA202PhatTrien = labelArray;
         this.ChartDataReportCA202PhatTrien = [
-          { data: dataArray001, label: label001, stack: 'a' },
-          { data: dataArray002, label: label002, stack: 'b' }
+          { data: dataArray001, label: label001, stack: 'a', type: 'line', fill: false },
+          { data: dataArray002, label: label002, stack: 'b', }
         ];
         this.ChartLabelsReportCA202GiaHan = labelArray;
         this.ChartDataReportCA202GiaHan = [
-          { data: dataArray003, label: label003, stack: 'a' },
+          { data: dataArray003, label: label003, stack: 'a', type: 'line', fill: false },
           { data: dataArray004, label: label004, stack: 'b' }
         ];
         this.isShowLoading = false;
@@ -224,8 +224,7 @@ export class DashboardCAComponent implements OnInit {
       }
     }
   };
-  public ChartColorsReportCA202PhatTrien: Color[] = [
-    { backgroundColor: 'blue' },
+  public ChartColorsReportCA202PhatTrien: Color[] = [    
   ]
   public ChartLabelsReportCA202PhatTrien: Label[] = [];
   public ChartTypeReportCA202PhatTrien: ChartType = 'bar';
@@ -247,8 +246,7 @@ export class DashboardCAComponent implements OnInit {
       }
     }
   };
-  public ChartColorsReportCA202GiaHan: Color[] = [
-    { backgroundColor: 'blue' },
+  public ChartColorsReportCA202GiaHan: Color[] = [    
   ]
   public ChartLabelsReportCA202GiaHan: Label[] = [];
   public ChartTypeReportCA202GiaHan: ChartType = 'bar';

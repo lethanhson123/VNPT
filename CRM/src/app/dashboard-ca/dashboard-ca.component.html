@@ -95,6 +95,8 @@
                                     </div>
                                     <div class="col-lg-2 col-sm-12 col-12">
                                         <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of DownloadService.listMonth;"
                                                 [value]="item.Display">
                                                 {{item.Display}}</option>
@@ -106,17 +108,17 @@
                                     </div>
                                 </div>
                                 <div class="row gx-4">
-                                    <div class="col-xl-4 col-sm-6 col-12">
+                                    <div class="col-xl-2 col-sm-6 col-12">
                                         <div class="card my-2 card-success">
                                             <div class="card-header">
                                                 <h5 class="card-title text-white">Doanh thu</h5>
                                             </div>
                                             <div class="card-body">
                                                 <h1 class="display-3 text-white m-0 lh-1">
-                                                    {{ReportService.formData.DoanhThu |
+                                                    {{ReportService.formData.DoanhThuLast    |
                                                     number:
-                                                    '1.0-0'}}</h1>
-                                                <h6 class="text-white m-0">Đơn vị tính: đồng</h6>
+                                                    '1.0-2'}}</h1>
+                                                <h6 class="text-white m-0">Đơn vị tính: triệu đồng</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +139,7 @@
                                     <div class="col-xl-2 col-sm-6 col-12">
                                         <div class="card my-2 card-info">
                                             <div class="card-header">
-                                                <h5 class="card-title text-white">Phát triển mới</h5>
+                                                <h5 class="card-title text-white">Phát triển</h5>
                                             </div>
                                             <div class="card-body">
                                                 <h1 class="display-3 text-white m-0 lh-1">
@@ -177,7 +179,7 @@
                                     <div class="col-xl-2 col-sm-6 col-12">
                                         <div class="card my-2 card-success">
                                             <div class="card-header">
-                                                <h5 class="card-title text-white">Hồ sơ hoàn thành</h5>
+                                                <h5 class="card-title text-white">Hồ sơ</h5>
                                             </div>
                                             <div class="card-body">
                                                 <h1 class="display-3 text-white m-0 lh-1">
@@ -195,15 +197,19 @@
                                 <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <canvas baseChart [datasets]="ChartDataReportCA202PhatTrien"
-                                            [labels]="ChartLabelsReportCA202PhatTrien" [chartType]="ChartTypeReportCA202PhatTrien"
-                                            [colors]="ChartColorsReportCA202PhatTrien" [options]="ChartOptionsReportCA202PhatTrien">
+                                            [labels]="ChartLabelsReportCA202PhatTrien"
+                                            [chartType]="ChartTypeReportCA202PhatTrien"
+                                            [colors]="ChartColorsReportCA202PhatTrien"
+                                            [options]="ChartOptionsReportCA202PhatTrien">
                                         </canvas>
                                     </div>
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <canvas baseChart [datasets]="ChartDataReportCA202GiaHan"
-                                        [labels]="ChartLabelsReportCA202GiaHan" [chartType]="ChartTypeReportCA202GiaHan"
-                                        [colors]="ChartColorsReportCA202GiaHan" [options]="ChartOptionsReportCA202GiaHan">
-                                    </canvas>
+                                            [labels]="ChartLabelsReportCA202GiaHan"
+                                            [chartType]="ChartTypeReportCA202GiaHan"
+                                            [colors]="ChartColorsReportCA202GiaHan"
+                                            [options]="ChartOptionsReportCA202GiaHan">
+                                        </canvas>
                                     </div>
                                 </div>
                             </div>
