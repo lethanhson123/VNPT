@@ -5,6 +5,7 @@
 		public int? Thang { get; set; }
 		public int? ThangKhuyenMai { get; set; }
 		public int? GiaCuoc { get; set; }
+		public bool? IsSmartCA { get; set; }
 		public GoiCuoc()
         {
         }

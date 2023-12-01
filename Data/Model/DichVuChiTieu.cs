@@ -11,6 +11,10 @@
 		public int? GiaHan { get; set; }
 		public int? PhongBanPhatTrien { get; set; }
 		public int? PhongBanGiaHan { get; set; }
+		public int? SmartCAPhatTrien { get; set; }
+		public int? SmartCAGiaHan { get; set; }
+		public int? SmartCAPhongBanPhatTrien { get; set; }
+		public int? SmartCAPhongBanGiaHan { get; set; }
 		public DichVuChiTieu()
 		{
 		}

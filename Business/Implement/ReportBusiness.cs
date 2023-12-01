@@ -401,5 +401,38 @@ namespace Business.Implement
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA202", parameters);
 			return result;
 		}
+		public virtual async Task<List<Report>> ReportCA203Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA203", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA204Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA204", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA205Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA205", parameters);
+			return result;
+		}
 	}
 }

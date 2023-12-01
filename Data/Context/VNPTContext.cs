@@ -9,6 +9,7 @@
             : base(options)
         {
         }
+		public virtual DbSet<Data.Model.DanhMucGoiCuoc> DanhMucGoiCuoc { get; set; }
 		public virtual DbSet<Data.Model.EmailConfig> EmailConfig { get; set; }
 		public virtual DbSet<Data.Model.DichVu> DichVu { get; set; }
 		public virtual DbSet<Data.Model.DichVuChiTieu> DichVuChiTieu { get; set; }

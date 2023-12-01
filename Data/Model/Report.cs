@@ -14,6 +14,8 @@
 
 		public long? NhanVienTaoYeuCauID { get; set; }
 		public string? NhanVienTaoYeuCauName { get; set; }
+		public long? PhongBanTaoYeuCauID { get; set; }
+		public string? PhongBanTaoYeuCauName { get; set; }
 		public long? NhanVienDuyetYeuCauID { get; set; }
 		public long? PhongBanDuyetYeuCauID { get; set; }
 		public string? PhongBanDuyetYeuCauName { get; set; }

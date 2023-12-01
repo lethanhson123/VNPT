@@ -4,4 +4,5 @@ export class GoiCuoc extends Base{
     Thang?: number;
     ThangKhuyenMai?: number;
     GiaCuoc?: number;      
+    IsSmartCA?: number;      
 }

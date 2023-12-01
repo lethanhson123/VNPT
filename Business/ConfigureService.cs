@@ -6,6 +6,7 @@ namespace Business
     {
         public static IServiceCollection AddBusinessService(this IServiceCollection services)
         {
+			services.AddTransient<IDanhMucGoiCuocBusiness, DanhMucGoiCuocBusiness>();
 			services.AddTransient<IEmailConfigBusiness, EmailConfigBusiness>();
 			services.AddTransient<IDichVuBusiness, DichVuBusiness>();
 			services.AddTransient<IDichVuChiTieuBusiness, DichVuChiTieuBusiness>();
@@ -44,6 +45,7 @@ namespace Business
         }
         public static IServiceCollection AddRepositoryService(this IServiceCollection services)
         {
+			services.AddTransient<IDanhMucGoiCuocRepository, DanhMucGoiCuocRepository>();
 			services.AddTransient<IEmailConfigRepository, EmailConfigRepository>();
 			services.AddTransient<IDichVuRepository, DichVuRepository>();
 			services.AddTransient<IDichVuChiTieuRepository, DichVuChiTieuRepository>();

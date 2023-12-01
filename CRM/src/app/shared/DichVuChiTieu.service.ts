@@ -7,7 +7,7 @@ import { BaseService } from './Base.service';
     providedIn: 'root'
 })
 export class DichVuChiTieuService extends BaseService {
-    displayColumns: string[] = ['Nam', 'PhongBanID', 'PhongBanPhatTrien', 'PhongBanGiaHan', 'NhanVienID', 'PhatTrien', 'GiaHan', 'Save']; 
+    displayColumns: string[] = ['Nam', 'PhongBanID', 'PhongBanPhatTrien', 'PhongBanGiaHan','SmartCAPhongBanPhatTrien', 'SmartCAPhongBanGiaHan', 'NhanVienID', 'PhatTrien', 'GiaHan','SmartCAPhatTrien', 'SmartCAGiaHan', 'Save']; 
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "DichVuChiTieu";

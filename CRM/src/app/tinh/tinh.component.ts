@@ -24,6 +24,16 @@ import { GoiCuoc } from 'src/app/shared/GoiCuoc.model';
 import { GoiCuocService } from 'src/app/shared/GoiCuoc.service';
 import { EmailConfig } from 'src/app/shared/EmailConfig.model';
 import { EmailConfigService } from 'src/app/shared/EmailConfig.service';
+import { NhanVien } from 'src/app/shared/NhanVien.model';
+import { NhanVienService } from 'src/app/shared/NhanVien.service';
+import { NhanVienTaiKhoan } from 'src/app/shared/NhanVienTaiKhoan.model';
+import { NhanVienTaiKhoanService } from 'src/app/shared/NhanVienTaiKhoan.service';
+import { DichVuChiTieu } from 'src/app/shared/DichVuChiTieu.model';
+import { DichVuChiTieuService } from 'src/app/shared/DichVuChiTieu.service';
+import { DanhMucGoiCuoc } from 'src/app/shared/DanhMucGoiCuoc.model';
+import { DanhMucGoiCuocService } from 'src/app/shared/DanhMucGoiCuoc.service';
+import { YearMonth } from 'src/app/shared/YearMonth.model';
+import { DownloadService } from 'src/app/shared/Download.service';
 
 @Component({
   selector: 'app-tinh',
@@ -72,9 +82,23 @@ export class TinhComponent implements OnInit {
   @ViewChild('sort10') sort10: MatSort;
   @ViewChild('paginator10') paginator10: MatPaginator;
 
+  dataSource11: MatTableDataSource<any>;
+  @ViewChild('sort11') sort11: MatSort;
+  @ViewChild('paginator11') paginator11: MatPaginator;
+
+  dataSource12: MatTableDataSource<any>;
+  @ViewChild('sort12') sort12: MatSort;
+  @ViewChild('paginator12') paginator12: MatPaginator;
+
+  dataSource13: MatTableDataSource<any>;
+  @ViewChild('sort13') sort13: MatSort;
+  @ViewChild('paginator13') paginator13: MatPaginator;
+
 
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
+  year: number = new Date().getFullYear();
+  month: number = new Date().getMonth() + 1;
   constructor(
     public TinhService: TinhService,
     public HuyenService: HuyenService,
@@ -86,12 +110,188 @@ export class TinhComponent implements OnInit {
     public DichVuService: DichVuService,
     public GoiCuocService: GoiCuocService,
     public EmailConfigService: EmailConfigService,
+    public NhanVienService: NhanVienService,
+    public NhanVienTaiKhoanService: NhanVienTaiKhoanService,
+    public DichVuChiTieuService: DichVuChiTieuService,
+    public DanhMucGoiCuocService: DanhMucGoiCuocService,
+    public DownloadService: DownloadService,
     public NotificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
     this.onSearchTinh();
     this.onSearchHuyen();
+    this.NhanVienGetToList();
+    this.GetYearToList();
+    this.GetMonthToList();
+  }
+
+  DanhMucGoiCuocGetToList() {
+    this.isShowLoading = true;
+    this.DanhMucGoiCuocService.GetAllAndEmptyToListAsync().subscribe(
+      res => {
+        this.DanhMucGoiCuocService.list = (res as DanhMucGoiCuoc[]);
+        this.dataSource13 = new MatTableDataSource(this.DanhMucGoiCuocService.list);
+        this.dataSource13.sort = this.sort13;
+        this.dataSource13.paginator = this.paginator13;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchDanhMucGoiCuoc() {
+    if (this.searchString.length > 0) {
+      this.dataSource13.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.DanhMucGoiCuocGetToList();
+    }
+  }
+  onSaveDanhMucGoiCuoc(element: DanhMucGoiCuoc) {
+    this.DanhMucGoiCuocService.SaveAsync(element).subscribe(
+      res => {
+        this.onSearchDanhMucGoiCuoc();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onDeleteDanhMucGoiCuoc(element: DanhMucGoiCuoc) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.DanhMucGoiCuocService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.onSearchDanhMucGoiCuoc();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
+  }
+
+  GetYearToList() {
+    this.DownloadService.GetYearToList().then(res => {
+      this.DownloadService.listYear = res as YearMonth[];
+    });
+  }
+  GetMonthToList() {
+    this.DownloadService.GetMonthToList().then(res => {
+      this.DownloadService.listMonth = res as YearMonth[];
+    });
+  }
+
+  DichVuChiTieuGetToList() {
+    this.isShowLoading = true;
+    this.DichVuChiTieuService.GetByNam_ThangToListAsync(this.year, this.month).subscribe(
+      res => {
+        this.DichVuChiTieuService.list = (res as DichVuChiTieu[]);
+        this.dataSource12 = new MatTableDataSource(this.DichVuChiTieuService.list);
+        this.dataSource12.sort = this.sort12;
+        this.dataSource12.paginator = this.paginator12;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchDichVuChiTieu() {
+    if (this.searchString.length > 0) {
+      this.dataSource12.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.DichVuChiTieuGetToList();
+    }
+  }
+  onSaveDichVuChiTieu(element: DichVuChiTieu) {
+    this.DichVuChiTieuService.SaveAsync(element).subscribe(
+      res => {
+        this.onSearchDichVuChiTieu();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onDeleteDichVuChiTieu(element: DichVuChiTieu) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.DichVuChiTieuService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.onSearchDichVuChiTieu();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
+  }
+
+  NhanVienGetToList() {
+    this.isShowLoading = true;
+    this.NhanVienService.GetAllToListAsync().subscribe(
+      res => {
+        this.NhanVienService.list = (res as NhanVien[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));       
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+
+  NhanVienTaiKhoanGetToList() {
+    this.isShowLoading = true;
+    this.NhanVienTaiKhoanService.GetAllAndEmptyToListAsync().subscribe(
+      res => {
+        this.NhanVienTaiKhoanService.list = (res as NhanVienTaiKhoan[]).sort((a, b) => (a.ParentID > b.ParentID ? 1 : -1));
+        this.dataSource11 = new MatTableDataSource(this.NhanVienTaiKhoanService.list);
+        this.dataSource11.sort = this.sort11;
+        this.dataSource11.paginator = this.paginator11;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchNhanVienTaiKhoan() {
+    if (this.searchString.length > 0) {
+      this.dataSource11.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.NhanVienTaiKhoanGetToList();
+    }
+  }
+  onSaveNhanVienTaiKhoan(element: NhanVienTaiKhoan) {
+    this.NhanVienTaiKhoanService.SaveAsync(element).subscribe(
+      res => {
+        this.onSearchNhanVienTaiKhoan();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onDeleteNhanVienTaiKhoan(element: NhanVienTaiKhoan) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.NhanVienTaiKhoanService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.onSearchNhanVienTaiKhoan();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
   }
 
   EmailConfigGetToList() {

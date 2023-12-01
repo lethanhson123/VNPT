@@ -10,6 +10,10 @@ export class DichVuChiTieu extends Base {
     GiaHan?: number;
     PhongBanPhatTrien?: number;
     PhongBanGiaHan?: number;
+    SmartCAPhatTrien?: number;
+    SmartCAGiaHan?: number;
+    SmartCAPhongBanPhatTrien?: number;
+    SmartCAPhongBanGiaHan?: number;
 }
 
 

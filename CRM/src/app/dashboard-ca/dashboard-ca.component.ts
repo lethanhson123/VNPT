@@ -75,6 +75,13 @@ export class DashboardCAComponent implements OnInit {
   @ViewChild('sort9') sort9: MatSort;
   @ViewChild('paginator9') paginator9: MatPaginator;
 
+  dataSource203: MatTableDataSource<any>;
+  @ViewChild('sort203') sort203: MatSort;
+  @ViewChild('paginator203') paginator203: MatPaginator;
+
+  dataSource204: MatTableDataSource<any>;
+  @ViewChild('sort204') sort204: MatSort;
+  @ViewChild('paginator204') paginator204: MatPaginator;
 
   isShowLoading: boolean = false;
   huyenID: number = 1;
@@ -207,10 +214,122 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
+  ReportCA205Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA205Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReportCA205 = (res as Report[]);
+        let labelArray001 = [];
+        let dataArray001 = [];
+        let labelArray002 = [];
+        let dataArray002 = [];
+        for (let i = 0; i < this.ReportService.listReportCA205.length; i++) {
+          labelArray001.push(this.ReportService.listReportCA205[i].LoaiGoiCuoc);
+          dataArray001.push(this.ReportService.listReportCA205[i].SanLuong);
+          labelArray002.push(this.ReportService.listReportCA205[i].LoaiGoiCuoc);
+          dataArray002.push(this.ReportService.listReportCA205[i].DoanhThu);
+        }
+        this.ChartLabelsReportCA205SanLuong = labelArray001;
+        this.ChartDataReportCA205SanLuong = [
+          { data: dataArray001, stack: 'a' },
+        ];
+        this.ChartLabelsReportCA205DoanhThu = labelArray002;
+        this.ChartDataReportCA205DoanhThu = [
+          { data: dataArray002, stack: 'a' },
+        ];
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+
+  ReportCA203Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA203Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReportCA203 = (res as Report[]);
+        this.dataSource203 = new MatTableDataSource(this.ReportService.listReportCA203);
+        this.dataSource203.sort = this.sort203;
+        this.dataSource203.paginator = this.paginator203;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  ReportCA204Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA204Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReportCA204 = (res as Report[]);
+        this.dataSource204 = new MatTableDataSource(this.ReportService.listReportCA204);
+        this.dataSource204.sort = this.sort204;
+        this.dataSource204.paginator = this.paginator204;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   onSearchReportCA201() {
     this.ReportCA201Async();
     this.ReportCA202Async();
+    this.ReportCA205Async();
+    this.ReportCA203Async();
+    this.ReportCA204Async();
   }
+
+  public ChartOptionsReportCA205SanLuong: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA205SanLuong: Color[] = [
+  ]
+  public ChartLabelsReportCA205SanLuong: Label[] = [];
+  public ChartTypeReportCA205SanLuong: ChartType = 'doughnut';
+  public ChartLegendReportCA205SanLuong = true;
+  public ChartPluginsReportCA205SanLuong = [];
+
+  public ChartDataReportCA205SanLuong: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA205DoanhThu: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA205DoanhThu: Color[] = [
+  ]
+  public ChartLabelsReportCA205DoanhThu: Label[] = [];
+  public ChartTypeReportCA205DoanhThu: ChartType = 'doughnut';
+  public ChartLegendReportCA205DoanhThu = true;
+  public ChartPluginsReportCA205DoanhThu = [];
+
+  public ChartDataReportCA205DoanhThu: ChartDataSets[] = [
+  ];
 
   public ChartOptionsReportCA202PhatTrien: ChartOptions = {
     responsive: true,
@@ -224,7 +343,7 @@ export class DashboardCAComponent implements OnInit {
       }
     }
   };
-  public ChartColorsReportCA202PhatTrien: Color[] = [    
+  public ChartColorsReportCA202PhatTrien: Color[] = [
   ]
   public ChartLabelsReportCA202PhatTrien: Label[] = [];
   public ChartTypeReportCA202PhatTrien: ChartType = 'bar';
@@ -246,7 +365,7 @@ export class DashboardCAComponent implements OnInit {
       }
     }
   };
-  public ChartColorsReportCA202GiaHan: Color[] = [    
+  public ChartColorsReportCA202GiaHan: Color[] = [
   ]
   public ChartLabelsReportCA202GiaHan: Label[] = [];
   public ChartTypeReportCA202GiaHan: ChartType = 'bar';
@@ -594,7 +713,7 @@ export class DashboardCAComponent implements OnInit {
     this.isShowLoading = true;
     this.DichVuChiTieuService.GetByNam_ThangToListAsync(this.year, this.month).subscribe(
       res => {
-        this.DichVuChiTieuService.list = (res as DichVuChiTieu[]).sort((a, b) => (a.NhanVienID > b.NhanVienID ? 1 : -1));
+        this.DichVuChiTieuService.list = (res as DichVuChiTieu[]);
         this.dataSource9 = new MatTableDataSource(this.DichVuChiTieuService.list);
         this.dataSource9.sort = this.sort9;
         this.dataSource9.paginator = this.paginator9;

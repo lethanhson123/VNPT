@@ -35,5 +35,9 @@ namespace Business.Interface
 
 		Task<Report> ReportCA201Async(int year, int month);
 		Task<List<Report>> ReportCA202Async(int year, int month);
+		Task<List<Report>> ReportCA203Async(int year, int month);
+		Task<List<Report>> ReportCA204Async(int year, int month);
+		Task<List<Report>> ReportCA205Async(int year, int month);
+
 	}
 }

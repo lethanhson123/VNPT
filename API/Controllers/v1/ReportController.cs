@@ -539,5 +539,56 @@ namespace API.Controllers.v1
 			}
 			return result;
 		}
+		[HttpPost]
+		[Route("ReportCA203Async")]
+		public virtual async Task<List<Report>> ReportCA203Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA203Async(year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA204Async")]
+		public virtual async Task<List<Report>> ReportCA204Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA204Async(year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA205Async")]
+		public virtual async Task<List<Report>> ReportCA205Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA205Async(year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }
