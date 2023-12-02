@@ -226,7 +226,7 @@ export class DashboardCAComponent implements OnInit {
         for (let i = 0; i < this.ReportService.listReportCA205.length; i++) {
           labelArray001.push(this.ReportService.listReportCA205[i].LoaiGoiCuoc);
           dataArray001.push(this.ReportService.listReportCA205[i].SanLuong);
-          labelArray002.push(this.ReportService.listReportCA205[i].LoaiGoiCuoc);
+          labelArray002.push(this.ReportService.listReportCA205[i].DichVu);
           dataArray002.push(this.ReportService.listReportCA205[i].DoanhThu);
         }
         this.ChartLabelsReportCA205SanLuong = labelArray001;
@@ -290,9 +290,7 @@ export class DashboardCAComponent implements OnInit {
         label: function (tooltipItem, data) {
           var label = data.labels[tooltipItem.index];
           var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
-          });
+          return label + '';
         }
       }
     }
@@ -314,9 +312,7 @@ export class DashboardCAComponent implements OnInit {
         label: function (tooltipItem, data) {
           var label = data.labels[tooltipItem.index];
           var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-          return label + ': ' + Number(value).toFixed(0).replace(/./g, function (c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
-          });
+          return label + '';
         }
       }
     }

@@ -235,7 +235,8 @@
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Xếp hạng
                                                                 </th>
-                                                                <td mat-cell *matCellDef="let element; index as i;" style="text-align: center; font-size: 30px;">
+                                                                <td mat-cell *matCellDef="let element; index as i;"
+                                                                    style="text-align: center; font-size: 30px;">
                                                                     {{paginator204.pageSize *
                                                                     paginator204.pageIndex + i + 1}}
                                                                 </td>
@@ -244,7 +245,8 @@
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Phòng Bán hàng
                                                                 </th>
-                                                                <td mat-cell *matCellDef="let element" style="font-size: 24px;">
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="font-size: 24px;">
                                                                     <b>{{element.PhongBanTaoYeuCauName}}</b>
                                                                 </td>
                                                             </ng-container>
@@ -253,7 +255,7 @@
                                                                     Sản lượng
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                style="text-align: right; font-size: 30px;">
+                                                                    style="text-align: right; font-size: 30px;">
                                                                     {{element.SanLuong |
                                                                     number:
                                                                     '1.0-0'}}
@@ -278,8 +280,8 @@
                                                             </tr>
                                                         </table>
                                                         <mat-paginator #paginator204="matPaginator"
-                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="100"
-                                                    [showFirstLastButtons]></mat-paginator>
+                                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="100"
+                                                            [showFirstLastButtons]></mat-paginator>
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +303,8 @@
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Xếp hạng
                                                                 </th>
-                                                                <td mat-cell *matCellDef="let element; index as i;" style="text-align: center; font-size: 30px;">
+                                                                <td mat-cell *matCellDef="let element; index as i;"
+                                                                    style="text-align: center; font-size: 30px;">
                                                                     {{paginator203.pageSize *
                                                                     paginator203.pageIndex + i + 1}}
                                                                 </td>
@@ -310,7 +313,8 @@
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Nhân viên
                                                                 </th>
-                                                                <td mat-cell *matCellDef="let element" style="font-size: 24px;">
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="font-size: 24px;">
                                                                     <b>{{element.NhanVienTaoYeuCauName}}</b>
                                                                 </td>
                                                             </ng-container>
@@ -344,8 +348,8 @@
                                                             </tr>
                                                         </table>
                                                         <mat-paginator #paginator203="matPaginator"
-                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="100"
-                                                    [showFirstLastButtons]></mat-paginator>
+                                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="100"
+                                                            [showFirstLastButtons]></mat-paginator>
                                                     </div>
                                                 </div>
                                             </div>
@@ -370,6 +374,8 @@
                                     </div>
                                     <div class="col-lg-1 col-sm-12 col-12">
                                         <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of DownloadService.listMonth;"
                                                 [value]="item.Display">
                                                 {{item.Display}}</option>
@@ -544,52 +550,68 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHopDong{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHopDong">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HopDong" target="_blank"
-                                                                    class="link-primary" href="{{element.HopDong}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsDonXinCapChungThuSo">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Đơn xin
-                                                            cấp
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsDonXinCapChungThuSo{{element.ID}}"
-                                                                    [(ngModel)]="element.IsDonXinCapChungThuSo">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.DonXinCapChungThuSo" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.DonXinCapChungThuSo}}"
-                                                                    title="{{element.DonXinCapChungThuSo}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsCCCD">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsCCCD{{element.ID}}"
-                                                                    [(ngModel)]="element.IsCCCD">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.CCCD" target="_blank"
-                                                                    class="link-primary" href="{{element.CCCD}}"
-                                                                    title="{{element.CCCD}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -597,35 +619,47 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsGiayPhepKinhDoanh{{element.ID}}"
-                                                                    [(ngModel)]="element.IsGiayPhepKinhDoanh">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.GiayPhepKinhDoanh" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.GiayPhepKinhDoanh}}"
-                                                                    title="{{element.GiayPhepKinhDoanh}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsBienBanNghiemThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nghiệm thu
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsBienBanNghiemThu{{element.ID}}"
-                                                                    [(ngModel)]="element.IsBienBanNghiemThu">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.BienBanNghiemThu" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.BienBanNghiemThu}}"
-                                                                    title="{{element.BienBanNghiemThu}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -633,16 +667,21 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHoaDon{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHoaDon">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HoaDon" target="_blank"
-                                                                    class="link-primary" href="{{element.HoaDon}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -654,14 +693,17 @@
                                                                 <input class="form-check-input" type="checkbox"
                                                                     name="IsKetLuan{{element.ID}}"
                                                                     [(ngModel)]="element.IsKetLuan">
+                                                                <br />
+                                                                <br />
+                                                                {{element.KetLuan}}
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="KetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nội dung
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            {{element.KetLuan}}
+                                                            {{element.Note}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="Save">
@@ -669,8 +711,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
                                                             <a class="btn btn-success" title="Chi tiết"
-                                                                (click)="onAddReportCA001(element.ID)"><i
-                                                                    class="bi bi-x-diamond"></i></a>
+                                                                (click)="onAddReportCA001(element.ID)">Upload hồ sơ</a>
                                                         </td>
                                                     </ng-container>
                                                     <tr mat-header-row
@@ -707,6 +748,8 @@
                                     </div>
                                     <div class="col-lg-1 col-sm-12 col-12">
                                         <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of DownloadService.listMonth;"
                                                 [value]="item.Display">
                                                 {{item.Display}}</option>
@@ -881,52 +924,68 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHopDong{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHopDong">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HopDong" target="_blank"
-                                                                    class="link-primary" href="{{element.HopDong}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsDonXinCapChungThuSo">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Đơn xin
-                                                            cấp
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsDonXinCapChungThuSo{{element.ID}}"
-                                                                    [(ngModel)]="element.IsDonXinCapChungThuSo">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.DonXinCapChungThuSo" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.DonXinCapChungThuSo}}"
-                                                                    title="{{element.DonXinCapChungThuSo}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsCCCD">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsCCCD{{element.ID}}"
-                                                                    [(ngModel)]="element.IsCCCD">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.CCCD" target="_blank"
-                                                                    class="link-primary" href="{{element.CCCD}}"
-                                                                    title="{{element.CCCD}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -934,35 +993,47 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsGiayPhepKinhDoanh{{element.ID}}"
-                                                                    [(ngModel)]="element.IsGiayPhepKinhDoanh">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.GiayPhepKinhDoanh" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.GiayPhepKinhDoanh}}"
-                                                                    title="{{element.GiayPhepKinhDoanh}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsBienBanNghiemThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nghiệm thu
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsBienBanNghiemThu{{element.ID}}"
-                                                                    [(ngModel)]="element.IsBienBanNghiemThu">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.BienBanNghiemThu" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.BienBanNghiemThu}}"
-                                                                    title="{{element.BienBanNghiemThu}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -970,16 +1041,21 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHoaDon{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHoaDon">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HoaDon" target="_blank"
-                                                                    class="link-primary" href="{{element.HoaDon}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -991,14 +1067,17 @@
                                                                 <input class="form-check-input" type="checkbox"
                                                                     name="IsKetLuan{{element.ID}}"
                                                                     [(ngModel)]="element.IsKetLuan">
+                                                                <br />
+                                                                <br />
+                                                                {{element.KetLuan}}
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="KetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nội dung
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            {{element.KetLuan}}
+                                                            {{element.Note}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="Save">
@@ -1044,6 +1123,8 @@
                                     </div>
                                     <div class="col-lg-1 col-sm-12 col-12">
                                         <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of DownloadService.listMonth;"
                                                 [value]="item.Display">
                                                 {{item.Display}}</option>
@@ -1218,52 +1299,68 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHopDong{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHopDong">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HopDong" target="_blank"
-                                                                    class="link-primary" href="{{element.HopDong}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsDonXinCapChungThuSo">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Đơn xin
-                                                            cấp
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsDonXinCapChungThuSo{{element.ID}}"
-                                                                    [(ngModel)]="element.IsDonXinCapChungThuSo">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.DonXinCapChungThuSo" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.DonXinCapChungThuSo}}"
-                                                                    title="{{element.DonXinCapChungThuSo}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsCCCD">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsCCCD{{element.ID}}"
-                                                                    [(ngModel)]="element.IsCCCD">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.CCCD" target="_blank"
-                                                                    class="link-primary" href="{{element.CCCD}}"
-                                                                    title="{{element.CCCD}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1271,35 +1368,47 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsGiayPhepKinhDoanh{{element.ID}}"
-                                                                    [(ngModel)]="element.IsGiayPhepKinhDoanh">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.GiayPhepKinhDoanh" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.GiayPhepKinhDoanh}}"
-                                                                    title="{{element.GiayPhepKinhDoanh}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsBienBanNghiemThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nghiệm thu
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsBienBanNghiemThu{{element.ID}}"
-                                                                    [(ngModel)]="element.IsBienBanNghiemThu">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.BienBanNghiemThu" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.BienBanNghiemThu}}"
-                                                                    title="{{element.BienBanNghiemThu}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1307,16 +1416,21 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHoaDon{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHoaDon">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HoaDon" target="_blank"
-                                                                    class="link-primary" href="{{element.HoaDon}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1328,14 +1442,17 @@
                                                                 <input class="form-check-input" type="checkbox"
                                                                     name="IsKetLuan{{element.ID}}"
                                                                     [(ngModel)]="element.IsKetLuan">
+                                                                <br />
+                                                                <br />
+                                                                {{element.KetLuan}}
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="KetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nội dung
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            {{element.KetLuan}}
+                                                            {{element.Note}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="Save">
@@ -1381,6 +1498,8 @@
                                     </div>
                                     <div class="col-lg-1 col-sm-12 col-12">
                                         <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of DownloadService.listMonth;"
                                                 [value]="item.Display">
                                                 {{item.Display}}</option>
@@ -1555,52 +1674,68 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHopDong{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHopDong">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HopDong" target="_blank"
-                                                                    class="link-primary" href="{{element.HopDong}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsDonXinCapChungThuSo">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Đơn xin
-                                                            cấp
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsDonXinCapChungThuSo{{element.ID}}"
-                                                                    [(ngModel)]="element.IsDonXinCapChungThuSo">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.DonXinCapChungThuSo" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.DonXinCapChungThuSo}}"
-                                                                    title="{{element.DonXinCapChungThuSo}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsCCCD">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsCCCD{{element.ID}}"
-                                                                    [(ngModel)]="element.IsCCCD">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.CCCD" target="_blank"
-                                                                    class="link-primary" href="{{element.CCCD}}"
-                                                                    title="{{element.CCCD}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1608,35 +1743,47 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsGiayPhepKinhDoanh{{element.ID}}"
-                                                                    [(ngModel)]="element.IsGiayPhepKinhDoanh">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.GiayPhepKinhDoanh" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.GiayPhepKinhDoanh}}"
-                                                                    title="{{element.GiayPhepKinhDoanh}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsBienBanNghiemThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nghiệm thu
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsBienBanNghiemThu{{element.ID}}"
-                                                                    [(ngModel)]="element.IsBienBanNghiemThu">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.BienBanNghiemThu" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.BienBanNghiemThu}}"
-                                                                    title="{{element.BienBanNghiemThu}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1644,16 +1791,21 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHoaDon{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHoaDon">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HoaDon" target="_blank"
-                                                                    class="link-primary" href="{{element.HoaDon}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1665,14 +1817,17 @@
                                                                 <input class="form-check-input" type="checkbox"
                                                                     name="IsKetLuan{{element.ID}}"
                                                                     [(ngModel)]="element.IsKetLuan">
+                                                                <br />
+                                                                <br />
+                                                                {{element.KetLuan}}
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="KetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nội dung
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            {{element.KetLuan}}
+                                                            {{element.Note}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="Save">
@@ -1718,6 +1873,8 @@
                                     </div>
                                     <div class="col-lg-1 col-sm-12 col-12">
                                         <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of DownloadService.listMonth;"
                                                 [value]="item.Display">
                                                 {{item.Display}}</option>
@@ -1892,52 +2049,68 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHopDong{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHopDong">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HopDong" target="_blank"
-                                                                    class="link-primary" href="{{element.HopDong}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsDonXinCapChungThuSo">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Đơn xin
-                                                            cấp
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsDonXinCapChungThuSo{{element.ID}}"
-                                                                    [(ngModel)]="element.IsDonXinCapChungThuSo">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.DonXinCapChungThuSo" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.DonXinCapChungThuSo}}"
-                                                                    title="{{element.DonXinCapChungThuSo}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsCCCD">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsCCCD{{element.ID}}"
-                                                                    [(ngModel)]="element.IsCCCD">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.CCCD" target="_blank"
-                                                                    class="link-primary" href="{{element.CCCD}}"
-                                                                    title="{{element.CCCD}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1945,35 +2118,47 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsGiayPhepKinhDoanh{{element.ID}}"
-                                                                    [(ngModel)]="element.IsGiayPhepKinhDoanh">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.GiayPhepKinhDoanh" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.GiayPhepKinhDoanh}}"
-                                                                    title="{{element.GiayPhepKinhDoanh}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="IsBienBanNghiemThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nghiệm thu
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsBienBanNghiemThu{{element.ID}}"
-                                                                    [(ngModel)]="element.IsBienBanNghiemThu">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.BienBanNghiemThu" target="_blank"
-                                                                    class="link-primary"
-                                                                    href="{{element.BienBanNghiemThu}}"
-                                                                    title="{{element.BienBanNghiemThu}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1981,16 +2166,21 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsHoaDon{{element.ID}}"
-                                                                    [(ngModel)]="element.IsHoaDon">
-                                                                <br />
-                                                                <br />
-                                                                <a *ngIf="element.HoaDon" target="_blank"
-                                                                    class="link-primary" href="{{element.HoaDon}}"
-                                                                    title="{{element.HoaDon}}">Xem
-                                                                    chi tiết</a>
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -2002,14 +2192,17 @@
                                                                 <input class="form-check-input" type="checkbox"
                                                                     name="IsKetLuan{{element.ID}}"
                                                                     [(ngModel)]="element.IsKetLuan">
+                                                                <br />
+                                                                <br />
+                                                                {{element.KetLuan}}
                                                             </div>
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="KetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nội dung
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            {{element.KetLuan}}
+                                                            {{element.Note}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="Save">
