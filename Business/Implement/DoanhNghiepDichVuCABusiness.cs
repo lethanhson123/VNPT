@@ -1,12 +1,17 @@
 ﻿
+using Data.Model;
+using Data.Repository.Implement;
+
 namespace Business.Implement
 {
 	public class DoanhNghiepDichVuCABusiness : BaseBusiness<DoanhNghiepDichVuCA, IDoanhNghiepDichVuCARepository>, IDoanhNghiepDichVuCABusiness
 	{
 		private readonly IDoanhNghiepDichVuCARepository _DoanhNghiepDichVuCARepository;
-		public DoanhNghiepDichVuCABusiness(IDoanhNghiepDichVuCARepository DoanhNghiepDichVuCARepository) : base(DoanhNghiepDichVuCARepository)
+		private readonly IDoanhNghiepBusiness _DoanhNghiepBusiness;
+		public DoanhNghiepDichVuCABusiness(IDoanhNghiepDichVuCARepository DoanhNghiepDichVuCARepository, IDoanhNghiepBusiness doanhNghiepBusiness) : base(DoanhNghiepDichVuCARepository)
 		{
 			_DoanhNghiepDichVuCARepository = DoanhNghiepDichVuCARepository;
+			_DoanhNghiepBusiness = doanhNghiepBusiness;
 		}
 		public override void Initialization(DoanhNghiepDichVuCA model)
 		{
@@ -81,6 +86,58 @@ namespace Business.Implement
 			{
 				model.KetLuan = model.KetLuan + "[Hoá đơn]";
 			}
+		}
+
+		public override async Task<DoanhNghiepDichVuCA> SaveAsync(DoanhNghiepDichVuCA model)
+		{
+			Initialization(model);
+			if (!string.IsNullOrEmpty(model.Code))
+			{
+				DoanhNghiepDichVuCA modelExist = await _DoanhNghiepDichVuCARepository.GetByCodeAsync(model.Code);
+				if (model.ID > 0)
+				{
+					if (modelExist.ID == 0)
+					{
+						await _DoanhNghiepDichVuCARepository.UpdateAsync(model);
+					}
+					else
+					{
+						if (modelExist.ID == model.ID)
+						{
+							await _DoanhNghiepDichVuCARepository.UpdateAsync(model);
+						}
+					}
+				}
+				else
+				{
+					if (modelExist.ID == 0)
+					{
+						await _DoanhNghiepDichVuCARepository.AddAsync(model);
+					}
+				}
+				if (model.ParentID > 0)
+				{
+					if (!string.IsNullOrEmpty(model.Email))
+					{
+						DoanhNghiep doanhNghiep = await _DoanhNghiepBusiness.GetByIDAsync(model.ParentID.Value);
+						if (doanhNghiep != null)
+						{
+							if (doanhNghiep.ID > 0)
+							{
+								doanhNghiep.Email = model.Email;
+								await _DoanhNghiepBusiness.SaveAsync(doanhNghiep);
+							}
+						}
+						string url = GlobalHelper.APISite + "api/v1/Email/AsyncHetHan" + model.GetType().Name;
+						var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+						HttpClient client = new HttpClient();
+						var task = client.PostAsync(url, content);
+						await task.Result.Content.ReadAsStringAsync();
+					}
+				}
+
+			}
+			return model;
 		}
 	}
 }

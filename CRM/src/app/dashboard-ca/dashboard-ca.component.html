@@ -41,6 +41,30 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-5" data-bs-toggle="tab" href="#5" role="tab"
+                                    aria-controls="5" aria-selected="false">
+                                    <span class="badge bg-warning">Hết hạn</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-6" data-bs-toggle="tab" href="#6" role="tab"
+                                    aria-controls="6" aria-selected="false">
+                                    <span class="badge bg-info">Chưa gia hạn</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-7" data-bs-toggle="tab" href="#7" role="tab"
+                                    aria-controls="7" aria-selected="false">
+                                    <span class="badge bg-danger">Chưa sử dụng</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-8" data-bs-toggle="tab" href="#8" role="tab"
+                                    aria-controls="8" aria-selected="false">
+                                    <span class="badge bg-success">Hồ sơ</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#3" role="tab"
                                     aria-controls="3" aria-selected="false">
                                     <span class="badge bg-warning">Thay đổi thông tin</span>
@@ -50,24 +74,6 @@
                                 <a class="nav-link" id="tab-4" data-bs-toggle="tab" href="#4" role="tab"
                                     aria-controls="4" aria-selected="false">
                                     <span class="badge bg-info">Thu hồi</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="tab-5" data-bs-toggle="tab" href="#5" role="tab"
-                                    aria-controls="5" aria-selected="false">
-                                    <span class="badge bg-danger">Hết hạn</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="tab-6" data-bs-toggle="tab" href="#6" role="tab"
-                                    aria-controls="6" aria-selected="false">
-                                    <span class="badge bg-success">Ngưng sử dụng</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="tab-7" data-bs-toggle="tab" href="#7" role="tab"
-                                    aria-controls="7" aria-selected="false">
-                                    <span class="badge bg-warning">Chưa sử dụng</span>
                                 </a>
                             </li>
                         </ul>
@@ -361,6 +367,8 @@
                                 <div class="row gx-4">
                                     <div class="col-lg-2 col-sm-12 col-12">
                                         <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
+                                            <option [value]="0">
+                                                Tất cả</option>
                                             <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
                                                 {{item.Name}}</option>
                                         </select>
@@ -393,9 +401,29 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Sản lượng</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA305SanLuong"
+                                            [labels]="ChartLabelsReportCA305SanLuong"
+                                            [chartType]="ChartTypeReportCA305SanLuong"
+                                            [colors]="ChartColorsReportCA305SanLuong"
+                                            [options]="ChartOptionsReportCA305SanLuong">
+                                        </canvas>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Doanh thu</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA305DoanhThu"
+                                            [labels]="ChartLabelsReportCA305DoanhThu"
+                                            [chartType]="ChartTypeReportCA305DoanhThu"
+                                            [colors]="ChartColorsReportCA305DoanhThu"
+                                            [options]="ChartOptionsReportCA305DoanhThu">
+                                        </canvas>
+                                    </div>
+                                </div>
                                 <div class="card mb-4 card-danger">
                                     <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
+                                        <h5 class="card-title text-white">Phát triển
                                             <span
                                                 *ngIf="ReportService.listReportCA001">({{ReportService.listReportCA001.length}}
                                                 items)</span>
@@ -451,7 +479,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHieuLuc |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyyyyyy-MM-dd'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="NgayHetHan">
@@ -459,7 +487,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHetHan |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="TenGoiCuoc">
@@ -689,13 +717,15 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsKetLuan{{element.ID}}"
-                                                                    [(ngModel)]="element.IsKetLuan">
-                                                                <br />
-                                                                <br />
-                                                                {{element.KetLuan}}
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -767,9 +797,29 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Sản lượng</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA306SanLuong"
+                                            [labels]="ChartLabelsReportCA306SanLuong"
+                                            [chartType]="ChartTypeReportCA306SanLuong"
+                                            [colors]="ChartColorsReportCA306SanLuong"
+                                            [options]="ChartOptionsReportCA306SanLuong">
+                                        </canvas>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Doanh thu</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA306DoanhThu"
+                                            [labels]="ChartLabelsReportCA306DoanhThu"
+                                            [chartType]="ChartTypeReportCA306DoanhThu"
+                                            [colors]="ChartColorsReportCA306DoanhThu"
+                                            [options]="ChartOptionsReportCA306DoanhThu">
+                                        </canvas>
+                                    </div>
+                                </div>
                                 <div class="card mb-4 card-success">
                                     <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
+                                        <h5 class="card-title text-white">Gia hạn
                                             <span
                                                 *ngIf="ReportService.listReportCA002">({{ReportService.listReportCA002.length}}
                                                 items)</span>
@@ -789,9 +839,9 @@
                                                             class="sticky-col">
                                                             <a title="{{element.DoanhNghiepName}}" class="link-primary"
                                                                 target="_blank"
-                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator1.pageSize
+                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator2.pageSize
                                                                     *
-                                                                    paginator1.pageIndex + i + 1}} |
+                                                                    paginator2.pageIndex + i + 1}} |
                                                                     {{element.DoanhNghiepName}}</b></a>
                                                         </td>
                                                     </ng-container>
@@ -825,7 +875,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHieuLuc |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="NgayHetHan">
@@ -833,7 +883,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHetHan |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="TenGoiCuoc">
@@ -1063,13 +1113,15 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsKetLuan{{element.ID}}"
-                                                                    [(ngModel)]="element.IsKetLuan">
-                                                                <br />
-                                                                <br />
-                                                                {{element.KetLuan}}
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1085,8 +1137,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
                                                             <a class="btn btn-success" title="Chi tiết"
-                                                                (click)="onAddReportCA002(element.ID)"><i
-                                                                    class="bi bi-x-diamond"></i></a>
+                                                                (click)="onAddReportCA002(element.ID)">Upload hồ sơ</a>
                                                         </td>
                                                     </ng-container>
                                                     <tr mat-header-row
@@ -1097,6 +1148,1233 @@
                                                     </tr>
                                                 </table>
                                                 <mat-paginator #paginator2="matPaginator"
+                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                                    [showFirstLastButtons]></mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="5" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of DownloadService.listMonth;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 col-14">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportCA005()">
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA005()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportCA005()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Sản lượng</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA307SanLuong"
+                                            [labels]="ChartLabelsReportCA307SanLuong"
+                                            [chartType]="ChartTypeReportCA307SanLuong"
+                                            [colors]="ChartColorsReportCA307SanLuong"
+                                            [options]="ChartOptionsReportCA307SanLuong">
+                                        </canvas>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Doanh thu</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA307DoanhThu"
+                                            [labels]="ChartLabelsReportCA307DoanhThu"
+                                            [chartType]="ChartTypeReportCA307DoanhThu"
+                                            [colors]="ChartColorsReportCA307DoanhThu"
+                                            [options]="ChartOptionsReportCA307DoanhThu">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-warning">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Hết hạn
+                                            <span
+                                                *ngIf="ReportService.listReportCA005">({{ReportService.listReportCA005.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table mat-table matSort #sort5="matSort" [dataSource]="dataSource5"
+                                                    class="table table-striped m-0">
+                                                    <ng-container matColumnDef="DoanhNghiepName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            class="sticky-col" style="background-color: black;">
+                                                            <span style="color: #ffffff;">Doanh nghiệp</span>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element index as i;"
+                                                            class="sticky-col">
+                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
+                                                                target="_blank"
+                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator1.pageSize
+                                                                    *
+                                                                    paginator1.pageIndex + i + 1}} |
+                                                                    {{element.DoanhNghiepName}}</b></a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="CodeCA">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.CodeCA}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="UserName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>UserName
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.UserName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SoChungThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThu}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SoChungThuCu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
+                                                            cũ
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThuCu}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NgayHieuLuc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hiệu lực
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.NgayHieuLuc |
+                                                            date:'dd/MM/yyyy'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NgayHetHan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hết hạn
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.NgayHetHan |
+                                                            date:'dd/MM/yyyy'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TenGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gói cước
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.TenGoiCuoc}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="LoaiGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại gói
+                                                            cước
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.LoaiGoiCuoc}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="ThoiGianGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.ThoiGianGoiCuoc |
+                                                            number:
+                                                            '1.0-0'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Email">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.Email}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DienThoai">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.DienThoai}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TaiKhoanTaoYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tạo yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.TaiKhoanTaoYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NhanVienTaoYeuCauName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
+                                                            AM
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.NhanVienTaoYeuCauName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TaiKhoanDuyetYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duyệt yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.TaiKhoanDuyetYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="PhongBanDuyetYeuCauName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phòng ban
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.PhongBanDuyetYeuCauName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="LoaiYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.LoaiYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DoanhThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">
+                                                            {{element.DoanhThu |
+                                                            number:
+                                                            '1.0-0'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsHopDong">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsDonXinCapChungThuSo">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsCCCD">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsGiayPhepKinhDoanh">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsBienBanNghiemThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsHoaDon">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsKetLuan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="KetLuan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.Note}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Save">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a class="btn btn-success" title="Upload hồ sơ"
+                                                                (click)="onAddReportCA005(element.ID)">Upload hồ
+                                                                sơ</a>&nbsp;&nbsp;&nbsp;
+                                                            <a class="btn btn-success" title="Gửi mail"
+                                                                (click)="onEmailReportCA005(element.ID)">Gửi mail</a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA002">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA002;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginator5="matPaginator"
+                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                                    [showFirstLastButtons]></mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="6" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5 col-sm-12 col-14">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportCA006()">
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA006()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportCA006()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Chưa gia hạn
+                                            <span
+                                                *ngIf="ReportService.listReportCA006">({{ReportService.listReportCA006.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table mat-table matSort #sort6="matSort" [dataSource]="dataSource6"
+                                                    class="table table-striped m-0">
+                                                    <ng-container matColumnDef="DoanhNghiepName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            class="sticky-col" style="background-color: black;">
+                                                            <span style="color: #ffffff;">Doanh nghiệp</span>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element index as i;"
+                                                            class="sticky-col">
+                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
+                                                                target="_blank"
+                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator1.pageSize
+                                                                    *
+                                                                    paginator1.pageIndex + i + 1}} |
+                                                                    {{element.DoanhNghiepName}}</b></a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="CodeCA">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.CodeCA}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="UserName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>UserName
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.UserName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SoChungThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThu}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SoChungThuCu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
+                                                            cũ
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThuCu}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NgayHieuLuc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hiệu lực
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.NgayHieuLuc |
+                                                            date:'dd/MM/yyyy'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NgayHetHan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hết hạn
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.NgayHetHan |
+                                                            date:'dd/MM/yyyy'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TenGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gói cước
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.TenGoiCuoc}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="LoaiGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại gói
+                                                            cước
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.LoaiGoiCuoc}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="ThoiGianGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.ThoiGianGoiCuoc |
+                                                            number:
+                                                            '1.0-0'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Email">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.Email}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DienThoai">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.DienThoai}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TaiKhoanTaoYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tạo yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.TaiKhoanTaoYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NhanVienTaoYeuCauName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
+                                                            AM
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.NhanVienTaoYeuCauName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TaiKhoanDuyetYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duyệt yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.TaiKhoanDuyetYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="PhongBanDuyetYeuCauName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phòng ban
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.PhongBanDuyetYeuCauName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="LoaiYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.LoaiYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DoanhThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">
+                                                            {{element.DoanhThu |
+                                                            number:
+                                                            '1.0-0'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsHopDong">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsDonXinCapChungThuSo">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsCCCD">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsGiayPhepKinhDoanh">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsBienBanNghiemThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsHoaDon">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsKetLuan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="KetLuan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.Note}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Save">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a class="btn btn-success" title="Chi tiết"
+                                                                (click)="onAddReportCA005(element.ID)">Upload hồ sơ</a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA002">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA002;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginator6="matPaginator"
+                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                                    [showFirstLastButtons]></mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="7" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5 col-sm-12 col-14">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportCA007()">
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA007()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportCA007()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-danger">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Chưa sử dụng
+                                            <span
+                                                *ngIf="ReportService.listReportCA007">({{ReportService.listReportCA007.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table mat-table matSort #sort7="matSort" [dataSource]="dataSource7"
+                                                    class="table table-striped m-0">
+                                                    <ng-container matColumnDef="No">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            No.
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element; index as i;">
+                                                            {{paginator7.pageSize *
+                                                            paginator7.pageIndex + i + 1}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="HuyenName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Huyện</th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.HuyenName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DoanhNghiepName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh
+                                                            nghiệp</th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
+                                                                target="_blank"
+                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{element.DoanhNghiepName}}</b></a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA006">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA006;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginator7="matPaginator"
+                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                                                    [showFirstLastButtons]></mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="8" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
+                                                {{item.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="year" [(ngModel)]="year">
+                                            <option *ngFor="let item of DownloadService.listYear;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <select class="form-select" name="month" [(ngModel)]="month">
+                                            <option [value]="0">
+                                                Tất cả</option>
+                                            <option *ngFor="let item of DownloadService.listMonth;"
+                                                [value]="item.Display">
+                                                {{item.Display}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-12 col-12">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="isKetLuan"
+                                                [(ngModel)]="isKetLuan">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-14">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchReportCA008()">
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA008()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportCA008()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="row gx-4">
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                        <h1 class="text-center">Tỷ lệ hoàn thành và Chưa hoàn thành</h1>
+                                        <canvas baseChart [datasets]="ChartDataReportCA308SanLuong"
+                                            [labels]="ChartLabelsReportCA308SanLuong"
+                                            [chartType]="ChartTypeReportCA308SanLuong"
+                                            [colors]="ChartColorsReportCA308SanLuong"
+                                            [options]="ChartOptionsReportCA308SanLuong">
+                                        </canvas>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-12">
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-success">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Hồ sơ
+                                            <span
+                                                *ngIf="ReportService.listReportCA002">({{ReportService.listReportCA008.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table mat-table matSort #sort8="matSort" [dataSource]="dataSource8"
+                                                    class="table table-striped m-0">
+                                                    <ng-container matColumnDef="DoanhNghiepName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            class="sticky-col" style="background-color: black;">
+                                                            <span style="color: #ffffff;">Doanh nghiệp</span>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element index as i;"
+                                                            class="sticky-col">
+                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
+                                                                target="_blank"
+                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator8.pageSize
+                                                                    *
+                                                                    paginator8.pageIndex + i + 1}} |
+                                                                    {{element.DoanhNghiepName}}</b></a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="CodeCA">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.CodeCA}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="UserName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>UserName
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.UserName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SoChungThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThu}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SoChungThuCu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
+                                                            cũ
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThuCu}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NgayHieuLuc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hiệu lực
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.NgayHieuLuc |
+                                                            date:'dd/MM/yyyy'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NgayHetHan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hết hạn
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.NgayHetHan |
+                                                            date:'dd/MM/yyyy'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TenGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gói cước
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.TenGoiCuoc}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="LoaiGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại gói
+                                                            cước
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.LoaiGoiCuoc}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="ThoiGianGoiCuoc">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.ThoiGianGoiCuoc |
+                                                            number:
+                                                            '1.0-0'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Email">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">{{element.Email}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DienThoai">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">{{element.DienThoai}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TaiKhoanTaoYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tạo yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.TaiKhoanTaoYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="NhanVienTaoYeuCauName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
+                                                            AM
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.NhanVienTaoYeuCauName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="TaiKhoanDuyetYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duyệt yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.TaiKhoanDuyetYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="PhongBanDuyetYeuCauName">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phòng ban
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.PhongBanDuyetYeuCauName}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="LoaiYeuCau">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại yêu
+                                                            cầu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.LoaiYeuCau}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="DoanhThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"
+                                                            style="text-align: right;">
+                                                            {{element.DoanhThu |
+                                                            number:
+                                                            '1.0-0'}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsHopDong">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHopDong{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHopDong">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HopDong"
+                                                                        target="_blank" href="{{element.HopDong}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsDonXinCapChungThuSo">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
+                                                            ký
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
+                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.DonXinCapChungThuSo"
+                                                                        target="_blank"
+                                                                        href="{{element.DonXinCapChungThuSo}}"
+                                                                        title="{{element.DonXinCapChungThuSo}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsCCCD">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsCCCD{{element.ID}}"
+                                                                            [(ngModel)]="element.IsCCCD">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.CCCD"
+                                                                        target="_blank" href="{{element.CCCD}}"
+                                                                        title="{{element.CCCD}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsGiayPhepKinhDoanh">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
+                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.GiayPhepKinhDoanh"
+                                                                        target="_blank"
+                                                                        href="{{element.GiayPhepKinhDoanh}}"
+                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsBienBanNghiemThu">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
+                                                            nghiệm thu
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsBienBanNghiemThu{{element.ID}}"
+                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary"
+                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
+                                                                        href="{{element.BienBanNghiemThu}}"
+                                                                        title="{{element.BienBanNghiemThu}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsHoaDon">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="IsHoaDon{{element.ID}}"
+                                                                            [(ngModel)]="element.IsHoaDon">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <a style="font-size: 24px; margin-top: 10px;"
+                                                                        class="link-primary" *ngIf="element.HoaDon"
+                                                                        target="_blank" href="{{element.HoaDon}}"
+                                                                        title="{{element.HoaDon}}"><i
+                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="IsKetLuan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="KetLuan">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.Note}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Save">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a class="btn btn-success" title="Chi tiết"
+                                                                (click)="onAddReportCA008(element.ID)">Upload hồ sơ</a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA002">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA002;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginator8="matPaginator"
                                                     [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
                                                     [showFirstLastButtons]></mat-paginator>
                                             </div>
@@ -1144,7 +2422,7 @@
                                 </div>
                                 <div class="card mb-4 card-warning">
                                     <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
+                                        <h5 class="card-title text-white">Thay đổi thông tin
                                             <span
                                                 *ngIf="ReportService.listReportCA003">({{ReportService.listReportCA003.length}}
                                                 items)</span>
@@ -1164,9 +2442,9 @@
                                                             class="sticky-col">
                                                             <a title="{{element.DoanhNghiepName}}" class="link-primary"
                                                                 target="_blank"
-                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator1.pageSize
+                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator3.pageSize
                                                                     *
-                                                                    paginator1.pageIndex + i + 1}} |
+                                                                    paginator3.pageIndex + i + 1}} |
                                                                     {{element.DoanhNghiepName}}</b></a>
                                                         </td>
                                                     </ng-container>
@@ -1200,7 +2478,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHieuLuc |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="NgayHetHan">
@@ -1208,7 +2486,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHetHan |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="TenGoiCuoc">
@@ -1438,13 +2716,15 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsKetLuan{{element.ID}}"
-                                                                    [(ngModel)]="element.IsKetLuan">
-                                                                <br />
-                                                                <br />
-                                                                {{element.KetLuan}}
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1460,8 +2740,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
                                                             <a class="btn btn-success" title="Chi tiết"
-                                                                (click)="onAddReportCA003(element.ID)"><i
-                                                                    class="bi bi-x-diamond"></i></a>
+                                                                (click)="onAddReportCA003(element.ID)">Upload hồ sơ</a>
                                                         </td>
                                                     </ng-container>
                                                     <tr mat-header-row
@@ -1519,7 +2798,7 @@
                                 </div>
                                 <div class="card mb-4 card-info">
                                     <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
+                                        <h5 class="card-title text-white">Thu hồi
                                             <span
                                                 *ngIf="ReportService.listReportCA004">({{ReportService.listReportCA004.length}}
                                                 items)</span>
@@ -1575,7 +2854,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHieuLuc |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="NgayHetHan">
@@ -1583,7 +2862,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element"
                                                             style="text-align: right;">{{element.NgayHetHan |
-                                                            date:'yyyy-MM-dd'}}
+                                                            date:'dd/MM/yyyy'}}
                                                         </td>
                                                     </ng-container>
                                                     <ng-container matColumnDef="TenGoiCuoc">
@@ -1813,13 +3092,15 @@
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsKetLuan{{element.ID}}"
-                                                                    [(ngModel)]="element.IsKetLuan">
-                                                                <br />
-                                                                <br />
-                                                                {{element.KetLuan}}
+                                                            <div class="row gx-4">
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="IsKetLuan{{element.ID}}"
+                                                                        [(ngModel)]="element.IsKetLuan">
+                                                                </div>
+                                                                <div class="col-xl-6 col-sm-6 col-12">
+                                                                    {{element.KetLuan}}
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </ng-container>
@@ -1835,8 +3116,7 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">
                                                             <a class="btn btn-success" title="Chi tiết"
-                                                                (click)="onAddReportCA004(element.ID)"><i
-                                                                    class="bi bi-x-diamond"></i></a>
+                                                                (click)="onAddReportCA004(element.ID)">Upload hồ sơ</a>
                                                         </td>
                                                     </ng-container>
                                                     <tr mat-header-row
@@ -1848,527 +3128,6 @@
                                                 </table>
                                                 <mat-paginator #paginator4="matPaginator"
                                                     [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
-                                                    [showFirstLastButtons]></mat-paginator>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="5" role="tabpanel">
-                                <div class="row gx-4">
-                                    <div class="col-lg-2 col-sm-12 col-12">
-                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
-                                            <option [value]="0">
-                                                Tất cả</option>
-                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
-                                                {{item.Name}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-1 col-sm-12 col-12">
-                                        <select class="form-select" name="year" [(ngModel)]="year">
-                                            <option *ngFor="let item of DownloadService.listYear;"
-                                                [value]="item.Display">
-                                                {{item.Display}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-1 col-sm-12 col-12">
-                                        <select class="form-select" name="month" [(ngModel)]="month">
-                                            <option [value]="0">
-                                                Tất cả</option>
-                                            <option *ngFor="let item of DownloadService.listMonth;"
-                                                [value]="item.Display">
-                                                {{item.Display}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-12 col-14">
-                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
-                                            (keyup.enter)="onSearchReportCA005()">
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12 col-12">
-                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA005()"><i
-                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
-                                            (click)="onDownloadExcelFileReportCA005()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
-                                    </div>
-                                </div>
-                                <div class="card mb-4 card-danger">
-                                    <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
-                                            <span
-                                                *ngIf="ReportService.listReportCA005">({{ReportService.listReportCA005.length}}
-                                                items)</span>
-                                        </h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-outer">
-                                            <div class="table-responsive">
-                                                <table mat-table matSort #sort5="matSort" [dataSource]="dataSource5"
-                                                    class="table table-striped m-0">
-                                                    <ng-container matColumnDef="DoanhNghiepName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                                            class="sticky-col" style="background-color: black;">
-                                                            <span style="color: #ffffff;">Doanh nghiệp</span>
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element index as i;"
-                                                            class="sticky-col">
-                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
-                                                                target="_blank"
-                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{paginator1.pageSize
-                                                                    *
-                                                                    paginator1.pageIndex + i + 1}} |
-                                                                    {{element.DoanhNghiepName}}</b></a>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="CodeCA">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"> {{element.CodeCA}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="UserName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>UserName
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"> {{element.UserName}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="SoChungThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThu}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="SoChungThuCu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
-                                                            cũ
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">{{element.SoChungThuCu}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="NgayHieuLuc">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hiệu lực
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"
-                                                            style="text-align: right;">{{element.NgayHieuLuc |
-                                                            date:'yyyy-MM-dd'}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="NgayHetHan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hết hạn
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"
-                                                            style="text-align: right;">{{element.NgayHetHan |
-                                                            date:'yyyy-MM-dd'}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="TenGoiCuoc">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gói cước
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">{{element.TenGoiCuoc}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="LoaiGoiCuoc">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại gói
-                                                            cước
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">{{element.LoaiGoiCuoc}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="ThoiGianGoiCuoc">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"
-                                                            style="text-align: right;">{{element.ThoiGianGoiCuoc |
-                                                            number:
-                                                            '1.0-0'}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="Email">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">{{element.Email}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="DienThoai">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"
-                                                            style="text-align: right;">{{element.DienThoai}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="TaiKhoanTaoYeuCau">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tạo yêu
-                                                            cầu
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            {{element.TaiKhoanTaoYeuCau}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="NhanVienTaoYeuCauName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nhân viên
-                                                            AM
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            {{element.NhanVienTaoYeuCauName}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="TaiKhoanDuyetYeuCau">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duyệt yêu
-                                                            cầu
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            {{element.TaiKhoanDuyetYeuCau}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="PhongBanDuyetYeuCauName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phòng ban
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            {{element.PhongBanDuyetYeuCauName}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="LoaiYeuCau">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại yêu
-                                                            cầu
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            {{element.LoaiYeuCau}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="DoanhThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh thu
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element"
-                                                            style="text-align: right;">
-                                                            {{element.DoanhThu |
-                                                            number:
-                                                            '1.0-0'}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsHopDong">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hợp đồng
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="row gx-4">
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            name="IsHopDong{{element.ID}}"
-                                                                            [(ngModel)]="element.IsHopDong">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <a style="font-size: 24px; margin-top: 10px;"
-                                                                        class="link-primary" *ngIf="element.HopDong"
-                                                                        target="_blank" href="{{element.HopDong}}"
-                                                                        title="{{element.HoaDon}}"><i
-                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsDonXinCapChungThuSo">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phiếu đăng
-                                                            ký
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="row gx-4">
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            name="IsDonXinCapChungThuSo{{element.ID}}"
-                                                                            [(ngModel)]="element.IsDonXinCapChungThuSo">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <a style="font-size: 24px; margin-top: 10px;"
-                                                                        class="link-primary"
-                                                                        *ngIf="element.DonXinCapChungThuSo"
-                                                                        target="_blank"
-                                                                        href="{{element.DonXinCapChungThuSo}}"
-                                                                        title="{{element.DonXinCapChungThuSo}}"><i
-                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsCCCD">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>CCCD/HC
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="row gx-4">
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            name="IsCCCD{{element.ID}}"
-                                                                            [(ngModel)]="element.IsCCCD">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <a style="font-size: 24px; margin-top: 10px;"
-                                                                        class="link-primary" *ngIf="element.CCCD"
-                                                                        target="_blank" href="{{element.CCCD}}"
-                                                                        title="{{element.CCCD}}"><i
-                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsGiayPhepKinhDoanh">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Giấy phép
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="row gx-4">
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            name="IsGiayPhepKinhDoanh{{element.ID}}"
-                                                                            [(ngModel)]="element.IsGiayPhepKinhDoanh">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <a style="font-size: 24px; margin-top: 10px;"
-                                                                        class="link-primary"
-                                                                        *ngIf="element.GiayPhepKinhDoanh"
-                                                                        target="_blank"
-                                                                        href="{{element.GiayPhepKinhDoanh}}"
-                                                                        title="{{element.GiayPhepKinhDoanh}}"><i
-                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsBienBanNghiemThu">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Biên bản
-                                                            nghiệm thu
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="row gx-4">
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            name="IsBienBanNghiemThu{{element.ID}}"
-                                                                            [(ngModel)]="element.IsBienBanNghiemThu">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <a style="font-size: 24px; margin-top: 10px;"
-                                                                        class="link-primary"
-                                                                        *ngIf="element.BienBanNghiemThu" target="_blank"
-                                                                        href="{{element.BienBanNghiemThu}}"
-                                                                        title="{{element.BienBanNghiemThu}}"><i
-                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsHoaDon">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoá đơn
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="row gx-4">
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            name="IsHoaDon{{element.ID}}"
-                                                                            [(ngModel)]="element.IsHoaDon">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-sm-6 col-12">
-                                                                    <a style="font-size: 24px; margin-top: 10px;"
-                                                                        class="link-primary" *ngIf="element.HoaDon"
-                                                                        target="_blank" href="{{element.HoaDon}}"
-                                                                        title="{{element.HoaDon}}"><i
-                                                                            class="bi bi-file-earmark-zip-fill"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="IsKetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kết luận
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="IsKetLuan{{element.ID}}"
-                                                                    [(ngModel)]="element.IsKetLuan">
-                                                                <br />
-                                                                <br />
-                                                                {{element.KetLuan}}
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="KetLuan">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            {{element.Note}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="Save">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <a class="btn btn-success" title="Chi tiết"
-                                                                (click)="onAddReportCA005(element.ID)"><i
-                                                                    class="bi bi-x-diamond"></i></a>
-                                                        </td>
-                                                    </ng-container>
-                                                    <tr mat-header-row
-                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA002">
-                                                    </tr>
-                                                    <tr mat-row
-                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA002;">
-                                                    </tr>
-                                                </table>
-                                                <mat-paginator #paginator5="matPaginator"
-                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
-                                                    [showFirstLastButtons]></mat-paginator>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="6" role="tabpanel">
-                                <div class="row gx-4">
-                                    <div class="col-lg-2 col-sm-12 col-12">
-                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
-                                            <option [value]="0">
-                                                Tất cả</option>
-                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
-                                                {{item.Name}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-5 col-sm-12 col-14">
-                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
-                                            (keyup.enter)="onSearchReportCA006()">
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12 col-12">
-                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA006()"><i
-                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
-                                            (click)="onDownloadExcelFileReportCA006()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
-                                    </div>
-                                </div>
-                                <div class="card mb-4 card-success">
-                                    <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
-                                            <span
-                                                *ngIf="ReportService.listReportCA006">({{ReportService.listReportCA006.length}}
-                                                items)</span>
-                                        </h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-outer">
-                                            <div class="table-responsive">
-                                                <table mat-table matSort #sort6="matSort" [dataSource]="dataSource6"
-                                                    class="table table-striped m-0">
-                                                    <ng-container matColumnDef="No">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                            No.
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element; index as i;">
-                                                            {{paginator6.pageSize *
-                                                            paginator6.pageIndex + i + 1}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="HuyenName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Huyện</th>
-                                                        <td mat-cell *matCellDef="let element"> {{element.HuyenName}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="DoanhNghiepName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh
-                                                            nghiệp</th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
-                                                                target="_blank"
-                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{element.DoanhNghiepName}}</b></a>
-                                                        </td>
-                                                    </ng-container>
-                                                    <tr mat-header-row
-                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA006">
-                                                    </tr>
-                                                    <tr mat-row
-                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA006;">
-                                                    </tr>
-                                                </table>
-                                                <mat-paginator #paginator6="matPaginator"
-                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
-                                                    [showFirstLastButtons]></mat-paginator>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="7" role="tabpanel">
-                                <div class="row gx-4">
-                                    <div class="col-lg-2 col-sm-12 col-12">
-                                        <select class="form-select" name="huyenID" [(ngModel)]="huyenID">
-                                            <option [value]="0">
-                                                Tất cả</option>
-                                            <option *ngFor="let item of HuyenService.list;" [value]="item.ID">
-                                                {{item.Name}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-5 col-sm-12 col-14">
-                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
-                                            (keyup.enter)="onSearchReportCA007()">
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12 col-12">
-                                        <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA007()"><i
-                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
-                                            (click)="onDownloadExcelFileReportCA007()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
-                                    </div>
-                                </div>
-                                <div class="card mb-4 card-warning">
-                                    <div class="card-header">
-                                        <h5 class="card-title text-white">Danh sách
-                                            <span
-                                                *ngIf="ReportService.listReportCA007">({{ReportService.listReportCA007.length}}
-                                                items)</span>
-                                        </h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-outer">
-                                            <div class="table-responsive">
-                                                <table mat-table matSort #sort7="matSort" [dataSource]="dataSource7"
-                                                    class="table table-striped m-0">
-                                                    <ng-container matColumnDef="No">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                            No.
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element; index as i;">
-                                                            {{paginator7.pageSize *
-                                                            paginator7.pageIndex + i + 1}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="HuyenName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Huyện</th>
-                                                        <td mat-cell *matCellDef="let element"> {{element.HuyenName}}
-                                                        </td>
-                                                    </ng-container>
-                                                    <ng-container matColumnDef="DoanhNghiepName">
-                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Doanh
-                                                            nghiệp</th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <a title="{{element.DoanhNghiepName}}" class="link-primary"
-                                                                target="_blank"
-                                                                href="{{URLSub}}/{{element.DoanhNghiepID}}"><b>{{element.DoanhNghiepName}}</b></a>
-                                                        </td>
-                                                    </ng-container>
-                                                    <tr mat-header-row
-                                                        *matHeaderRowDef="ReportService.displayColumnsReportCA006">
-                                                    </tr>
-                                                    <tr mat-row
-                                                        *matRowDef="let row; columns: ReportService.displayColumnsReportCA006;">
-                                                    </tr>
-                                                </table>
-                                                <mat-paginator #paginator7="matPaginator"
-                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
                                                     [showFirstLastButtons]></mat-paginator>
                                             </div>
                                         </div>

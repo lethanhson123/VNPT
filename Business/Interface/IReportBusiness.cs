@@ -32,12 +32,18 @@ namespace Business.Interface
 		Task<List<Report>> ReportCA105Async(long huyenID, int year, int month, long nhanVienID);
 		Task<List<Report>> ReportCA106Async(long huyenID, int year, int month, long nhanVienID);
 		Task<List<Report>> ReportCA107Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA108Async(long huyenID, int year, int month, long nhanVienID, bool isKetLuan);
 
 		Task<Report> ReportCA201Async(int year, int month);
 		Task<List<Report>> ReportCA202Async(int year, int month);
 		Task<List<Report>> ReportCA203Async(int year, int month);
 		Task<List<Report>> ReportCA204Async(int year, int month);
 		Task<List<Report>> ReportCA205Async(int year, int month);
+
+		Task<List<Report>> ReportCA305Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA306Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA307Async(long huyenID, int year, int month, long nhanVienID);
+		Task<List<Report>> ReportCA308Async(long huyenID, int year, int month, long nhanVienID);
 
 	}
 }

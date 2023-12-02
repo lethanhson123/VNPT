@@ -26,6 +26,7 @@ import { DoanhNghiepDichVuCAService } from 'src/app/shared/DoanhNghiepDichVuCA.s
 import { DichVuChiTieu } from 'src/app/shared/DichVuChiTieu.model';
 import { DichVuChiTieuService } from 'src/app/shared/DichVuChiTieu.service';
 import { DoanhNghiepDichVuCADetailComponent } from '../doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
+import { DoanhNghiepDichVuCAEmailComponent } from '../doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-caemail/doanh-nghiep-dich-vu-caemail.component';
 
 @Component({
   selector: 'app-dashboard-ca',
@@ -84,7 +85,7 @@ export class DashboardCAComponent implements OnInit {
   @ViewChild('paginator204') paginator204: MatPaginator;
 
   isShowLoading: boolean = false;
-  huyenID: number = 1;
+  huyenID: number = environment.InitializationNumber;
   xaID: number = 1;
   dichVuID: number = environment.CAID;
   phongBanID: number = 1;
@@ -106,6 +107,7 @@ export class DashboardCAComponent implements OnInit {
   doanhThuNhanVien: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
   month: number = new Date().getMonth() + 1;
+  isKetLuan: boolean = true;
   constructor(
     public HuyenService: HuyenService,
     public XaService: XaService,
@@ -131,7 +133,6 @@ export class DashboardCAComponent implements OnInit {
     this.GetMonthToList();
     this.NhanVienGetToList();
     this.PhongBanGetToList();
-    this.NhanVienTaiKhoanGetToList();
     this.onSearchReportCA201();
   }
 
@@ -284,7 +285,7 @@ export class DashboardCAComponent implements OnInit {
   }
 
   public ChartOptionsReportCA205SanLuong: ChartOptions = {
-    responsive: true,
+    responsive: true,    
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -327,8 +328,173 @@ export class DashboardCAComponent implements OnInit {
   public ChartDataReportCA205DoanhThu: ChartDataSets[] = [
   ];
 
+  public ChartOptionsReportCA305SanLuong: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA305SanLuong: Color[] = [
+  ]
+  public ChartLabelsReportCA305SanLuong: Label[] = [];
+  public ChartTypeReportCA305SanLuong: ChartType = 'doughnut';
+  public ChartLegendReportCA305SanLuong = true;
+  public ChartPluginsReportCA305SanLuong = [];
+  public ChartDataReportCA305SanLuong: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA305DoanhThu: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA305DoanhThu: Color[] = [
+  ]
+  public ChartLabelsReportCA305DoanhThu: Label[] = [];
+  public ChartTypeReportCA305DoanhThu: ChartType = 'doughnut';
+  public ChartLegendReportCA305DoanhThu = true;
+  public ChartPluginsReportCA305DoanhThu = [];
+  public ChartDataReportCA305DoanhThu: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA306SanLuong: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA306SanLuong: Color[] = [
+  ]
+  public ChartLabelsReportCA306SanLuong: Label[] = [];
+  public ChartTypeReportCA306SanLuong: ChartType = 'doughnut';
+  public ChartLegendReportCA306SanLuong = true;
+  public ChartPluginsReportCA306SanLuong = [];
+  public ChartDataReportCA306SanLuong: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA306DoanhThu: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA306DoanhThu: Color[] = [
+  ]
+  public ChartLabelsReportCA306DoanhThu: Label[] = [];
+  public ChartTypeReportCA306DoanhThu: ChartType = 'doughnut';
+  public ChartLegendReportCA306DoanhThu = true;
+  public ChartPluginsReportCA306DoanhThu = [];
+  public ChartDataReportCA306DoanhThu: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA307SanLuong: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA307SanLuong: Color[] = [
+  ]
+  public ChartLabelsReportCA307SanLuong: Label[] = [];
+  public ChartTypeReportCA307SanLuong: ChartType = 'doughnut';
+  public ChartLegendReportCA307SanLuong = true;
+  public ChartPluginsReportCA307SanLuong = [];
+  public ChartDataReportCA307SanLuong: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA307DoanhThu: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA307DoanhThu: Color[] = [
+  ]
+  public ChartLabelsReportCA307DoanhThu: Label[] = [];
+  public ChartTypeReportCA307DoanhThu: ChartType = 'doughnut';
+  public ChartLegendReportCA307DoanhThu = true;
+  public ChartPluginsReportCA307DoanhThu = [];
+  public ChartDataReportCA307DoanhThu: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA308SanLuong: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return label + '';
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA308SanLuong: Color[] = [
+  ]
+  public ChartLabelsReportCA308SanLuong: Label[] = [];
+  public ChartTypeReportCA308SanLuong: ChartType = 'doughnut';
+  public ChartLegendReportCA308SanLuong = true;
+  public ChartPluginsReportCA308SanLuong = [];
+  public ChartDataReportCA308SanLuong: ChartDataSets[] = [
+  ];
+
   public ChartOptionsReportCA202PhatTrien: ChartOptions = {
     responsive: true,
+    animation: {
+      duration: 1,
+      onComplete: function () {
+        var chartInstance = this.chart,
+          ctx = chartInstance.ctx;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.textBaseline = 'bottom';
+        this.data.datasets.forEach(function (dataset, i) {
+          var meta = chartInstance.controller.getDatasetMeta(i);
+          meta.data.forEach(function (bar, index) {
+            var data = dataset.data[index];
+            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+          });
+        });
+      }
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -350,7 +516,25 @@ export class DashboardCAComponent implements OnInit {
   ];
 
   public ChartOptionsReportCA202GiaHan: ChartOptions = {
-    responsive: true,
+    responsive: true,    
+    animation: {
+      duration: 1,
+      onComplete: function () {
+        var chartInstance = this.chart,
+          ctx = chartInstance.ctx;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.textBaseline = 'bottom';
+        this.data.datasets.forEach(function (dataset, i) {
+          var meta = chartInstance.controller.getDatasetMeta(i);
+          meta.data.forEach(function (bar, index) {
+            var data = dataset.data[index];
+            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+          });
+        });
+      }
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -454,7 +638,37 @@ export class DashboardCAComponent implements OnInit {
         this.isShowLoading = false;
       }
     );
+
+    this.isShowLoading = true;
+    this.ReportService.ReportCA305Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
+      res => {
+        this.ReportService.listReportCA305 = (res as Report[]);
+        let labelArray001 = [];
+        let dataArray001 = [];
+        let labelArray002 = [];
+        let dataArray002 = [];
+        for (let i = 0; i < this.ReportService.listReportCA305.length; i++) {
+          labelArray001.push(this.ReportService.listReportCA305[i].LoaiGoiCuoc);
+          dataArray001.push(this.ReportService.listReportCA305[i].SanLuong);
+          labelArray002.push(this.ReportService.listReportCA305[i].DichVu);
+          dataArray002.push(this.ReportService.listReportCA305[i].DoanhThu);
+        }
+        this.ChartLabelsReportCA305SanLuong = labelArray001;
+        this.ChartDataReportCA305SanLuong = [
+          { data: dataArray001, stack: 'a' },
+        ];
+        this.ChartLabelsReportCA305DoanhThu = labelArray002;
+        this.ChartDataReportCA305DoanhThu = [
+          { data: dataArray002, stack: 'a' },
+        ];
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
   }
+
   onSearchReportCA001() {
     if (this.searchString.length > 0) {
       this.dataSource1.filter = this.searchString.toLowerCase();
@@ -483,6 +697,35 @@ export class DashboardCAComponent implements OnInit {
         this.dataSource2 = new MatTableDataSource(this.ReportService.listReportCA002);
         this.dataSource2.sort = this.sort2;
         this.dataSource2.paginator = this.paginator2;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+
+    this.isShowLoading = true;
+    this.ReportService.ReportCA306Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
+      res => {
+        this.ReportService.listReportCA306 = (res as Report[]);
+        let labelArray001 = [];
+        let dataArray001 = [];
+        let labelArray002 = [];
+        let dataArray002 = [];
+        for (let i = 0; i < this.ReportService.listReportCA306.length; i++) {
+          labelArray001.push(this.ReportService.listReportCA306[i].LoaiGoiCuoc);
+          dataArray001.push(this.ReportService.listReportCA306[i].SanLuong);
+          labelArray002.push(this.ReportService.listReportCA306[i].DichVu);
+          dataArray002.push(this.ReportService.listReportCA306[i].DoanhThu);
+        }
+        this.ChartLabelsReportCA306SanLuong = labelArray001;
+        this.ChartDataReportCA306SanLuong = [
+          { data: dataArray001, stack: 'a' },
+        ];
+        this.ChartLabelsReportCA306DoanhThu = labelArray002;
+        this.ChartDataReportCA306DoanhThu = [
+          { data: dataArray002, stack: 'a' },
+        ];
         this.isShowLoading = false;
       },
       err => {
@@ -524,6 +767,8 @@ export class DashboardCAComponent implements OnInit {
         this.isShowLoading = false;
       }
     );
+
+
   }
   onSearchReportCA003() {
     if (this.searchString.length > 0) {
@@ -588,6 +833,35 @@ export class DashboardCAComponent implements OnInit {
         this.dataSource5 = new MatTableDataSource(this.ReportService.listReportCA005);
         this.dataSource5.sort = this.sort5;
         this.dataSource5.paginator = this.paginator5;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+
+    this.isShowLoading = true;
+    this.ReportService.ReportCA307Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
+      res => {
+        this.ReportService.listReportCA307 = (res as Report[]);
+        let labelArray001 = [];
+        let dataArray001 = [];
+        let labelArray002 = [];
+        let dataArray002 = [];
+        for (let i = 0; i < this.ReportService.listReportCA307.length; i++) {
+          labelArray001.push(this.ReportService.listReportCA307[i].LoaiGoiCuoc);
+          dataArray001.push(this.ReportService.listReportCA307[i].SanLuong);
+          labelArray002.push(this.ReportService.listReportCA307[i].DichVu);
+          dataArray002.push(this.ReportService.listReportCA307[i].DoanhThu);
+        }
+        this.ChartLabelsReportCA307SanLuong = labelArray001;
+        this.ChartDataReportCA307SanLuong = [
+          { data: dataArray001, stack: 'a' },
+        ];
+        this.ChartLabelsReportCA307DoanhThu = labelArray002;
+        this.ChartDataReportCA307DoanhThu = [
+          { data: dataArray002, stack: 'a' },
+        ];
         this.isShowLoading = false;
       },
       err => {
@@ -685,6 +959,66 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
+  ReportCA008Async() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA108Async(this.huyenID, this.year, this.month, this.nhanVienID, this.isKetLuan).subscribe(
+      res => {
+        this.ReportService.listReportCA008 = (res as Report[]);
+        this.dataSource8 = new MatTableDataSource(this.ReportService.listReportCA008);
+        this.dataSource8.sort = this.sort8;
+        this.dataSource8.paginator = this.paginator8;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+
+    this.isShowLoading = true;
+    this.ReportService.ReportCA308Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
+      res => {
+        this.ReportService.listReportCA308 = (res as Report[]);
+        let labelArray001 = [];
+        let dataArray001 = [];
+        let labelArray002 = [];
+        let dataArray002 = [];
+        for (let i = 0; i < this.ReportService.listReportCA308.length; i++) {
+          labelArray001.push(this.ReportService.listReportCA308[i].LoaiGoiCuoc);
+          dataArray001.push(this.ReportService.listReportCA308[i].SanLuong);
+        }
+        this.ChartLabelsReportCA308SanLuong = labelArray001;
+        this.ChartDataReportCA308SanLuong = [
+          { data: dataArray001, stack: 'a' },
+        ];
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+
+  }
+  onSearchReportCA008() {
+    if (this.searchString.length > 0) {
+      this.dataSource8.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.ReportCA008Async();
+    }
+  }
+  onDownloadExcelFileReportCA008() {
+    this.isShowLoading = true;
+    this.DownloadService.ReportCA007ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+      res => {
+        window.open(res.toString(), "_blank");
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+
   onDownloadExcelFileReportVNPT003() {
     this.isShowLoading = true;
     this.DownloadService.ReportVNPT003ToExcelAsync(this.huyenID, this.xaID, this.searchString, this.dichVuID, this.year, this.month).subscribe(
@@ -819,6 +1153,42 @@ export class DashboardCAComponent implements OnInit {
         const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
         dialog.afterClosed().subscribe(() => {
           this.onSearchReportCA005();
+        });
+      },
+      err => {
+      }
+    );
+  }
+  onEmailReportCA005(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCAEmailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA005();
+        });
+      },
+      err => {
+      }
+    );
+  }
+  onAddReportCA008(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchReportCA008();
         });
       },
       err => {
