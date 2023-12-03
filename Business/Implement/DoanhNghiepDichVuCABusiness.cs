@@ -88,7 +88,7 @@ namespace Business.Implement
 			}
 		}
 
-		public override async Task<DoanhNghiepDichVuCA> SaveAsync(DoanhNghiepDichVuCA model)
+		public virtual async Task<DoanhNghiepDichVuCA> Save001Async(DoanhNghiepDichVuCA model)
 		{
 			Initialization(model);
 			if (!string.IsNullOrEmpty(model.Code))

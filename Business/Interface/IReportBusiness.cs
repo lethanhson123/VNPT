@@ -45,5 +45,26 @@ namespace Business.Interface
 		Task<List<Report>> ReportCA307Async(long huyenID, int year, int month, long nhanVienID);
 		Task<List<Report>> ReportCA308Async(long huyenID, int year, int month, long nhanVienID);
 
+
+		Task<List<Report>> ReportCA401Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA402Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA403Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA404Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA405Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA406Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA407Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA408Async(long huyenID, int year, int month, long nhanVienID, bool isKetLuan, bool isSmartCA);
+
+		Task<Report> ReportCA501Async(int year, int month, bool isSmartCA);
+		Task<List<Report>> ReportCA502Async(int year, int month, bool isSmartCA);
+		Task<List<Report>> ReportCA503Async(int year, int month, bool isSmartCA);
+		Task<List<Report>> ReportCA504Async(int year, int month, bool isSmartCA);
+		Task<List<Report>> ReportCA505Async(int year, int month, bool isSmartCA);
+
+		Task<List<Report>> ReportCA605Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA606Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA607Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+		Task<List<Report>> ReportCA608Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
+
 	}
 }

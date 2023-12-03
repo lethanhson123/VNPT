@@ -17,12 +17,14 @@ namespace API.Controllers.v1
 		private readonly INhanVienBusiness _NhanVienBusiness;
 		private readonly IDoanhNghiepBusiness _DoanhNghiepBusiness;
 		private readonly IPhongBanBusiness _PhongBanBusiness;
+		private readonly IEmailConfigBusiness _EmailConfigBusiness;
 		public EmailController(IWebHostEnvironment WebHostEnvironment
 			, INhanVienTokenBusiness NhanVienTokenBusiness
 			, INhanVienTaiKhoanBusiness nhanVienTaiKhoanBusiness
 			, INhanVienBusiness nhanVienBusiness
 			, IDoanhNghiepBusiness doanhNghiepBusiness
 			, IPhongBanBusiness phongBanBusiness
+			, IEmailConfigBusiness EmailConfigBusiness
 			) : base(NhanVienTokenBusiness)
 		{
 			_WebHostEnvironment = WebHostEnvironment;
@@ -31,6 +33,7 @@ namespace API.Controllers.v1
 			_NhanVienBusiness = nhanVienBusiness;
 			_DoanhNghiepBusiness = doanhNghiepBusiness;
 			_PhongBanBusiness = phongBanBusiness;
+			_EmailConfigBusiness = EmailConfigBusiness;
 		}
 		[HttpPost]
 		[Route("AsyncNhanVienToken")]
@@ -77,17 +80,45 @@ namespace API.Controllers.v1
 		public async Task<bool> AsyncHetHanDoanhNghiepDichVuCA(DoanhNghiepDichVuCA doanhNghiepDichVuCA)
 		{
 			bool result = GlobalHelper.InitializationBool;
+
 			try
 			{
+				var diffOfDates = doanhNghiepDichVuCA.NgayHetHan.Value.Subtract(GlobalHelper.InitializationDateTime);
 				Helper.Model.Mail mail = new Helper.Model.Mail();
-				mail.MailFrom = GlobalHelper.MasterEmailUser;
-				mail.UserName = GlobalHelper.MasterEmailUser;
-				mail.Password = GlobalHelper.MasterEmailPassword;
-				mail.SMTPPort = GlobalHelper.SMTPPort;
-				mail.SMTPServer = GlobalHelper.SMTPServer;
-				mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
-				mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
-				mail.Display = GlobalHelper.MasterEmailDisplay;
+
+				EmailConfig emailConfig = await _EmailConfigBusiness.GetByCondition(item => item.Active == true).OrderBy(item => item.SortOrder).FirstOrDefaultAsync();
+				if (emailConfig != null)
+				{
+					mail.MailFrom = emailConfig.MasterEmailUser;
+					mail.UserName = emailConfig.MasterEmailUser;
+					mail.Password = emailConfig.MasterEmailPassword;
+					mail.SMTPPort = emailConfig.SMTPPort.Value;
+					mail.SMTPServer = emailConfig.SMTPServer;
+					mail.IsMailBodyHtml = 0;
+					if (emailConfig.IsMailBodyHtml==true)
+					{
+						mail.IsMailBodyHtml = 1;
+					}
+					mail.IsMailUsingSSL = 0;
+					if (emailConfig.IsMailUsingSSL == true)
+					{
+						mail.IsMailUsingSSL = 1;
+					}					
+					mail.Display = emailConfig.MasterEmailDisplay;
+				}
+				else
+				{
+					mail.MailFrom = GlobalHelper.MasterEmailUser;
+					mail.UserName = GlobalHelper.MasterEmailUser;
+					mail.Password = GlobalHelper.MasterEmailPassword;
+					mail.SMTPPort = GlobalHelper.SMTPPort;
+					mail.SMTPServer = GlobalHelper.SMTPServer;
+					mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+					mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+					mail.Display = GlobalHelper.MasterEmailDisplay;
+				}
+
+
 				mail.Subject = "Thông báo về dịch vụ chữ ký số CA - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
 				string contentHTML = GlobalHelper.InitializationString;
 				var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCAHetHan.html");
@@ -113,7 +144,6 @@ namespace API.Controllers.v1
 				}
 				else
 				{
-					var diffOfDates = doanhNghiepDichVuCA.NgayHetHan.Value.Subtract(GlobalHelper.InitializationDateTime);
 					note = "(Còn " + diffOfDates.Days + " ngày nữa)";
 				}
 				contentHTML = contentHTML.Replace("[Note]", note);
@@ -129,7 +159,7 @@ namespace API.Controllers.v1
 				contentHTML = contentHTML.Replace("[NhanVienName]", nhanVien.Name);
 				contentHTML = contentHTML.Replace("[NhanVienDienThoai]", nhanVien.DienThoai);
 				contentHTML = contentHTML.Replace("[NhanVienEmail]", nhanVien.Email);
-				contentHTML = contentHTML.Replace("[PhongBanHangName]", phongBan.Name);				
+				contentHTML = contentHTML.Replace("[PhongBanHangName]", phongBan.Name);
 
 				mail.Content = contentHTML;
 				if (!string.IsNullOrEmpty(doanhNghiepDichVuCA.Email))

@@ -183,5 +183,14 @@ namespace API.Controllers.v1
 			await _DoanhNghiepDichVuCABusiness.SaveAsync(model);
 			return model;
 		}
+
+		[HttpPost]
+		[Route("Save001Async")]
+		public virtual async Task<DoanhNghiepDichVuCA> Save001Async()
+		{
+			DoanhNghiepDichVuCA result = JsonConvert.DeserializeObject<DoanhNghiepDichVuCA>(Request.Form["data"]);
+			await _DoanhNghiepDichVuCABusiness.Save001Async(result);
+			return result;
+		}
 	}
 }

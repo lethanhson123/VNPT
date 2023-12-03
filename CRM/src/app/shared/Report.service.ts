@@ -351,6 +351,167 @@ export class ReportService extends BaseService{
         formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
         return this.httpClient.post(url, formUpload);
     }
+    ReportCA401Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA401Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA402Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA402Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA403Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA403Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA404Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA404Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA405Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA405Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA406Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA406Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA407Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA407Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA408Async(huyenID: number, year: number, month: number, nhanVienID: number, isKetLuan: boolean, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA408Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isKetLuan', JSON.stringify(isKetLuan));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA501Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA501Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));   
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));     
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA502Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA502Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));     
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));   
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA503Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA503Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));    
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));    
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA504Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA504Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));      
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA505Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA505Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month)); 
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));       
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA605Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA605Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA606Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA606Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA607Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA607Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA608Async(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA608Async';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
 }
 
 

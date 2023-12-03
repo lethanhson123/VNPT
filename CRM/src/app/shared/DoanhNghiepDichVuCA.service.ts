@@ -60,6 +60,16 @@ export class DoanhNghiepDichVuCAService extends BaseService{
         formUpload.append('file[]', fileCCCD);
         return this.httpClient.post(url, formUpload);
     }
+    Save001Async(formData: DoanhNghiepDichVuCA) {
+        var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
+        if (lastUpdatedMembershipID) {
+            formData.LastUpdatedMembershipID = Number(lastUpdatedMembershipID);
+        }
+        let url = this.aPIURL + this.controller + '/Save001Async';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        return this.httpClient.post(url, formUpload);
+    }
 }
 
 

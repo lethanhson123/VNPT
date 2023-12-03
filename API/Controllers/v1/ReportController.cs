@@ -686,5 +686,336 @@ namespace API.Controllers.v1
 			}
 			return result;
 		}
+		[HttpPost]
+		[Route("ReportCA401Async")]
+		public virtual async Task<List<Report>> ReportCA401Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA401Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA402Async")]
+		public virtual async Task<List<Report>> ReportCA402Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA402Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA403Async")]
+		public virtual async Task<List<Report>> ReportCA403Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA403Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA404Async")]
+		public virtual async Task<List<Report>> ReportCA404Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA404Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA405Async")]
+		public virtual async Task<List<Report>> ReportCA405Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA405Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA406Async")]
+		public virtual async Task<List<Report>> ReportCA406Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA406Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA407Async")]
+		public virtual async Task<List<Report>> ReportCA407Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA407Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA408Async")]
+		public virtual async Task<List<Report>> ReportCA408Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isKetLuan = JsonConvert.DeserializeObject<bool>(Request.Form["isKetLuan"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA408Async(huyenID, year, month, nhanVienID, isKetLuan, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA501Async")]
+		public virtual async Task<Report> ReportCA501Async()
+		{
+			Report result = new Report();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA501Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA502Async")]
+		public virtual async Task<List<Report>> ReportCA502Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA502Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA503Async")]
+		public virtual async Task<List<Report>> ReportCA503Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA503Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA504Async")]
+		public virtual async Task<List<Report>> ReportCA504Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA504Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA505Async")]
+		public virtual async Task<List<Report>> ReportCA505Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA505Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA605Async")]
+		public virtual async Task<List<Report>> ReportCA605Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA605Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA606Async")]
+		public virtual async Task<List<Report>> ReportCA606Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA606Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA607Async")]
+		public virtual async Task<List<Report>> ReportCA607Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA607Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA608Async")]
+		public virtual async Task<List<Report>> ReportCA608Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA608Async(huyenID, year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }

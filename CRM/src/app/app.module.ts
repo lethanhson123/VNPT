@@ -40,6 +40,8 @@ import { DoanhNghiepDichVuCAComponent } from './doanh-nghiep-dich-vu-ca/doanh-ng
 import { DoanhNghiepDichVuCADetailComponent } from './doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
 import { NhanVienDangNhapComponent } from './nhan-vien-dang-nhap/nhan-vien-dang-nhap.component';
 import { DoanhNghiepDichVuCAEmailComponent } from './doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-caemail/doanh-nghiep-dich-vu-caemail.component';
+import { CAVNPTComponent } from './cavnpt/cavnpt.component';
+import { CASmartComponent } from './casmart/casmart.component';
 
 
 
@@ -73,7 +75,9 @@ import { DoanhNghiepDichVuCAEmailComponent } from './doanh-nghiep-dich-vu-ca/doa
     DoanhNghiepDichVuCAComponent,
     DoanhNghiepDichVuCADetailComponent,
     NhanVienDangNhapComponent,
-    DoanhNghiepDichVuCAEmailComponent,    
+    DoanhNghiepDichVuCAEmailComponent,
+    CAVNPTComponent,
+    CASmartComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

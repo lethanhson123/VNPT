@@ -24,16 +24,24 @@ import { DashboardHoaDonDienTuComponent } from './dashboard-hoa-don-dien-tu/dash
 import { NhanVienTaiKhoanComponent } from './nhan-vien-tai-khoan/nhan-vien-tai-khoan.component';
 import { GoiCuocComponent } from './goi-cuoc/goi-cuoc.component';
 import { NhanVienDangNhapComponent } from './nhan-vien-dang-nhap/nhan-vien-dang-nhap.component';
+import { CAVNPTComponent } from './cavnpt/cavnpt.component';
+import { CASmartComponent } from './casmart/casmart.component';
 
 
 const routes: Routes = [  
   { path: '', redirectTo: '/DashboardCA', pathMatch: 'full' },  
   {
-    path: 'Homepage', component: HomepageComponent,
+    path: 'Homepage', component: DashboardCAComponent,
   },
   {
     path: 'DashboardCA', component: DashboardCAComponent,
   },     
+  {
+    path: 'CAVNPT', component: CAVNPTComponent,
+  },   
+  {
+    path: 'CASmart', component: CASmartComponent,
+  },   
   {
     path: 'DashboardTenMien', component: DashboardTenMienComponent,
   },  

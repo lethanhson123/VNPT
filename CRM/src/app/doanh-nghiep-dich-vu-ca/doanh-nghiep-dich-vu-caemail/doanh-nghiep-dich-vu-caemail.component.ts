@@ -32,7 +32,7 @@ export class DoanhNghiepDichVuCAEmailComponent implements OnInit {
 
   onSubmit() {    
     this.isShowLoading = true;
-    this.DoanhNghiepDichVuCAService.SaveAsync(this.DoanhNghiepDichVuCAService.formData).subscribe(
+    this.DoanhNghiepDichVuCAService.Save001Async(this.DoanhNghiepDichVuCAService.formData).subscribe(
       res => {
         this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
         this.isShowLoading = false;
