@@ -1,4 +1,6 @@
 ﻿
+using Data.Repository.Implement;
+
 namespace Business.Implement
 {
 	public class NhanVienBusiness : BaseBusiness<NhanVien, INhanVienRepository>, INhanVienBusiness
@@ -40,6 +42,6 @@ namespace Business.Implement
 				}
 			}
 			return result;
-		}
+		}		
 	}
 }

@@ -107,7 +107,7 @@ export class DashboardCAComponent implements OnInit {
   doanhThuNhanVien: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
   month: number = new Date().getMonth() + 1;
-  isKetLuan: boolean = true;
+  isKetLuan: boolean = false;
   constructor(
     public HuyenService: HuyenService,
     public XaService: XaService,
@@ -132,8 +132,7 @@ export class DashboardCAComponent implements OnInit {
     this.GetYearToList();
     this.GetMonthToList();
     this.NhanVienGetToList();
-    this.PhongBanGetToList();
-    this.onSearchReportCA201();
+    this.PhongBanGetToList();    
   }
 
   GetYearToList() {
@@ -194,9 +193,9 @@ export class DashboardCAComponent implements OnInit {
           dataArray003.push(this.ReportService.listReportCA202[i].GiaHan);
           dataArray004.push(this.ReportService.listReportCA202[i].GiaHanChiTieu);
         }
-        let label001: string = 'Phát triển';
+        let label001: string = 'PHÁT TRIỂN';
         let label002: string = 'Chỉ tiêu';
-        let label003: string = 'Gia hạn';
+        let label003: string = 'GIA HẠN';
         let label004: string = 'Chỉ tiêu';
         this.ChartLabelsReportCA202PhatTrien = labelArray;
         this.ChartDataReportCA202PhatTrien = [
@@ -232,7 +231,7 @@ export class DashboardCAComponent implements OnInit {
         }
         this.ChartLabelsReportCA205SanLuong = labelArray001;
         this.ChartDataReportCA205SanLuong = [
-          { data: dataArray001, stack: 'a' },
+          { data: dataArray001, stack: 'a', },
         ];
         this.ChartLabelsReportCA205DoanhThu = labelArray002;
         this.ChartDataReportCA205DoanhThu = [
@@ -285,7 +284,11 @@ export class DashboardCAComponent implements OnInit {
   }
 
   public ChartOptionsReportCA205SanLuong: ChartOptions = {
-    responsive: true,    
+    responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -299,7 +302,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA205SanLuong: Color[] = [
   ]
   public ChartLabelsReportCA205SanLuong: Label[] = [];
-  public ChartTypeReportCA205SanLuong: ChartType = 'doughnut';
+  public ChartTypeReportCA205SanLuong: ChartType = 'pie';
   public ChartLegendReportCA205SanLuong = true;
   public ChartPluginsReportCA205SanLuong = [];
 
@@ -308,6 +311,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA205DoanhThu: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -321,7 +328,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA205DoanhThu: Color[] = [
   ]
   public ChartLabelsReportCA205DoanhThu: Label[] = [];
-  public ChartTypeReportCA205DoanhThu: ChartType = 'doughnut';
+  public ChartTypeReportCA205DoanhThu: ChartType = 'pie';
   public ChartLegendReportCA205DoanhThu = true;
   public ChartPluginsReportCA205DoanhThu = [];
 
@@ -330,6 +337,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA305SanLuong: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -343,7 +354,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA305SanLuong: Color[] = [
   ]
   public ChartLabelsReportCA305SanLuong: Label[] = [];
-  public ChartTypeReportCA305SanLuong: ChartType = 'doughnut';
+  public ChartTypeReportCA305SanLuong: ChartType = 'pie';
   public ChartLegendReportCA305SanLuong = true;
   public ChartPluginsReportCA305SanLuong = [];
   public ChartDataReportCA305SanLuong: ChartDataSets[] = [
@@ -351,6 +362,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA305DoanhThu: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -364,7 +379,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA305DoanhThu: Color[] = [
   ]
   public ChartLabelsReportCA305DoanhThu: Label[] = [];
-  public ChartTypeReportCA305DoanhThu: ChartType = 'doughnut';
+  public ChartTypeReportCA305DoanhThu: ChartType = 'pie';
   public ChartLegendReportCA305DoanhThu = true;
   public ChartPluginsReportCA305DoanhThu = [];
   public ChartDataReportCA305DoanhThu: ChartDataSets[] = [
@@ -372,6 +387,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA306SanLuong: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -385,7 +404,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA306SanLuong: Color[] = [
   ]
   public ChartLabelsReportCA306SanLuong: Label[] = [];
-  public ChartTypeReportCA306SanLuong: ChartType = 'doughnut';
+  public ChartTypeReportCA306SanLuong: ChartType = 'pie';
   public ChartLegendReportCA306SanLuong = true;
   public ChartPluginsReportCA306SanLuong = [];
   public ChartDataReportCA306SanLuong: ChartDataSets[] = [
@@ -393,6 +412,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA306DoanhThu: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -406,7 +429,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA306DoanhThu: Color[] = [
   ]
   public ChartLabelsReportCA306DoanhThu: Label[] = [];
-  public ChartTypeReportCA306DoanhThu: ChartType = 'doughnut';
+  public ChartTypeReportCA306DoanhThu: ChartType = 'pie';
   public ChartLegendReportCA306DoanhThu = true;
   public ChartPluginsReportCA306DoanhThu = [];
   public ChartDataReportCA306DoanhThu: ChartDataSets[] = [
@@ -414,6 +437,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA307SanLuong: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -427,7 +454,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA307SanLuong: Color[] = [
   ]
   public ChartLabelsReportCA307SanLuong: Label[] = [];
-  public ChartTypeReportCA307SanLuong: ChartType = 'doughnut';
+  public ChartTypeReportCA307SanLuong: ChartType = 'pie';
   public ChartLegendReportCA307SanLuong = true;
   public ChartPluginsReportCA307SanLuong = [];
   public ChartDataReportCA307SanLuong: ChartDataSets[] = [
@@ -435,6 +462,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA307DoanhThu: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -448,7 +479,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA307DoanhThu: Color[] = [
   ]
   public ChartLabelsReportCA307DoanhThu: Label[] = [];
-  public ChartTypeReportCA307DoanhThu: ChartType = 'doughnut';
+  public ChartTypeReportCA307DoanhThu: ChartType = 'pie';
   public ChartLegendReportCA307DoanhThu = true;
   public ChartPluginsReportCA307DoanhThu = [];
   public ChartDataReportCA307DoanhThu: ChartDataSets[] = [
@@ -456,6 +487,10 @@ export class DashboardCAComponent implements OnInit {
 
   public ChartOptionsReportCA308SanLuong: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right'
+    },   
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -469,7 +504,7 @@ export class DashboardCAComponent implements OnInit {
   public ChartColorsReportCA308SanLuong: Color[] = [
   ]
   public ChartLabelsReportCA308SanLuong: Label[] = [];
-  public ChartTypeReportCA308SanLuong: ChartType = 'doughnut';
+  public ChartTypeReportCA308SanLuong: ChartType = 'pie';
   public ChartLegendReportCA308SanLuong = true;
   public ChartPluginsReportCA308SanLuong = [];
   public ChartDataReportCA308SanLuong: ChartDataSets[] = [
@@ -516,7 +551,7 @@ export class DashboardCAComponent implements OnInit {
   ];
 
   public ChartOptionsReportCA202GiaHan: ChartOptions = {
-    responsive: true,    
+    responsive: true,
     animation: {
       duration: 1,
       onComplete: function () {
@@ -558,21 +593,7 @@ export class DashboardCAComponent implements OnInit {
 
 
 
-  NhanVienTaiKhoanGetToList() {
-    this.isShowLoading = true;
-    this.NhanVienTaiKhoanService.GetAllAndEmptyToListAsync().subscribe(
-      res => {
-        this.NhanVienTaiKhoanService.list = (res as NhanVienTaiKhoan[]).sort((a, b) => (a.ParentID > b.ParentID ? 1 : -1));
-        this.dataSource8 = new MatTableDataSource(this.NhanVienTaiKhoanService.list);
-        this.dataSource8.sort = this.sort8;
-        this.dataSource8.paginator = this.paginator8;
-        this.isShowLoading = false;
-      },
-      err => {
-        this.isShowLoading = false;
-      }
-    );
-  }
+
   NhanVienGetToList() {
     this.isShowLoading = true;
     this.NhanVienService.GetAllToListAsync().subscribe(
@@ -600,8 +621,7 @@ export class DashboardCAComponent implements OnInit {
   GetHuyenToListAsync() {
     this.HuyenService.GetSQLByNhanVienID_ActiveAsync().subscribe(
       res => {
-        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.onSearchReportCA001();
+        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));        
       },
       err => {
       }
