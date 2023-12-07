@@ -192,5 +192,12 @@ namespace API.Controllers.v1
 			await _DoanhNghiepDichVuCABusiness.Save001Async(result);
 			return result;
 		}
+		[HttpPost]
+		[Route("AsyncThieuHoSoDoanhNghiepDichVuCA")]
+		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA()
+		{			
+			await _DoanhNghiepDichVuCABusiness.AsyncThieuHoSoDoanhNghiepDichVuCA();
+			return true;
+		}
 	}
 }

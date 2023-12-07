@@ -1,7 +1,4 @@
-﻿
-using Data.Model;
-
-namespace Business.Implement
+﻿namespace Business.Implement
 {
 	public class ReportBusiness : BaseBusiness<Report, IReportRepository>, IReportBusiness
 	{

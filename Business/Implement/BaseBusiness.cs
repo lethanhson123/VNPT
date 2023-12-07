@@ -174,7 +174,15 @@
         {
             return await _repository.GetByActiveToListAsync(active);
         }
-        public virtual List<T> GetByParentIDToList(long parentID)
+		public virtual List<T> GetByIDToList(long ID)
+		{
+			return _repository.GetByIDToList(ID);
+		}
+		public virtual async Task<List<T>> GetByIDToListAsync(long ID)
+		{
+			return await _repository.GetByIDToListAsync(ID);
+		}
+		public virtual List<T> GetByParentIDToList(long parentID)
         {
             return _repository.GetByParentIDToList(parentID);
         }

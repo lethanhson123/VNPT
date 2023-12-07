@@ -28,7 +28,9 @@ namespace Data.Repository.Interface
         Task<List<T>> GetAllToListAsync();
         List<T> GetByActiveToList(bool active);
         Task<List<T>> GetByActiveToListAsync(bool active);
-        List<T> GetByParentIDToList(long parentID);
+        List<T> GetByIDToList(long ID);
+        Task<List<T>> GetByIDToListAsync(long ID);
+		List<T> GetByParentIDToList(long parentID);
         Task<List<T>> GetByParentIDToListAsync(long parentID);
         List<T> GetByParentIDAndActiveToList(long parentID, bool active);
         Task<List<T>> GetByParentIDAndActiveToListAsync(long parentID, bool active);

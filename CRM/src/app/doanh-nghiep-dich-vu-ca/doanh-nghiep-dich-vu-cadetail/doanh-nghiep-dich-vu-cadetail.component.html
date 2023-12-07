@@ -4,7 +4,7 @@
             <i class="bi bi-bar-chart fs-3 text-primary"></i>
         </div>
         <div>
-            <h2 class="mb-1">Xác nhận</h2>
+            <h2 class="mb-1">UPLOAD HỒ SƠ KHÁCH HÀNG</h2>
             <h6 class="m-0 text-dark fw-light">
                 CA
             </h6>
@@ -24,9 +24,9 @@
         <div class="col-lg-3 col-sm-12 col-12">
             <div class="col-lg-12 col-sm-12 col-12">
                 <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsKetLuan"
+                    <input type="checkbox" class="form-check-input" name="IsKetLuan" disabled
                         [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsKetLuan" />
-                    <label class="form-check-label" for="IsKetLuan">Xác nhận</label>
+                    <label class="form-check-label" for="IsKetLuan">Hoàn thành</label>
                 </div>
             </div>
             <div class="col-lg-12 col-sm-12 col-12">
@@ -74,15 +74,15 @@
         </div>
         <div class="col-lg-9 col-sm-12 col-12">
             <div class="col-lg-12 col-sm-12 col-12">
-                <label class="form-label">Ghi chú</label>
-                <input name="Note" [(ngModel)]="DoanhNghiepDichVuCAService.formData.Note" placeholder="Ghi chú"
+                <label class="form-label">Kết luận</label>
+                <input name="KetLuan" [(ngModel)]="DoanhNghiepDichVuCAService.formData.KetLuan" placeholder="Kết luận" disabled
                     type="text" class="form-control">
             </div>
             <div class="col-lg-12 col-sm-12 col-12">
-                <label class="form-label">Kết luận</label>
-                <input name="KetLuan" [(ngModel)]="DoanhNghiepDichVuCAService.formData.KetLuan" placeholder="Kết luận"
+                <label class="form-label">Ghi chú</label>
+                <input name="Note" [(ngModel)]="DoanhNghiepDichVuCAService.formData.Note" placeholder="Ghi chú"
                     type="text" class="form-control">
-            </div>
+            </div>           
             <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Hợp đồng: <a *ngIf="DoanhNghiepDichVuCAService.formData.HopDong" target="_blank" class="link-primary"
                     href="{{DoanhNghiepDichVuCAService.formData.HopDong}}" title="{{DoanhNghiepDichVuCAService.formData.HopDong}}">Xem chi tiết</a></label>

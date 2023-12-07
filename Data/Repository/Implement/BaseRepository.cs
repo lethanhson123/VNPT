@@ -292,7 +292,17 @@
             var result = await _context.Set<T>().AsNoTracking().Where(item => item.Active == active).ToListAsync();
             return result ?? new List<T>();
         }
-        public virtual List<T> GetByParentIDToList(long parentID)
+		public virtual List<T> GetByIDToList(long ID)
+		{
+			var result = _context.Set<T>().AsNoTracking().Where(item => item.ID == ID).ToList();
+			return result ?? new List<T>();
+		}
+		public virtual async Task<List<T>> GetByIDToListAsync(long ID)
+		{
+			var result = await _context.Set<T>().AsNoTracking().Where(item => item.ID == ID).ToListAsync();
+			return result ?? new List<T>();
+		}
+		public virtual List<T> GetByParentIDToList(long parentID)
         {
             var result = _context.Set<T>().AsNoTracking().Where(item => item.ParentID == parentID).ToList();
             return result ?? new List<T>();

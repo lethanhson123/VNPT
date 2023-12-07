@@ -70,6 +70,11 @@ export class DoanhNghiepDichVuCAService extends BaseService{
         formUpload.append('data', JSON.stringify(formData));
         return this.httpClient.post(url, formUpload);
     }
+    AsyncThieuHoSoDoanhNghiepDichVuCA() {       
+        let url = this.aPIURL + this.controller + '/AsyncThieuHoSoDoanhNghiepDichVuCA';
+        const formUpload: FormData = new FormData();        
+        return this.httpClient.post(url, formUpload);
+    }
 }
 
 

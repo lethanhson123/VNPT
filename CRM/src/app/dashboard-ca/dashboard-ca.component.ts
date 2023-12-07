@@ -1215,4 +1215,15 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
+  DoanhNghiepDichVuCAThieuHoSo() {
+    this.isShowLoading = true;
+    this.DoanhNghiepDichVuCAService.AsyncThieuHoSoDoanhNghiepDichVuCA().subscribe(
+      res => {        
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
 }

@@ -21,7 +21,9 @@
         Task<List<T>> GetAllAndEmptyToListAsync();
         List<T> GetByActiveToList(bool active);
         Task<List<T>> GetByActiveToListAsync(bool active);
-        List<T> GetByParentIDToList(long parentID);
+		List<T> GetByIDToList(long ID);
+		Task<List<T>> GetByIDToListAsync(long ID);
+		List<T> GetByParentIDToList(long parentID);
         Task<List<T>> GetByParentIDToListAsync(long parentID);
 		List<T> GetByParentIDAndEmptyToList(long parentID);
 		Task<List<T>> GetByParentIDAndEmptyToListAsync(long parentID);

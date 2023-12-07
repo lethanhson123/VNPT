@@ -1,6 +1,7 @@
 ﻿
 using Data.Model;
 using Data.Repository.Implement;
+using Data.Repository.Interface;
 
 namespace Business.Implement
 {
@@ -45,8 +46,11 @@ namespace Business.Implement
 			{
 				model.IsHoaDon = true;
 			}
-
-			if ((model.IsHopDong == true) && (model.IsDonXinCapChungThuSo == true) && (model.IsCCCD == true) && (model.IsGiayPhepKinhDoanh == true) && (model.IsHoaDon == true))
+			if (!string.IsNullOrEmpty(model.BienBanNghiemThu))
+			{
+				model.IsBienBanNghiemThu = true;
+			}
+			if ((model.IsHopDong == true) && (model.IsDonXinCapChungThuSo == true) && (model.IsCCCD == true) && (model.IsGiayPhepKinhDoanh == true) && (model.IsBienBanNghiemThu == true))
 			{
 				model.IsKetLuan = true;
 				model.KetLuan = GlobalHelper.InitializationString;
@@ -62,6 +66,11 @@ namespace Business.Implement
 			model.KetLuan = model.KetLuan.Replace("[Giấy phép kinh doanh]", "");
 			model.KetLuan = model.KetLuan.Replace("[Biên bản nghiệm thu]", "");
 			model.KetLuan = model.KetLuan.Replace("[Hoá đơn]", "");
+
+			if (model.IsKetLuan != true)
+			{				
+				model.KetLuan = "Thiếu hồ sơ : ";
+			}
 			if (model.IsHopDong != true)
 			{
 				model.KetLuan = model.KetLuan + "[Hợp đồng]";
@@ -138,6 +147,43 @@ namespace Business.Implement
 
 			}
 			return model;
+		}
+		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA()
+		{
+			string url = GlobalHelper.APISite + "api/v1/Email/AsyncThieuHoSoDoanhNghiepDichVuCA";
+			var content = new StringContent(JsonConvert.SerializeObject(""), Encoding.UTF8, "application/json");
+			HttpClient client = new HttpClient();
+			var task = client.PostAsync(url, content);
+			await task.Result.Content.ReadAsStringAsync();
+			return true;
+		}
+		public virtual async Task<List<DoanhNghiepDichVuCA>> GetByNhanVienIDToListAsync(long nhanVienID)
+		{
+			List<DoanhNghiepDichVuCA> result = new List<DoanhNghiepDichVuCA>();
+			if (nhanVienID > 0)
+			{
+				SqlParameter[] parameters =
+				 {
+					new SqlParameter("@NhanVienID",nhanVienID),
+				};
+				result = await _DoanhNghiepDichVuCARepository.GetByStoredProcedureToListAsync("sp_DoanhNghiepDichVuCASelectItemsByNhanVienID", parameters);
+			}
+			return result;
+		}
+		public virtual async Task<List<DoanhNghiepDichVuCA>> GetByNhanVienIDAndYearAndMonthToListAsync(long nhanVienID, int year, int month)
+		{
+			List<DoanhNghiepDichVuCA> result = new List<DoanhNghiepDichVuCA>();
+			if (nhanVienID > 0)
+			{
+				SqlParameter[] parameters =
+				 {
+					new SqlParameter("@NhanVienID",nhanVienID),
+					new SqlParameter("@Year",year),
+					new SqlParameter("@Month",month),
+				};
+				result = await _DoanhNghiepDichVuCARepository.GetByStoredProcedureToListAsync("sp_DoanhNghiepDichVuCASelectItemsByNhanVienIDAndYearAndMonth", parameters);
+			}
+			return result;
 		}
 	}
 }
