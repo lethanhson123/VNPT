@@ -26,14 +26,17 @@ export class UploadComponent implements OnInit {
   isDoanhThu: boolean = false;
   isGoiCuoc: boolean = false;
   isCA: boolean = false;
+  isCAHoSo: boolean = false;
   excelDoanhNghiepURL: string = environment.APIRootURL + environment.Download + "/DoanhNghiep.xlsx";
   excelDoanhThuURL: string = environment.APIRootURL + environment.Download + "/DoanhThu.xlsx";
   excelGoiCuocURL: string = environment.APIRootURL + environment.Download + "/GoiCuoc.xlsx";
   excelCAURL: string = environment.APIRootURL + environment.Download + "/CA.xlsx";
+  excelCAHoSoURL: string = environment.APIRootURL + environment.Download + "/CAHoSo.xlsx";
   @ViewChild('uploadDoanhNghiep') uploadDoanhNghiep!: ElementRef;
   @ViewChild('uploadDoanhThu') uploadDoanhThu!: ElementRef;
   @ViewChild('uploadGoiCuoc') uploadGoiCuoc!: ElementRef;
   @ViewChild('uploadCA') uploadCA!: ElementRef;
+  @ViewChild('uploadCAHoSo') uploadCAHoSo!: ElementRef;
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -76,6 +79,11 @@ export class UploadComponent implements OnInit {
   changeCA(files: FileList) {
     if (files) {
       this.isCA = true;
+    }
+  }
+  changeCAHoSo(files: FileList) {
+    if (files) {
+      this.isCAHoSo = true;
     }
   }
   onSubmit() {
@@ -134,6 +142,21 @@ export class UploadComponent implements OnInit {
     fileToUpload = this.uploadGoiCuoc.nativeElement.files[0];
     this.isShowLoading = true;
     this.UploadService.PostGoiCuocListByExcelFileAsync(fileToUpload).subscribe(
+      res => {
+        this.isShowLoading = false;        
+        this.NotificationService.warn(environment.UploadSuccess);
+      },
+      err => {
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.UploadNotSuccess);
+      }
+    );
+  }
+  onSubmitCAHoSo() {
+    let fileToUpload: File;
+    fileToUpload = this.uploadCAHoSo.nativeElement.files[0];
+    this.isShowLoading = true;
+    this.UploadService.PostDoanhNghiepDichVuCAByExcelFileAsync(fileToUpload).subscribe(
       res => {
         this.isShowLoading = false;        
         this.NotificationService.warn(environment.UploadSuccess);

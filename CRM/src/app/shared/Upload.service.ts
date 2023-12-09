@@ -54,5 +54,11 @@ export class UploadService {
         formUpload.append('month', JSON.stringify(month));
         return this.httpClient.post(url, formUpload);
     }
+    PostDoanhNghiepDichVuCAByExcelFileAsync(fileToUpload: File) {
+        let url = this.aPIURL + this.controller + '/PostDoanhNghiepDichVuCAByExcelFileAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('file', fileToUpload, fileToUpload.name);        
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

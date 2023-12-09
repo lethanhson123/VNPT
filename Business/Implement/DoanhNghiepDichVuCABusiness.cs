@@ -94,6 +94,10 @@ namespace Business.Implement
 			if (model.IsHoaDon != true)
 			{
 				model.KetLuan = model.KetLuan + "[Hoá đơn]";
+				if (model.IsKetLuan == true)
+				{
+					model.KetLuan = "Thiếu hồ sơ : " + model.KetLuan;
+				}
 			}
 		}
 
@@ -194,6 +198,10 @@ namespace Business.Implement
 				result = await _DoanhNghiepDichVuCARepository.GetByStoredProcedureToListAsync("sp_DoanhNghiepDichVuCASelectItemsByNhanVienIDAndYearAndMonth", parameters);
 			}
 			return result;
+		}
+		public virtual async Task<DoanhNghiepDichVuCA> GetByUserName_Year_MonthToAsync(string userName, int year, int month)
+		{
+			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.UserName == userName && model.NgayHieuLuc.Value.Year == year && model.NgayHieuLuc.Value.Month == month).FirstOrDefaultAsync();
 		}
 	}
 }

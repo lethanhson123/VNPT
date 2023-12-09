@@ -2,6 +2,7 @@
 using Helper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using System.Collections.Generic;
 using System.Data;
@@ -1371,6 +1372,110 @@ namespace API.Controllers.v1
 												}
 											}
 											await _IDoanhNghiepDichVuLichSuBusiness.InsertItemsByDataTableAsync(table);
+										}
+									}
+								}
+							}
+						}
+					}
+					catch (Exception e)
+					{
+						string mes = e.Message;
+					}
+				}
+			}
+			return result;
+		}
+
+		[HttpPost]
+		[Route("PostDoanhNghiepDichVuCAByExcelFileAsync")]
+		public virtual async Task<List<DoanhNghiepDichVuCA>> PostDoanhNghiepDichVuCAByExcelFileAsync()
+		{
+			List<DoanhNghiepDichVuCA> result = new List<DoanhNghiepDichVuCA>();			
+			
+			if (Request.Form.Files.Count > 0)
+			{
+				var file = Request.Form.Files[0];
+				if (file == null || file.Length == 0)
+				{
+				}
+				if (file != null)
+				{
+					string fileExtension = Path.GetExtension(file.FileName);
+					string fileName = "DoanhNghiepDichVuCA_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+					var physicalPath = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Upload, fileName);
+					using (var stream = new FileStream(physicalPath, FileMode.Create))
+					{
+						file.CopyTo(stream);
+					}
+					try
+					{
+						FileInfo fileLocation = new FileInfo(physicalPath);
+						if (fileLocation.Length > 0)
+						{
+							if ((fileExtension == ".xlsx") || (fileExtension == ".xls"))
+							{
+								using (ExcelPackage package = new ExcelPackage(fileLocation))
+								{
+									if (package.Workbook.Worksheets.Count > 0)
+									{
+										ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+										if (workSheet != null)
+										{
+											int totalRows = workSheet.Dimension.Rows;
+
+											for (int i = 2; i <= totalRows; i++)
+											{
+												DoanhNghiepDichVuCA doanhNghiepDichVuCA = new DoanhNghiepDichVuCA();
+												int year = GlobalHelper.InitializationNumber;
+												int month = GlobalHelper.InitializationNumber;
+												if (workSheet.Cells[i, 1].Value != null)
+												{
+													year = int.Parse(workSheet.Cells[i, 1].Value.ToString().Trim());
+												}
+												if (workSheet.Cells[i, 2].Value != null)
+												{
+													month = int.Parse(workSheet.Cells[i, 2].Value.ToString().Trim());
+												}
+												if (workSheet.Cells[i, 3].Value != null)
+												{
+													doanhNghiepDichVuCA.UserName = workSheet.Cells[i, 3].Value.ToString().Trim();
+												}
+												doanhNghiepDichVuCA = await _IDoanhNghiepDichVuCABusiness.GetByUserName_Year_MonthToAsync(doanhNghiepDichVuCA.UserName, year, month);
+												if (doanhNghiepDichVuCA!=null)
+												{
+													if (doanhNghiepDichVuCA.ID>0)
+													{
+														if (workSheet.Cells[i, 4].Value != null)
+														{
+															doanhNghiepDichVuCA.HopDong = workSheet.Cells[i, 4].Value.ToString().Trim();
+														}
+														if (workSheet.Cells[i, 5].Value != null)
+														{
+															doanhNghiepDichVuCA.DonXinCapChungThuSo = workSheet.Cells[i, 5].Value.ToString().Trim();
+														}
+														if (workSheet.Cells[i, 6].Value != null)
+														{
+															doanhNghiepDichVuCA.CCCD = workSheet.Cells[i, 6].Value.ToString().Trim();
+														}
+														if (workSheet.Cells[i, 7].Value != null)
+														{
+															doanhNghiepDichVuCA.GiayPhepKinhDoanh = workSheet.Cells[i, 7].Value.ToString().Trim();
+														}
+														if (workSheet.Cells[i, 8].Value != null)
+														{
+															doanhNghiepDichVuCA.BienBanNghiemThu = workSheet.Cells[i, 8].Value.ToString().Trim();
+														}
+														if (workSheet.Cells[i, 9].Value != null)
+														{
+															doanhNghiepDichVuCA.HoaDon = workSheet.Cells[i, 9].Value.ToString().Trim();
+														}
+														await _IDoanhNghiepDichVuCABusiness.SaveAsync(doanhNghiepDichVuCA);
+														result.Add(doanhNghiepDichVuCA);
+													}
+												}												
+											}
+											
 										}
 									}
 								}
