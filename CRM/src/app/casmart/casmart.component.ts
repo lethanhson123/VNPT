@@ -83,6 +83,14 @@ export class CASmartComponent implements OnInit {
   @ViewChild('sort204') sort204: MatSort;
   @ViewChild('paginator204') paginator204: MatPaginator;
 
+  DataSource206: MatTableDataSource<any>;
+  @ViewChild('Sort206') Sort206: MatSort;
+  @ViewChild('Paginator206') Paginator206: MatPaginator;
+
+  DataSource207: MatTableDataSource<any>;
+  @ViewChild('Sort207') Sort207: MatSort;
+  @ViewChild('Paginator207') Paginator207: MatPaginator;
+
   isShowLoading: boolean = false;
   huyenID: number = environment.InitializationNumber;
   xaID: number = 1;
@@ -1133,4 +1141,156 @@ export class CASmartComponent implements OnInit {
       }
     );
   }
+  ReportCA206() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA206Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReportCA206 = (res as Report[]);
+        this.DataSource206 = new MatTableDataSource(this.ReportService.listReportCA206);
+        this.DataSource206.sort = this.Sort206;
+        this.DataSource206.paginator = this.Paginator206;
+
+        let labelArray = [];
+        let dataArray001 = [];
+        let dataArray002 = [];
+        let dataArray003 = [];        
+        for (let i = 0; i < this.ReportService.listReportCA206.length; i++) {
+          labelArray.push(this.ReportService.listReportCA206[i].NhanVienTaoYeuCauName);
+          dataArray001.push(this.ReportService.listReportCA206[i].HoSo);
+          dataArray002.push(this.ReportService.listReportCA206[i].HoSoHoanThanh);
+          dataArray003.push(this.ReportService.listReportCA206[i].HoSoChuaHoanThanh);          
+        }
+        let label001: string = 'HỒ SƠ';
+        let label002: string = 'HOÀN THÀNH';
+        let label003: string = 'CHƯA HOÀN THÀNH';        
+        this.ChartLabelsReportCA206 = labelArray;
+        this.ChartDataReportCA206 = [
+          { data: dataArray001, label: label001, stack: 'a', },
+          { data: dataArray002, label: label002, stack: 'b', type: 'line', fill: false },
+          { data: dataArray003, label: label003, stack: 'c', type: 'line', fill: false }
+        ];
+
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  ReportCA207() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCA207Async(this.year, this.month).subscribe(
+      res => {
+        this.ReportService.listReportCA207 = (res as Report[]);
+        this.DataSource207 = new MatTableDataSource(this.ReportService.listReportCA207);
+        this.DataSource207.sort = this.Sort207;
+        this.DataSource207.paginator = this.Paginator207;
+
+        let labelArray = [];
+        let dataArray001 = [];
+        let dataArray002 = [];
+        let dataArray003 = [];        
+        for (let i = 0; i < this.ReportService.listReportCA207.length; i++) {
+          labelArray.push(this.ReportService.listReportCA207[i].PhongBanTaoYeuCauName);
+          dataArray001.push(this.ReportService.listReportCA207[i].HoSo);
+          dataArray002.push(this.ReportService.listReportCA207[i].HoSoHoanThanh);
+          dataArray003.push(this.ReportService.listReportCA207[i].HoSoChuaHoanThanh);          
+        }
+        let label001: string = 'HỒ SƠ';
+        let label002: string = 'HOÀN THÀNH';
+        let label003: string = 'CHƯA HOÀN THÀNH';        
+        this.ChartLabelsReportCA207 = labelArray;
+        this.ChartDataReportCA207 = [
+          { data: dataArray001, label: label001, stack: 'a', },
+          { data: dataArray002, label: label002, stack: 'b', type: 'line', fill: false },
+          { data: dataArray003, label: label003, stack: 'c', type: 'line', fill: false }
+        ];
+        
+
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  public ChartOptionsReportCA206: ChartOptions = {
+    responsive: true,
+    animation: {
+      duration: 1,
+      onComplete: function () {
+        var chartInstance = this.chart,
+        ctx = chartInstance.ctx;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.textBaseline = 'bottom';
+        this.data.datasets.forEach(function (dataset, i) {
+          var meta = chartInstance.controller.getDatasetMeta(i);
+          meta.data.forEach(function (bar, index) {
+            var data = dataset.data[index];
+            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+          });
+        });
+      }
+    },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA206: Color[] = [
+  ]
+  public ChartLabelsReportCA206: Label[] = [];
+  public ChartTypeReportCA206: ChartType = 'bar';
+  public ChartLegendReportCA206 = true;
+  public ChartPluginsReportCA206 = [];
+
+  public ChartDataReportCA206: ChartDataSets[] = [
+  ];
+
+  public ChartOptionsReportCA207: ChartOptions = {
+    responsive: true,
+    animation: {
+      duration: 1,
+      onComplete: function () {
+        var chartInstance = this.chart,
+        ctx = chartInstance.ctx;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.textBaseline = 'bottom';
+        this.data.datasets.forEach(function (dataset, i) {
+          var meta = chartInstance.controller.getDatasetMeta(i);
+          meta.data.forEach(function (bar, index) {
+            var data = dataset.data[index];
+            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+          });
+        });
+      }
+    },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
+          });
+        }
+      }
+    }
+  };
+  public ChartColorsReportCA207: Color[] = [
+  ]
+  public ChartLabelsReportCA207: Label[] = [];
+  public ChartTypeReportCA207: ChartType = 'bar';
+  public ChartLegendReportCA207 = true;
+  public ChartPluginsReportCA207 = [];
+
+  public ChartDataReportCA207: ChartDataSets[] = [
+  ];
 }
