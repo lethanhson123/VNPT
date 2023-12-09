@@ -12,8 +12,10 @@ export class ReportService extends BaseService{
     displayColumnsReportVNPT003: string[] = ['No', 'Name', 'HuyenName', 'DoanhThu', 'DoanhThu01', 'DoanhThu02', 'DoanhThu03', 'DoanhThu04', 'DoanhThu05', 'DoanhThu06', 'DoanhThu07', 'DoanhThu08', 'DoanhThu09', 'DoanhThu10', 'DoanhThu11', 'DoanhThu12']; 
     displayColumnsReportCA001: string[] = ['No', 'HuyenName', 'DoanhNghiepName', 'UserName', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'NhanVienName', 'TaiKhoanTaoYeuCau', 'TaiKhoanDuyetYeuCau']; 
     displayColumnsReportCA002: string[] = ['DoanhNghiepName', 'UserName', 'IsKetLuan', 'KetLuan', 'IsHopDong', 'IsDonXinCapChungThuSo', 'IsCCCD', 'IsGiayPhepKinhDoanh', 'IsBienBanNghiemThu', 'IsHoaDon', 'Note', 'CodeCA', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
+    displayColumnsReportCA202312: string[] = ['DoanhNghiepName', 'UserName', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
     displayColumnsReportCA006: string[] = ['No', 'HuyenName', 'DoanhNghiepName']; 
     displayColumnsReportCA203: string[] = ['No', 'NhanVienTaoYeuCauName', 'SanLuong', 'DoanhThu']; 
+    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'HoSoChuaHoanThanh']; 
     listReport001: Report[] | undefined;        
     listReport002: Report[] | undefined;        
     listReport003: Report[] | undefined;        
@@ -38,6 +40,8 @@ export class ReportService extends BaseService{
     listReportCA203: Report[] | undefined;    
     listReportCA204: Report[] | undefined;    
     listReportCA205: Report[] | undefined;    
+    listReportCA206: Report[] | undefined;
+    listReportCA207: Report[] | undefined;
     listReportCA305: Report[] | undefined;    
     listReportCA306: Report[] | undefined;    
     listReportCA307: Report[] | undefined;    
@@ -315,6 +319,20 @@ export class ReportService extends BaseService{
         formUpload.append('month', JSON.stringify(month));        
         return this.httpClient.post(url, formUpload);
     }
+    ReportCA206Async(year: number, month: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA206Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));        
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA207Async(year: number, month: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA207Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));        
+        return this.httpClient.post(url, formUpload);
+    }
     ReportCA305Async(huyenID: number, year: number, month: number, nhanVienID: number) {
         let url = this.aPIURL + this.controller + '/ReportCA305Async';
         const formUpload: FormData = new FormData();        
@@ -466,6 +484,22 @@ export class ReportService extends BaseService{
     }
     ReportCA505Async(year: number, month: number, isSmartCA: boolean) {
         let url = this.aPIURL + this.controller + '/ReportCA505Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month)); 
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));       
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA506Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA506Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month)); 
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));       
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA507Async(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA507Async';
         const formUpload: FormData = new FormData();                      
         formUpload.append('year', JSON.stringify(year));         
         formUpload.append('month', JSON.stringify(month)); 

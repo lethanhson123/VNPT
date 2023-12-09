@@ -19,7 +19,7 @@ export class DoanhNghiepDichVuCADetailComponent implements OnInit {
   @ViewChild('uploadDonXinCapChungThuSo') uploadDonXinCapChungThuSo!: ElementRef;
   @ViewChild('uploadCCCD') uploadCCCD!: ElementRef;
   @ViewChild('uploadGiayPhepKinhDoanh') uploadGiayPhepKinhDoanh!: ElementRef;
-  @ViewChild('uploadBienBanNghiemThu') uploadBienBanNghiemThu!: ElementRef;  
+  @ViewChild('uploadBienBanNghiemThu') uploadBienBanNghiemThu!: ElementRef;
   @ViewChild('uploadHoaDon') uploadHoaDon!: ElementRef;
 
   constructor(
@@ -36,12 +36,29 @@ export class DoanhNghiepDichVuCADetailComponent implements OnInit {
   onClose() {
     this.dialogRef.close();
   }
-
+  HopDongDelete() {
+    this.DoanhNghiepDichVuCAService.formData.HopDong = environment.InitializationString;
+  }
+  BienBanNghiemThuDelete() {
+    this.DoanhNghiepDichVuCAService.formData.BienBanNghiemThu = environment.InitializationString;
+  }
+  CCCDDelete() {
+    this.DoanhNghiepDichVuCAService.formData.CCCD = environment.InitializationString;
+  }
+  DonXinCapChungThuSoDelete() {
+    this.DoanhNghiepDichVuCAService.formData.DonXinCapChungThuSo = environment.InitializationString;
+  }
+  HoaDonDelete() {
+    this.DoanhNghiepDichVuCAService.formData.HoaDon = environment.InitializationString;
+  }
+  GiayPhepKinhDoanhDelete() {
+    this.DoanhNghiepDichVuCAService.formData.GiayPhepKinhDoanh = environment.InitializationString;
+  }
   onSubmit() {
     let fileHopDong: File;
     fileHopDong = this.uploadHopDong.nativeElement.files[0];
     let fileDonXinCapChungThuSo: File;
-    fileDonXinCapChungThuSo = this.uploadDonXinCapChungThuSo.nativeElement.files[0];   
+    fileDonXinCapChungThuSo = this.uploadDonXinCapChungThuSo.nativeElement.files[0];
     let fileGiayPhepKinhDoanh: File;
     fileGiayPhepKinhDoanh = this.uploadGiayPhepKinhDoanh.nativeElement.files[0];
     let fileBienBanNghiemThu: File;

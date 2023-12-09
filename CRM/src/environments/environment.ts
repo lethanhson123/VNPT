@@ -16,6 +16,7 @@ export const environment = {
   Download: "Download",  
   LoadingFile: "loading.gif",
   DialogConfigWidth: "80%",
+  DialogConfigWidth60: "60%",  
   InitializationString: "",  
   InitializationNumber: 0, 
   CustomerID: 1, 

@@ -445,6 +445,28 @@
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA205", parameters);
 			return result;
 		}
+		public virtual async Task<List<Report>> ReportCA206Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA206", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA207Async(int year, int month)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA207", parameters);
+			return result;
+		}
 		public virtual async Task<List<Report>> ReportCA305Async(long huyenID, int year, int month, long nhanVienID)
 		{
 			List<Report> result = new List<Report>();
@@ -674,6 +696,30 @@
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA505", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA506Async(int year, int month, bool isSmartCA)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@IsSmartCA", isSmartCA),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA506", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCA507Async(int year, int month, bool isSmartCA)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@IsSmartCA", isSmartCA),
+				};
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA507", parameters);
 			return result;
 		}
 		public virtual async Task<List<Report>> ReportCA605Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA)

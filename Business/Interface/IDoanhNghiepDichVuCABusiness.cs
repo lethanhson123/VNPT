@@ -6,5 +6,6 @@
 		Task<List<DoanhNghiepDichVuCA>> GetByNhanVienIDToListAsync(long nhanVienID);
 		Task<List<DoanhNghiepDichVuCA>> GetByNhanVienIDAndYearAndMonthToListAsync(long nhanVienID, int year, int month);
 		Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA();
+		Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(int year, int month);
 	}
 }

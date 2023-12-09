@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Helper;
+using Microsoft.AspNetCore.Hosting;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 
 namespace API.Controllers.v1
@@ -197,6 +198,15 @@ namespace API.Controllers.v1
 		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA()
 		{			
 			await _DoanhNghiepDichVuCABusiness.AsyncThieuHoSoDoanhNghiepDichVuCA();
+			return true;
+		}
+		[HttpPost]
+		[Route("AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth")]
+		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth()
+		{
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			await _DoanhNghiepDichVuCABusiness.AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(year, month);
 			return true;
 		}
 	}

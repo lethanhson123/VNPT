@@ -4,6 +4,8 @@ export class Report extends Base{
     SanLuong?: number;     
     PhatTrien?: number;     
     GiaHan?: number;     
+    HoSo?: number;     
+    HoSoChuaHoanThanh?: number;     
     HoSoHoanThanh?: number;     
     PhatTrienChiTieu?: number;     
     GiaHanChiTieu?: number;     
@@ -13,9 +15,11 @@ export class Report extends Base{
 
     NhanVienTaoYeuCauID?: number;     
     NhanVienTaoYeuCauName?: string;     
-    NhanVienDuyetYeuCauID?: number;     
+    NhanVienDuyetYeuCauID?: number;  
     PhongBanDuyetYeuCauID?: number;     
-    PhongBanDuyetYeuCauName?: string;     
+    PhongBanDuyetYeuCauName?: string;        
+    PhongBanTaoYeuCauID?: number;     
+    PhongBanTaoYeuCauName?: string;     
     HuyenName?: string;     
     XaName?: string;     
     DoanhNghiepID?: number;   

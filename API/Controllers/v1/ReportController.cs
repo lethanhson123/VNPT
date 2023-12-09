@@ -611,6 +611,40 @@ namespace API.Controllers.v1
 			return result;
 		}
 		[HttpPost]
+		[Route("ReportCA206Async")]
+		public virtual async Task<List<Report>> ReportCA206Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA206Async(year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA207Async")]
+		public virtual async Task<List<Report>> ReportCA207Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				result = await _ReportBusiness.ReportCA207Async(year, month);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
 		[Route("ReportCA305Async")]
 		public virtual async Task<List<Report>> ReportCA305Async()
 		{
@@ -930,6 +964,42 @@ namespace API.Controllers.v1
 				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
 				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
 				result = await _ReportBusiness.ReportCA505Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA506Async")]
+		public virtual async Task<List<Report>> ReportCA506Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA506Async(year, month, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA507Async")]
+		public virtual async Task<List<Report>> ReportCA507Async()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA507Async(year, month, isSmartCA);
 			}
 			catch (Exception ex)
 			{

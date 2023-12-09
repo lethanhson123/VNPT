@@ -68,7 +68,7 @@ namespace Business.Implement
 			model.KetLuan = model.KetLuan.Replace("[Hoá đơn]", "");
 
 			if (model.IsKetLuan != true)
-			{				
+			{
 				model.KetLuan = "Thiếu hồ sơ : ";
 			}
 			if (model.IsHopDong != true)
@@ -152,6 +152,16 @@ namespace Business.Implement
 		{
 			string url = GlobalHelper.APISite + "api/v1/Email/AsyncThieuHoSoDoanhNghiepDichVuCA";
 			var content = new StringContent(JsonConvert.SerializeObject(""), Encoding.UTF8, "application/json");
+			HttpClient client = new HttpClient();
+			var task = client.PostAsync(url, content);
+			await task.Result.Content.ReadAsStringAsync();
+			return true;
+		}
+		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(int year, int month)
+		{
+			string data = year + "_" + month;
+			string url = GlobalHelper.APISite + "api/v1/Email/AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth";
+			var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
 			HttpClient client = new HttpClient();
 			var task = client.PostAsync(url, content);
 			await task.Result.Content.ReadAsStringAsync();

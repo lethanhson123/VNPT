@@ -283,6 +283,119 @@ namespace API.Controllers.v1
 
 			return result;
 		}
+
+		[HttpPost]
+		[Route("AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth")]
+		public async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(string data)
+		{
+			bool result = GlobalHelper.InitializationBool;
+
+			try
+			{
+				int year = GlobalHelper.InitializationDateTime.Year;
+				int month = GlobalHelper.InitializationDateTime.Month;
+
+				if (!string.IsNullOrEmpty(data))
+				{
+					if (data.Split('_').Length>0)
+					{
+						year = int.Parse(data.Split('_')[0]);
+					}
+					if (data.Split('_').Length > 1)
+					{
+						month = int.Parse(data.Split('_')[1]);
+					}
+				}
+
+				Helper.Model.Mail mail = new Helper.Model.Mail();
+
+				EmailConfig emailConfig = await _EmailConfigBusiness.GetByCondition(item => item.Active == true).OrderBy(item => item.SortOrder).FirstOrDefaultAsync();
+				if (emailConfig != null)
+				{
+					mail.MailFrom = emailConfig.MasterEmailUser;
+					mail.UserName = emailConfig.MasterEmailUser;
+					mail.Password = emailConfig.MasterEmailPassword;
+					mail.SMTPPort = emailConfig.SMTPPort.Value;
+					mail.SMTPServer = emailConfig.SMTPServer;
+					mail.IsMailBodyHtml = 0;
+					if (emailConfig.IsMailBodyHtml == true)
+					{
+						mail.IsMailBodyHtml = 1;
+					}
+					mail.IsMailUsingSSL = 0;
+					if (emailConfig.IsMailUsingSSL == true)
+					{
+						mail.IsMailUsingSSL = 1;
+					}
+					mail.Display = emailConfig.MasterEmailDisplay;
+				}
+				else
+				{
+					mail.MailFrom = GlobalHelper.MasterEmailUser;
+					mail.UserName = GlobalHelper.MasterEmailUser;
+					mail.Password = GlobalHelper.MasterEmailPassword;
+					mail.SMTPPort = GlobalHelper.SMTPPort;
+					mail.SMTPServer = GlobalHelper.SMTPServer;
+					mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+					mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+					mail.Display = GlobalHelper.MasterEmailDisplay;
+				}
+
+
+				mail.Subject = "CÁNH BÁO HỒ SƠ SAI QUY ĐỊNH - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+				string contentHTML = GlobalHelper.InitializationString;
+				var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCAThieuHoSo.html");
+				using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
+				{
+					using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+					{
+						contentHTML = r.ReadToEnd();
+					}
+				}
+
+				contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
+				contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
+				contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
+
+				List<NhanVien> listNhanVien = await _NhanVienBusiness.GetByActiveToListAsync(true);
+
+				foreach (NhanVien nhanVien in listNhanVien)
+				{
+					if (!string.IsNullOrEmpty(nhanVien.Email))
+					{
+
+						List<DoanhNghiepDichVuCA> listDoanhNghiepDichVuCA = await _DoanhNghiepDichVuCABusiness.GetByNhanVienIDAndYearAndMonthToListAsync(nhanVien.ID, year, month);
+						if (listDoanhNghiepDichVuCA.Count > 0)
+						{
+							StringBuilder contentDoanhNghiepDichVuCA = new StringBuilder();
+							foreach (DoanhNghiepDichVuCA doanhNghiepDichVuCA in listDoanhNghiepDichVuCA)
+							{
+								contentDoanhNghiepDichVuCA.AppendLine("<hr/>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"Khách hàng: <b>" + doanhNghiepDichVuCA.Name + "</b>");
+								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"Mã số thuế: <b>" + doanhNghiepDichVuCA.UserName.Substring(6) + "</b>");
+								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"SERIAL: <b>" + doanhNghiepDichVuCA.SoChungThu + "</b>");
+							}
+							contentHTML = contentHTML.Replace("[DoanhNghiep]", contentDoanhNghiepDichVuCA.ToString());
+							contentHTML = contentHTML.Replace("[NhanVienName]", nhanVien.Name);
+							mail.Content = contentHTML;
+							mail.MailTo = nhanVien.Email;
+							MailHelper.SendMail(mail);
+						}
+					}
+				}
+
+
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+
+			return result;
+		}
 	}
 }
+
 

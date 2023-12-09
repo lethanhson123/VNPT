@@ -5,6 +5,8 @@
 		public decimal? SanLuong { get; set; }
 		public decimal? PhatTrien { get; set; }
 		public decimal? GiaHan { get; set; }
+		public decimal? HoSo { get; set; }
+		public decimal? HoSoChuaHoanThanh { get; set; }
 		public decimal? HoSoHoanThanh { get; set; }
 		public decimal? PhatTrienChiTieu { get; set; }
 		public decimal? GiaHanChiTieu { get; set; }
