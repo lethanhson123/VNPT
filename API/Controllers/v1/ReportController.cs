@@ -459,7 +459,8 @@ namespace API.Controllers.v1
 				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
 				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
 				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA105Async(huyenID, year, month, nhanVienID);
+				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
+				result = await _ReportBusiness.ReportCA105Async(huyenID, year, month, nhanVienID, hetHan);
 			}
 			catch (Exception ex)
 			{
@@ -693,7 +694,8 @@ namespace API.Controllers.v1
 				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
 				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
 				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA307Async(huyenID, year, month, nhanVienID);
+				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
+				result = await _ReportBusiness.ReportCA307Async(huyenID, year, month, nhanVienID, hetHan);
 			}
 			catch (Exception ex)
 			{
@@ -811,8 +813,9 @@ namespace API.Controllers.v1
 				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
 				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
 				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
 				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA405Async(huyenID, year, month, nhanVienID, isSmartCA);
+				result = await _ReportBusiness.ReportCA405Async(huyenID, year, month, nhanVienID, hetHan, isSmartCA);
 			}
 			catch (Exception ex)
 			{
@@ -1058,8 +1061,9 @@ namespace API.Controllers.v1
 				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
 				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
 				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
 				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA607Async(huyenID, year, month, nhanVienID, isSmartCA);
+				result = await _ReportBusiness.ReportCA607Async(huyenID, year, month, nhanVienID, hetHan, isSmartCA);
 			}
 			catch (Exception ex)
 			{

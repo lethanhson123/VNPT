@@ -333,7 +333,7 @@
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA104", parameters);
 			return result;
 		}
-		public virtual async Task<List<Report>> ReportCA105Async(long huyenID, int year, int month, long nhanVienID)
+		public virtual async Task<List<Report>> ReportCA105Async(long huyenID, int year, int month, long nhanVienID, int hetHan)
 		{
 			List<Report> result = new List<Report>();
 			SqlParameter[] parameters =
@@ -342,6 +342,7 @@
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
 					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@HetHan", hetHan),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA105", parameters);
 			return result;
@@ -493,7 +494,7 @@
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA306", parameters);
 			return result;
 		}
-		public virtual async Task<List<Report>> ReportCA307Async(long huyenID, int year, int month, long nhanVienID)
+		public virtual async Task<List<Report>> ReportCA307Async(long huyenID, int year, int month, long nhanVienID, int hetHan)
 		{
 			List<Report> result = new List<Report>();
 			SqlParameter[] parameters =
@@ -502,6 +503,7 @@
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
 					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@HetHan", hetHan),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA307", parameters);
 			return result;
@@ -514,7 +516,7 @@
 					new SqlParameter("@HuyenID",huyenID),
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
-					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@NhanVienID", nhanVienID),					
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA308", parameters);
 			return result;
@@ -577,7 +579,7 @@
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA404", parameters);
 			return result;
 		}
-		public virtual async Task<List<Report>> ReportCA405Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA)
+		public virtual async Task<List<Report>> ReportCA405Async(long huyenID, int year, int month, long nhanVienID, int hetHan, bool isSmartCA)
 		{
 			List<Report> result = new List<Report>();
 			SqlParameter[] parameters =
@@ -586,6 +588,7 @@
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
 					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@HetHan", hetHan),
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA405", parameters);
@@ -599,7 +602,7 @@
 					new SqlParameter("@HuyenID",huyenID),
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
-					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@NhanVienID", nhanVienID),					
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA406", parameters);
@@ -750,7 +753,7 @@
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA606", parameters);
 			return result;
 		}
-		public virtual async Task<List<Report>> ReportCA607Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA)
+		public virtual async Task<List<Report>> ReportCA607Async(long huyenID, int year, int month, long nhanVienID, int hetHan, bool isSmartCA)
 		{
 			List<Report> result = new List<Report>();
 			SqlParameter[] parameters =
@@ -759,6 +762,7 @@
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
 					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@HetHan", hetHan),
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA607", parameters);

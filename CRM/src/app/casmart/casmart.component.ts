@@ -92,6 +92,7 @@ export class CASmartComponent implements OnInit {
   @ViewChild('Paginator207') Paginator207: MatPaginator;
 
   isShowLoading: boolean = false;
+  domainName = environment.DomainDestination;
   huyenID: number = environment.InitializationNumber;
   xaID: number = 1;
   dichVuID: number = environment.CAID;
@@ -112,6 +113,7 @@ export class CASmartComponent implements OnInit {
   doanhThuDichVu: number = environment.InitializationNumber;
   doanhThuPhongBan: number = environment.InitializationNumber;
   doanhThuNhanVien: number = environment.InitializationNumber;
+  hetHan: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
   month: number = new Date().getMonth() + 1;
   isKetLuan: boolean = false;
@@ -799,7 +801,7 @@ export class CASmartComponent implements OnInit {
   }
   ReportCA005Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA405Async(this.huyenID, this.year, this.month, this.nhanVienID, this.isSmartCA).subscribe(
+    this.ReportService.ReportCA405Async(this.huyenID, this.year, this.month, this.nhanVienID, this.hetHan, this.isSmartCA).subscribe(
       res => {
         this.ReportService.listReportCA005 = (res as Report[]);
         this.dataSource5 = new MatTableDataSource(this.ReportService.listReportCA005);
@@ -813,7 +815,7 @@ export class CASmartComponent implements OnInit {
     );
 
     this.isShowLoading = true;
-    this.ReportService.ReportCA607Async(this.huyenID, this.year, this.month, this.nhanVienID, this.isSmartCA).subscribe(
+    this.ReportService.ReportCA607Async(this.huyenID, this.year, this.month, this.nhanVienID, this.hetHan, this.isSmartCA).subscribe(
       res => {
         this.ReportService.listReportCA307 = (res as Report[]);
         let labelArray001 = [];
@@ -980,7 +982,7 @@ export class CASmartComponent implements OnInit {
   }
   onDownloadExcelFileReportCA008() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA007ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA408ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID, this.isKetLuan, this.isSmartCA).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;

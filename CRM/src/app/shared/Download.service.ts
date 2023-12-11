@@ -138,5 +138,26 @@ export class DownloadService {
         formUpload.append('month', JSON.stringify(month));  
         return this.httpClient.post(url, formUpload);
     }
+    ReportCA108ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, isKetLuan: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA108ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));  
+        formUpload.append('isKetLuan', JSON.stringify(isKetLuan));  
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA408ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, isKetLuan: boolean, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA408ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));  
+        formUpload.append('isKetLuan', JSON.stringify(isKetLuan));  
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));  
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

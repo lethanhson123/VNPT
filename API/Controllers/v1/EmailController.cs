@@ -261,7 +261,7 @@ namespace API.Controllers.v1
 								contentDoanhNghiepDichVuCA.AppendLine("<hr/>");
 								contentDoanhNghiepDichVuCA.AppendLine(@"Khách hàng: <b>" + doanhNghiepDichVuCA.Name + "</b>");
 								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
-								contentDoanhNghiepDichVuCA.AppendLine(@"Mã số thuế: <b>" + doanhNghiepDichVuCA.UserName.Substring(6) + "</b>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"UserName: <b>" + doanhNghiepDichVuCA.UserName + "</b>");
 								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
 								contentDoanhNghiepDichVuCA.AppendLine(@"SERIAL: <b>" + doanhNghiepDichVuCA.SoChungThu + "</b>");								
 							}
@@ -373,7 +373,7 @@ namespace API.Controllers.v1
 								contentDoanhNghiepDichVuCA.AppendLine("<hr/>");
 								contentDoanhNghiepDichVuCA.AppendLine(@"Khách hàng: <b>" + doanhNghiepDichVuCA.Name + "</b>");
 								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
-								contentDoanhNghiepDichVuCA.AppendLine(@"Mã số thuế: <b>" + doanhNghiepDichVuCA.UserName.Substring(6) + "</b>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"UserName: <b>" + doanhNghiepDichVuCA.UserName + "</b>");
 								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
 								contentDoanhNghiepDichVuCA.AppendLine(@"SERIAL: <b>" + doanhNghiepDichVuCA.SoChungThu + "</b>");
 							}

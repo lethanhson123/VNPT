@@ -93,6 +93,7 @@ export class DashboardCAComponent implements OnInit {
   @ViewChild('Paginator207') Paginator207: MatPaginator;
 
   isShowLoading: boolean = false;
+  domainName = environment.DomainDestination;
   huyenID: number = environment.InitializationNumber;
   xaID: number = 1;
   dichVuID: number = environment.CAID;
@@ -113,8 +114,9 @@ export class DashboardCAComponent implements OnInit {
   doanhThuDichVu: number = environment.InitializationNumber;
   doanhThuPhongBan: number = environment.InitializationNumber;
   doanhThuNhanVien: number = environment.InitializationNumber;
+  hetHan: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
-  month: number = new Date().getMonth() + 1;
+  month: number = new Date().getMonth() + 1;  
   isKetLuan: boolean = false;
   constructor(
     public HuyenService: HuyenService,
@@ -859,7 +861,7 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCA005Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA105Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
+    this.ReportService.ReportCA105Async(this.huyenID, this.year, this.month, this.nhanVienID, this.hetHan).subscribe(
       res => {
         this.ReportService.listReportCA005 = (res as Report[]);
         this.dataSource5 = new MatTableDataSource(this.ReportService.listReportCA005);
@@ -873,7 +875,7 @@ export class DashboardCAComponent implements OnInit {
     );
 
     this.isShowLoading = true;
-    this.ReportService.ReportCA307Async(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
+    this.ReportService.ReportCA307Async(this.huyenID, this.year, this.month, this.nhanVienID, this.hetHan).subscribe(
       res => {
         this.ReportService.listReportCA307 = (res as Report[]);
         let labelArray001 = [];
@@ -1042,7 +1044,7 @@ export class DashboardCAComponent implements OnInit {
   }
   onDownloadExcelFileReportCA008() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA007ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA108ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID, this.isKetLuan).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;

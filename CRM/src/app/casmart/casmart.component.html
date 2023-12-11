@@ -12,6 +12,15 @@
     </div>
     <div class="ms-auto d-lg-flex d-none flex-row">
         <div class="d-flex flex-row gap-2">
+            <a class="link-primary" href="{{domainName}}DashboardCA" title="DashboardCA">
+                <b>VNPT-CA & SMART-CA</b>
+            </a> | 
+            <a class="link-primary" href="{{domainName}}CAVNPT" title="VNPT-CA">
+                <b>VNPT-CA</b>
+            </a> | 
+            <a class="link-primary" href="{{domainName}}CASmart" title="SMART-CA">
+                <b>SMART-CA</b>
+            </a>
         </div>
     </div>
 </div>
@@ -47,13 +56,13 @@
                                     <span class="badge bg-warning" style="font-size: 14px; width: 120px;">Hết hạn</span>
                                 </a>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            <!-- <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-6" data-bs-toggle="tab" href="#6" role="tab"
                                     aria-controls="6" aria-selected="false">
                                     <span class="badge bg-dark" style="font-size: 14px; width: 120px;">Chưa gia
                                         hạn</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-7" data-bs-toggle="tab" href="#7" role="tab"
                                     aria-controls="7" aria-selected="false">
@@ -256,7 +265,7 @@
                                                                     Xếp hạng
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element; index as i;"
-                                                                    style="text-align: center; font-size: 24px;">
+                                                                    style="text-align: center; font-size: 18px;">
                                                                     {{paginator204.pageSize *
                                                                     paginator204.pageIndex + i + 1}}
                                                                 </td>
@@ -266,7 +275,7 @@
                                                                     Phòng Bán hàng
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="font-size: 24px;">
+                                                                    style="font-size: 18px;">
                                                                     <b>{{element.PhongBanTaoYeuCauName}}</b>
                                                                 </td>
                                                             </ng-container>
@@ -275,7 +284,7 @@
                                                                     Sản lượng
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.SanLuong |
                                                                     number:
                                                                     '1.0-0'}}
@@ -286,7 +295,7 @@
                                                                     Doanh thu
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.DoanhThu |
                                                                     number:
                                                                     '1.0-0'}}
@@ -324,7 +333,7 @@
                                                                     Xếp hạng
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element; index as i;"
-                                                                    style="text-align: center; font-size: 24px;">
+                                                                    style="text-align: center; font-size: 18px;">
                                                                     {{paginator203.pageSize *
                                                                     paginator203.pageIndex + i + 1}}
                                                                 </td>
@@ -334,7 +343,7 @@
                                                                     Nhân viên
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="font-size: 24px;">
+                                                                    style="font-size: 18px;">
                                                                     <b>{{element.NhanVienTaoYeuCauName}}</b>
                                                                 </td>
                                                             </ng-container>
@@ -343,7 +352,7 @@
                                                                     Sản lượng
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.SanLuong |
                                                                     number:
                                                                     '1.0-0'}}
@@ -354,7 +363,7 @@
                                                                     Doanh thu
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.DoanhThu |
                                                                     number:
                                                                     '1.0-0'}}
@@ -410,9 +419,9 @@
                                     <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA001()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA001()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="row gx-4">
@@ -630,9 +639,9 @@
                                     <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA002()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA002()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="row gx-4">
@@ -843,16 +852,26 @@
                                                 {{item.Display}}</option>
                                         </select>
                                     </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="hetHan" [(ngModel)]="hetHan">
+                                            <option [value]="0">
+                                                Hết hạn</option>
+                                            <option [value]="1">
+                                                Chưa gia hạn</option>
+                                            <option [value]="2">
+                                                Gia hạn</option>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-3 col-sm-12 col-14">
                                         <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
                                             (keyup.enter)="onSearchReportCA005()">
                                     </div>
-                                    <div class="col-lg-4 col-sm-12 col-12">
+                                    <div class="col-lg-2 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA005()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA005()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="row gx-4">
@@ -1229,9 +1248,9 @@
                                     <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA006()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA006()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-dark">
@@ -1588,9 +1607,9 @@
                                     <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA007()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA007()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-primary">
@@ -1685,6 +1704,9 @@
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA008()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportCA008()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Download excel"
                                             (click)="DoanhNghiepDichVuCAThieuHoSo()"><i
                                                 class="bi bi-envelope"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
@@ -1707,9 +1729,9 @@
                                                                     STT
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element; index as i;"
-                                                                    style="text-align: center; font-size: 24px;">
+                                                                    style="text-align: center; font-size: 18px;">
                                                                     {{Paginator207.pageSize *
-                                                                        Paginator207.pageIndex + i + 1}}
+                                                                    Paginator207.pageIndex + i + 1}}
                                                                 </td>
                                                             </ng-container>
                                                             <ng-container matColumnDef="PhongBanTaoYeuCauName">
@@ -1717,7 +1739,7 @@
                                                                     PHÒNG BÁN HÀNG
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="font-size: 24px;">
+                                                                    style="font-size: 18px;">
                                                                     <b>{{element.PhongBanTaoYeuCauName}}</b>
                                                                 </td>
                                                             </ng-container>
@@ -1726,7 +1748,7 @@
                                                                     Hồ sơ
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.HoSo |
                                                                     number:
                                                                     '1.0-0'}}
@@ -1737,7 +1759,7 @@
                                                                     Hoàn thành
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.HoSoHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
@@ -1748,7 +1770,7 @@
                                                                     Chưa Hoàn thành
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.HoSoChuaHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
@@ -1786,9 +1808,9 @@
                                                                     STT
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element; index as i;"
-                                                                    style="text-align: center; font-size: 24px;">
+                                                                    style="text-align: center; font-size: 18px;">
                                                                     {{Paginator206.pageSize *
-                                                                        Paginator206.pageIndex + i + 1}}
+                                                                    Paginator206.pageIndex + i + 1}}
                                                                 </td>
                                                             </ng-container>
                                                             <ng-container matColumnDef="PhongBanTaoYeuCauName">
@@ -1796,7 +1818,7 @@
                                                                     NHÂN VIÊN
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="font-size: 24px;">
+                                                                    style="font-size: 18px;">
                                                                     <b>{{element.NhanVienTaoYeuCauName}}</b>
                                                                 </td>
                                                             </ng-container>
@@ -1805,7 +1827,7 @@
                                                                     Hồ sơ
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.HoSo |
                                                                     number:
                                                                     '1.0-0'}}
@@ -1816,7 +1838,7 @@
                                                                     Hoàn thành
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.HoSoHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
@@ -1827,7 +1849,7 @@
                                                                     Chưa Hoàn thành
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 24px;">
+                                                                    style="text-align: right; font-size: 18px;">
                                                                     {{element.HoSoChuaHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
@@ -1847,7 +1869,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                   
+                                    </div>
                                 </div>
                                 <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
@@ -1862,21 +1884,17 @@
                                     </div>
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <canvas baseChart [datasets]="ChartDataReportCA207"
-                                            [labels]="ChartLabelsReportCA207"
-                                            [chartType]="ChartTypeReportCA207"
-                                            [colors]="ChartColorsReportCA207"
-                                            [options]="ChartOptionsReportCA207">
+                                            [labels]="ChartLabelsReportCA207" [chartType]="ChartTypeReportCA207"
+                                            [colors]="ChartColorsReportCA207" [options]="ChartOptionsReportCA207">
                                         </canvas>
                                     </div>
                                 </div>
                                 <div class="row gx-4">
-                                    <div class="col-lg-12 col-sm-12 col-12">                                       
+                                    <div class="col-lg-12 col-sm-12 col-12">
                                         <canvas baseChart [datasets]="ChartDataReportCA206"
-                                        [labels]="ChartLabelsReportCA206"
-                                        [chartType]="ChartTypeReportCA206"
-                                        [colors]="ChartColorsReportCA206"
-                                        [options]="ChartOptionsReportCA206">
-                                    </canvas>
+                                            [labels]="ChartLabelsReportCA206" [chartType]="ChartTypeReportCA206"
+                                            [colors]="ChartColorsReportCA206" [options]="ChartOptionsReportCA206">
+                                        </canvas>
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-success">
@@ -2249,9 +2267,9 @@
                                     <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA003()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA003()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-warning">
@@ -2624,9 +2642,9 @@
                                     <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA004()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
+                                        <!-- <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA004()"><i
-                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-info">
