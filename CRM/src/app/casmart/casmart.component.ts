@@ -141,6 +141,10 @@ export class CASmartComponent implements OnInit {
     this.GetHuyenToListAsync();
     this.GetYearToList();
     this.GetMonthToList();  
+    this.onSearchReportCA201();
+    this.onSearchReportCA001();
+    this.onSearchReportCA002();
+    this.onSearchReportCA008();
   }
 
   GetYearToList() {
@@ -973,6 +977,8 @@ export class CASmartComponent implements OnInit {
 
   }
   onSearchReportCA008() {
+    this.ReportCA206();
+    this.ReportCA207();
     if (this.searchString.length > 0) {
       this.dataSource8.filter = this.searchString.toLowerCase();
     }
@@ -1145,7 +1151,7 @@ export class CASmartComponent implements OnInit {
   }
   ReportCA206() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA206Async(this.year, this.month).subscribe(
+    this.ReportService.ReportCA506Async(this.year, this.month, this.isSmartCA).subscribe(
       res => {
         this.ReportService.listReportCA206 = (res as Report[]);
         this.DataSource206 = new MatTableDataSource(this.ReportService.listReportCA206);
@@ -1181,7 +1187,7 @@ export class CASmartComponent implements OnInit {
   }
   ReportCA207() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA207Async(this.year, this.month).subscribe(
+    this.ReportService.ReportCA507Async(this.year, this.month, this.isSmartCA).subscribe(
       res => {
         this.ReportService.listReportCA207 = (res as Report[]);
         this.DataSource207 = new MatTableDataSource(this.ReportService.listReportCA207);

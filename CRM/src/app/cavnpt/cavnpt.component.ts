@@ -141,6 +141,10 @@ export class CAVNPTComponent implements OnInit {
     this.GetHuyenToListAsync();
     this.GetYearToList();
     this.GetMonthToList();  
+    this.onSearchReportCA201();
+    this.onSearchReportCA001();
+    this.onSearchReportCA002();
+    this.onSearchReportCA008();
   }
 
   GetYearToList() {
@@ -973,6 +977,8 @@ export class CAVNPTComponent implements OnInit {
 
   }
   onSearchReportCA008() {
+    this.ReportCA206();
+    this.ReportCA207();
     if (this.searchString.length > 0) {
       this.dataSource8.filter = this.searchString.toLowerCase();
     }
