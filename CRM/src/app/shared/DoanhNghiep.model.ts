@@ -18,4 +18,6 @@ export class DoanhNghiep extends Base{
     NgayCap?: Date; 
     NgayDangKyThayDoi?: Date; 
     KHACHHANG_ID?: string;  
+    CodeCA?: string;  
+    UserName?: string;  
 }

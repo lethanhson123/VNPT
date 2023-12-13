@@ -1,4 +1,5 @@
 ﻿
+using Business.Interface;
 using Data.Model;
 using Data.Repository.Implement;
 using Data.Repository.Interface;
@@ -9,10 +10,12 @@ namespace Business.Implement
 	{
 		private readonly IDoanhNghiepDichVuCARepository _DoanhNghiepDichVuCARepository;
 		private readonly IDoanhNghiepBusiness _DoanhNghiepBusiness;
-		public DoanhNghiepDichVuCABusiness(IDoanhNghiepDichVuCARepository DoanhNghiepDichVuCARepository, IDoanhNghiepBusiness doanhNghiepBusiness) : base(DoanhNghiepDichVuCARepository)
+		private readonly IHuyenBusiness _IHuyenBusiness;
+		public DoanhNghiepDichVuCABusiness(IDoanhNghiepDichVuCARepository DoanhNghiepDichVuCARepository, IDoanhNghiepBusiness doanhNghiepBusiness, IHuyenBusiness iHuyenBusiness) : base(DoanhNghiepDichVuCARepository)
 		{
 			_DoanhNghiepDichVuCARepository = DoanhNghiepDichVuCARepository;
 			_DoanhNghiepBusiness = doanhNghiepBusiness;
+			_IHuyenBusiness = iHuyenBusiness;
 		}
 		public override void Initialization(DoanhNghiepDichVuCA model)
 		{
@@ -202,6 +205,70 @@ namespace Business.Implement
 		public virtual async Task<DoanhNghiepDichVuCA> GetByUserName_Year_MonthToAsync(string userName, int year, int month)
 		{
 			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.UserName == userName && model.NgayHieuLuc.Value.Year == year && model.NgayHieuLuc.Value.Month == month).FirstOrDefaultAsync();
+		}
+		public virtual async Task<bool> DongBoDuLieuAsync()
+		{
+			List<Huyen> listHuyen = await _IHuyenBusiness.GetAllToListAsync();
+			List<DoanhNghiepDichVuCA> listDoanhNghiepDichVuCA = await _DoanhNghiepDichVuCARepository.GetAllToListAsync();
+			foreach (DoanhNghiepDichVuCA doanhNghiepDichVuCA in listDoanhNghiepDichVuCA)
+			{
+				try
+				{
+					if (!string.IsNullOrEmpty(doanhNghiepDichVuCA.UserName))
+					{
+						DoanhNghiep doanhNghiep = new DoanhNghiep();
+						doanhNghiep.Code = doanhNghiepDichVuCA.UserName.Substring(6);
+						if (!string.IsNullOrEmpty(doanhNghiep.Code))
+						{
+							doanhNghiep = await _DoanhNghiepBusiness.GetByCodeAsync(doanhNghiep.Code);
+							if (doanhNghiep == null)
+							{
+								doanhNghiep = new DoanhNghiep();
+							}
+							doanhNghiep.Description = doanhNghiepDichVuCA.SubjectDN;
+							doanhNghiep.UserName = doanhNghiepDichVuCA.UserName;
+							doanhNghiep.Code = doanhNghiepDichVuCA.UserName.Substring(6);
+							string subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@"CN=", @"~");
+							if (subjectDN.Split('~').Length > 0)
+							{
+								doanhNghiep.Name = subjectDN.Split('~')[1];
+								doanhNghiep.Name = doanhNghiep.Name.Split(',')[0];
+							}
+
+							if (doanhNghiepDichVuCA.SubjectDN.Contains(@"L="))
+							{
+								subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@"L=", @"~");
+								if (subjectDN.Split('~').Length > 0)
+								{
+									subjectDN = subjectDN.Split('~')[1];
+									subjectDN = subjectDN.Split(',')[0];
+									subjectDN = subjectDN.Trim();
+									string huyenName = subjectDN.Split(' ')[subjectDN.Split(' ').Length - 1];
+									huyenName = huyenName.Trim();
+									Huyen huyen = listHuyen.Where(item => item.Name.Contains(huyenName)).FirstOrDefault();
+									if (huyen != null)
+									{
+										doanhNghiep.HuyenID = huyen.ID;
+									}
+								}
+							}
+							await _DoanhNghiepBusiness.SaveAsync(doanhNghiep);
+							if (doanhNghiep.ID > 0)
+							{
+								doanhNghiepDichVuCA.ParentID = doanhNghiep.ID;
+								await _DoanhNghiepDichVuCARepository.UpdateAsync(doanhNghiepDichVuCA);
+							}
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					string mes = ex.Message;
+				}
+
+
+			}
+			return true;
 		}
 	}
 }

@@ -33,12 +33,15 @@ import { DoanhNghiepDichVu } from 'src/app/shared/DoanhNghiepDichVu.model';
 import { DoanhNghiepDichVuService } from 'src/app/shared/DoanhNghiepDichVu.service';
 import { DoanhNghiepDichVuLichSu } from 'src/app/shared/DoanhNghiepDichVuLichSu.model';
 import { DoanhNghiepDichVuLichSuService } from 'src/app/shared/DoanhNghiepDichVuLichSu.service';
+import { DoanhNghiepDichVuCA } from 'src/app/shared/DoanhNghiepDichVuCA.model';
+import { DoanhNghiepDichVuCAService } from 'src/app/shared/DoanhNghiepDichVuCA.service';
 import { Report } from 'src/app/shared/Report.model';
 import { ReportService } from 'src/app/shared/Report.service';
 import { YearMonth } from 'src/app/shared/YearMonth.model';
 import { DownloadService } from 'src/app/shared/Download.service';
 import { ChartOptions, ChartType, ChartDataSets, Chart, ChartConfiguration, ChartData } from 'chart.js';
 import { Color, Label, SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { DoanhNghiepDichVuCADetailComponent } from 'src/app/doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
 
 @Component({
   selector: 'app-doanh-nghiep-info',
@@ -58,6 +61,10 @@ export class DoanhNghiepInfoComponent implements OnInit {
   dataSourceDoanhNghiepDichVu: MatTableDataSource<any>;
   @ViewChild('sortDoanhNghiepDichVu') sortDoanhNghiepDichVu: MatSort;
   @ViewChild('paginatorDoanhNghiepDichVu') paginatorDoanhNghiepDichVu: MatPaginator;  
+
+  dataSourceDoanhNghiepDichVuCA: MatTableDataSource<any>;
+  @ViewChild('sortDoanhNghiepDichVuCA') sortDoanhNghiepDichVuCA: MatSort;
+  @ViewChild('paginatorDoanhNghiepDichVuCA') paginatorDoanhNghiepDichVuCA: MatPaginator;  
 
   dataSourceReport001: MatTableDataSource<any>;
   @ViewChild(MatSort) sortReport001: MatSort;
@@ -86,10 +93,12 @@ export class DoanhNghiepInfoComponent implements OnInit {
     public LoaiDoanhNghiepThanhVienService: LoaiDoanhNghiepThanhVienService,
     public DoanhNghiepDichVuService: DoanhNghiepDichVuService,
     public DoanhNghiepDichVuLichSuService: DoanhNghiepDichVuLichSuService,
+    public DoanhNghiepDichVuCAService: DoanhNghiepDichVuCAService,
     public DichVuService: DichVuService,
     public ReportService: ReportService,
     public NotificationService: NotificationService,
     public DownloadService: DownloadService,
+    private dialog: MatDialog
   ) {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
@@ -189,6 +198,18 @@ export class DoanhNghiepInfoComponent implements OnInit {
     this.LoaiTrangThaiService.GetAllToListAsync().subscribe(
       res => {
         this.LoaiTrangThaiService.list = (res as LoaiTrangThai[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+      },
+      err => {
+      }
+    );
+  }
+  GetDoanhNghiepDichVuCAToListAsync() {
+    this.DoanhNghiepDichVuCAService.GetByParentIDToListAsync(this.DoanhNghiepService.formData.ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.list = (res as DoanhNghiepDichVuCA[]).sort((a, b) => (a.NgayHieuLuc > b.NgayHieuLuc ? 1 : -1));
+        this.dataSourceDoanhNghiepDichVuCA = new MatTableDataSource(this.DoanhNghiepDichVuCAService.list);
+        this.dataSourceDoanhNghiepDichVuCA.sort = this.sortDoanhNghiepDichVuCA;
+        this.dataSourceDoanhNghiepDichVuCA.paginator = this.paginatorDoanhNghiepDichVuCA;
       },
       err => {
       }
@@ -543,6 +564,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
         this.ReportDoanhNghiep002Async();
         this.ReportDoanhNghiep003Async();
         this.ReportDoanhNghiep004Async();
+        this.GetDoanhNghiepDichVuCAToListAsync();
       }
       this.isShowLoading = false;
     });
@@ -614,5 +636,23 @@ export class DoanhNghiepInfoComponent implements OnInit {
     this.ReportDoanhNghiep002Async();
     this.ReportDoanhNghiep003Async();
     this.ReportDoanhNghiep004Async();
+  }
+  onAddDoanhNghiepDichVuCA(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.GetDoanhNghiepDichVuCAToListAsync();
+        });
+      },
+      err => {
+      }
+    );
   }
 }

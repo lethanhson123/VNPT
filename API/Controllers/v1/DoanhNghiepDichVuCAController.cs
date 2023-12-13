@@ -9,7 +9,7 @@ namespace API.Controllers.v1
 	[ApiVersion("1.0")]
 	public class DoanhNghiepDichVuCAController : BaseController<DoanhNghiepDichVuCA, IDoanhNghiepDichVuCABusiness>
 	{
-		private readonly IDoanhNghiepDichVuCABusiness _DoanhNghiepDichVuCABusiness;
+		private readonly IDoanhNghiepDichVuCABusiness _DoanhNghiepDichVuCABusiness;		
 		private readonly IWebHostEnvironment _WebHostEnvironment;
 		public DoanhNghiepDichVuCAController(IDoanhNghiepDichVuCABusiness DoanhNghiepDichVuCABusiness, IWebHostEnvironment WebHostEnvironment) : base(DoanhNghiepDichVuCABusiness)
 		{
@@ -51,7 +51,7 @@ namespace API.Controllers.v1
 								if (!string.IsNullOrEmpty(model.HopDong))
 								{
 									model.HopDong = GlobalHelper.APISite + model.GetType().Name + "/" + model.HopDong;
-								}								
+								}
 							}
 						}
 					}
@@ -75,7 +75,7 @@ namespace API.Controllers.v1
 								if (!string.IsNullOrEmpty(model.DonXinCapChungThuSo))
 								{
 									model.DonXinCapChungThuSo = GlobalHelper.APISite + model.GetType().Name + "/" + model.DonXinCapChungThuSo;
-								}								
+								}
 							}
 						}
 					}
@@ -99,7 +99,7 @@ namespace API.Controllers.v1
 								if (!string.IsNullOrEmpty(model.GiayPhepKinhDoanh))
 								{
 									model.GiayPhepKinhDoanh = GlobalHelper.APISite + model.GetType().Name + "/" + model.GiayPhepKinhDoanh;
-								}								
+								}
 							}
 						}
 					}
@@ -123,7 +123,7 @@ namespace API.Controllers.v1
 								if (!string.IsNullOrEmpty(model.BienBanNghiemThu))
 								{
 									model.BienBanNghiemThu = GlobalHelper.APISite + model.GetType().Name + "/" + model.BienBanNghiemThu;
-								}								
+								}
 							}
 						}
 					}
@@ -147,7 +147,7 @@ namespace API.Controllers.v1
 								if (!string.IsNullOrEmpty(model.HoaDon))
 								{
 									model.HoaDon = GlobalHelper.APISite + model.GetType().Name + "/" + model.HoaDon;
-								}								
+								}
 							}
 						}
 					}
@@ -196,7 +196,7 @@ namespace API.Controllers.v1
 		[HttpPost]
 		[Route("AsyncThieuHoSoDoanhNghiepDichVuCA")]
 		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA()
-		{			
+		{
 			await _DoanhNghiepDichVuCABusiness.AsyncThieuHoSoDoanhNghiepDichVuCA();
 			return true;
 		}
@@ -207,6 +207,14 @@ namespace API.Controllers.v1
 			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
 			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
 			await _DoanhNghiepDichVuCABusiness.AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(year, month);
+			return true;
+		}
+
+		[HttpGet]
+		[Route("DongBoDuLieuAsync")]
+		public virtual async Task<bool> DongBoDuLieuAsync()
+		{
+			await _DoanhNghiepDichVuCABusiness.DongBoDuLieuAsync();
 			return true;
 		}
 	}

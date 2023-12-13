@@ -8,6 +8,7 @@ import { DoanhNghiepDichVuCA } from './DoanhNghiepDichVuCA.model';
 })
 export class DoanhNghiepDichVuCAService extends BaseService{
     displayColumns: string[] = ['NhanVienID','DichVuID','NgayKyHopDong', 'Code', 'MaThueBao', 'GiaTien', 'SoThang', 'Note', 'SortOrder', 'Active', 'Save']; 
+    displayColumnsDoanhNghiep: string[] = ['No', 'IsKetLuan', 'KetLuan', 'IsHopDong', 'IsDonXinCapChungThuSo', 'IsCCCD', 'IsGiayPhepKinhDoanh', 'IsBienBanNghiemThu', 'IsHoaDon', 'Note', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'TaiKhoanDuyetYeuCau', 'LoaiYeuCau', 'GiaTien'];  
     list: DoanhNghiepDichVuCA[] | undefined;        
     formData!: DoanhNghiepDichVuCA;
     constructor(public httpClient: HttpClient) {

@@ -22,6 +22,7 @@
         public string? KHACHHANG_ID { get; set; }
         public long? PhongBanID { get; set; }
 		public string? CodeCA { get; set; }
+		public string? UserName { get; set; }
 		public DoanhNghiep()
         {
         }
