@@ -204,7 +204,11 @@ namespace Business.Implement
 		}
 		public virtual async Task<DoanhNghiepDichVuCA> GetByUserName_Year_MonthToAsync(string userName, int year, int month)
 		{
-			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.UserName == userName && model.NgayHieuLuc.Value.Year == year && model.NgayHieuLuc.Value.Month == month).FirstOrDefaultAsync();
+			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.UserName == userName && model.NgayHieuLuc.Value.Year == year && model.NgayHieuLuc.Value.Month == month).OrderByDescending(item => item.NgayHieuLuc).FirstOrDefaultAsync();
+		}
+		public virtual async Task<DoanhNghiepDichVuCA> GetBySoChungThuToAsync(string soChungThu)
+		{
+			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.SoChungThu == soChungThu).FirstOrDefaultAsync();
 		}
 		public virtual async Task<bool> DongBoDuLieuAsync()
 		{
@@ -330,7 +334,7 @@ namespace Business.Implement
 							doanhNghiepDichVuCA.Note = subjectDN;
 							await _DoanhNghiepDichVuCARepository.UpdateAsync(doanhNghiepDichVuCA);
 						}
-					}					
+					}
 				}
 				catch (Exception ex)
 				{

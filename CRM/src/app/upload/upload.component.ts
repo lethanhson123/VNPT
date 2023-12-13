@@ -31,7 +31,7 @@ export class UploadComponent implements OnInit {
   excelDoanhThuURL: string = environment.APIRootURL + environment.Download + "/DoanhThu.xlsx";
   excelGoiCuocURL: string = environment.APIRootURL + environment.Download + "/GoiCuoc.xlsx";
   excelCAURL: string = environment.APIRootURL + environment.Download + "/CA.xlsx";
-  excelCAHoSoURL: string = environment.APIRootURL + environment.Download + "/CAHoSo.xlsx";
+  excelCAHoSoURL: string = environment.APIRootURL + environment.Download + "/CASoChungThu.xlsx";
   @ViewChild('uploadDoanhNghiep') uploadDoanhNghiep!: ElementRef;
   @ViewChild('uploadDoanhThu') uploadDoanhThu!: ElementRef;
   @ViewChild('uploadGoiCuoc') uploadGoiCuoc!: ElementRef;
@@ -156,7 +156,7 @@ export class UploadComponent implements OnInit {
     let fileToUpload: File;
     fileToUpload = this.uploadCAHoSo.nativeElement.files[0];
     this.isShowLoading = true;
-    this.UploadService.PostDoanhNghiepDichVuCAByExcelFileAsync(fileToUpload).subscribe(
+    this.UploadService.PostDoanhNghiepDichVuCASoChungThuByExcelFileAsync(fileToUpload).subscribe(
       res => {
         this.isShowLoading = false;        
         this.NotificationService.warn(environment.UploadSuccess);
