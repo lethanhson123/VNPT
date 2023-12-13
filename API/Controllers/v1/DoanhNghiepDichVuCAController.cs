@@ -210,11 +210,18 @@ namespace API.Controllers.v1
 			return true;
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("DongBoDuLieuAsync")]
 		public virtual async Task<bool> DongBoDuLieuAsync()
 		{
 			await _DoanhNghiepDichVuCABusiness.DongBoDuLieuAsync();
+			return true;
+		}
+		[HttpGet]
+		[Route("DongBoDuLieuNoteAsync")]
+		public virtual async Task<bool> DongBoDuLieuNoteAsync()
+		{
+			await _DoanhNghiepDichVuCABusiness.DongBoDuLieuNoteAsync();
 			return true;
 		}
 	}

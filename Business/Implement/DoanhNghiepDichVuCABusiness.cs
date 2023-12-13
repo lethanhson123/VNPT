@@ -227,6 +227,9 @@ namespace Business.Implement
 							}
 							doanhNghiep.Description = doanhNghiepDichVuCA.SubjectDN;
 							doanhNghiep.UserName = doanhNghiepDichVuCA.UserName;
+							doanhNghiep.DiaChi = doanhNghiepDichVuCA.DiaChiLapDat;
+							doanhNghiep.DienThoai = doanhNghiepDichVuCA.DienThoai;
+							doanhNghiep.Email = doanhNghiepDichVuCA.Email;
 							doanhNghiep.Code = doanhNghiepDichVuCA.UserName.Substring(6);
 							string subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@"CN=", @"~");
 							if (subjectDN.Split('~').Length > 0)
@@ -252,11 +255,48 @@ namespace Business.Implement
 									}
 								}
 							}
-							await _DoanhNghiepBusiness.SaveAsync(doanhNghiep);
-							if (doanhNghiep.ID > 0)
+
+							if (doanhNghiepDichVuCA.SubjectDN.Contains(@"T="))
 							{
-								doanhNghiepDichVuCA.ParentID = doanhNghiep.ID;
-								await _DoanhNghiepDichVuCARepository.UpdateAsync(doanhNghiepDichVuCA);
+								subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@"T=", @"~");
+								if (subjectDN.Split('~').Length > 0)
+								{
+									subjectDN = subjectDN.Split('~')[1];
+									subjectDN = subjectDN.Split(',')[0];
+									subjectDN = subjectDN.Trim();
+									doanhNghiepDichVuCA.Note = subjectDN;
+								}
+							}
+
+							if (doanhNghiepDichVuCA.SubjectDN.Contains(@"O="))
+							{
+								subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@"O=", @"~");
+								if (subjectDN.Split('~').Length > 0)
+								{
+									subjectDN = subjectDN.Split('~')[1];
+									subjectDN = subjectDN.Split(',')[0];
+									subjectDN = subjectDN.Trim();
+									doanhNghiepDichVuCA.Description = subjectDN;
+								}
+							}
+
+							if (doanhNghiepDichVuCA.SubjectDN.Contains(@"OU="))
+							{
+								subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@"OU=", @"~");
+								if (subjectDN.Split('~').Length > 0)
+								{
+									subjectDN = subjectDN.Split('~')[1];
+									subjectDN = subjectDN.Split(',')[0];
+									subjectDN = subjectDN.Trim();
+									doanhNghiepDichVuCA.Description = subjectDN;
+								}
+
+								await _DoanhNghiepBusiness.SaveAsync(doanhNghiep);
+								if (doanhNghiep.ID > 0)
+								{
+									doanhNghiepDichVuCA.ParentID = doanhNghiep.ID;
+									await _DoanhNghiepDichVuCARepository.UpdateAsync(doanhNghiepDichVuCA);
+								}
 							}
 						}
 					}
@@ -267,6 +307,35 @@ namespace Business.Implement
 				}
 
 
+			}
+			return true;
+		}
+
+		public virtual async Task<bool> DongBoDuLieuNoteAsync()
+		{
+			List<DoanhNghiepDichVuCA> listDoanhNghiepDichVuCA = await _DoanhNghiepDichVuCARepository.GetAllToListAsync();
+			foreach (DoanhNghiepDichVuCA doanhNghiepDichVuCA in listDoanhNghiepDichVuCA)
+			{
+				try
+				{
+					string subjectDN = GlobalHelper.InitializationString;
+					if (doanhNghiepDichVuCA.SubjectDN.Contains(@", T="))
+					{
+						subjectDN = doanhNghiepDichVuCA.SubjectDN.Replace(@", T=", @"~");
+						if (subjectDN.Split('~').Length > 0)
+						{
+							subjectDN = subjectDN.Split('~')[1];
+							subjectDN = subjectDN.Split(',')[0];
+							subjectDN = subjectDN.Trim();
+							doanhNghiepDichVuCA.Note = subjectDN;
+							await _DoanhNghiepDichVuCARepository.UpdateAsync(doanhNghiepDichVuCA);
+						}
+					}					
+				}
+				catch (Exception ex)
+				{
+					string mes = ex.Message;
+				}
 			}
 			return true;
 		}

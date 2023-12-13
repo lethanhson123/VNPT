@@ -755,57 +755,59 @@ namespace API.Controllers.v1
 												{
 													string subjectDN = doanhNghiepDichVu.SubjectDN;
 
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"T="))
+													{
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"T=", @"~");
+														if (subjectDN.Split('~').Length > 0)
+														{
+															subjectDN = subjectDN.Split('~')[1];
+															subjectDN = subjectDN.Split(',')[0];
+															subjectDN = subjectDN.Trim();
+															doanhNghiepDichVu.Note = subjectDN;
+														}
+													}
+
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"O="))
+													{
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"O=", @"~");
+														if (subjectDN.Split('~').Length > 0)
+														{
+															subjectDN = subjectDN.Split('~')[1];
+															subjectDN = subjectDN.Split(',')[0];
+															subjectDN = subjectDN.Trim();
+															doanhNghiepDichVu.Description = subjectDN;
+														}
+													}
+
+													if (doanhNghiepDichVu.SubjectDN.Contains(@"OU="))
+													{
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"OU=", @"~");
+														if (subjectDN.Split('~').Length > 0)
+														{
+															subjectDN = subjectDN.Split('~')[1];
+															subjectDN = subjectDN.Split(',')[0];
+															subjectDN = subjectDN.Trim();
+															doanhNghiepDichVu.Description = subjectDN;
+														}
+													}
 
 													if (doanhNghiepDichVu.UserName.Length > 6)
 													{
 														doanhNghiep.Code = doanhNghiepDichVu.UserName.Substring(5);
-													}
-													else
-													{
-														if (doanhNghiepDichVu.SubjectDN.Contains(@"MST:"))
-														{
-															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"MST:", @"~");
-															if (subjectDN.Split('~').Length > 0)
-															{
-																doanhNghiep.Code = subjectDN.Split('~')[1];
-																doanhNghiep.Code = doanhNghiep.Code.Split(',')[0];
-															}
-														}
-														if (string.IsNullOrEmpty(doanhNghiep.Code))
-														{
-															doanhNghiep.Code = doanhNghiepDichVu.MaThueBao;
-														}
-														if (string.IsNullOrEmpty(doanhNghiep.Code))
-														{
-															doanhNghiep.Code = doanhNghiepDichVu.UserName;
-														}
-													}
+													}													
 													DoanhNghiep doanhNghiepSearch = await _IDoanhNghiepBusiness.GetByCondition(item => item.Code == doanhNghiep.Code).FirstOrDefaultAsync();
 													if (doanhNghiepSearch == null)
 													{
 														doanhNghiepSearch = new DoanhNghiep();
 														doanhNghiepSearch.Code = doanhNghiep.Code;
 														doanhNghiepSearch.HuyenID = 1;
-														if (doanhNghiepDichVu.SubjectDN.Contains(@"O="))
-														{
-															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"O=", @"~");
-														}
-														else
-														{
-															if (doanhNghiepDichVu.SubjectDN.Contains(@"OU="))
-															{
-																subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"OU=", @"~");
-															}
-															else
-															{
-																subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CN=", @"~");
-															}
-														}
+														subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"CN=", @"~");
 														if (subjectDN.Split('~').Length > 0)
 														{
 															doanhNghiepSearch.Name = subjectDN.Split('~')[1];
-															doanhNghiepSearch.Name = doanhNghiepSearch.Name.Split(',')[0];
+															doanhNghiepSearch.Name = doanhNghiep.Name.Split(',')[0];
 														}
+
 														if (doanhNghiepDichVu.SubjectDN.Contains(@"L="))
 														{
 															subjectDN = doanhNghiepDichVu.SubjectDN.Replace(@"L=", @"~");
@@ -813,12 +815,8 @@ namespace API.Controllers.v1
 															{
 																subjectDN = subjectDN.Split('~')[1];
 																subjectDN = subjectDN.Split(',')[0];
-
-																string huyenName = GlobalHelper.InitializationString;
-																for (int j = 1; j < subjectDN.Split(' ').Length; j++)
-																{
-																	huyenName = subjectDN.Split(' ')[j] + " ";
-																}
+																subjectDN = subjectDN.Trim();
+																string huyenName = subjectDN.Split(' ')[subjectDN.Split(' ').Length - 1];
 																huyenName = huyenName.Trim();
 																Huyen huyen = listHuyen.Where(item => item.Name.Contains(huyenName)).FirstOrDefault();
 																if (huyen != null)

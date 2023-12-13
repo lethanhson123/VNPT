@@ -206,7 +206,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
   GetDoanhNghiepDichVuCAToListAsync() {
     this.DoanhNghiepDichVuCAService.GetByParentIDToListAsync(this.DoanhNghiepService.formData.ID).subscribe(
       res => {
-        this.DoanhNghiepDichVuCAService.list = (res as DoanhNghiepDichVuCA[]).sort((a, b) => (a.NgayHieuLuc > b.NgayHieuLuc ? 1 : -1));
+        this.DoanhNghiepDichVuCAService.list = (res as DoanhNghiepDichVuCA[]).sort((a, b) => (a.NgayHieuLuc < b.NgayHieuLuc ? 1 : -1));
         this.dataSourceDoanhNghiepDichVuCA = new MatTableDataSource(this.DoanhNghiepDichVuCAService.list);
         this.dataSourceDoanhNghiepDichVuCA.sort = this.sortDoanhNghiepDichVuCA;
         this.dataSourceDoanhNghiepDichVuCA.paginator = this.paginatorDoanhNghiepDichVuCA;

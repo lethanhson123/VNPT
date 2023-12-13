@@ -1,4 +1,6 @@
 ﻿
+using System.Drawing.Printing;
+
 namespace Business.Implement
 {
 	public class DoanhNghiepBusiness : BaseBusiness<DoanhNghiep, IDoanhNghiepRepository>, IDoanhNghiepBusiness
@@ -14,7 +16,7 @@ namespace Business.Implement
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
 			if (!string.IsNullOrEmpty(searchString))
 			{
-				result = await _DoanhNghiepRepository.GetByCondition(item => item.Code.Contains(searchString) || item.Name.Contains(searchString)).ToListAsync();
+				result = await _DoanhNghiepRepository.GetByCondition(item => item.Code.Contains(searchString) || item.CodeCA.Contains(searchString) || item.Name.Contains(searchString) || item.UserName.Contains(searchString)).ToListAsync();
 			}
 			return result;
 		}
@@ -40,7 +42,7 @@ namespace Business.Implement
 				}
 				else
 				{
-					result = await _DoanhNghiepRepository.GetByPageAndPageSizeToListAsync(0, 50);
+					result = await _DoanhNghiepRepository.GetByCondition(item => !string.IsNullOrEmpty(item.UserName)).Skip(0 * 20).Take(20).ToListAsync();
 				}
 
 			}

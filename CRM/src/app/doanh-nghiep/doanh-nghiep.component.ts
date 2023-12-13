@@ -41,12 +41,7 @@ export class DoanhNghiepComponent implements OnInit {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        if (this.HuyenService.list) {
-          if (this.HuyenService.list.length > 0) {
-            this.huyenID = this.HuyenService.list[0].ID;
-            this.GetXaToListAsync();
-          }
-        }
+        this.GetXaToListAsync();
       },
       err => {
       }

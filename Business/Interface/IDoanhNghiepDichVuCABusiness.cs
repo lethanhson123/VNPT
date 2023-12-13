@@ -9,5 +9,6 @@
 		Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(int year, int month);
 		Task<DoanhNghiepDichVuCA> GetByUserName_Year_MonthToAsync(string userName, int year, int month);
 		Task<bool> DongBoDuLieuAsync();
+		Task<bool> DongBoDuLieuNoteAsync();
 	}
 }
