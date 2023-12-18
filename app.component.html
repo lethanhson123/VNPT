@@ -1,0 +1,104 @@
+<div class="vertical-layout page-header-light vertical-menu-collapsible vertical-gradient-menu 2-column"
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-column">
+      <header class="page-topbar" id="header">
+            <div class="navbar navbar-fixed">
+                  <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
+                        <div class="nav-wrapper">
+                              <div class="header-search-wrapper hide-on-med-and-down">
+                                    <input disabled class="header-search-input z-depth-2" type="text" name="Search"
+                                          placeholder="{{DownloadService.PageTitle()}} | Tiếp tục triển khai và đẩy mạnh ứng dụng du lịch thông minh trên thiết bị di động | E-TBMT">
+                              </div>
+                              <ul class="navbar-list right">
+                                    <li><a class="waves-effect waves-block waves-light notification-button"
+                                                href="javascript:void(0);" data-target="notifications-dropdown"><i
+                                                      class="material-icons">notifications_none<small
+                                                            class="notification-badge"
+                                                            *ngIf="ThongBaoService.list">{{ThongBaoService.list.length}}</small></i></a>
+                                    </li>
+                                    <li><a class="waves-effect waves-block waves-light profile-button"
+                                                href="javascript:void(0);" data-target="profile-dropdown"><span
+                                                      class="avatar-status avatar-online"><img
+                                                            src="{{ThanhVienService.formDataLogin.AvatarURL}}"
+                                                            alt="{{ThanhVienService.formDataLogin.HoTen}}"
+                                                            title="{{ThanhVienService.formDataLogin.HoTen}}"><i></i></span></a>
+                                    </li>
+                                    <li><a class="waves-effect waves-block waves-light sidenav-trigger" href="#"
+                                                data-target="slide-out-right"><i
+                                                      class="material-icons">format_indent_increase</i></a></li>
+                              </ul>
+                              <ul class="dropdown-content" id="translation-dropdown">
+                              </ul>
+                              <ul class="dropdown-content" id="notifications-dropdown">
+                                    <li>
+                                          <h6>Thông báo<span class="new badge"
+                                                      *ngIf="ThongBaoService.list">{{ThongBaoService.list.length}}</span>
+                                          </h6>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li *ngFor="let element of ThongBaoService.list;">
+                                          <a class="grey-text text-darken-2" href="{{element.URL}}"><span
+                                                      class="{{element.CSSClass}}">{{element.Icon}}</span>
+                                                {{element.Name}} {{element.Note}}</a>
+                                          <a class="grey-text text-darken-2" href="{{element.URL}}"><time
+                                                      class="media-meta"
+                                                      datetime="{{element.LastUpdatedDate}}">{{element.LastUpdatedDate |
+                                                      date:'dd/MM/yyyy h:mm:ss a'}}</time></a>
+                                    </li>
+                              </ul>
+                              <ul class="dropdown-content" id="profile-dropdown">
+                                    <li><a class="grey-text text-darken-1" href="{{domainName}}ThanhVienThongTin"><i
+                                                      class="material-icons">person_outline</i> Tài khoản</a></li>
+                                    <li><a class="grey-text text-darken-1" href="{{domainName}}ThanhVienQuenMatKhau"><i
+                                                      class="material-icons">lock_outline</i> Đổi mật khẩu</a></li>
+                                    <li><a class="grey-text text-darken-1" (click)="onLogout()"><i
+                                                      class="material-icons">keyboard_tab</i> Thoát</a></li>
+                              </ul>
+                        </div>
+                        <nav class="display-none search-sm">
+                              <div class="nav-wrapper">
+                              </div>
+                        </nav>
+                  </nav>
+            </div>
+      </header>
+      <aside
+            class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark gradient-45deg-deep-purple-blue sidenav-gradient sidenav-active-rounded">
+            <div class="brand-sidebar">
+                  <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="#" style="color:#fff;"><span
+                                    class="logo-text hide-on-med-and-down" style="color:#fff;">CMS</span></a><a
+                              class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a>
+                  </h1>
+            </div>
+            <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow"
+                  id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
+                  <li class="bold" style="display: flex; align-items: center; justify-content: center;"><img
+                              class="responsive-img" src="/assets/image/logo.png" width="50%"
+                              alt="{{DownloadService.PageTitle()}}" title="{{DownloadService.PageTitle()}}">
+                  </li>
+                  <li [ngClass]="itemParent.Active == true ? 'active bold open': 'bold'"
+                        *ngFor="let itemParent of DanhMucChucNangService.listParent;">
+                        <a class="collapsible-header waves-effect waves-cyan "><i
+                                    class="material-icons">{{itemParent.Note}}</i><span class="menu-title"
+                                    data-i18n="">{{itemParent.Name}}</span></a>
+                        <div class="collapsible-body" [ngStyle]="{'display':itemParent.Active == true ? 'block' : ''}">
+                              <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                                    <li [ngClass]="itemChild.Active == true ? 'active': ''" *ngFor="let itemChild of itemParent.listChild;">
+                                          <a [ngClass]="itemChild.Active == true ? 'collapsible-body active': 'collapsible-body'" href="{{domainName}}{{itemChild.Code}}"
+                                                data-i18n=""><i
+                                                      class="material-icons">{{itemChild.Note}}</i><span>{{itemChild.Name}}</span></a>
+                                    </li>
+                              </ul>
+                        </div>
+                  </li>
+            </ul>
+            <div class="navigation-background"></div><a
+                  class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"
+                  href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+      </aside>
+      <div id="main">
+            <router-outlet></router-outlet>
+      </div>
+</div>
+<br />
+<br />
+<br />

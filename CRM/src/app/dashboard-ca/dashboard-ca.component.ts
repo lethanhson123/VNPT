@@ -144,9 +144,9 @@ export class DashboardCAComponent implements OnInit {
     this.NhanVienGetToList();
     this.PhongBanGetToList();
     this.onSearchReportCA201();
-    this.onSearchReportCA001();
-    this.onSearchReportCA002();
-    this.onSearchReportCA008();
+    // this.onSearchReportCA001();
+    // this.onSearchReportCA002();
+    // this.onSearchReportCA008();
   }
 
   GetYearToList() {

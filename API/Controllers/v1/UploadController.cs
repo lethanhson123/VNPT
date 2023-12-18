@@ -793,7 +793,7 @@ namespace API.Controllers.v1
 
 													if (doanhNghiepDichVu.UserName.Length > 6)
 													{
-														doanhNghiep.Code = doanhNghiepDichVu.UserName.Substring(5);
+														doanhNghiep.Code = doanhNghiepDichVu.UserName.Substring(6);
 													}													
 													DoanhNghiep doanhNghiepSearch = await _IDoanhNghiepBusiness.GetByCondition(item => item.Code == doanhNghiep.Code).FirstOrDefaultAsync();
 													if (doanhNghiepSearch == null)
@@ -805,7 +805,7 @@ namespace API.Controllers.v1
 														if (subjectDN.Split('~').Length > 0)
 														{
 															doanhNghiepSearch.Name = subjectDN.Split('~')[1];
-															doanhNghiepSearch.Name = doanhNghiep.Name.Split(',')[0];
+															doanhNghiepSearch.Name = doanhNghiepSearch.Name.Split(',')[0];
 														}
 
 														if (doanhNghiepDichVu.SubjectDN.Contains(@"L="))
