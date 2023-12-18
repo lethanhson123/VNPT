@@ -15,7 +15,7 @@ export class ReportService extends BaseService{
     displayColumnsReportCA202312: string[] = ['DoanhNghiepName', 'UserName', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
     displayColumnsReportCA006: string[] = ['No', 'HuyenName', 'DoanhNghiepName']; 
     displayColumnsReportCA203: string[] = ['No', 'NhanVienTaoYeuCauName', 'SanLuong', 'DoanhThu']; 
-    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'HoSoChuaHoanThanh']; 
+    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'TyLeHoanThanh', 'HoSoChuaHoanThanh']; 
     listReport001: Report[] | undefined;        
     listReport002: Report[] | undefined;        
     listReport003: Report[] | undefined;        
@@ -548,6 +548,12 @@ export class ReportService extends BaseService{
         formUpload.append('month', JSON.stringify(month));
         formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
         formUpload.append('isSmartCA', JSON.stringify(isSmartCA));
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCASearchStringToListAsync(searchString: string) {
+        let url = this.aPIURL + this.controller + '/ReportCASearchStringToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('searchString', JSON.stringify(searchString));               
         return this.httpClient.post(url, formUpload);
     }
 }

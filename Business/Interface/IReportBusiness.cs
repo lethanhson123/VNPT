@@ -70,5 +70,7 @@ namespace Business.Interface
 		Task<List<Report>> ReportCA607Async(long huyenID, int year, int month, long nhanVienID, int hetHan, bool isSmartCA);
 		Task<List<Report>> ReportCA608Async(long huyenID, int year, int month, long nhanVienID, bool isSmartCA);
 
+		Task<List<Report>> ReportCASearchStringToListAsync(string searchString);
+
 	}
 }

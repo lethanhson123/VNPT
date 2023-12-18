@@ -210,6 +210,7 @@ namespace Business.Implement
 		{
 			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.SoChungThu == soChungThu).FirstOrDefaultAsync();
 		}
+		
 		public virtual async Task<bool> DongBoDuLieuAsync()
 		{
 			List<Huyen> listHuyen = await _IHuyenBusiness.GetAllToListAsync();

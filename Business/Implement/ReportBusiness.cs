@@ -1,4 +1,6 @@
-﻿namespace Business.Implement
+﻿using Data.Model;
+
+namespace Business.Implement
 {
 	public class ReportBusiness : BaseBusiness<Report, IReportRepository>, IReportBusiness
 	{
@@ -780,6 +782,19 @@
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA608", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCASearchStringToListAsync(string searchString)
+		{
+			List<Report> result = new List<Report>();
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				SqlParameter[] parameters =
+				{
+					new SqlParameter("@SearchString",searchString),					
+				};
+				result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCASearchString", parameters);
+			}			
 			return result;
 		}
 	}

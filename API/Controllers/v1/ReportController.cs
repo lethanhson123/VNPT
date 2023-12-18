@@ -1091,5 +1091,21 @@ namespace API.Controllers.v1
 			}
 			return result;
 		}
+		[HttpPost]
+		[Route("ReportCASearchStringToListAsync")]
+		public virtual async Task<List<Report>> ReportCASearchStringToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);				
+				result = await _ReportBusiness.ReportCASearchStringToListAsync(searchString);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }

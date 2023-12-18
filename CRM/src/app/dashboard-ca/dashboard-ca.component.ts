@@ -1032,13 +1032,29 @@ export class DashboardCAComponent implements OnInit {
     );
 
   }
-  onSearchReportCA008() {
-    this.ReportCA206();
-    this.ReportCA207();
+
+  ReportCASearchStringToListAsync() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCASearchStringToListAsync(this.searchString).subscribe(
+      res => {
+        this.ReportService.listReportCA008 = (res as Report[]);
+        this.dataSource8 = new MatTableDataSource(this.ReportService.listReportCA008);
+        this.dataSource8.sort = this.sort8;
+        this.dataSource8.paginator = this.paginator8;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchReportCA008() {   
     if (this.searchString.length > 0) {
-      this.dataSource8.filter = this.searchString.toLowerCase();
+      this.ReportCASearchStringToListAsync();
     }
     else {
+      this.ReportCA206();
+      this.ReportCA207();
       this.ReportCA008Async();
     }
   }
