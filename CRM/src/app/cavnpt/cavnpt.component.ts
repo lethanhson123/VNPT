@@ -157,7 +157,18 @@ export class CAVNPTComponent implements OnInit {
       this.DownloadService.listMonth = res as YearMonth[];
     });
   } 
-
+  onReportCA() {
+    this.isShowLoading = true;
+    this.DownloadService.ReportCA503_504_506_507ToHTMLAsync(this.year, this.month, this.isSmartCA).subscribe(
+      res => {
+        window.open(res.toString(), "_blank");
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   ReportCA201Async() {
     this.isShowLoading = true;
     this.ReportService.ReportCA501Async(this.year, this.month, this.isSmartCA).subscribe(

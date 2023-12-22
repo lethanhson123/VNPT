@@ -159,5 +159,20 @@ export class DownloadService {
         formUpload.append('isSmartCA', JSON.stringify(isSmartCA));  
         return this.httpClient.post(url, formUpload);
     }
+    ReportCA203_204_206_207ToHTMLAsync(year: number, month: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA203_204_206_207ToHTMLAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));          
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA503_504_506_507ToHTMLAsync(year: number, month: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA503_504_506_507ToHTMLAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));          
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));    
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

@@ -15,7 +15,8 @@ export class ReportService extends BaseService{
     displayColumnsReportCA202312: string[] = ['DoanhNghiepName', 'UserName', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
     displayColumnsReportCA006: string[] = ['No', 'HuyenName', 'DoanhNghiepName']; 
     displayColumnsReportCA203: string[] = ['No', 'NhanVienTaoYeuCauName', 'SanLuong', 'DoanhThu']; 
-    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'TyLeHoanThanh', 'HoSoChuaHoanThanh']; 
+    displayColumnsReportCA204: string[] = ['No', 'NhanVienTaoYeuCauName', 'SanLuong', 'PhatTrienChiTieu', 'DoanhThu', 'TyLePhatTrien']; 
+    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'HoSoChuaHoanThanh', 'TyLeHoanThanh']; 
     listReport001: Report[] | undefined;        
     listReport002: Report[] | undefined;        
     listReport003: Report[] | undefined;        

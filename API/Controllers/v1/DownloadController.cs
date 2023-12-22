@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Data.Model;
+using Microsoft.AspNetCore.Hosting;
 using System.Drawing;
 
 namespace API.Controllers.v1
@@ -37,6 +38,226 @@ namespace API.Controllers.v1
 		{
 			var result = YearMonth.GetYearToList();
 			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA203_204_206_207ToHTMLAsync")]
+		public async Task<JsonResult> ReportCA203_204_206_207ToHTMLAsync()
+		{
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> listReportCA203 = await _ReportBusiness.ReportCA203Async(year, month);
+			List<Report> listReportCA204 = await _ReportBusiness.ReportCA204Async(year, month);
+			List<Report> listReportCA206 = await _ReportBusiness.ReportCA206Async(year, month);
+			List<Report> listReportCA207 = await _ReportBusiness.ReportCA207Async(year, month);
+			string contentHTML = GlobalHelper.InitializationString;
+			var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCABaoCaoTongHop.html");
+			using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
+			{
+				using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+				{
+					contentHTML = r.ReadToEnd();
+				}
+			}
+			if (listReportCA203.Count > 0)
+			{
+				StringBuilder contentReportCA203 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA203)
+				{
+					stt = stt + 1;
+					contentReportCA203.AppendLine(@"<tr>");
+					contentReportCA203.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA203.AppendLine(@"<td><b>" + report.NhanVienTaoYeuCauName + "</b></td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.SanLuong.Value.ToString("N0") + "</td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.PhatTrienChiTieu.Value.ToString("N0") + "</td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.DoanhThu.Value.ToString("N0") + "</td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.TyLePhatTrien.Value.ToString("N0") + " %</td>");
+					contentReportCA203.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[NhanVienXepHang]", contentReportCA203.ToString());
+			}
+			if (listReportCA204.Count > 0)
+			{
+				StringBuilder contentReportCA204 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA204)
+				{
+					stt = stt + 1;
+					contentReportCA204.AppendLine(@"<tr>");
+					contentReportCA204.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA204.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.SanLuong.Value.ToString("N0") + "</td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.PhatTrienChiTieu.Value.ToString("N0") + "</td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.DoanhThu.Value.ToString("N0") + "</td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.TyLePhatTrien.Value.ToString("N0") + " %</td>");
+					contentReportCA204.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[PhongBanHangXepHang]", contentReportCA204.ToString());
+			}
+			if (listReportCA206.Count > 0)
+			{
+				StringBuilder contentReportCA206 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA206)
+				{
+					stt = stt + 1;
+					contentReportCA206.AppendLine(@"<tr>");
+					contentReportCA206.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA206.AppendLine(@"<td><b>" + report.NhanVienTaoYeuCauName + "</b></td>");
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
+					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
+					contentReportCA206.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[NhanVienBaoCao]", contentReportCA206.ToString());
+			}
+			if (listReportCA207.Count > 0)
+			{
+				StringBuilder contentReportCA207 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA207)
+				{
+					stt = stt + 1;
+					contentReportCA207.AppendLine(@"<tr>");
+					contentReportCA207.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA207.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
+					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
+					contentReportCA207.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[PhongBanHangBaoCao]", contentReportCA207.ToString());
+			}
+			contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
+			contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
+			contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
+			string fileName = "ReportCA203_204_206_207_" + GlobalHelper.InitializationDateTimeCode0001 + ".html";
+			result = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (FileStream fs = new FileStream(result, FileMode.Create))
+			{
+				using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
+				{
+					w.WriteLine(contentHTML);
+				}
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
+		}
+
+		[HttpPost]
+		[Route("ReportCA503_504_506_507ToHTMLAsync")]
+		public async Task<JsonResult> ReportCA503_504_506_507ToHTMLAsync()
+		{
+			int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+			int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+			bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+			string result = GlobalHelper.InitializationString;
+			List<Report> listReportCA203 = await _ReportBusiness.ReportCA503Async(year, month, isSmartCA);
+			List<Report> listReportCA204 = await _ReportBusiness.ReportCA504Async(year, month, isSmartCA);
+			List<Report> listReportCA206 = await _ReportBusiness.ReportCA506Async(year, month, isSmartCA);
+			List<Report> listReportCA207 = await _ReportBusiness.ReportCA507Async(year, month, isSmartCA);
+			string contentHTML = GlobalHelper.InitializationString;
+			var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCABaoCaoTongHop.html");
+			using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
+			{
+				using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+				{
+					contentHTML = r.ReadToEnd();
+				}
+			}
+			if (listReportCA203.Count > 0)
+			{
+				StringBuilder contentReportCA203 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA203)
+				{
+					stt = stt + 1;
+					contentReportCA203.AppendLine(@"<tr>");
+					contentReportCA203.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA203.AppendLine(@"<td><b>" + report.NhanVienTaoYeuCauName + "</b></td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.SanLuong.Value.ToString("N0") + "</td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.PhatTrienChiTieu.Value.ToString("N0") + "</td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.DoanhThu.Value.ToString("N0") + "</td>");
+					contentReportCA203.AppendLine(@"<td style='text-align: right;'>" + report.TyLePhatTrien.Value.ToString("N0") + " %</td>");
+					contentReportCA203.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[NhanVienXepHang]", contentReportCA203.ToString());
+			}
+			if (listReportCA204.Count > 0)
+			{
+				StringBuilder contentReportCA204 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA204)
+				{
+					stt = stt + 1;
+					contentReportCA204.AppendLine(@"<tr>");
+					contentReportCA204.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA204.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.SanLuong.Value.ToString("N0") + "</td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.PhatTrienChiTieu.Value.ToString("N0") + "</td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.DoanhThu.Value.ToString("N0") + "</td>");
+					contentReportCA204.AppendLine(@"<td style='text-align: right;'>" + report.TyLePhatTrien.Value.ToString("N0") + " %</td>");
+					contentReportCA204.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[PhongBanHangXepHang]", contentReportCA204.ToString());
+			}
+			if (listReportCA206.Count > 0)
+			{
+				StringBuilder contentReportCA206 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA206)
+				{
+					stt = stt + 1;
+					contentReportCA206.AppendLine(@"<tr>");
+					contentReportCA206.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA206.AppendLine(@"<td><b>" + report.NhanVienTaoYeuCauName + "</b></td>");
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
+					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
+					contentReportCA206.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[NhanVienBaoCao]", contentReportCA206.ToString());
+			}
+			if (listReportCA207.Count > 0)
+			{
+				StringBuilder contentReportCA207 = new StringBuilder();
+				int stt = 0;
+				foreach (Report report in listReportCA207)
+				{
+					stt = stt + 1;
+					contentReportCA207.AppendLine(@"<tr>");
+					contentReportCA207.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+					contentReportCA207.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
+					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
+					contentReportCA207.AppendLine(@"</tr>");
+				}
+				contentHTML = contentHTML.Replace("[PhongBanHangBaoCao]", contentReportCA207.ToString());
+			}
+			contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
+			contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
+			contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
+			string fileName = "ReportCA203_204_206_207_" + GlobalHelper.InitializationDateTimeCode0001 + ".html";
+			result = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+			using (FileStream fs = new FileStream(result, FileMode.Create))
+			{
+				using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
+				{
+					w.WriteLine(contentHTML);
+				}
+			}
+			result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			return Json(result);
 		}
 		[HttpPost]
 		[Route("ReportVNPT001ToExcelAsync")]
@@ -3043,7 +3264,7 @@ namespace API.Controllers.v1
 					{
 						workSheet.Cells[row, 6].Value = item.NgayHieuLuc.Value.ToString("yyyy-MM-dd");
 					}
-					catch(Exception ex)
+					catch (Exception ex)
 					{
 						workSheet.Cells[row, 6].Value = "";
 						string mes = ex.Message;
@@ -3056,7 +3277,7 @@ namespace API.Controllers.v1
 					{
 						workSheet.Cells[row, 67].Value = "";
 						string mes = ex.Message;
-					}					
+					}
 					workSheet.Cells[row, 8].Value = item.NhanVienName;
 					workSheet.Cells[row, 9].Value = item.TaiKhoanTaoYeuCau;
 					workSheet.Cells[row, 10].Value = item.TaiKhoanDuyetYeuCau;
@@ -3068,7 +3289,7 @@ namespace API.Controllers.v1
 					workSheet.Cells[row, 16].Value = item.IsGiayPhepKinhDoanh;
 					workSheet.Cells[row, 17].Value = item.IsBienBanNghiemThu;
 					workSheet.Cells[row, 18].Value = item.IsHoaDon;
-					workSheet.Cells[row, 19].Value = item.Note;				
+					workSheet.Cells[row, 19].Value = item.Note;
 
 
 					for (int i = 1; i <= column; i++)

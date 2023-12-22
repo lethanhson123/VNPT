@@ -14,15 +14,15 @@
         <div class="d-flex flex-row gap-2">
             <a class="link-primary" href="{{domainName}}DashboardCA" title="DashboardCA">
                 <b>VNPT-CA & SMART-CA</b>
-            </a> | 
+            </a> |
             <a class="link-primary" href="{{domainName}}CAVNPT" title="VNPT-CA">
                 <b>VNPT-CA</b>
-            </a> | 
+            </a> |
             <a class="link-primary" href="{{domainName}}CASmart" title="SMART-CA">
                 <b>SMART-CA</b>
-            </a> | 
+            </a> |
             <a class="link-primary" href="{{domainName}}DoanhNghiep" title="UserName">
-                <b>UserName</b>
+                <b>Khách hàng</b>
             </a>
         </div>
     </div>
@@ -115,6 +115,8 @@
                                     <div class="col-lg-8 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA201()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-success" title="Báo cáo" (click)="onReportCA()"><i
+                                                class="bi bi-printer"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
                                 <div class="row gx-4">
@@ -284,11 +286,22 @@
                                                             </ng-container>
                                                             <ng-container matColumnDef="SanLuong">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                                    Sản lượng
+                                                                    Thực hiện
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
                                                                     style="text-align: right; font-size: 18px;">
                                                                     {{element.SanLuong |
+                                                                    number:
+                                                                    '1.0-0'}}
+                                                                </td>
+                                                            </ng-container>
+                                                            <ng-container matColumnDef="PhatTrienChiTieu">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Chỉ tiêu
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.PhatTrienChiTieu |
                                                                     number:
                                                                     '1.0-0'}}
                                                                 </td>
@@ -304,15 +317,26 @@
                                                                     '1.0-0'}}
                                                                 </td>
                                                             </ng-container>
+                                                            <ng-container matColumnDef="TyLePhatTrien">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Tỷ lệ
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.TyLePhatTrien |
+                                                                    number:
+                                                                    '1.0-0'}} %
+                                                                </td>
+                                                            </ng-container>
                                                             <tr mat-header-row
-                                                                *matHeaderRowDef="ReportService.displayColumnsReportCA203">
+                                                                *matHeaderRowDef="ReportService.displayColumnsReportCA204">
                                                             </tr>
                                                             <tr mat-row
-                                                                *matRowDef="let row; columns: ReportService.displayColumnsReportCA203;">
+                                                                *matRowDef="let row; columns: ReportService.displayColumnsReportCA204;">
                                                             </tr>
                                                         </table>
                                                         <mat-paginator #paginator204="matPaginator"
-                                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
                                                             [showFirstLastButtons]></mat-paginator>
                                                     </div>
                                                 </div>
@@ -352,11 +376,22 @@
                                                             </ng-container>
                                                             <ng-container matColumnDef="SanLuong">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                                    Sản lượng
+                                                                    Thực hiện
                                                                 </th>
                                                                 <td mat-cell *matCellDef="let element"
                                                                     style="text-align: right; font-size: 18px;">
                                                                     {{element.SanLuong |
+                                                                    number:
+                                                                    '1.0-0'}}
+                                                                </td>
+                                                            </ng-container>
+                                                            <ng-container matColumnDef="PhatTrienChiTieu">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Chỉ tiêu
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.PhatTrienChiTieu |
                                                                     number:
                                                                     '1.0-0'}}
                                                                 </td>
@@ -372,15 +407,26 @@
                                                                     '1.0-0'}}
                                                                 </td>
                                                             </ng-container>
+                                                            <ng-container matColumnDef="TyLePhatTrien">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Tỷ lệ
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.TyLePhatTrien |
+                                                                    number:
+                                                                    '1.0-0'}} %
+                                                                </td>
+                                                            </ng-container>
                                                             <tr mat-header-row
-                                                                *matHeaderRowDef="ReportService.displayColumnsReportCA203">
+                                                                *matHeaderRowDef="ReportService.displayColumnsReportCA204">
                                                             </tr>
                                                             <tr mat-row
-                                                                *matRowDef="let row; columns: ReportService.displayColumnsReportCA203;">
+                                                                *matRowDef="let row; columns: ReportService.displayColumnsReportCA204;">
                                                             </tr>
                                                         </table>
                                                         <mat-paginator #paginator203="matPaginator"
-                                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                                            [pageSizeOptions]="[10,20,50,100]" [pageSize]="100"
                                                             [showFirstLastButtons]></mat-paginator>
                                                     </div>
                                                 </div>
@@ -1768,6 +1814,17 @@
                                                                     '1.0-0'}}
                                                                 </td>
                                                             </ng-container>
+                                                            <ng-container matColumnDef="TyLeHoanThanh">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Tỷ lệ
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.HoSoHoanThanh/element.HoSo * 100 |
+                                                                    number:
+                                                                    '1.0-0'}} %
+                                                                </td>
+                                                            </ng-container>
                                                             <ng-container matColumnDef="HoSoChuaHoanThanh">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Chưa Hoàn thành
@@ -1845,6 +1902,17 @@
                                                                     {{element.HoSoHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
+                                                                </td>
+                                                            </ng-container>
+                                                            <ng-container matColumnDef="TyLeHoanThanh">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Tỷ lệ
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.HoSoHoanThanh/element.HoSo * 100 |
+                                                                    number:
+                                                                    '1.0-0'}} %
                                                                 </td>
                                                             </ng-container>
                                                             <ng-container matColumnDef="HoSoChuaHoanThanh">
@@ -1971,7 +2039,8 @@
                                                                 </div>
                                                                 <div class="col-xl-6 col-sm-6 col-12">
                                                                     <a style="padding-top: 2px; padding-bottom: 0px; padding-left: 4px; padding-right: 4px; margin-top: 8px;"
-                                                                        class="btn btn-success" *ngIf="element.HopDong && element.HopDong.length>10"
+                                                                        class="btn btn-success"
+                                                                        *ngIf="element.HopDong && element.HopDong.length>10"
                                                                         target="_blank" href="{{element.HopDong}}"
                                                                         title="{{element.HoaDon}}"><i
                                                                             class="bi bi bi-eye-fill"></i></a>
@@ -2018,7 +2087,8 @@
                                                                 </div>
                                                                 <div class="col-xl-6 col-sm-6 col-12">
                                                                     <a style="padding-top: 2px; padding-bottom: 0px; padding-left: 4px; padding-right: 4px; margin-top: 8px;"
-                                                                        class="btn btn-success" *ngIf="element.CCCD && element.CCCD.length>10"
+                                                                        class="btn btn-success"
+                                                                        *ngIf="element.CCCD && element.CCCD.length>10"
                                                                         target="_blank" href="{{element.CCCD}}"
                                                                         title="{{element.CCCD}}"><i
                                                                             class="bi bi-file-earmark-zip-fill"></i></a>
@@ -2066,7 +2136,8 @@
                                                                 <div class="col-xl-6 col-sm-6 col-12">
                                                                     <a style="padding-top: 2px; padding-bottom: 0px; padding-left: 4px; padding-right: 4px; margin-top: 8px;"
                                                                         class="btn btn-success"
-                                                                        *ngIf="element.BienBanNghiemThu && element.BienBanNghiemThu.length>10" target="_blank"
+                                                                        *ngIf="element.BienBanNghiemThu && element.BienBanNghiemThu.length>10"
+                                                                        target="_blank"
                                                                         href="{{element.BienBanNghiemThu}}"
                                                                         title="{{element.BienBanNghiemThu}}"><i
                                                                             class="bi bi-file-earmark-zip-fill"></i></a>
@@ -2088,7 +2159,8 @@
                                                                 </div>
                                                                 <div class="col-xl-6 col-sm-6 col-12">
                                                                     <a style="padding-top: 2px; padding-bottom: 0px; padding-left: 4px; padding-right: 4px; margin-top: 8px;"
-                                                                        class="btn btn-success" *ngIf="element.HoaDon && element.HoaDon.length>10"
+                                                                        class="btn btn-success"
+                                                                        *ngIf="element.HoaDon && element.HoaDon.length>10"
                                                                         target="_blank" href="{{element.HoaDon}}"
                                                                         title="{{element.HoaDon}}"><i
                                                                             class="bi bi-file-earmark-zip-fill"></i></a>

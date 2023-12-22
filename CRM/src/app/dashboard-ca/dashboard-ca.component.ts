@@ -116,7 +116,7 @@ export class DashboardCAComponent implements OnInit {
   doanhThuNhanVien: number = environment.InitializationNumber;
   hetHan: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
-  month: number = new Date().getMonth() + 1;  
+  month: number = new Date().getMonth() + 1;
   isKetLuan: boolean = false;
   constructor(
     public HuyenService: HuyenService,
@@ -295,6 +295,18 @@ export class DashboardCAComponent implements OnInit {
     this.ReportCA205Async();
     this.ReportCA203Async();
     this.ReportCA204Async();
+  }
+  onReportCA() {
+    this.isShowLoading = true;
+    this.DownloadService.ReportCA203_204_206_207ToHTMLAsync(this.year, this.month).subscribe(
+      res => {
+        window.open(res.toString(), "_blank");
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
   }
 
   public ChartOptionsReportCA205SanLuong: ChartOptions = {
@@ -530,7 +542,7 @@ export class DashboardCAComponent implements OnInit {
       duration: 1,
       onComplete: function () {
         var chartInstance = this.chart,
-        ctx = chartInstance.ctx;
+          ctx = chartInstance.ctx;
         ctx.textAlign = 'center';
         ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.textBaseline = 'bottom';
@@ -1048,7 +1060,7 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-  onSearchReportCA008() {   
+  onSearchReportCA008() {
     if (this.searchString.length > 0) {
       this.ReportCASearchStringToListAsync();
     }
@@ -1272,16 +1284,16 @@ export class DashboardCAComponent implements OnInit {
         let labelArray = [];
         let dataArray001 = [];
         let dataArray002 = [];
-        let dataArray003 = [];        
+        let dataArray003 = [];
         for (let i = 0; i < this.ReportService.listReportCA206.length; i++) {
           labelArray.push(this.ReportService.listReportCA206[i].NhanVienTaoYeuCauName);
           dataArray001.push(this.ReportService.listReportCA206[i].HoSo);
           dataArray002.push(this.ReportService.listReportCA206[i].HoSoHoanThanh);
-          dataArray003.push(this.ReportService.listReportCA206[i].HoSoChuaHoanThanh);          
+          dataArray003.push(this.ReportService.listReportCA206[i].HoSoChuaHoanThanh);
         }
         let label001: string = 'HỒ SƠ';
         let label002: string = 'HOÀN THÀNH';
-        let label003: string = 'CHƯA HOÀN THÀNH';        
+        let label003: string = 'CHƯA HOÀN THÀNH';
         this.ChartLabelsReportCA206 = labelArray;
         this.ChartDataReportCA206 = [
           { data: dataArray001, label: label001, stack: 'a', },
@@ -1308,23 +1320,23 @@ export class DashboardCAComponent implements OnInit {
         let labelArray = [];
         let dataArray001 = [];
         let dataArray002 = [];
-        let dataArray003 = [];        
+        let dataArray003 = [];
         for (let i = 0; i < this.ReportService.listReportCA207.length; i++) {
           labelArray.push(this.ReportService.listReportCA207[i].PhongBanTaoYeuCauName);
           dataArray001.push(this.ReportService.listReportCA207[i].HoSo);
           dataArray002.push(this.ReportService.listReportCA207[i].HoSoHoanThanh);
-          dataArray003.push(this.ReportService.listReportCA207[i].HoSoChuaHoanThanh);          
+          dataArray003.push(this.ReportService.listReportCA207[i].HoSoChuaHoanThanh);
         }
         let label001: string = 'HỒ SƠ';
         let label002: string = 'HOÀN THÀNH';
-        let label003: string = 'CHƯA HOÀN THÀNH';        
+        let label003: string = 'CHƯA HOÀN THÀNH';
         this.ChartLabelsReportCA207 = labelArray;
         this.ChartDataReportCA207 = [
           { data: dataArray001, label: label001, stack: 'a', },
           { data: dataArray002, label: label002, stack: 'b', type: 'line', fill: false },
           { data: dataArray003, label: label003, stack: 'c', type: 'line', fill: false }
         ];
-        
+
 
         this.isShowLoading = false;
       },
@@ -1339,7 +1351,7 @@ export class DashboardCAComponent implements OnInit {
       duration: 1,
       onComplete: function () {
         var chartInstance = this.chart,
-        ctx = chartInstance.ctx;
+          ctx = chartInstance.ctx;
         ctx.textAlign = 'center';
         ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.textBaseline = 'bottom';
@@ -1379,7 +1391,7 @@ export class DashboardCAComponent implements OnInit {
       duration: 1,
       onComplete: function () {
         var chartInstance = this.chart,
-        ctx = chartInstance.ctx;
+          ctx = chartInstance.ctx;
         ctx.textAlign = 'center';
         ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.textBaseline = 'bottom';
