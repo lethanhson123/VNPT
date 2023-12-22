@@ -1162,7 +1162,7 @@ export class CAVNPTComponent implements OnInit {
   }
   ReportCA206() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA206Async(this.year, this.month).subscribe(
+    this.ReportService.ReportCA506Async(this.year, this.month, this.isSmartCA).subscribe(
       res => {
         this.ReportService.listReportCA206 = (res as Report[]);
         this.DataSource206 = new MatTableDataSource(this.ReportService.listReportCA206);
@@ -1198,7 +1198,7 @@ export class CAVNPTComponent implements OnInit {
   }
   ReportCA207() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA207Async(this.year, this.month).subscribe(
+    this.ReportService.ReportCA507Async(this.year, this.month, this.isSmartCA).subscribe(
       res => {
         this.ReportService.listReportCA207 = (res as Report[]);
         this.DataSource207 = new MatTableDataSource(this.ReportService.listReportCA207);
