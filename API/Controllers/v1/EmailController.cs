@@ -193,7 +193,6 @@ namespace API.Controllers.v1
 		public async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA()
 		{
 			bool result = GlobalHelper.InitializationBool;
-
 			try
 			{
 				Helper.Model.Mail mail = new Helper.Model.Mail();
@@ -228,24 +227,7 @@ namespace API.Controllers.v1
 					mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
 					mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
 					mail.Display = GlobalHelper.MasterEmailDisplay;
-				}
-
-
-				mail.Subject = "CÁNH BÁO HỒ SƠ SAI QUY ĐỊNH - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
-				string contentHTML = GlobalHelper.InitializationString;
-				var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCAThieuHoSo.html");
-				using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
-				{
-					using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
-					{
-						contentHTML = r.ReadToEnd();
-					}
-				}
-
-				contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
-				contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
-				contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
-
+				}				
 				List<NhanVien> listNhanVien = await _NhanVienBusiness.GetByActiveToListAsync(true);
 
 				foreach (NhanVien nhanVien in listNhanVien)
@@ -255,20 +237,142 @@ namespace API.Controllers.v1
 						List<DoanhNghiepDichVuCA> listDoanhNghiepDichVuCA = await _DoanhNghiepDichVuCABusiness.GetByNhanVienIDToListAsync(nhanVien.ID);
 						if (listDoanhNghiepDichVuCA.Count > 0)
 						{
+							string contentHTML = GlobalHelper.InitializationString;
+							var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCAThieuHoSo.html");
+							using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
+							{
+								using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+								{
+									contentHTML = r.ReadToEnd();
+								}
+							}
+
+							contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
+							contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
+							contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
+							string pageTitle = "VNPT-CA & SMART-CA";
+							contentHTML = contentHTML.Replace("[PageTitle]", pageTitle);
 							StringBuilder contentDoanhNghiepDichVuCA = new StringBuilder();
 							foreach (DoanhNghiepDichVuCA doanhNghiepDichVuCA in listDoanhNghiepDichVuCA)
-							{								
+							{
 								contentDoanhNghiepDichVuCA.AppendLine("<hr/>");
 								contentDoanhNghiepDichVuCA.AppendLine(@"Khách hàng: <b>" + doanhNghiepDichVuCA.Name + "</b>");
 								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
 								contentDoanhNghiepDichVuCA.AppendLine(@"UserName: <b>" + doanhNghiepDichVuCA.UserName + "</b>");
 								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
-								contentDoanhNghiepDichVuCA.AppendLine(@"SERIAL: <b>" + doanhNghiepDichVuCA.SoChungThu + "</b>");								
+								contentDoanhNghiepDichVuCA.AppendLine(@"SERIAL: <b>" + doanhNghiepDichVuCA.SoChungThu + "</b>");
 							}
 							contentHTML = contentHTML.Replace("[DoanhNghiep]", contentDoanhNghiepDichVuCA.ToString());
 							contentHTML = contentHTML.Replace("[NhanVienName]", nhanVien.Name);
 							mail.Content = contentHTML;
 							mail.MailTo = nhanVien.Email;
+							//mail.MailTo = "lethanhson123@gmail.com";
+							mail.Subject = "CÁNH BÁO HỒ SƠ "+ pageTitle + " SAI QUY ĐỊNH - " + nhanVien.Name + " - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+							MailHelper.SendMail(mail);
+						}
+					}
+				}
+
+
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+
+			return result;
+		}
+
+		[HttpPost]
+		[Route("AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA")]
+		public async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA()
+		{
+			bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["data"]);
+			bool result = GlobalHelper.InitializationBool;
+			try
+			{
+				Helper.Model.Mail mail = new Helper.Model.Mail();
+
+				EmailConfig emailConfig = await _EmailConfigBusiness.GetByCondition(item => item.Active == true).OrderBy(item => item.SortOrder).FirstOrDefaultAsync();
+				if (emailConfig != null)
+				{
+					mail.MailFrom = emailConfig.MasterEmailUser;
+					mail.UserName = emailConfig.MasterEmailUser;
+					mail.Password = emailConfig.MasterEmailPassword;
+					mail.SMTPPort = emailConfig.SMTPPort.Value;
+					mail.SMTPServer = emailConfig.SMTPServer;
+					mail.IsMailBodyHtml = 0;
+					if (emailConfig.IsMailBodyHtml == true)
+					{
+						mail.IsMailBodyHtml = 1;
+					}
+					mail.IsMailUsingSSL = 0;
+					if (emailConfig.IsMailUsingSSL == true)
+					{
+						mail.IsMailUsingSSL = 1;
+					}
+					mail.Display = emailConfig.MasterEmailDisplay;
+				}
+				else
+				{
+					mail.MailFrom = GlobalHelper.MasterEmailUser;
+					mail.UserName = GlobalHelper.MasterEmailUser;
+					mail.Password = GlobalHelper.MasterEmailPassword;
+					mail.SMTPPort = GlobalHelper.SMTPPort;
+					mail.SMTPServer = GlobalHelper.SMTPServer;
+					mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+					mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+					mail.Display = GlobalHelper.MasterEmailDisplay;
+				}				
+				List<NhanVien> listNhanVien = await _NhanVienBusiness.GetByActiveToListAsync(true);
+
+				foreach (NhanVien nhanVien in listNhanVien)
+				{
+					if (!string.IsNullOrEmpty(nhanVien.Email))
+					{
+						List<DoanhNghiepDichVuCA> listDoanhNghiepDichVuCA = await _DoanhNghiepDichVuCABusiness.GetByNhanVienIDAndIsSmartCAToListAsync(nhanVien.ID, isSmartCA);
+						if (listDoanhNghiepDichVuCA.Count > 0)
+						{
+							string contentHTML = GlobalHelper.InitializationString;
+							var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCAThieuHoSo.html");
+							using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
+							{
+								using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+								{
+									contentHTML = r.ReadToEnd();
+								}
+							}
+
+							contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
+							contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
+							contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
+							string pageTitle = "VNPT-CA & SMART-CA";
+							if (isSmartCA == true)
+							{
+								pageTitle = "SMART-CA";
+							}
+							else
+							{
+								pageTitle = "VNPT-CA";
+							}
+							contentHTML = contentHTML.Replace("[PageTitle]", pageTitle);
+							StringBuilder contentDoanhNghiepDichVuCA = new StringBuilder();
+							foreach (DoanhNghiepDichVuCA doanhNghiepDichVuCA in listDoanhNghiepDichVuCA)
+							{
+								contentDoanhNghiepDichVuCA.AppendLine("<hr/>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"Khách hàng: <b>" + doanhNghiepDichVuCA.Name + "</b>");
+								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"UserName: <b>" + doanhNghiepDichVuCA.UserName + "</b>");
+								contentDoanhNghiepDichVuCA.AppendLine("<br/>");
+								contentDoanhNghiepDichVuCA.AppendLine(@"SERIAL: <b>" + doanhNghiepDichVuCA.SoChungThu + "</b>");
+							}
+							contentHTML = contentHTML.Replace("[DoanhNghiep]", contentDoanhNghiepDichVuCA.ToString());
+							contentHTML = contentHTML.Replace("[NhanVienName]", nhanVien.Name);
+
+							mail.Content = contentHTML;
+							//mail.MailTo = nhanVien.Email;
+							mail.MailTo = "lethanhson123@gmail.com";
+							mail.Subject = "CÁNH BÁO HỒ SƠ "+ pageTitle + " SAI QUY ĐỊNH - " + nhanVien.Name + " - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
 							MailHelper.SendMail(mail);
 						}
 					}
@@ -297,7 +401,7 @@ namespace API.Controllers.v1
 
 				if (!string.IsNullOrEmpty(data))
 				{
-					if (data.Split('_').Length>0)
+					if (data.Split('_').Length > 0)
 					{
 						year = int.Parse(data.Split('_')[0]);
 					}

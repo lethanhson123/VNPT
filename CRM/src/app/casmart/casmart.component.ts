@@ -27,6 +27,7 @@ import { DichVuChiTieu } from 'src/app/shared/DichVuChiTieu.model';
 import { DichVuChiTieuService } from 'src/app/shared/DichVuChiTieu.service';
 import { DoanhNghiepDichVuCADetailComponent } from '../doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
 import { DoanhNghiepDichVuCAEmailComponent } from '../doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-caemail/doanh-nghiep-dich-vu-caemail.component';
+import { EmailService } from 'src/app/shared/Email.service';
 
 @Component({
   selector: 'app-casmart',
@@ -129,6 +130,7 @@ export class CASmartComponent implements OnInit {
     public DichVuChiTieuService: DichVuChiTieuService,
     public NotificationService: NotificationService,
     public DownloadService: DownloadService,
+    public EmailService: EmailService,
     private dialog: MatDialog
   ) {
     var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
@@ -1151,8 +1153,8 @@ export class CASmartComponent implements OnInit {
   }
   DoanhNghiepDichVuCAThieuHoSo() {
     this.isShowLoading = true;
-    this.DoanhNghiepDichVuCAService.AsyncThieuHoSoDoanhNghiepDichVuCA().subscribe(
-      res => {        
+    this.EmailService.AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(this.isSmartCA).subscribe(
+      res => {
         this.isShowLoading = false;
       },
       err => {

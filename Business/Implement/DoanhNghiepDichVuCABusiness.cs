@@ -164,6 +164,15 @@ namespace Business.Implement
 			await task.Result.Content.ReadAsStringAsync();
 			return true;
 		}
+		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(bool isSmartCA)
+		{
+			string url = GlobalHelper.APISite + "api/v1/Email/AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA";
+			var content = new StringContent(JsonConvert.SerializeObject(isSmartCA), Encoding.UTF8, "application/json");
+			HttpClient client = new HttpClient();
+			var task = client.PostAsync(url, content);
+			await task.Result.Content.ReadAsStringAsync();
+			return true;
+		}
 		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth(int year, int month)
 		{
 			string data = year + "_" + month;
@@ -184,6 +193,20 @@ namespace Business.Implement
 					new SqlParameter("@NhanVienID",nhanVienID),
 				};
 				result = await _DoanhNghiepDichVuCARepository.GetByStoredProcedureToListAsync("sp_DoanhNghiepDichVuCASelectItemsByNhanVienID", parameters);
+			}
+			return result;
+		}
+		public virtual async Task<List<DoanhNghiepDichVuCA>> GetByNhanVienIDAndIsSmartCAToListAsync(long nhanVienID, bool isSmartCA)
+		{
+			List<DoanhNghiepDichVuCA> result = new List<DoanhNghiepDichVuCA>();
+			if (nhanVienID > 0)
+			{
+				SqlParameter[] parameters =
+				 {
+					new SqlParameter("@NhanVienID",nhanVienID),
+					new SqlParameter("@IsSmartCA",isSmartCA),
+				};
+				result = await _DoanhNghiepDichVuCARepository.GetByStoredProcedureToListAsync("sp_DoanhNghiepDichVuCASelectItemsByNhanVienIDAndIsSmartCA", parameters);
 			}
 			return result;
 		}

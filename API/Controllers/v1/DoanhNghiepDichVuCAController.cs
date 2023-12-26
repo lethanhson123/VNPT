@@ -201,6 +201,14 @@ namespace API.Controllers.v1
 			return true;
 		}
 		[HttpPost]
+		[Route("AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA")]
+		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA()
+		{
+			bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["data"]);
+			await _DoanhNghiepDichVuCABusiness.AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(isSmartCA);
+			return true;
+		}
+		[HttpPost]
 		[Route("AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth")]
 		public virtual async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCAByYearAndMonth()
 		{

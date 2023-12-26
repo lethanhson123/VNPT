@@ -76,6 +76,12 @@ export class DoanhNghiepDichVuCAService extends BaseService{
         const formUpload: FormData = new FormData();        
         return this.httpClient.post(url, formUpload);
     }
+    AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(isSmartCA: boolean) {       
+        let url = this.aPIURL + this.controller + '/AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA';
+        const formUpload: FormData = new FormData();      
+        formUpload.append('data', JSON.stringify(isSmartCA));  
+        return this.httpClient.post(url, formUpload);
+    }
 }
 
 
