@@ -55,7 +55,7 @@ export class HomepageComponent implements OnInit {
   doanhThuPhongBan: number = environment.InitializationNumber;
   doanhThuNhanVien: number = environment.InitializationNumber;
   year: number = new Date().getFullYear();
-  month: number = new Date().getMonth();
+  month: number = new Date().getMonth() + 1;
   constructor(
     public HuyenService: HuyenService,
     public XaService: XaService,
@@ -192,6 +192,11 @@ export class HomepageComponent implements OnInit {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        if (this.HuyenService.list) {
+          if (this.HuyenService.list.length > 0) {
+            this.huyenID = this.HuyenService.list[0].ID;
+          }
+        }
         this.onSearchReportVNPT001();
       },
       err => {

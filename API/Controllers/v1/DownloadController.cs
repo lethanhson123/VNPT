@@ -527,6 +527,156 @@
 			return Json(result);
 		}
 		[HttpPost]
+		[Route("ReportCA401ToExcelAsync")]
+		public async Task<JsonResult> ReportCA401ToExcelAsync()
+		{
+			string result = GlobalHelper.InitializationString;
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+
+				List<Report> list = await _ReportBusiness.ReportCA401Async(huyenID, year, month, nhanVienID, isSmartCA);
+				string fileName = @"Report_CA_" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+				var streamExport = new MemoryStream();
+				InitializationExcelReportCA(list, streamExport);
+				var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+				using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+				{
+					streamExport.CopyTo(stream);
+				}
+				result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			}
+			catch (Exception ex)
+			{
+				result = ex.Message;
+			}
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA102ToExcelAsync")]
+		public async Task<JsonResult> ReportCA102ToExcelAsync()
+		{
+			string result = GlobalHelper.InitializationString;
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+
+				List<Report> list = await _ReportBusiness.ReportCA102Async(huyenID, year, month, nhanVienID);
+				string fileName = @"Report_CA_" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+				var streamExport = new MemoryStream();
+				InitializationExcelReportCA(list, streamExport);
+				var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+				using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+				{
+					streamExport.CopyTo(stream);
+				}
+				result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			}
+			catch (Exception ex)
+			{
+				result = ex.Message;
+			}
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA402ToExcelAsync")]
+		public async Task<JsonResult> ReportCA402ToExcelAsync()
+		{
+			string result = GlobalHelper.InitializationString;
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+
+				List<Report> list = await _ReportBusiness.ReportCA402Async(huyenID, year, month, nhanVienID, isSmartCA);
+				string fileName = @"Report_CA_" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+				var streamExport = new MemoryStream();
+				InitializationExcelReportCA(list, streamExport);
+				var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+				using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+				{
+					streamExport.CopyTo(stream);
+				}
+				result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			}
+			catch (Exception ex)
+			{
+				result = ex.Message;
+			}
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA105ToExcelAsync")]
+		public async Task<JsonResult> ReportCA105ToExcelAsync()
+		{
+			string result = GlobalHelper.InitializationString;
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
+
+				List<Report> list = await _ReportBusiness.ReportCA105Async(huyenID, year, month, nhanVienID, hetHan);
+				string fileName = @"Report_CA_" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+				var streamExport = new MemoryStream();
+				InitializationExcelReportCA(list, streamExport);
+				var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+				using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+				{
+					streamExport.CopyTo(stream);
+				}
+				result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			}
+			catch (Exception ex)
+			{
+				result = ex.Message;
+			}
+			return Json(result);
+		}
+		[HttpPost]
+		[Route("ReportCA405ToExcelAsync")]
+		public async Task<JsonResult> ReportCA405ToExcelAsync()
+		{
+			string result = GlobalHelper.InitializationString;
+			try
+			{
+				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+
+				List<Report> list = await _ReportBusiness.ReportCA405Async(huyenID, year, month, nhanVienID, hetHan, isSmartCA);
+				string fileName = @"Report_CA_" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+				var streamExport = new MemoryStream();
+				InitializationExcelReportCA(list, streamExport);
+				var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+				using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+				{
+					streamExport.CopyTo(stream);
+				}
+				result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			}
+			catch (Exception ex)
+			{
+				result = ex.Message;
+			}
+			return Json(result);
+		}
+		[HttpPost]
 		[Route("ReportCA108ToExcelAsync")]
 		public async Task<JsonResult> ReportCA108ToExcelAsync()
 		{

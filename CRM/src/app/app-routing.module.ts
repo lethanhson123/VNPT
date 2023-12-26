@@ -29,9 +29,9 @@ import { CASmartComponent } from './casmart/casmart.component';
 
 
 const routes: Routes = [  
-  { path: '', redirectTo: '/DashboardCA', pathMatch: 'full' },  
+  { path: '', redirectTo: '/Homepage', pathMatch: 'full' },  
   {
-    path: 'Homepage', component: DashboardCAComponent,
+    path: 'Homepage', component: HomepageComponent,
   },
   {
     path: 'DashboardCA', component: DashboardCAComponent,

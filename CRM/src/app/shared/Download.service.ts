@@ -138,6 +138,65 @@ export class DownloadService {
         formUpload.append('month', JSON.stringify(month));  
         return this.httpClient.post(url, formUpload);
     }
+    ReportCA101ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA101ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));          
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA401ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA401ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));   
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));           
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA102ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA102ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));          
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA402ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA402ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID)); 
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));           
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA105ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, hetHan: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA105ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));          
+        formUpload.append('hetHan', JSON.stringify(hetHan)); 
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA405ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, hetHan: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA405ToExcelAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('huyenID', JSON.stringify(huyenID));        
+        formUpload.append('year', JSON.stringify(year));
+        formUpload.append('month', JSON.stringify(month));  
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));          
+        formUpload.append('hetHan', JSON.stringify(hetHan)); 
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));  
+        return this.httpClient.post(url, formUpload);
+    }
     ReportCA108ToExcelAsync(huyenID: number, year: number, month: number, nhanVienID: number, isKetLuan: boolean) {
         let url = this.aPIURL + this.controller + '/ReportCA108ToExcelAsync';
         const formUpload: FormData = new FormData();

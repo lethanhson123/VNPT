@@ -20,9 +20,9 @@ import { DownloadService } from 'src/app/shared/Download.service';
 })
 export class DashboardHoaDonDienTuComponent implements OnInit {
 
-  dataSourceReportVNPT003: MatTableDataSource<any>;
-  @ViewChild('sortReportVNPT003') sortReportVNPT003: MatSort;
-  @ViewChild('paginatorReportVNPT003') paginatorReportVNPT003: MatPaginator;
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   isShowLoading: boolean = false;
@@ -68,9 +68,9 @@ export class DashboardHoaDonDienTuComponent implements OnInit {
     this.ReportService.ReportVNPT003Async(this.huyenID, this.xaID, this.searchString, this.dichVuID, this.year, this.month).subscribe(
       res => {
         this.ReportService.listReportVNPT003 = (res as Report[]).sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1));
-        this.dataSourceReportVNPT003 = new MatTableDataSource(this.ReportService.listReportVNPT003.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
-        this.dataSourceReportVNPT003.sort = this.sortReportVNPT003;
-        this.dataSourceReportVNPT003.paginator = this.paginatorReportVNPT003;
+        this.dataSource = new MatTableDataSource(this.ReportService.listReportVNPT003.sort((a, b) => (a.DoanhThu < b.DoanhThu ? 1 : -1)));
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         for (let i = 0; i < this.ReportService.listReportVNPT003.length; i++) {
           this.doanhThuDichVu = this.doanhThuDichVu + this.ReportService.listReportVNPT003[i].DoanhThu;
         }
@@ -95,6 +95,11 @@ export class DashboardHoaDonDienTuComponent implements OnInit {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        if (this.HuyenService.list) {
+          if (this.HuyenService.list.length > 0) {
+            this.huyenID = this.HuyenService.list[0].ID;
+          }
+        }
         this.GetXaToListAsync();
       },
       err => {
@@ -105,6 +110,11 @@ export class DashboardHoaDonDienTuComponent implements OnInit {
     this.XaService.GetByParentIDToListAsync(this.huyenID).subscribe(
       res => {
         this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        if (this.XaService.list) {
+          if (this.XaService.list.length > 0) {
+            this.xaID = this.XaService.list[0].ID;
+          }
+        }
         this.ReportVNPT003Async();
       },
       err => {

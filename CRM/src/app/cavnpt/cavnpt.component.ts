@@ -670,7 +670,7 @@ export class CAVNPTComponent implements OnInit {
   }
   onDownloadExcelFileReportCA001() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA001ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA401ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID, this.isSmartCA).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;
@@ -734,7 +734,7 @@ export class CAVNPTComponent implements OnInit {
   }
   onDownloadExcelFileReportCA002() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA002ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA402ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID, this.isSmartCA).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;
@@ -870,7 +870,7 @@ export class CAVNPTComponent implements OnInit {
   }
   onDownloadExcelFileReportCA005() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA005ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA405ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID, this.hetHan, this.isSmartCA).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;

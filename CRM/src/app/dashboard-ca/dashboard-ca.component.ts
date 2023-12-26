@@ -727,7 +727,7 @@ export class DashboardCAComponent implements OnInit {
   }
   onDownloadExcelFileReportCA001() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA001ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA101ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;
@@ -791,7 +791,7 @@ export class DashboardCAComponent implements OnInit {
   }
   onDownloadExcelFileReportCA002() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA002ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA102ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;
@@ -927,7 +927,7 @@ export class DashboardCAComponent implements OnInit {
   }
   onDownloadExcelFileReportCA005() {
     this.isShowLoading = true;
-    this.DownloadService.ReportCA005ToExcelAsync(this.huyenID, this.year, this.month).subscribe(
+    this.DownloadService.ReportCA105ToExcelAsync(this.huyenID, this.year, this.month, this.nhanVienID, this.hetHan).subscribe(
       res => {
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;
