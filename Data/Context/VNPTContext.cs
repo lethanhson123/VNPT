@@ -30,11 +30,13 @@
 		public virtual DbSet<Data.Model.PhongBan> PhongBan { get; set; }
         public virtual DbSet<Data.Model.NhanVienKhuVuc> NhanVienKhuVuc { get; set; }
 		public virtual DbSet<Data.Model.NhanVienTaiKhoan> NhanVienTaiKhoan { get; set; }
+		public virtual DbSet<Data.Model.NhanVienMenu> NhanVienMenu { get; set; }
 		public virtual DbSet<Data.Model.PhongBanKhuVuc> PhongBanKhuVuc { get; set; }
         public virtual DbSet<Data.Model.Tinh> Tinh { get; set; }
-        public virtual DbSet<Data.Model.Xa> Xa { get; set; }        
+        public virtual DbSet<Data.Model.Xa> Xa { get; set; }
+		public virtual DbSet<Data.Model.Menu> Menu { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {

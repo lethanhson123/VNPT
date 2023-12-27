@@ -26,6 +26,8 @@ import { GoiCuocComponent } from './goi-cuoc/goi-cuoc.component';
 import { NhanVienDangNhapComponent } from './nhan-vien-dang-nhap/nhan-vien-dang-nhap.component';
 import { CAVNPTComponent } from './cavnpt/cavnpt.component';
 import { CASmartComponent } from './casmart/casmart.component';
+import { PhanQuyenMenuComponent } from './phan-quyen-menu/phan-quyen-menu.component';
+import { KhachHangComponent } from './khach-hang/khach-hang.component';
 
 
 const routes: Routes = [  
@@ -100,6 +102,9 @@ const routes: Routes = [
     path: 'DoanhNghiepInfo/:ID', component: DoanhNghiepInfoComponent,
   },
   {
+    path: 'KhachHang', component: KhachHangComponent,
+  }, 
+  {
     path: 'PhongBan', component: PhongBanComponent,
   },  
   {
@@ -108,6 +113,9 @@ const routes: Routes = [
   {
     path: 'Upload', component: UploadComponent,
   },   
+  {
+    path: 'PhanQuyenMenu', component: PhanQuyenMenuComponent,
+  },  
 ];
 
 @NgModule({

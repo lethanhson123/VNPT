@@ -7,6 +7,7 @@ import { DoanhNghiep } from './DoanhNghiep.model';
 })
 export class DoanhNghiepService extends BaseService{
     displayColumns: string[] = ['No', 'Name', 'Code', 'UserName', 'Description']; 
+    displayColumns001: string[] = ['No', 'Name', 'Code', 'DienThoai', 'Email']; 
     displayColumnsSub: string[] = ['Code', 'Name', 'DienThoai']; 
     displayColumnsNhanVien: string[] = ['Code', 'Name', 'HuyenID', 'XaID', 'NhanVienID'];
     displayColumnsPhongBan: string[] = ['Code', 'Name', 'HuyenID', 'XaID', 'PhongBanID'];

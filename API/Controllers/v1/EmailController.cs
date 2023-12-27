@@ -370,8 +370,8 @@ namespace API.Controllers.v1
 							contentHTML = contentHTML.Replace("[NhanVienName]", nhanVien.Name);
 
 							mail.Content = contentHTML;
-							//mail.MailTo = nhanVien.Email;
-							mail.MailTo = "lethanhson123@gmail.com";
+							mail.MailTo = nhanVien.Email;
+							//mail.MailTo = "lethanhson123@gmail.com";
 							mail.Subject = "CÁNH BÁO HỒ SƠ "+ pageTitle + " SAI QUY ĐỊNH - " + nhanVien.Name + " - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
 							MailHelper.SendMail(mail);
 						}

@@ -13,6 +13,8 @@ import { NhanVienKhuVuc } from 'src/app/shared/NhanVienKhuVuc.model';
 import { NhanVienKhuVucService } from 'src/app/shared/NhanVienKhuVuc.service';
 import { NhanVienTaiKhoan } from 'src/app/shared/NhanVienTaiKhoan.model';
 import { NhanVienTaiKhoanService } from 'src/app/shared/NhanVienTaiKhoan.service';
+import { NhanVienMenu } from 'src/app/shared/NhanVienMenu.model';
+import { NhanVienMenuService } from 'src/app/shared/NhanVienMenu.service';
 import { PhongBan } from 'src/app/shared/PhongBan.model';
 import { PhongBanService } from 'src/app/shared/PhongBan.service';
 import { Huyen } from 'src/app/shared/Huyen.model';
@@ -21,6 +23,8 @@ import { Xa } from 'src/app/shared/Xa.model';
 import { XaService } from 'src/app/shared/Xa.service';
 import { DoanhNghiep } from 'src/app/shared/DoanhNghiep.model';
 import { DoanhNghiepService } from 'src/app/shared/DoanhNghiep.service';
+import { Menu } from 'src/app/shared/Menu.model';
+import { MenuService } from 'src/app/shared/Menu.service';
 
 @Component({
   selector: 'app-nhan-vien-info',
@@ -50,9 +54,11 @@ export class NhanVienInfoComponent implements OnInit {
     public PhongBanService: PhongBanService,
     public NhanVienKhuVucService: NhanVienKhuVucService,
     public NhanVienTaiKhoanService: NhanVienTaiKhoanService,
+    public NhanVienMenuService: NhanVienMenuService,
     public HuyenService: HuyenService,
     public XaService: XaService,
     public DoanhNghiepService: DoanhNghiepService,
+    public MenuService: MenuService,
     public NotificationService: NotificationService,
   ) {
     this.router.events.forEach((event) => {
@@ -70,6 +76,18 @@ export class NhanVienInfoComponent implements OnInit {
     this.NhanVienService.GetAllToListAsync().subscribe(
       res => {
         this.NhanVienService.list = (res as NhanVien[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  GetMenuToListAsync() {
+    this.isShowLoading = true;
+    this.MenuService.GetAllToListAsync().subscribe(
+      res => {
+        this.MenuService.list = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));        
         this.isShowLoading = false;
       },
       err => {
@@ -140,6 +158,18 @@ export class NhanVienInfoComponent implements OnInit {
       }
     );
   }
+  GetNhanVienMenuToListAsync() {
+    this.isShowLoading = true;
+    this.NhanVienMenuService.GetByParentIDToListAsync(this.NhanVienService.formData.ID).subscribe(
+      res => {
+        this.NhanVienMenuService.list = (res as NhanVienMenu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   GetDoanhNghiepToListAsync() {
     this.isShowLoading = true;
     this.DoanhNghiepService.GetBySearchStringToListAsync(this.searchString).subscribe(
@@ -163,10 +193,12 @@ export class NhanVienInfoComponent implements OnInit {
       this.GetPhongBanToListAsync();
       this.GetHuyenToListAsync();
       this.GetXaToListAsync();
+      this.GetMenuToListAsync();
       this.GetDoanhNghiepToListAsync();
       if (this.NhanVienService.formData) {
         this.GetNhanVienKhuVucToListAsync();
         this.GetNhanVienTaiKhoanToListAsync();
+        this.GetNhanVienMenuToListAsync();
         this.isShowLoading = false;
       }
       this.isShowLoading = false;
@@ -197,6 +229,16 @@ export class NhanVienInfoComponent implements OnInit {
   }
   onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {
     this.NhanVienKhuVucService.SaveAsync(element).subscribe(
+      res => {
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onNhanVienMenuActiveChange(element: NhanVienMenu) {
+    this.NhanVienMenuService.SaveAsync(element).subscribe(
       res => {
         this.NotificationService.warn(environment.SaveSuccess);
       },

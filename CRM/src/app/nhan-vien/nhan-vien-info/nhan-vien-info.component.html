@@ -40,6 +40,12 @@
                                     <span class="badge bg-success">Khu vực</span>
                                 </a>
                             </li>
+                            <!-- <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-Menu" data-bs-toggle="tab" href="#Menu" role="tab"
+                                    aria-controls="Menu" aria-selected="false">
+                                    <span class="badge bg-warning">Menu</span>
+                                </a>
+                            </li> -->
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="tab-4" data-bs-toggle="tab" href="#4" role="tab"
                                     aria-controls="4" aria-selected="true">
@@ -261,6 +267,58 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Menu" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <div class="card mb-4 card-warning">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Phân quyền Menu
+                                                    <span
+                                                        *ngIf="NhanVienMenuService.list">({{NhanVienMenuService.list.length}}
+                                                        items)</span>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-outer">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped m-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Menu</th>                                                                    
+                                                                    <th>Phân quyền</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let element of NhanVienMenuService.list; index as i">
+                                                                    <td>{{i + 1}}</td>
+                                                                    <td>
+                                                                        <div *ngFor="let item of MenuService.list;">
+                                                                            <div *ngIf="item.ID==element.MenuID">
+                                                                                {{item.Name}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>                                                                   
+                                                                    <td>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input"
+                                                                                type="checkbox"
+                                                                                (change)="onNhanVienMenuActiveChange(element)"
+                                                                                name="Active{{element.ID}}"
+                                                                                [(ngModel)]="element.Active">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
                                 </div>
                             </div>
                             <div class="tab-pane fade show active" id="4" role="tabpanel">

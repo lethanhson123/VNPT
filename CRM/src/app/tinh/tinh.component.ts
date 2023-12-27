@@ -35,6 +35,9 @@ import { DanhMucGoiCuocService } from 'src/app/shared/DanhMucGoiCuoc.service';
 import { YearMonth } from 'src/app/shared/YearMonth.model';
 import { DownloadService } from 'src/app/shared/Download.service';
 
+import { Menu } from 'src/app/shared/Menu.model';
+import { MenuService } from 'src/app/shared/Menu.service';
+
 @Component({
   selector: 'app-tinh',
   templateUrl: './tinh.component.html',
@@ -94,6 +97,10 @@ export class TinhComponent implements OnInit {
   @ViewChild('sort13') sort13: MatSort;
   @ViewChild('paginator13') paginator13: MatPaginator;
 
+  dataSourceMenu: MatTableDataSource<any>;
+  @ViewChild('sortMenu') sortMenu: MatSort;
+  @ViewChild('paginatorMenu') paginatorMenu: MatPaginator;
+
 
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
@@ -114,6 +121,7 @@ export class TinhComponent implements OnInit {
     public NhanVienTaiKhoanService: NhanVienTaiKhoanService,
     public DichVuChiTieuService: DichVuChiTieuService,
     public DanhMucGoiCuocService: DanhMucGoiCuocService,
+    public MenuService: MenuService,
     public DownloadService: DownloadService,
     public NotificationService: NotificationService,
   ) { }
@@ -183,6 +191,54 @@ export class TinhComponent implements OnInit {
     this.DownloadService.GetMonthToList().then(res => {
       this.DownloadService.listMonth = res as YearMonth[];
     });
+  }
+
+  MenuGetToList() {
+    this.isShowLoading = true;
+    this.MenuService.GetAllAndEmptyToListAsync().subscribe(
+      res => {
+        this.MenuService.list = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.dataSourceMenu = new MatTableDataSource(this.MenuService.list);
+        this.dataSourceMenu.sort = this.sortMenu;
+        this.dataSourceMenu.paginator = this.paginatorMenu;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  onSearchMenu() {
+    if (this.searchString.length > 0) {
+      this.dataSourceMenu.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.MenuGetToList();
+    }
+  }
+  onSaveMenu(element: Menu) {
+    this.MenuService.SaveAsync(element).subscribe(
+      res => {
+        this.onSearchMenu();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onDeleteMenu(element: Menu) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.MenuService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.onSearchMenu();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
   }
 
   DichVuChiTieuGetToList() {

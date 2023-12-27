@@ -28,10 +28,12 @@ namespace Business
             services.AddTransient<IPhongBanKhuVucBusiness, PhongBanKhuVucBusiness>();
             services.AddTransient<INhanVienKhuVucBusiness, NhanVienKhuVucBusiness>();
 			services.AddTransient<INhanVienTaiKhoanBusiness, NhanVienTaiKhoanBusiness>();
+			services.AddTransient<INhanVienMenuBusiness, NhanVienMenuBusiness>();
 			services.AddTransient<ITinhBusiness, TinhBusiness>();
             services.AddTransient<IXaBusiness, XaBusiness>();
+			services.AddTransient<IMenuBusiness, MenuBusiness>();
 
-            services.AddTransient<IReportBusiness, ReportBusiness>();
+			services.AddTransient<IReportBusiness, ReportBusiness>();
 
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             return services;
@@ -67,10 +69,12 @@ namespace Business
             services.AddTransient<IPhongBanKhuVucRepository, PhongBanKhuVucRepository>();
             services.AddTransient<INhanVienKhuVucRepository, NhanVienKhuVucRepository>();
 			services.AddTransient<INhanVienTaiKhoanRepository, NhanVienTaiKhoanRepository>();
+			services.AddTransient<INhanVienMenuRepository, NhanVienMenuRepository>();
 			services.AddTransient<ITinhRepository, TinhRepository>();
             services.AddTransient<IXaRepository, XaRepository>();
+			services.AddTransient<IMenuRepository, MenuRepository>();
 
-            services.AddTransient<IReportRepository, ReportRepository>();
+			services.AddTransient<IReportRepository, ReportRepository>();
 
             return services;
         }

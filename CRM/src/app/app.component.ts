@@ -5,7 +5,8 @@ import { NhanVien } from 'src/app/shared/NhanVien.model';
 import { NhanVienService } from 'src/app/shared/NhanVien.service';
 import { NhanVienToken } from 'src/app/shared/NhanVienToken.model';
 import { NhanVienTokenService } from 'src/app/shared/NhanVienToken.service';
-
+import { Menu } from 'src/app/shared/Menu.model';
+import { MenuService } from 'src/app/shared/Menu.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
     public router: Router,
     public NhanVienService: NhanVienService,
     public NhanVienTokenService: NhanVienTokenService,
+    public MenuService: MenuService,
   ) {    
     this.getByQueryString();
   }
@@ -34,6 +36,16 @@ export class AppComponent {
         this.AuthenticationToken();
       }
     });
+  }
+  GetMenuToListAsync() {    
+    this.MenuService.GetByNhanVienIDToListAsync().subscribe(
+      res => {
+        this.MenuService.listLogin = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));   
+        console.log(this.MenuService.listLogin);             
+      },
+      err => {        
+      }
+    );
   }
   AuthenticationToken() {
     let token = localStorage.getItem(environment.Token);    
@@ -54,7 +66,8 @@ export class AppComponent {
                     localStorage.setItem(environment.NhanVienID, this.NhanVienService.formDataLogin.ID.toString());
                     localStorage.setItem(environment.NhanVienName, this.NhanVienService.formDataLogin.Name);
                     localStorage.setItem(environment.NhanVienEmail, this.NhanVienService.formDataLogin.Email);
-                    localStorage.setItem(environment.NhanVienNote, this.NhanVienService.formDataLogin.Note);                  
+                    localStorage.setItem(environment.NhanVienNote, this.NhanVienService.formDataLogin.Note);  
+                    this.GetMenuToListAsync();                   
                   }
                   else {
                     isLogin = false;
