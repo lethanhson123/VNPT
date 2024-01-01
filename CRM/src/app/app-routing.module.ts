@@ -28,10 +28,11 @@ import { CAVNPTComponent } from './cavnpt/cavnpt.component';
 import { CASmartComponent } from './casmart/casmart.component';
 import { PhanQuyenMenuComponent } from './phan-quyen-menu/phan-quyen-menu.component';
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
+import { DoanhNghiepCAComponent } from './doanh-nghiep-ca/doanh-nghiep-ca.component';
 
 
 const routes: Routes = [  
-  { path: '', redirectTo: '/Homepage', pathMatch: 'full' },  
+  { path: '', redirectTo: '/DashboardCA', pathMatch: 'full' },  
   {
     path: 'Homepage', component: HomepageComponent,
   },
@@ -100,6 +101,9 @@ const routes: Routes = [
   },  
   {
     path: 'DoanhNghiepInfo/:ID', component: DoanhNghiepInfoComponent,
+  },
+  {
+    path: 'DoanhNghiepCA/:ID', component: DoanhNghiepCAComponent,
   },
   {
     path: 'KhachHang', component: KhachHangComponent,

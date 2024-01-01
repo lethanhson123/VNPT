@@ -25,7 +25,7 @@ export class DoanhNghiepComponent implements OnInit {
   searchString: string = environment.InitializationString;
   xaID: number = environment.InitializationNumber;
   huyenID: number = environment.InitializationNumber;
-  URLSub: string = environment.DomainDestination + "DoanhNghiepInfo";
+  URLSub: string = environment.DomainDestination + "DoanhNghiepCA";
   constructor(
     public DoanhNghiepService: DoanhNghiepService,
     public HuyenService: HuyenService,
@@ -59,7 +59,7 @@ export class DoanhNghiepComponent implements OnInit {
   }
   GetToList() {
     this.isShowLoading = true;
-    this.DoanhNghiepService.GetByHuyenIDAndXaIDOrSearchStringToListAsync(this.huyenID, this.xaID, this.searchString).subscribe(
+    this.DoanhNghiepService.GetCAByHuyenIDAndXaIDOrSearchStringToListAsync(this.huyenID, this.xaID, this.searchString).subscribe(
       res => {
         this.DoanhNghiepService.list = (res as DoanhNghiep[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
         this.dataSource = new MatTableDataSource(this.DoanhNghiepService.list);

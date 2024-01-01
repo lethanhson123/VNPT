@@ -140,6 +140,8 @@ export class DashboardCAComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.year = new Date().getFullYear();
+    this.month = new Date().getMonth() + 1;
     this.GetHuyenToListAsync();
     this.GetYearToList();
     this.GetMonthToList();

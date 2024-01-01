@@ -10,13 +10,38 @@ namespace Business.Implement
 		{
 			_DoanhNghiepRepository = DoanhNghiepRepository;
 		}
+		public override void Initialization(DoanhNghiep model)
+		{
+			if (string.IsNullOrEmpty(model.Code))
+			{
+				model.Code = GlobalHelper.InitializationDateTimeCode;
+			}
+			model.Display = model.Name + "-" + model.Code;
+			if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))
+			{
+				model.SortOrder = 1;
+			}
 
+			if (!string.IsNullOrEmpty(model.Name))
+			{
+				model.Name = model.Name.ToUpper();
+			}
+		}
 		public virtual async Task<List<DoanhNghiep>> GetBySearchStringToListAsync(string searchString)
 		{
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
 			if (!string.IsNullOrEmpty(searchString))
 			{
 				result = await _DoanhNghiepRepository.GetByCondition(item => item.Code.Contains(searchString) || item.CodeCA.Contains(searchString) || item.Name.Contains(searchString) || item.UserName.Contains(searchString)).ToListAsync();
+			}
+			return result;
+		}
+		public virtual async Task<List<DoanhNghiep>> GetCABySearchStringToListAsync(string searchString)
+		{
+			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				result = await _DoanhNghiepRepository.GetByCondition(item => !string.IsNullOrEmpty(item.UserName) && (item.Code.Contains(searchString) || item.CodeCA.Contains(searchString) || item.Name.Contains(searchString) || item.UserName.Contains(searchString))).ToListAsync();
 			}
 			return result;
 		}
@@ -42,9 +67,35 @@ namespace Business.Implement
 				}
 				else
 				{
-					result = await _DoanhNghiepRepository.GetByCondition(item => !string.IsNullOrEmpty(item.UserName)).Skip(0 * 20).Take(20).ToListAsync();
+					result = await GetAllToListAsync();
 				}
-
+			}
+			return result;
+		}
+		public virtual async Task<List<DoanhNghiep>> GetCAByHuyenIDAndXaIDOrSearchStringToListAsync(long huyenID, long xaID, string searchString)
+		{
+			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				result = await GetCABySearchStringToListAsync(searchString);
+			}
+			else
+			{
+				if (huyenID > 0)
+				{
+					if (xaID > 0)
+					{
+						result = await _DoanhNghiepRepository.GetByCondition(item => item.HuyenID == huyenID && item.XaID == xaID && !string.IsNullOrEmpty(item.UserName)).ToListAsync();
+					}
+					else
+					{
+						result = await _DoanhNghiepRepository.GetByCondition(item => item.HuyenID == huyenID && !string.IsNullOrEmpty(item.UserName)).ToListAsync();
+					}
+				}
+				else
+				{
+					result = await _DoanhNghiepRepository.GetByCondition(item => !string.IsNullOrEmpty(item.UserName)).ToListAsync();
+				}
 			}
 			return result;
 		}

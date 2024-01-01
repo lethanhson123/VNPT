@@ -12,7 +12,7 @@
     </div>
     <div class="ms-auto d-lg-flex d-none flex-row">
         <div class="d-flex flex-row gap-2">
-            <a title="Lưu thay đổi" (click)="onSubmit()" class="btn btn-info"><i class="bi bi-sd-card"></i></a>
+            <a *ngIf="DoanhNghiepDichVuCAService.NhanVienIDLogin==1" title="Lưu thay đổi" (click)="onSubmit()" class="btn btn-info"><i class="bi bi-sd-card"></i></a>
             <a title="Đóng" class="btn btn-success" (click)="onClose()">
                 <i class="bi bi-x-lg"></i>
             </a>

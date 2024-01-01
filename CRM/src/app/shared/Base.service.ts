@@ -6,17 +6,19 @@ import { Base } from 'src/app/shared/Base.model';
     providedIn: 'root'
 })
 export class BaseService {
-    displayColumns: string[] = ['No', 'ParentID', 'Code', 'Name', 'Note', 'SortOrder', 'Active', 'Save']; 
-    list: Base[] | undefined;        
+    displayColumns: string[] = ['No', 'ParentID', 'Code', 'Name', 'Note', 'SortOrder', 'Active', 'Save'];
+    list: Base[] | undefined;
     formData!: Base;
     aPIURL: string = environment.APIURL;
     controller: string = "Base";
+    NhanVienIDLogin: number = environment.InitializationNumber;
     constructor(public httpClient: HttpClient) {
         this.initializationFormData();
     }
     initializationFormData() {
         this.formData = {
-        }
+        };
+        this.NhanVienIDLogin = Number(localStorage.getItem(environment.NhanVienID));
     }
     SaveList(list: Base[]) {
         let url = this.aPIURL + this.controller + '/SaveList';

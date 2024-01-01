@@ -186,7 +186,7 @@ export class HomepageComponent implements OnInit {
     );
   }
   onChangeHuyenID() {
-    this.onSearchReportVNPT001();
+    //this.onSearchReportVNPT001();
   }
   GetHuyenToListAsync() {
     this.HuyenService.GetAllToListAsync().subscribe(
@@ -197,7 +197,7 @@ export class HomepageComponent implements OnInit {
             this.huyenID = this.HuyenService.list[0].ID;
           }
         }
-        this.onSearchReportVNPT001();
+        //this.onSearchReportVNPT001();
       },
       err => {
       }
@@ -207,7 +207,7 @@ export class HomepageComponent implements OnInit {
     this.XaService.GetByParentIDToListAsync(this.huyenID).subscribe(
       res => {
         this.XaService.list = (res as Xa[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.onSearchReportVNPT001();
+        //this.onSearchReportVNPT001();
       },
       err => {
       }

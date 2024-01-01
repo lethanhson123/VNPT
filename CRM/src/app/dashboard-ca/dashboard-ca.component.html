@@ -1764,8 +1764,8 @@
                                         <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA008()"><i
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Gửi mail"
-                                            (click)="DoanhNghiepDichVuCAThieuHoSo()"><i
+                                        <a *ngIf="ReportService.NhanVienIDLogin==1" class="btn btn-success"
+                                            title="Gửi mail" (click)="DoanhNghiepDichVuCAThieuHoSo()"><i
                                                 class="bi bi-envelope"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>

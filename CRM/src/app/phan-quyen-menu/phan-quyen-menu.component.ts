@@ -66,4 +66,14 @@ export class PhanQuyenMenuComponent implements OnInit {
       }
     );
   }
+  onNhanVienMenuActiveChange(element: NhanVienMenu) {
+    this.NhanVienMenuService.SaveAsync(element).subscribe(
+      res => {
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
 }
