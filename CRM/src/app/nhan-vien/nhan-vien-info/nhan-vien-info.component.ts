@@ -39,6 +39,8 @@ export class NhanVienInfoComponent implements OnInit {
   URLSub: string = environment.DomainDestination + "NhanVienInfo";
   URLSubDoanhNghiep: string = environment.DomainDestination + "DoanhNghiepInfo";
 
+  huyenID: number = environment.InitializationNumber;
+  activeAll: boolean = false;
 
   dataSourceNhanVienKhuVuc: MatTableDataSource<any>;
   @ViewChild('sortNhanVienKhuVuc') sortNhanVienKhuVuc: MatSort;
@@ -87,7 +89,7 @@ export class NhanVienInfoComponent implements OnInit {
     this.isShowLoading = true;
     this.MenuService.GetAllToListAsync().subscribe(
       res => {
-        this.MenuService.list = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));        
+        this.MenuService.list = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
         this.isShowLoading = false;
       },
       err => {
@@ -100,6 +102,11 @@ export class NhanVienInfoComponent implements OnInit {
     this.HuyenService.GetAllToListAsync().subscribe(
       res => {
         this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        if (this.HuyenService.list) {
+          if (this.HuyenService.list.length > 0) {
+            this.huyenID = this.HuyenService.list[0].ID;
+          }
+        }
         this.isShowLoading = false;
       },
       err => {
@@ -136,6 +143,7 @@ export class NhanVienInfoComponent implements OnInit {
     this.NhanVienKhuVucService.GetSQLByParentIDAsync(this.NhanVienService.formData.ID).subscribe(
       res => {
         this.NhanVienKhuVucService.list = (res as NhanVienKhuVuc[]);
+        this.NhanVienKhuVucService.list = this.NhanVienKhuVucService.list.filter(item => item.HuyenID == this.huyenID);
         this.dataSourceNhanVienKhuVuc = new MatTableDataSource(this.NhanVienKhuVucService.list);
         this.dataSourceNhanVienKhuVuc.sort = this.sortNhanVienKhuVuc;
         this.dataSourceNhanVienKhuVuc.paginator = this.paginatorNhanVienKhuVuc;
@@ -227,7 +235,7 @@ export class NhanVienInfoComponent implements OnInit {
       }
     );
   }
-  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {
+  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {   
     this.NhanVienKhuVucService.SaveAsync(element).subscribe(
       res => {
         this.NotificationService.warn(environment.SaveSuccess);
@@ -236,6 +244,20 @@ export class NhanVienInfoComponent implements OnInit {
         this.NotificationService.warn(environment.SaveNotSuccess);
       }
     );
+  }
+  onNhanVienKhuVucActiveAllChange() {
+    for (let i = 0; i < this.NhanVienKhuVucService.list.length; i++) {
+      this.isShowLoading = true;
+      this.NhanVienKhuVucService.list[i].Active = this.activeAll;
+      this.NhanVienKhuVucService.SaveAsync(this.NhanVienKhuVucService.list[i]).subscribe(
+        res => {      
+          this.isShowLoading = false;    
+        },
+        err => {
+          this.isShowLoading = false;
+        }
+      );
+    }    
   }
   onNhanVienMenuActiveChange(element: NhanVienMenu) {
     this.NhanVienMenuService.SaveAsync(element).subscribe(

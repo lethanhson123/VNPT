@@ -104,7 +104,11 @@
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
-					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					decimal tyLe = 0;
+					if (report.HoSo != 0)
+					{
+						tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+					}
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
 					contentReportCA206.AppendLine(@"</tr>");
 				}
@@ -122,8 +126,12 @@
 					contentReportCA207.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
-					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
-					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");					
+					decimal tyLe = 0;
+					if (report.HoSo != 0)
+					{
+						tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+					}
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
 					contentReportCA207.AppendLine(@"</tr>");
 				}
@@ -215,7 +223,11 @@
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
-					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					decimal tyLe = 0;
+					if (report.HoSo != 0)
+					{
+						tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+					}
 					contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
 					contentReportCA206.AppendLine(@"</tr>");
 				}
@@ -234,7 +246,11 @@
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
-					decimal tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSoChuaHoanThanh.Value;
+					decimal tyLe = 0;
+					if (report.HoSo != 0)
+					{
+						tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+					}
 					contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
 					contentReportCA207.AppendLine(@"</tr>");
 				}
