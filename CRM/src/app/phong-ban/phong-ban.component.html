@@ -37,7 +37,11 @@
         <div class="col-xxl-12">
             <div class="card mb-4 card-info">
                 <div class="card-header">
-                    <h5 class="card-title text-white">Danh sách ({{PhongBanService.list.length}} items)</h5>
+                    <h5 class="card-title text-white">Danh sách
+                        <span
+                            *ngIf="PhongBanService.list">({{PhongBanService.list.length}}
+                            items)</span>
+                    </h5>                   
                 </div>
                 <div class="card-body">
                     <div class="table-outer">

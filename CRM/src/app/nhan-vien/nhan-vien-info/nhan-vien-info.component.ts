@@ -246,18 +246,21 @@ export class NhanVienInfoComponent implements OnInit {
     );
   }
   onNhanVienKhuVucActiveAllChange() {
+    this.isShowLoading = true;
     for (let i = 0; i < this.NhanVienKhuVucService.list.length; i++) {
       this.isShowLoading = true;
-      this.NhanVienKhuVucService.list[i].Active = this.activeAll;
-      this.NhanVienKhuVucService.SaveAsync(this.NhanVienKhuVucService.list[i]).subscribe(
-        res => {      
-          this.isShowLoading = false;    
-        },
-        err => {
-          this.isShowLoading = false;
-        }
-      );
+      this.NhanVienKhuVucService.list[i].Active = this.activeAll;      
     }    
+    this.NhanVienKhuVucService.SaveListAsync(this.NhanVienKhuVucService.list).subscribe(
+      res => {      
+        this.isShowLoading = false;   
+        this.NotificationService.warn(environment.SaveSuccess); 
+      },
+      err => {
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
   }
   onNhanVienMenuActiveChange(element: NhanVienMenu) {
     this.NhanVienMenuService.SaveAsync(element).subscribe(

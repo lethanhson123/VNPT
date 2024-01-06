@@ -40,8 +40,7 @@ export class AppComponent {
   GetMenuToListAsync() {    
     this.MenuService.GetByNhanVienIDToListAsync().subscribe(
       res => {
-        this.MenuService.listLogin = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));   
-        console.log(this.MenuService.listLogin);             
+        this.MenuService.listLogin = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));           
       },
       err => {        
       }

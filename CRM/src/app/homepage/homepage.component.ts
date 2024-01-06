@@ -54,8 +54,8 @@ export class HomepageComponent implements OnInit {
   doanhThuDichVu: number = environment.InitializationNumber;
   doanhThuPhongBan: number = environment.InitializationNumber;
   doanhThuNhanVien: number = environment.InitializationNumber;
-  year: number = new Date().getFullYear();
-  month: number = new Date().getMonth() + 1;
+  year: number = environment.InitializationNumber;
+  month: number = environment.InitializationNumber;
   constructor(
     public HuyenService: HuyenService,
     public XaService: XaService,
@@ -75,15 +75,24 @@ export class HomepageComponent implements OnInit {
     this.GetPhongBanToListAsync();
     this.GetNhanVienToListAsync();
   }
-
+  GetYearAndMonth() {
+    this.year = new Date().getFullYear();
+    this.month = new Date().getMonth();
+    if (this.month == 0) {
+      this.month = 12;
+      this.year = this.year - 1;
+    }
+  }
   GetYearToList() {
     this.DownloadService.GetYearToList().then(res => {
       this.DownloadService.listYear = res as YearMonth[];
+      this.GetYearAndMonth();
     });
   }
   GetMonthToList() {
     this.DownloadService.GetMonthToList().then(res => {
       this.DownloadService.listMonth = res as YearMonth[];
+      this.GetYearAndMonth();
     });
   }
   GetDichVuToListAsync() {

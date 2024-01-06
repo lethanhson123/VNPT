@@ -115,8 +115,8 @@ export class CASmartComponent implements OnInit {
   doanhThuPhongBan: number = environment.InitializationNumber;
   doanhThuNhanVien: number = environment.InitializationNumber;
   hetHan: number = environment.InitializationNumber;
-  year: number = new Date().getFullYear();
-  month: number = new Date().getMonth() + 1;
+  year: number = environment.InitializationNumber;
+  month: number = environment.InitializationNumber;
   isKetLuan: boolean = false;
   isSmartCA: boolean = true;
   constructor(
@@ -148,15 +148,25 @@ export class CASmartComponent implements OnInit {
     // this.onSearchReportCA002();
     // this.onSearchReportCA008();
   }
+  GetYearAndMonth() {
+    this.year = new Date().getFullYear();
+    this.month = new Date().getMonth();
+    if (this.month == 0) {
+      this.month = 12;
+      this.year = this.year - 1;
+    }
+  }
 
   GetYearToList() {
     this.DownloadService.GetYearToList().then(res => {
       this.DownloadService.listYear = res as YearMonth[];
+      this.GetYearAndMonth();
     });
   }
   GetMonthToList() {
     this.DownloadService.GetMonthToList().then(res => {
       this.DownloadService.listMonth = res as YearMonth[];
+      this.GetYearAndMonth();
     });
   } 
   onReportCA() {
