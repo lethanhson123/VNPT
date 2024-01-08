@@ -8,7 +8,7 @@ import { YearMonth } from './YearMonth.model';
 export class DownloadService {
     listYear: YearMonth[] | undefined;
     listMonth: YearMonth[] | undefined;
-    aPIURL: string = environment.APIURL;
+    aPIURL: string = environment.APIUploadURL;
     controller: string = "Download";
     constructor(private httpClient: HttpClient) {
         this.initializationFormData();

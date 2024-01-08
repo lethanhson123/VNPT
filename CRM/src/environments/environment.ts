@@ -4,6 +4,8 @@ export const environment = {
   DomainDestination: "https://crm.vnptvungtau.vn/#/",  
   APIURL: "https://apicrm.vnptvungtau.vn/api/v1/",    
   APIRootURL: "https://apicrm.vnptvungtau.vn/",    
+  APIUploadURL: "https://api.upload.vnptvungtau.vn/api/v1/",    
+  APIUploadRootURL: "https://api.upload.vnptvungtau.vn/",    
   LoginURL: "https://login.vnptvungtau.vn/",
   Website: "https://vnptvungtau.vn/",
   Image: "Image",  

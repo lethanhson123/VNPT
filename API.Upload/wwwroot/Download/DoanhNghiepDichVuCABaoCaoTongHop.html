@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>BÁO CÁO TỔNG HỢP</title>
+</head>
+<body>
+    <style>
+        .border, .border td, .border th {
+            border-color: #000000;
+            border-style: solid;
+            border-width: 1px;
+            padding: 2px;
+        }
+
+        .border {
+            border-collapse: collapse;
+            width: 1000px;            
+        }
+    </style>
+    <div id="BodyContent" style="width: 1100px; margin: auto; background-color: #ffffff; letter-spacing: 1px;">
+        <div class="logo" style="padding-top: 5px; padding-bottom: 5px; letter-spacing: 3px; cursor: pointer; display: inline-block; text-align: center; justify-content: center; align-items: center; font-size:14px; width: 100%; height: 100%;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 30%;">
+                        <a href='javascript:window.print();' title="In biểu mẫu" style="text-decoration: none;"><img src="https://apicrm.vnptvungtau.vn/image/logo.png" width="100" height="100" /></a>
+                    </td>
+                    <td style="width: 70%;">
+                        <h1 style="font-size: 16px; text-align: center;">
+                            TỔNG CÔNG TY DỊCH VỤ VIỄN THÔNG
+                        </h1>
+                        <h1 style="font-size: 16px; text-align: center;">
+                            TRUNG TÂM KINH DOANH VNPT BÀ RỊA VŨNG TÀU
+                        </h1>
+                        <i style="text-align: right;">Vũng Tàu, [Day]</i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="main" style="justify-content: center; align-items: center; font-size: 14px; padding: 10px;">
+            <hr />
+            <div class="title" style="font-weight: bold; font-size: 16px; margin-bottom: 20px; text-align: center;">
+                BÁO CÁO TÌNH HÌNH TUÂN THỦ QUY ĐỊNH VỀ HỒ SƠ CHỨNG THƯ SỐ THÁNG [MonthData] NĂM [YearData]
+            </div>
+            <div class="title" style="font-size: 14px; margin-bottom: 20px; line-height: 30px;">
+                <table class="border">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">
+                                STT
+                            </th>
+                            <th>
+                                Phòng bán hàng
+                            </th>
+                            <th style="width: 150px;">
+                                Hồ sơ
+                            </th>
+                            <th style="width: 150px;">
+                                Hoàn thành
+                            </th>
+                            <th style="width: 150px;">
+                                Chưa hoàn thành
+                            </th>
+                            <th style="width: 150px;">
+                                Tỷ lệ
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [PhongBanHangBaoCao]
+                    </tbody>
+                </table>
+            </div>
+            <div class="title" style="font-weight: bold; font-size: 16px; margin-bottom: 20px; text-align: center;">
+                BÁO CÁO NHÂN VIÊN
+            </div>
+            <div class="title" style="font-size: 14px; margin-bottom: 20px; line-height: 30px;">
+                <table class="border">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">
+                                STT
+                            </th>
+                            <th>
+                                Nhân viên
+                            </th>
+                            <th style="width: 150px;">
+                                Hồ sơ
+                            </th>
+                            <th style="width: 150px;">
+                                Hoàn thành
+                            </th>
+                            <th style="width: 150px;">
+                                Chưa hoàn thành
+                            </th>
+                            <th style="width: 150px;">
+                                Tỷ lệ
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [NhanVienBaoCao]
+                    </tbody>
+                </table>
+            </div>
+            <div class="title" style="font-weight: bold; font-size: 16px; margin-bottom: 20px; text-align: center;">
+                XẾP HẠNG PHÒNG BÁN HÀNG
+            </div>
+            <div class="title" style="font-size: 14px; margin-bottom: 20px; line-height: 30px;">
+                <table class="border">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">
+                                Xếp hạng
+                            </th>
+                            <th>
+                                Phòng bán hàng
+                            </th>
+                            <th style="width: 150px;">
+                                Thực hiện
+                            </th>
+                            <th style="width: 150px;">
+                                Chỉ tiêu
+                            </th>
+                            <th style="width: 150px;">
+                                Doanh thu
+                            </th>
+                            <th style="width: 150px;">
+                                Tỷ lệ
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [PhongBanHangXepHang]
+                    </tbody>
+                </table>
+            </div>
+            <div class="title" style="font-weight: bold; font-size: 16px; margin-bottom: 20px; text-align: center;">
+                XẾP HẠNG NHÂN VIÊN
+            </div>
+            <div class="title" style="font-size: 14px; margin-bottom: 20px; line-height: 30px;">
+                <table class="border">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">
+                                Xếp hạng
+                            </th>
+                            <th>
+                                Nhân viên
+                            </th>
+                            <th style="width: 150px;">
+                                Thực hiện
+                            </th>
+                            <th style="width: 150px;">
+                                Chỉ tiêu
+                            </th>
+                            <th style="width: 150px;">
+                                Doanh thu
+                            </th>
+                            <th style="width: 150px;">
+                                Tỷ lệ
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [NhanVienXepHang]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="logo" style="padding-top: 5px; padding-bottom: 5px; letter-spacing: 3px; cursor: pointer; display: inline-block; text-align: center; justify-content: center; align-items: center; font-size: 24px; width: 100%; height: 100%; background-color: #0051e9;">
+            <div style="font-size: 10px; color: #ffffff;">
+                TRUNG TÂM KINH DOANH VNPT BÀ RỊA VŨNG TÀU
+            </div>
+        </div>
+    </div>
+</body>
+</html>

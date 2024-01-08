@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class UploadService {
-    aPIURL: string = environment.APIURL;
+    aPIURL: string = environment.APIUploadURL;
     controller: string = "Upload";
     constructor(private httpClient: HttpClient) {
         this.initializationFormData();
