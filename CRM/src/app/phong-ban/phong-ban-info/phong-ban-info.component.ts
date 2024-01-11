@@ -168,12 +168,18 @@ export class PhongBanInfoComponent implements OnInit {
     this.isShowLoading = true;
     this.PhongBanService.SaveAsync(this.PhongBanService.formData).subscribe(
       res => {
-        this.GetByQueryString();
-        this.NotificationService.warn(environment.SaveSuccess);
+        this.NhanVienService.formData = res as NhanVien;
+        if (this.NhanVienService.formData.ID > 0) {
+          window.location.href = this.URLSub + "/" + this.NhanVienService.formData.ID;
+        }
+        else {
+          this.NotificationService.warn(environment.SaveSuccess);
+        }
         this.isShowLoading = false;
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
       }
     );
   }

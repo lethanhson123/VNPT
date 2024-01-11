@@ -233,6 +233,9 @@
                                             [options]="ChartOptionsReportCA202GiaHan">
                                         </canvas>
                                     </div>
+                                </div>
+                                <br />
+                                <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <h3 class="text-center" style="text-transform: uppercase;">Sản lượng nhóm khách
                                             hàng</h3>
@@ -253,6 +256,8 @@
                                             [options]="ChartOptionsReportCA205DoanhThu">
                                         </canvas>
                                     </div>
+                                </div>
+                                <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <div class="card mb-4 card-info">
                                             <div class="card-header">
@@ -471,6 +476,9 @@
                                         <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA001()"><i
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <!-- <a class="btn btn-success" title="Download excel"
+                                            (click)="onDownloadExcelFileReportCA001()"><i
+                                                class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp; -->
                                     </div>
                                 </div>
                                 <div class="row gx-4">
@@ -681,21 +689,11 @@
                                                 {{item.Display}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-2 col-sm-12 col-12">
-                                        <select class="form-select" name="hetHan" [(ngModel)]="hetHan">
-                                            <option [value]="0">
-                                                Hết hạn</option>
-                                            <option [value]="1">
-                                                Chưa gia hạn</option>
-                                            <option [value]="2">
-                                                Gia hạn</option>
-                                        </select>
-                                    </div>
                                     <div class="col-lg-3 col-sm-12 col-14">
                                         <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
                                             (keyup.enter)="onSearchReportCA002()">
                                     </div>
-                                    <div class="col-lg-2 col-sm-12 col-12">
+                                    <div class="col-lg-4 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA002()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-success" title="Download excel"
@@ -911,11 +909,21 @@
                                                 {{item.Display}}</option>
                                         </select>
                                     </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <select class="form-select" name="hetHan" [(ngModel)]="hetHan">
+                                            <option [value]="0">
+                                                Hết hạn</option>
+                                            <option [value]="1">
+                                                Chưa gia hạn</option>
+                                            <option [value]="2">
+                                                Gia hạn</option>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-3 col-sm-12 col-14">
                                         <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
                                             (keyup.enter)="onSearchReportCA005()">
                                     </div>
-                                    <div class="col-lg-4 col-sm-12 col-12">
+                                    <div class="col-lg-2 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchReportCA005()"><i
                                                 class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-success" title="Download excel"
@@ -923,6 +931,7 @@
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
+                                <br />
                                 <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <h3 class="text-center" style="text-transform: uppercase;">Sản lượng</h3>
@@ -945,7 +954,7 @@
                                 </div>
                                 <div class="card mb-4 card-warning">
                                     <div class="card-header">
-                                        <h5 class="card-title text-white">Hết hạn
+                                        <h5 class="card-title text-white">Danh sách
                                             <span
                                                 *ngIf="ReportService.listReportCA005">({{ReportService.listReportCA005.length}}
                                                 items)</span>
@@ -1755,8 +1764,8 @@
                                         <a class="btn btn-success" title="Download excel"
                                             (click)="onDownloadExcelFileReportCA008()"><i
                                                 class="bi bi-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-success" title="Download excel"
-                                            (click)="DoanhNghiepDichVuCAThieuHoSo()"><i
+                                        <a *ngIf="ReportService.NhanVienIDLogin==1" class="btn btn-success"
+                                            title="Gửi mail" (click)="DoanhNghiepDichVuCAThieuHoSo()"><i
                                                 class="bi bi-envelope"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
@@ -1814,17 +1823,6 @@
                                                                     '1.0-0'}}
                                                                 </td>
                                                             </ng-container>
-                                                            <ng-container matColumnDef="TyLeHoanThanh">
-                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                                    Tỷ lệ
-                                                                </th>
-                                                                <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 18px;">
-                                                                    {{element.HoSoHoanThanh/element.HoSo * 100 |
-                                                                    number:
-                                                                    '1.0-0'}} %
-                                                                </td>
-                                                            </ng-container>
                                                             <ng-container matColumnDef="HoSoChuaHoanThanh">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Chưa Hoàn thành
@@ -1834,6 +1832,17 @@
                                                                     {{element.HoSoChuaHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
+                                                                </td>
+                                                            </ng-container>
+                                                            <ng-container matColumnDef="TyLeHoanThanh">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Tỷ lệ
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.HoSoHoanThanh/element.HoSo * 100 |
+                                                                    number:
+                                                                    '1.0-0'}} %
                                                                 </td>
                                                             </ng-container>
                                                             <tr mat-header-row
@@ -1904,17 +1913,6 @@
                                                                     '1.0-0'}}
                                                                 </td>
                                                             </ng-container>
-                                                            <ng-container matColumnDef="TyLeHoanThanh">
-                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                                                    Tỷ lệ
-                                                                </th>
-                                                                <td mat-cell *matCellDef="let element"
-                                                                    style="text-align: right; font-size: 18px;">
-                                                                    {{element.HoSoHoanThanh/element.HoSo * 100 |
-                                                                    number:
-                                                                    '1.0-0'}} %
-                                                                </td>
-                                                            </ng-container>
                                                             <ng-container matColumnDef="HoSoChuaHoanThanh">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Chưa Hoàn thành
@@ -1924,6 +1922,17 @@
                                                                     {{element.HoSoChuaHoanThanh |
                                                                     number:
                                                                     '1.0-0'}}
+                                                                </td>
+                                                            </ng-container>
+                                                            <ng-container matColumnDef="TyLeHoanThanh">
+                                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                    Tỷ lệ
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element"
+                                                                    style="text-align: right; font-size: 18px;">
+                                                                    {{element.HoSoHoanThanh/element.HoSo * 100 |
+                                                                    number:
+                                                                    '1.0-0'}} %
                                                                 </td>
                                                             </ng-container>
                                                             <tr mat-header-row

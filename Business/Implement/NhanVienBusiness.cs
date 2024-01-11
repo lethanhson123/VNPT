@@ -17,7 +17,7 @@ namespace Business.Implement
 		public async Task<NhanVien> AuthenticationAsync(NhanVien nhanVien)
 		{
 			NhanVien result = new NhanVien();
-			result = await _NhanVienRepository.GetByCondition(model => model.Email == nhanVien.Email && model.MatKhau == nhanVien.MatKhau && model.Active == true).FirstOrDefaultAsync();
+			result = await _NhanVienRepository.GetByCondition(model => model.Email == nhanVien.Email && model.MatKhau == nhanVien.MatKhau).FirstOrDefaultAsync();
 			if (result == null)
 			{
 				result = new NhanVien();
