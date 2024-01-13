@@ -109,7 +109,7 @@ export class DashboardCAComponent implements OnInit {
   searchString6: string = environment.InitializationString;
   searchString7: string = environment.InitializationString;
   searchString8: string = environment.InitializationString;
-  URLSub: string = environment.DomainDestination + "DoanhNghiepInfo";
+  URLSub: string = environment.DomainDestination + "DoanhNghiepCA";
   URLNhanVien: string = environment.DomainDestination + "NhanVienInfo";
   doanhThuTongHop: number = environment.InitializationNumber;
   doanhThuDichVu: number = environment.InitializationNumber;
