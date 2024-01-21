@@ -30,6 +30,11 @@ export class ReportService extends BaseService{
     listReportVNPT004View: Report[] | undefined;
     listReportVNPT005: Report[] | undefined;
     listReportVNPT005View: Report[] | undefined;
+
+    listReportVNPT1001: Report[] | undefined;
+    listReportVNPT1002: Report[] | undefined;
+
+
     listReportCA001: Report[] | undefined;
     listReportCA002: Report[] | undefined;
     listReportCA003: Report[] | undefined;
@@ -556,6 +561,16 @@ export class ReportService extends BaseService{
         let url = this.aPIURL + this.controller + '/ReportCASearchStringToListAsync';
         const formUpload: FormData = new FormData();        
         formUpload.append('searchString', JSON.stringify(searchString));               
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportVNPT1001ToListAsync() {
+        let url = this.aPIURL + this.controller + '/ReportVNPT1001ToListAsync';
+        const formUpload: FormData = new FormData();                
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportVNPT1002ToListAsync() {
+        let url = this.aPIURL + this.controller + '/ReportVNPT1002ToListAsync';
+        const formUpload: FormData = new FormData();                
         return this.httpClient.post(url, formUpload);
     }
 }

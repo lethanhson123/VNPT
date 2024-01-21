@@ -1107,5 +1107,35 @@ namespace API.Controllers.v1
 			}
 			return result;
 		}
+		[HttpPost]
+		[Route("ReportVNPT1001ToListAsync")]
+		public virtual async Task<List<Report>> ReportVNPT1001ToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{				
+				result = await _ReportBusiness.ReportVNPT1001ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportVNPT1002ToListAsync")]
+		public virtual async Task<List<Report>> ReportVNPT1002ToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			try
+			{
+				result = await _ReportBusiness.ReportVNPT1002ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }

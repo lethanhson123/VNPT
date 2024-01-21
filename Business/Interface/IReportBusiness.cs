@@ -72,5 +72,9 @@ namespace Business.Interface
 
 		Task<List<Report>> ReportCASearchStringToListAsync(string searchString);
 
+
+		Task<List<Report>> ReportVNPT1001ToListAsync();
+		Task<List<Report>> ReportVNPT1002ToListAsync();
+
 	}
 }

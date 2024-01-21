@@ -21,15 +21,15 @@
                 {{item.Name}}</option>
         </select>
     </div>
-    <div class="col-lg-2 col-sm-6 col-12">
+    <!-- <div class="col-lg-2 col-sm-6 col-12">
         <select class="form-select" name="xaID" [(ngModel)]="xaID">
             <option [value]="0">
                 Tất cả</option>
             <option *ngFor="let item of XaService.list;" [value]="item.ID">
                 {{item.Name}}</option>
         </select>
-    </div>
-    <div class="col-lg-3 col-sm-6 col-12">
+    </div> -->
+    <div class="col-lg-5 col-sm-6 col-12">
         <div class="input-group">
             <input class="form-control" type="text" placeholder="Tìm ..." [(ngModel)]="searchString"
                 (keyup.enter)="onSearch()">
@@ -52,6 +52,26 @@
 <div class="app-body">
     <div class="row gx-4">
         <div class="col-xxl-12">
+            <div class="row gx-4">
+                <div class="col-lg-6 col-sm-12 col-12">
+                    <h3 class="text-center" style="text-transform: uppercase;">Khách hàng theo khu vực</h3>
+                    <canvas baseChart [datasets]="ChartDataReportVNPT1001"
+                        [labels]="ChartLabelsReportVNPT1001"
+                        [chartType]="ChartTypeReportVNPT1001"
+                        [colors]="ChartColorsReportVNPT1001"
+                        [options]="ChartOptionsReportVNPT1001">
+                    </canvas>
+                </div>
+                <div class="col-lg-6 col-sm-12 col-12">
+                    <h3 class="text-center" style="text-transform: uppercase;">Doanh nghiệp thành lậP năm {{year}}</h3>
+                    <canvas baseChart [datasets]="ChartDataReportVNPT1002"
+                    [labels]="ChartLabelsReportVNPT1002"
+                    [chartType]="ChartTypeReportVNPT1002"
+                    [colors]="ChartColorsReportVNPT1002"
+                    [options]="ChartOptionsReportVNPT1002">
+                </canvas>
+                </div>
+            </div>
             <div class="card mb-4 card-info">
                 <div class="card-header">
                     <h5 class="card-title text-white">Danh sách
@@ -70,7 +90,28 @@
                                     </th>
                                     <td mat-cell *matCellDef="let element; index as i;">
                                         {{paginator.pageSize *
-                                        paginator.pageIndex + i + 1}}
+                                        paginator.pageIndex + i + 1}} - {{element.ID}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="HuyenName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Quận Huyện
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.HuyenName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="XaName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Xã Phường
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.XaName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Code">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.Code}}
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="Name">
@@ -81,13 +122,7 @@
                                             href="{{URLSub}}/{{element.ID}}"><b>{{element.Name}}</b></a>
                                     </td>
                                 </ng-container>
-                                <ng-container matColumnDef="Code">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã số thuế
-                                    </th>
-                                    <td mat-cell *matCellDef="let element">
-                                        {{element.Code}}
-                                    </td>
-                                </ng-container>
+                               
                                 <ng-container matColumnDef="DienThoai">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Điện thoại
                                     </th>
@@ -102,9 +137,23 @@
                                         {{element.Email}}
                                     </td>
                                 </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="DoanhNghiepService.displayColumns001">
+                                <ng-container matColumnDef="NgayCap">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày cấp
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.NgayCap | date:'dd/MM/yyyy'}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="NhanVienName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>AM Quản lý
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.NhanVienName}}
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="DoanhNghiepService.displayColumns002">
                                 </tr>
-                                <tr mat-row *matRowDef="let row; columns: DoanhNghiepService.displayColumns001;">
+                                <tr mat-row *matRowDef="let row; columns: DoanhNghiepService.displayColumns002;">
                                 </tr>
                             </table>
                             <mat-paginator #paginator="matPaginator" [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"

@@ -137,5 +137,16 @@ namespace Business.Implement
 			result = await _DoanhNghiepRepository.GetByCondition(item => item.Code == item.KHACHHANG_ID).OrderBy(item => item.HuyenID).ToListAsync();
 			return result;
 		}
+		public virtual async Task<List<DoanhNghiepTranfer>> GetSQLBySearchString_HuyenIDToListTranferAsync(string searchString, long huyenID)
+		{
+			List<DoanhNghiepTranfer> result = new List<DoanhNghiepTranfer>();			
+				SqlParameter[] parameters =
+				 {
+					new SqlParameter("@SearchString",searchString),
+					new SqlParameter("@HuyenID",huyenID),
+				};
+				result = await _DoanhNghiepRepository.GetByStoredProcedureToListTranferAsync("sp_DoanhNghiepSelectItemsBySearchString_HuyenID", parameters);			
+			return result;
+		}
 	}
 }

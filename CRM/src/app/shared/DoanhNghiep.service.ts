@@ -8,6 +8,7 @@ import { DoanhNghiep } from './DoanhNghiep.model';
 export class DoanhNghiepService extends BaseService{
     displayColumns: string[] = ['No', 'Name', 'Code', 'UserName', 'Description']; 
     displayColumns001: string[] = ['No', 'Name', 'Code', 'DienThoai', 'Email']; 
+    displayColumns002: string[] = ['No', 'HuyenName', 'XaName', 'Code', 'Name', 'DienThoai', 'Email', 'NgayCap', 'NhanVienName']; 
     displayColumnsSub: string[] = ['Code', 'Name', 'DienThoai']; 
     displayColumnsNhanVien: string[] = ['Code', 'Name', 'HuyenID', 'XaID', 'NhanVienID'];
     displayColumnsPhongBan: string[] = ['Code', 'Name', 'HuyenID', 'XaID', 'PhongBanID'];
@@ -65,6 +66,13 @@ export class DoanhNghiepService extends BaseService{
         const params = new HttpParams()
             .set('ID', ID)
         return this.httpClient.get(url, { params }).toPromise();
+    }
+    GetSQLBySearchString_HuyenIDToListTranferAsync(searchString: string, huyenID: number) {
+        let url = this.aPIURL + this.controller + '/GetSQLBySearchString_HuyenIDToListTranferAsync';
+        const formUpload: FormData = new FormData();                  
+        formUpload.append('searchString', JSON.stringify(searchString));        
+        formUpload.append('huyenID', JSON.stringify(huyenID));      
+        return this.httpClient.post(url, formUpload);
     }
 }
 

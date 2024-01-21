@@ -797,5 +797,18 @@ namespace Business.Implement
 			}			
 			return result;
 		}
+
+		public virtual async Task<List<Report>> ReportVNPT1001ToListAsync()
+		{
+			List<Report> result = new List<Report>();			
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT1001");			
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportVNPT1002ToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT1002");
+			return result;
+		}
 	}
 }

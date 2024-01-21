@@ -20,4 +20,7 @@ export class DoanhNghiep extends Base{
     KHACHHANG_ID?: string;  
     CodeCA?: string;  
     UserName?: string;  
+    HuyenName?: string;  
+    XaName?: string;  
+    NhanVienName?: string;  
 }

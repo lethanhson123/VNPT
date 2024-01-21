@@ -23,7 +23,7 @@
                     <div class="custom-tabs-container">
                         <ul class="nav nav-tabs justify-content-end" id="customTab5" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="tab-1" data-bs-toggle="tab" href="#1" role="tab"
+                                <a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#1" role="tab"
                                     aria-controls="1" aria-selected="false">
                                     <span class="badge bg-info" style="font-size: 14px; width: 120px;">Doanh thu</span>
                                 </a>
@@ -54,7 +54,7 @@
                                 </a>
                             </li> -->
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="tab-5" data-bs-toggle="tab" href="#5" role="tab"
+                                <a class="nav-link" id="tab-5" data-bs-toggle="tab" href="#5" role="tab"
                                     aria-controls="5" aria-selected="true">
                                     <span class="badge bg-primary" style="font-size: 14px; width: 120px;">Thông
                                         tin</span>
@@ -62,7 +62,7 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="customTabContent">
-                            <div class="tab-pane fade" id="1" role="tabpanel">
+                            <div class="tab-pane fade show active" id="1" role="tabpanel">
                                 <div class="row gx-4">
                                     <div class="col-lg-3 col-sm-12 col-12">
                                         <select class="form-select" name="year" [(ngModel)]="year">
@@ -108,28 +108,22 @@
                                                         <table class="table table-striped m-0">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>No</th>
-                                                                    <th>Gói cước</th>
-                                                                    <th>Năm</th>
-                                                                    <th>Tháng</th>
-                                                                    <th>Doanh thu</th>
-                                                                    <th>Mã thuê bao</th>
+                                                                    <th style="text-align: center;">No</th>
+                                                                    <th style="text-align: center;">Gói cước</th>
+                                                                    <th style="text-align: center;">Năm</th>
+                                                                    <th style="text-align: center;">Tháng</th>
+                                                                    <th style="text-align: center;">Doanh thu</th>
+                                                                    <th style="text-align: center;">Mã thuê bao</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr
                                                                     *ngFor="let element of DoanhNghiepDichVuLichSuService.list; index as i">
                                                                     <td>{{i + 1}}</td>
-                                                                    <td>
-                                                                        <div *ngFor="let item of DichVuService.list;">
-                                                                            <div *ngIf="item.ID==element.DichVuID">
-                                                                                {{item.Name}}
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>{{element.Year}}</td>
-                                                                    <td>{{element.Month}}</td>
-                                                                    <td> <b>{{element.GiaTien | number:
+                                                                    <td>{{element.Name}}</td>
+                                                                    <td style="text-align: right;">{{element.Year}}</td>
+                                                                    <td style="text-align: right;">{{element.Month}}</td>
+                                                                    <td style="text-align: right;"><b>{{element.GiaTien | number:
                                                                             '1.0-0'}}</b></td>
                                                                     <td>{{element.Note}}</td>
                                                                 </tr>
@@ -155,12 +149,12 @@
                                                         <table class="table table-striped m-0">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>No</th>
-                                                                    <th>Dịch vụ</th>
-                                                                    <th>Mã thuê bao</th>
-                                                                    <th>{{month}}-{{year}}</th>
-                                                                    <th>Liền kề</th>
-                                                                    <th>Chênh lệch</th>
+                                                                    <th style="text-align: center;">No</th>
+                                                                    <th style="text-align: center;">Dịch vụ</th>
+                                                                    <th style="text-align: center;">Mã thuê bao</th>
+                                                                    <th style="text-align: center;">{{month}}-{{year}}</th>
+                                                                    <th style="text-align: center;">Liền kề</th>
+                                                                    <th style="text-align: center;">Chênh lệch</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -171,11 +165,11 @@
                                                                         {{element.DichVu}}
                                                                     </td>
                                                                     <td>{{element.MaThueBao}}</td>
-                                                                    <td><b>{{element.DoanhThu | number:
+                                                                    <td style="text-align: right;"><b>{{element.DoanhThu | number:
                                                                             '1.0-0'}}</b></td>
-                                                                    <td> <b>{{element.DoanhThuLast | number:
+                                                                    <td style="text-align: right;"><b>{{element.DoanhThuLast | number:
                                                                             '1.0-0'}}</b></td>
-                                                                    <td>
+                                                                    <td style="text-align: right;">
                                                                         <div *ngIf="element.ChenhLech>=0"
                                                                             style="color: limegreen; text-align: right; font-weight: bold;">
                                                                             {{element.ChenhLech | number:
@@ -264,18 +258,18 @@
                                                 <table class="table table-striped m-0">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
-                                                            <th>Nhân viên AM</th>
-                                                            <th>Gói cước</th>
-                                                            <th>Ngày ký</th>
-                                                            <th>Số hợp đồng</th>
-                                                            <th>Mã thuê bao</th>
-                                                            <th>Giá cước</th>
-                                                            <th>Số tháng</th>
-                                                            <th>Ghi chú</th>
-                                                            <th>Sắp xếp</th>
-                                                            <th>Kích hoạt</th>
-                                                            <th>Lưu</th>
+                                                            <th style="text-align: center;">No</th>
+                                                            <th style="text-align: center;">Nhân viên AM</th>
+                                                            <th style="text-align: center;">Gói cước</th>
+                                                            <th style="text-align: center;">Ngày ký</th>
+                                                            <th style="text-align: center;">Số hợp đồng</th>
+                                                            <th style="text-align: center;">Mã thuê bao</th>
+                                                            <th style="text-align: center;">Giá cước</th>
+                                                            <th style="text-align: center;">Số tháng</th>
+                                                            <th style="text-align: center;">Ghi chú</th>
+                                                            <th style="text-align: center;">Sắp xếp</th>
+                                                            <th style="text-align: center;">Kích hoạt</th>
+                                                            <th style="text-align: center;">Lưu</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -361,17 +355,17 @@
                                                 <table class="table table-striped m-0">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
-                                                            <th>Thành viên</th>
-                                                            <th>Nhân viên</th>
-                                                            <th>Điện thoại</th>
-                                                            <th>Email</th>
-                                                            <th>Ngày sinh</th>
-                                                            <th>CCCD</th>
-                                                            <th>Ngày cấp</th>
-                                                            <th>Nơi cấp</th>
-                                                            <th>Kích hoạt</th>
-                                                            <th>Lưu</th>
+                                                            <th style="text-align: center;">No</th>
+                                                            <th style="text-align: center;">Thành viên</th>
+                                                            <th style="text-align: center;">Nhân viên</th>
+                                                            <th style="text-align: center;">Điện thoại</th>
+                                                            <th style="text-align: center;">Email</th>
+                                                            <th style="text-align: center;">Ngày sinh</th>
+                                                            <th style="text-align: center;">CCCD</th>
+                                                            <th style="text-align: center;">Ngày cấp</th>
+                                                            <th style="text-align: center;">Nơi cấp</th>
+                                                            <th style="text-align: center;">Kích hoạt</th>
+                                                            <th style="text-align: center;">Lưu</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -749,7 +743,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" id="5" role="tabpanel">
+                            <div class="tab-pane fade" id="5" role="tabpanel">
                                 <div class="card mb-4 card-light">
                                     <div class="card-header">
                                         <h5 class="card-title">Thông tin

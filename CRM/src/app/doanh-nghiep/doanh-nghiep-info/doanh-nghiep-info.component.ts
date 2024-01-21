@@ -103,23 +103,32 @@ export class DoanhNghiepInfoComponent implements OnInit {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.queryString = event.url;
-        this.GetByQueryString();
         this.GetYearToList();
-        this.GetMonthToList();
+        this.GetMonthToList();               
       }
     });
   }
 
   ngOnInit(): void {
   }
+  GetYearAndMonth() {
+    this.year = new Date().getFullYear();
+    this.month = new Date().getMonth();
+    if (this.month == 0) {
+      this.month = 12;
+      this.year = this.year - 1;
+    }
+  }
   GetYearToList() {
     this.DownloadService.GetYearToList().then(res => {
-      this.DownloadService.listYear = res as YearMonth[];
+      this.DownloadService.listYear = res as YearMonth[];      
     });
   }
   GetMonthToList() {
     this.DownloadService.GetMonthToList().then(res => {
       this.DownloadService.listMonth = res as YearMonth[];
+      this.GetYearAndMonth();
+      this.GetByQueryString();
     });
   }
   GetDichVuToListAsync() {
@@ -548,14 +557,15 @@ export class DoanhNghiepInfoComponent implements OnInit {
     this.DoanhNghiepService.GetByIDStringAsync(this.queryString).then(res => {
       this.DoanhNghiepService.formData = res as DoanhNghiep;
       if (this.DoanhNghiepService.formData) {
+        this.GetDoanhNghiepDichVuLichSuToListAsync();
+
         this.GetHuyenToListAsync();
         this.GetXaToListAsync();
         this.GetNganhNgheKinhDoanhToListAsync();
         this.GetLoaiDoanhNghiepToListAsync();
         this.GetLoaiTrangThaiToListAsync();
         this.GetNhanVienToListAsync();
-        this.GetPhongBanToListAsync();
-        this.GetDoanhNghiepDichVuLichSuToListAsync();
+        this.GetPhongBanToListAsync();        
         this.GetDoanhNghiepThanhVienToListAsync();
         this.GetLoaiDoanhNghiepThanhVienToListAsync();
         this.GetDoanhNghiepDichVuToListAsync();

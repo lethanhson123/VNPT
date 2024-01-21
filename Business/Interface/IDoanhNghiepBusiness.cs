@@ -9,6 +9,7 @@
 		Task<List<DoanhNghiep>> GetByNhanVienIDOrSearchStringToListAsync(long nhanVienID, string searchString);
         Task<List<DoanhNghiep>> GetByPhongBanIDOrSearchStringToListAsync(long phongBanID, string searchString);
 		Task<List<DoanhNghiep>> GetMaSoThueKhongTonTaiToListAsync();
+		Task<List<DoanhNghiepTranfer>> GetSQLBySearchString_HuyenIDToListTranferAsync(string searchString, long huyenID);
 
 	}
 }
