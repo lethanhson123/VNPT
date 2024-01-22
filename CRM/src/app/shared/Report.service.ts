@@ -299,6 +299,14 @@ export class ReportService extends BaseService{
         formUpload.append('month', JSON.stringify(month));        
         return this.httpClient.post(url, formUpload);
     }
+    ReportCA201_001Async(year: number, month: number, nhanVienID: number) {
+        let url = this.aPIURL + this.controller + '/ReportCA201_001Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));    
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));    
+        return this.httpClient.post(url, formUpload);
+    }
     ReportCA202Async(year: number, month: number) {
         let url = this.aPIURL + this.controller + '/ReportCA202Async';
         const formUpload: FormData = new FormData();                      
@@ -465,6 +473,15 @@ export class ReportService extends BaseService{
         const formUpload: FormData = new FormData();                      
         formUpload.append('year', JSON.stringify(year));         
         formUpload.append('month', JSON.stringify(month));   
+        formUpload.append('isSmartCA', JSON.stringify(isSmartCA));     
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCA501_001Async(year: number, month: number, nhanVienID: number, isSmartCA: boolean) {
+        let url = this.aPIURL + this.controller + '/ReportCA501_001Async';
+        const formUpload: FormData = new FormData();                      
+        formUpload.append('year', JSON.stringify(year));         
+        formUpload.append('month', JSON.stringify(month));   
+        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));
         formUpload.append('isSmartCA', JSON.stringify(isSmartCA));     
         return this.httpClient.post(url, formUpload);
     }

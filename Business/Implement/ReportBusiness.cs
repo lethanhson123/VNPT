@@ -404,6 +404,22 @@ namespace Business.Implement
 			}
 			return result;
 		}
+		public virtual async Task<Report> ReportCA201_001Async(int year, int month, long nhanVienID)
+		{
+			Report result = new Report();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+				};
+			List<Report> list = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA201_001", parameters);
+			if (list.Count > 0)
+			{
+				result = list[0];
+			}
+			return result;
+		}
 		public virtual async Task<List<Report>> ReportCA202Async(int year, int month)
 		{
 			List<Report> result = new List<Report>();
@@ -649,6 +665,23 @@ namespace Business.Implement
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			List<Report> list = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA501", parameters);
+			if (list.Count > 0)
+			{
+				result = list[0];
+			}
+			return result;
+		}
+		public virtual async Task<Report> ReportCA501_001Async(int year, int month, long nhanVienID, bool isSmartCA)
+		{
+			Report result = new Report();
+			SqlParameter[] parameters =
+			 {
+					new SqlParameter("@Year", year),
+					new SqlParameter("@Month", month),
+					new SqlParameter("@NhanVienID", nhanVienID),
+					new SqlParameter("@IsSmartCA", isSmartCA),
+				};
+			List<Report> list = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA501_001", parameters);
 			if (list.Count > 0)
 			{
 				result = list[0];

@@ -182,7 +182,7 @@ export class CAVNPTComponent implements OnInit {
   }
   ReportCA201Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA501Async(this.year, this.month, this.isSmartCA).subscribe(
+    this.ReportService.ReportCA501_001Async(this.year, this.month, this.nhanVienID, this.isSmartCA).subscribe(
       res => {
         this.ReportService.formData = (res as Report);
         this.isShowLoading = false;

@@ -193,7 +193,7 @@ export class DashboardCAComponent implements OnInit {
 
   ReportCA201Async() {
     this.isShowLoading = true;
-    this.ReportService.ReportCA201Async(this.year, this.month).subscribe(
+    this.ReportService.ReportCA201_001Async(this.year, this.month, this.nhanVienID).subscribe(
       res => {
         this.ReportService.formData = (res as Report);
         this.isShowLoading = false;

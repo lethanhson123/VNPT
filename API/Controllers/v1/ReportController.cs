@@ -1137,5 +1137,43 @@ namespace API.Controllers.v1
 			}
 			return result;
 		}
+
+		[HttpPost]
+		[Route("ReportCA201_001Async")]
+		public virtual async Task<Report> ReportCA201_001Async()
+		{
+			Report result = new Report();
+			try
+			{				
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);				
+				result = await _ReportBusiness.ReportCA201_001Async(year, month, nhanVienID);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCA501_001Async")]
+		public virtual async Task<Report> ReportCA501_001Async()
+		{
+			Report result = new Report();
+			try
+			{				
+				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
+				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
+				result = await _ReportBusiness.ReportCA501_001Async(year, month, nhanVienID, isSmartCA);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }
