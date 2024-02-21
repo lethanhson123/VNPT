@@ -1,4 +1,5 @@
 ﻿
+using Data.Model;
 using System.Drawing.Printing;
 
 namespace Business.Implement
@@ -41,7 +42,11 @@ namespace Business.Implement
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
 			if (!string.IsNullOrEmpty(searchString))
 			{
-				result = await _DoanhNghiepRepository.GetByCondition(item => !string.IsNullOrEmpty(item.UserName) && (item.Code.Contains(searchString) || item.CodeCA.Contains(searchString) || item.Name.Contains(searchString) || item.UserName.Contains(searchString))).ToListAsync();
+				SqlParameter[] parameters =
+				{
+					new SqlParameter("@SearchString",searchString),						
+				};
+				result = await GetByStoredProcedureToListAsync("sp_DoanhNghiepSelectItemsBySearchString", parameters);				
 			}
 			return result;
 		}
