@@ -23,28 +23,42 @@
                     <div class="custom-tabs-container">
                         <ul class="nav nav-tabs justify-content-end" id="customTab5" role="tablist">
                             <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="tab-NhanVienMenu" data-bs-toggle="tab"
+                                    href="#NhanVienMenu" role="tab" aria-controls="NhanVienMenu" aria-selected="true">
+                                    <span class="badge bg-warning" style="font-size: 18px;">Phân quyền Menu</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-Menu" data-bs-toggle="tab" href="#Menu" role="tab"
-                                    aria-controls="Menu" aria-selected="true">
-                                    <span class="badge bg-warning" style="font-size: 14px; width: 120px;">Menu</span>
+                                    aria-controls="Menu" aria-selected="false">
+                                    <span class="badge bg-info" style="font-size: 18px;">Menu</span>
                                 </a>
                             </li>
                         </ul>
                         <div class="tab-content" id="customTabContent">
-                            <div class="tab-pane fade show active" id="Menu" role="tabpanel">
+                            <div class="tab-pane fade show active" id="NhanVienMenu" role="tabpanel">
                                 <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <select class="form-select" name="nhanVienID" [(ngModel)]="nhanVienID">
-                                            <option *ngFor="let item of NhanVienService.list;"
-                                                [value]="item.ID">
+                                            <option *ngFor="let item of NhanVienService.list;" [value]="item.ID">
                                                 {{item.Name}}</option>
                                         </select>
-                                    </div>                                   
-                                    <div class="col-lg-6 col-sm-12 col-12">
-                                        <a class="btn btn-success" title="Tìm" (click)="GetNhanVienMenuToListAsync()"><i
-                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;                                       
                                     </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="GetNhanVienMenuToListAsync()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input"
+                                                type="checkbox"
+                                                (change)="NhanVienMenuActiveAllChange()"
+                                                name="activeAll"
+                                                [(ngModel)]="NhanVienMenuActiveAll">
+                                        </div>        
+                                    </div>      
                                 </div>
-                                <div class="row gx-4">                                    
+                                <div class="row gx-4">
                                     <div class="col-lg-12 col-sm-12 col-12">
                                         <div class="card mb-4 card-warning">
                                             <div class="card-header">
@@ -90,6 +104,133 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="Menu" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-10 col-sm-12 col-12">
+                                        <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
+                                            (keyup.enter)="onSearchMenu()">
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 col-12">
+                                        <a class="btn btn-success" title="Tìm" (click)="onSearchMenu()"><i
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                <div class="card mb-4 card-info">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-white">Danh sách
+                                            <span *ngIf="MenuService.list">({{MenuService.list.length}}
+                                                items)</span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-outer">
+                                            <div class="table-responsive">
+                                                <table mat-table matSort #sortMenu="matSort"
+                                                    [dataSource]="dataSourceMenu" class="table table-striped m-0">
+                                                    <ng-container matColumnDef="No">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            No.
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element; index as i;">
+                                                            {{paginatorMenu.pageSize *
+                                                            paginatorMenu.pageIndex + i + 1}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="ID">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.ID}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="ParentID">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Parent
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <select class="form-select" name="element.ParentID"
+                                                                [(ngModel)]="element.ParentID">
+                                                                <option value="0">
+                                                                    Root</option>
+                                                                <option
+                                                                    *ngFor="let item of MenuService.list001;"
+                                                                    [value]="item.ID">
+                                                                    {{item.Name}}</option>
+                                                            </select>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Name">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Tiêu đề" name="Name{{element.ID}}"
+                                                                [(ngModel)]="element.Name">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Display">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>URL</th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text" placeholder="URL"
+                                                                name="Display{{element.ID}}" [(ngModel)]="element.Display">
+                                                        </td>
+                                                    </ng-container>                                                    
+                                                    <ng-container matColumnDef="Note">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Icon
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Icon" name="Note{{element.ID}}"
+                                                                [(ngModel)]="element.Note">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="SortOrder">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <input class="form-control" type="number" placeholder="0"
+                                                                name="SortOrder{{element.ID}}"
+                                                                [(ngModel)]="element.SortOrder"
+                                                                style="text-align: right;">
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Active">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Active{{element.ID}}"
+                                                                    [(ngModel)]="element.Active">
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="Save">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a class="btn btn-info" (click)="onSaveMenu(element)"><i
+                                                                    class="bi bi-sd-card"></i>
+                                                            </a>&nbsp;&nbsp;&nbsp;
+                                                            <a class="btn btn-danger" (click)="onDeleteMenu(element)"
+                                                                *ngIf="element.ID>0"><i class="bi bi-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="MenuService.displayColumns">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: MenuService.displayColumns;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginatorMenu="matPaginator"
+                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="1000"
+                                                    [showFirstLastButtons]></mat-paginator>
                                             </div>
                                         </div>
                                     </div>

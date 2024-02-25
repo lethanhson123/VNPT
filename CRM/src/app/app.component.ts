@@ -18,6 +18,7 @@ export class AppComponent {
   domainName = environment.DomainDestination;
   domainURL = environment.DomainURL;
   queryString: string = environment.InitializationString;
+  queryStringSub: string = environment.InitializationString;
   constructor(
     public router: Router,
     public NhanVienService: NhanVienService,
@@ -38,13 +39,66 @@ export class AppComponent {
     });
   }
   GetMenuToListAsync() {    
+    if (this.queryString) {
+      if (this.queryString.length > 0) {
+        this.queryStringSub = this.queryString.substring(1, this.queryString.length);
+      }
+    }
     this.MenuService.GetByNhanVienIDToListAsync().subscribe(
       res => {
-        this.MenuService.listLogin = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));           
+        this.MenuService.ListChild = (res as Menu[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        this.MenuService.ListParent = [];
+        let isLogin = false;
+        for (var i = 0; i < this.MenuService.ListChild.length; i++) {
+          if (this.queryStringSub == this.MenuService.ListChild[i].Display) {
+            this.MenuService.ListChild[i].Active = true;
+          }
+          else {
+            this.MenuService.ListChild[i].Active = false;
+          }
+          if (this.queryStringSub.indexOf(this.MenuService.ListChild[i].Display) > -1) {
+            isLogin = true;
+          }
+          this.MenuService.ListChild[i].Display = environment.DomainDestination + this.MenuService.ListChild[i].Display;
+        }
+        for (var i = 0; i < this.MenuService.ListChild.length; i++) {
+          if (this.MenuService.ListChild[i].ParentID == 0) {
+            this.MenuService.ListChild[i].Active = false;
+            this.MenuService.ListChild[i].ListChild = [];
+            for (var j = 0; j < this.MenuService.ListChild.length; j++) {
+              if (this.MenuService.ListChild[i].ID == this.MenuService.ListChild[j].ParentID) {
+                this.MenuService.ListChild[i].ListChild.push(this.MenuService.ListChild[j]);
+                if (this.MenuService.ListChild[j].Active == true) {
+                  this.MenuService.ListChild[i].Active = true;
+                }
+              }
+            }
+            this.MenuService.ListParent.push(this.MenuService.ListChild[i]);
+          }
+        }
+
+        if (this.queryStringSub.indexOf("NhanVienDangNhap") > -1) {
+          isLogin = true;
+        }        
+        if (this.queryStringSub.indexOf("Info") > -1) {
+          isLogin = true;
+        }
+        if (isLogin == false) {
+          let destinationURL = environment.DomainDestination
+          window.location.href = destinationURL;
+        }
       },
-      err => {        
+      err => {
       }
     );
+  }
+  MenuClick(itemParent: Menu) {
+    for (var i = 0; i < this.MenuService.ListParent.length; i++) {
+      this.MenuService.ListParent[i].Active = false;
+      if (this.MenuService.ListParent[i].ID == itemParent.ID) {
+        this.MenuService.ListParent[i].Active = true;
+      }
+    }
   }
   AuthenticationToken() {
     let token = localStorage.getItem(environment.Token);    

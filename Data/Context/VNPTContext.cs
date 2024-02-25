@@ -9,6 +9,8 @@
             : base(options)
         {
         }
+
+		public virtual DbSet<Data.Model.DanhMucChucNang> DanhMucChucNang { get; set; }
 		public virtual DbSet<Data.Model.DanhMucGoiCuoc> DanhMucGoiCuoc { get; set; }
 		public virtual DbSet<Data.Model.EmailConfig> EmailConfig { get; set; }
 		public virtual DbSet<Data.Model.DichVu> DichVu { get; set; }
@@ -28,7 +30,8 @@
         public virtual DbSet<Data.Model.NhanVien> NhanVien { get; set; }
 		public virtual DbSet<Data.Model.NhanVienToken> NhanVienToken { get; set; }
 		public virtual DbSet<Data.Model.PhongBan> PhongBan { get; set; }
-        public virtual DbSet<Data.Model.NhanVienKhuVuc> NhanVienKhuVuc { get; set; }
+        public virtual DbSet<Data.Model.NhanVienChucNang> NhanVienChucNang { get; set; }
+		public virtual DbSet<Data.Model.NhanVienKhuVuc> NhanVienKhuVuc { get; set; }
 		public virtual DbSet<Data.Model.NhanVienTaiKhoan> NhanVienTaiKhoan { get; set; }
 		public virtual DbSet<Data.Model.NhanVienMenu> NhanVienMenu { get; set; }
 		public virtual DbSet<Data.Model.PhongBanKhuVuc> PhongBanKhuVuc { get; set; }

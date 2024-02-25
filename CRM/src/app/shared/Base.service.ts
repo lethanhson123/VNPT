@@ -8,6 +8,7 @@ import { Base } from 'src/app/shared/Base.model';
 export class BaseService {
     displayColumns: string[] = ['No', 'ParentID', 'Code', 'Name', 'Note', 'SortOrder', 'Active', 'Save'];
     list: Base[] | undefined;
+    list001: Base[] | undefined;
     formData!: Base;
     aPIURL: string = environment.APIURL;
     controller: string = "Base";

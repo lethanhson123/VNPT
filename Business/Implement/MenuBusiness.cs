@@ -24,5 +24,19 @@ namespace Business.Implement
 			}
 			return result;
 		}
+		public virtual async Task<List<Menu>> GetSQLByNhanVienIDAndActiveToListAsync(long nhanVienID, bool active)
+		{
+			List<Menu> result = new List<Menu>();
+			if (nhanVienID > 0)
+			{
+				SqlParameter[] parameters =
+				 {
+					new SqlParameter("@NhanVienID",nhanVienID),
+					new SqlParameter("@Active",active),
+				};
+				result = await GetByStoredProcedureToListAsync("sp_MenuSelectItemsByNhanVienIDAndActive", parameters);
+			}
+			return result;
+		}
 	}
 }

@@ -7,14 +7,18 @@ import { Menu } from './Menu.model';
     providedIn: 'root'
 })
 export class MenuService extends BaseService {
-    displayColumns: string[] = ['ParentID', 'Code', 'Name', 'Note', 'SortOrder', 'Active', 'Save'];
-    listLogin: Menu[] | undefined;  
+    displayColumns: string[] = ['No', 'ID', 'ParentID', 'Name', 'Display', 'Note', 'SortOrder', 'Active', 'Save'];
+
+    List001: Menu[] | undefined;
+    ListChild: Menu[] | undefined;
+    ListParent: Menu[] | undefined;
+
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "Menu";
     }
     GetByNhanVienIDToListAsync() {
-        var nhanVienID = localStorage.getItem(environment.NhanVienID);        
+        var nhanVienID = localStorage.getItem(environment.NhanVienID);
         if (nhanVienID) {
             let url = this.aPIURL + this.controller + '/GetByNhanVienIDToListAsync';
             const formUpload: FormData = new FormData();

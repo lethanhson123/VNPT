@@ -26,5 +26,22 @@
 			}
 			return result;
 		}
+		[HttpPost]
+		[Route("GetSQLByNhanVienIDAndActiveToListAsync")]
+		public virtual async Task<List<Menu>> GetSQLByNhanVienIDAndActiveToListAsync()
+		{
+			List<Menu> result = new List<Menu>();
+			try
+			{
+				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
+				bool active = JsonConvert.DeserializeObject<bool>(Request.Form["active"]);
+				result = await _MenuBusiness.GetSQLByNhanVienIDAndActiveToListAsync(nhanVienID, active);
+			}
+			catch (Exception ex)
+			{
+				string mes = ex.Message;
+			}
+			return result;
+		}
 	}
 }

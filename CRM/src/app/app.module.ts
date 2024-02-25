@@ -45,6 +45,7 @@ import { CASmartComponent } from './casmart/casmart.component';
 import { PhanQuyenMenuComponent } from './phan-quyen-menu/phan-quyen-menu.component';
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
 import { DoanhNghiepCAComponent } from './doanh-nghiep-ca/doanh-nghiep-ca.component';
+import { DanhMucChucNangComponent } from './danh-muc-chuc-nang/danh-muc-chuc-nang.component';
 
 
 
@@ -83,7 +84,8 @@ import { DoanhNghiepCAComponent } from './doanh-nghiep-ca/doanh-nghiep-ca.compon
     CASmartComponent,
     PhanQuyenMenuComponent,
     KhachHangComponent,
-    DoanhNghiepCAComponent,    
+    DoanhNghiepCAComponent,
+    DanhMucChucNangComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

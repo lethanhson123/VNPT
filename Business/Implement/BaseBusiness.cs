@@ -15,7 +15,10 @@
             {
                 model.Code = GlobalHelper.InitializationDateTimeCode;
             }
-            model.Display = model.Name + "-" + model.Code;
+			if (string.IsNullOrEmpty(model.Display))
+			{
+				model.Display = model.Name + "-" + model.Code;
+			}			
             if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))
             {
                 model.SortOrder = 1;

@@ -7,11 +7,20 @@
       </div>
       <div class="sidebarMenuScroll">
             <ul class="sidebar-menu">
-                  <li *ngFor="let item of MenuService.listLogin">
-                        <a href="{{domainName}}{{item.Code}}" title="{{item.Name}}">
-                              <i class="bi {{item.Note}}"></i>
-                              <span class="menu-text">{{item.Name}}</span>
+                  <li (click)="MenuClick(itemParent)"
+                        [ngClass]="itemParent.Active == true ? 'treeview active current-page': 'treeview'"
+                        *ngFor="let itemParent of MenuService.ListParent;">
+                        <a style="cursor: pointer;">
+                              <i class="{{itemParent.Note}}"></i>
+                              <span class="menu-text">{{itemParent.Name}}</span>
                         </a>
+                        <ul [ngClass]="itemParent.Active == true ? 'treeview-menu menu-open': 'treeview-menu'">
+                              <li *ngFor="let itemChild of itemParent.ListChild;">
+                                    <a [ngStyle]="{'font-weight': itemChild.Active == true ? 'bold' : ''}"
+                                          [ngClass]="itemChild.Active == true ? 'active-sub': ''"
+                                          href="{{itemChild.Display}}">{{itemChild.Name}}</a>
+                              </li>
+                        </ul>
                   </li>
                   <!-- <li>
                         <a href="{{domainName}}Homepage" title="Tổng hợp">

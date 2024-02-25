@@ -29,6 +29,7 @@ import { CASmartComponent } from './casmart/casmart.component';
 import { PhanQuyenMenuComponent } from './phan-quyen-menu/phan-quyen-menu.component';
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
 import { DoanhNghiepCAComponent } from './doanh-nghiep-ca/doanh-nghiep-ca.component';
+import { DanhMucChucNangComponent } from './danh-muc-chuc-nang/danh-muc-chuc-nang.component';
 
 
 const routes: Routes = [  
@@ -119,6 +120,9 @@ const routes: Routes = [
   },   
   {
     path: 'PhanQuyenMenu', component: PhanQuyenMenuComponent,
+  },  
+  {
+    path: 'DanhMucChucNang', component: DanhMucChucNangComponent,
   },  
 ];
 
