@@ -31,6 +31,7 @@ export const environment = {
   TenMienID: 42,
   HoaDonDienTuID: 14,
   Token: "Token", 
+  TokenAPI: "040621fe-7999-410c-8e06-a3ba249ded43", 
   OTP001: "OTP001",  
   NhanVienID: "NhanVienID",  
   NhanVienName: "NhanVienName",  

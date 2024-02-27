@@ -13,10 +13,11 @@ export class DichVuChiTieuService extends BaseService {
         this.controller = "DichVuChiTieu";
     }
     GetByNam_ThangToListAsync(nam: number, thang: number) {
+        this.BaseParameter.Year = nam;
+        this.BaseParameter.Month = thang;
         let url = this.aPIURL + this.controller + '/GetByNam_ThangToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('nam', JSON.stringify(nam));        
-        formUpload.append('thang', JSON.stringify(thang));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter)); 
         return this.httpClient.post(url, formUpload);
     }
 }

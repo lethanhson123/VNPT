@@ -14,9 +14,10 @@ export class PhongBanKhuVucService extends BaseService{
         this.controller = "PhongBanKhuVuc";
     }    
     GetSQLByParentIDAsync(parentID: number) {
+        this.BaseParameter.ParentID = parentID;
         let url = this.aPIURL + this.controller + '/GetSQLByParentIDAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('parentID', JSON.stringify(parentID));                      
+        formUpload.append('data', JSON.stringify(this.BaseParameter));                     
         return this.httpClient.post(url, formUpload);
     }
 }

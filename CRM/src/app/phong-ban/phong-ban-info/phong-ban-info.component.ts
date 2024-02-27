@@ -150,19 +150,24 @@ export class PhongBanInfoComponent implements OnInit {
   }
   GetByQueryString() {
     this.isShowLoading = true;
-    this.PhongBanService.GetByIDStringAsync(this.queryString).then(res => {
-      this.PhongBanService.formData = res as PhongBan;
-      this.GetHuyenToListAsync();
-      this.GetXaToListAsync();
-      this.GetPhongBanToListAsync();
-      this.GetDoanhNghiepToListAsync();
-      if (this.PhongBanService.formData) {
-        this.GetPhongBanKhuVucToListAsync();
-        this.GetNhanVienToListAsync();
+    this.PhongBanService.GetByIDStringAsync(this.queryString).subscribe(
+      res => {
+        this.PhongBanService.formData = res as PhongBan;
+        this.GetHuyenToListAsync();
+        this.GetXaToListAsync();
+        this.GetPhongBanToListAsync();
+        this.GetDoanhNghiepToListAsync();
+        if (this.PhongBanService.formData) {
+          this.GetPhongBanKhuVucToListAsync();
+          this.GetNhanVienToListAsync();
+          this.isShowLoading = false;
+        }
+        this.isShowLoading = false;
+      },
+      err => {
         this.isShowLoading = false;
       }
-      this.isShowLoading = false;
-    });
+    );
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;

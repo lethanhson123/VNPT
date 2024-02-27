@@ -22,56 +22,64 @@ export class DoanhNghiepService extends BaseService{
     }    
     GetMaSoThueKhongTonTaiToListAsync() {
         let url = this.aPIURL + this.controller + '/GetMaSoThueKhongTonTaiToListAsync';
-        const formUpload: FormData = new FormData();                
+        const formUpload: FormData = new FormData(); 
+        formUpload.append('data', JSON.stringify(this.BaseParameter));              
         return this.httpClient.post(url, formUpload);
     }
     GetBySearchStringToListAsync(searchString: string) {
+        this.BaseParameter.SearchString = searchString;
         let url = this.aPIURL + this.controller + '/GetBySearchStringToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('searchString', JSON.stringify(searchString));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));      
         return this.httpClient.post(url, formUpload);
     }
     GetByHuyenIDAndXaIDOrSearchStringToListAsync(huyenID: number, xaID: number, searchString: string) {
+        this.BaseParameter.HuyenID = huyenID;
+        this.BaseParameter.XaID = xaID;
+        this.BaseParameter.SearchString = searchString;
         let url = this.aPIURL + this.controller + '/GetByHuyenIDAndXaIDOrSearchStringToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('huyenID', JSON.stringify(huyenID));
-        formUpload.append('xaID', JSON.stringify(xaID));
-        formUpload.append('searchString', JSON.stringify(searchString));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));       
         return this.httpClient.post(url, formUpload);
     }
     GetCAByHuyenIDAndXaIDOrSearchStringToListAsync(huyenID: number, xaID: number, searchString: string) {
+        this.BaseParameter.HuyenID = huyenID;
+        this.BaseParameter.XaID = xaID;
+        this.BaseParameter.SearchString = searchString;
         let url = this.aPIURL + this.controller + '/GetCAByHuyenIDAndXaIDOrSearchStringToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('huyenID', JSON.stringify(huyenID));
-        formUpload.append('xaID', JSON.stringify(xaID));
-        formUpload.append('searchString', JSON.stringify(searchString));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));           
         return this.httpClient.post(url, formUpload);
     }
     GetByNhanVienIDOrSearchStringToListAsync(nhanVienID: number, searchString: string) {
+        this.BaseParameter.NhanVienID = nhanVienID;
+        this.BaseParameter.SearchString = searchString;
         let url = this.aPIURL + this.controller + '/GetByNhanVienIDOrSearchStringToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('nhanVienID', JSON.stringify(nhanVienID));        
-        formUpload.append('searchString', JSON.stringify(searchString));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));              
         return this.httpClient.post(url, formUpload);
     }
     GetByPhongBanIDOrSearchStringToListAsync(phongBanID: number, searchString: string) {
+        this.BaseParameter.PhongBanID = phongBanID;
+        this.BaseParameter.SearchString = searchString;
         let url = this.aPIURL + this.controller + '/GetByPhongBanIDOrSearchStringToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('phongBanID', JSON.stringify(phongBanID));        
-        formUpload.append('searchString', JSON.stringify(searchString));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));      
         return this.httpClient.post(url, formUpload);
     }
     GetByIDStringAsync(ID: string) {
+        this.BaseParameter.IDString = ID;        
         let url = this.aPIURL + this.controller + '/GetByIDStringAsync';
-        const params = new HttpParams()
-            .set('ID', ID)
-        return this.httpClient.get(url, { params }).toPromise();
+        const formUpload: FormData = new FormData();                  
+        formUpload.append('data', JSON.stringify(this.BaseParameter));           
+        return this.httpClient.post(url, formUpload);
     }
     GetSQLBySearchString_HuyenIDToListTranferAsync(searchString: string, huyenID: number) {
+        this.BaseParameter.HuyenID = huyenID;
+        this.BaseParameter.SearchString = searchString;
         let url = this.aPIURL + this.controller + '/GetSQLBySearchString_HuyenIDToListTranferAsync';
         const formUpload: FormData = new FormData();                  
-        formUpload.append('searchString', JSON.stringify(searchString));        
-        formUpload.append('huyenID', JSON.stringify(huyenID));      
+        formUpload.append('data', JSON.stringify(this.BaseParameter));           
         return this.httpClient.post(url, formUpload);
     }
 }

@@ -73,13 +73,15 @@ export class DoanhNghiepDichVuCAService extends BaseService{
     }
     AsyncThieuHoSoDoanhNghiepDichVuCA() {       
         let url = this.aPIURL + this.controller + '/AsyncThieuHoSoDoanhNghiepDichVuCA';
-        const formUpload: FormData = new FormData();        
+        const formUpload: FormData = new FormData();   
+        formUpload.append('data', JSON.stringify(this.BaseParameter));               
         return this.httpClient.post(url, formUpload);
     }
-    AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(isSmartCA: boolean) {       
+    AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(isSmartCA: boolean) { 
+        this.BaseParameter.IsSmartCA = isSmartCA;      
         let url = this.aPIURL + this.controller + '/AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA';
         const formUpload: FormData = new FormData();      
-        formUpload.append('data', JSON.stringify(isSmartCA));  
+        formUpload.append('data', JSON.stringify(this.BaseParameter));          
         return this.httpClient.post(url, formUpload);
     }
 }

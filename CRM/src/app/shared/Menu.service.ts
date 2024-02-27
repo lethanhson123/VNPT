@@ -20,9 +20,10 @@ export class MenuService extends BaseService {
     GetByNhanVienIDToListAsync() {
         var nhanVienID = localStorage.getItem(environment.NhanVienID);
         if (nhanVienID) {
+            this.BaseParameter.NhanVienID = Number(nhanVienID);     
             let url = this.aPIURL + this.controller + '/GetByNhanVienIDToListAsync';
             const formUpload: FormData = new FormData();
-            formUpload.append('data', JSON.stringify(Number(nhanVienID)));
+            formUpload.append('data', JSON.stringify(this.BaseParameter));    
             return this.httpClient.post(url, formUpload);
         }
     }

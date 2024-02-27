@@ -14,11 +14,12 @@ export class DoanhNghiepDichVuLichSuService extends BaseService{
         this.controller = "DoanhNghiepDichVuLichSu";
     }    
     GetByDoanhNghiepIDAndYearAndMonthToListAsync(doanhNghiepID: number, year: number, month: number) {
+        this.BaseParameter.DoanhNghiepID = doanhNghiepID;      
+        this.BaseParameter.Year = year;      
+        this.BaseParameter.Month = month;      
         let url = this.aPIURL + this.controller + '/GetByDoanhNghiepIDAndYearAndMonthToListAsync';
         const formUpload: FormData = new FormData();        
-        formUpload.append('doanhNghiepID', JSON.stringify(doanhNghiepID));
-        formUpload.append('year', JSON.stringify(year));
-        formUpload.append('month', JSON.stringify(month));        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));                  
         return this.httpClient.post(url, formUpload);
     }
 }

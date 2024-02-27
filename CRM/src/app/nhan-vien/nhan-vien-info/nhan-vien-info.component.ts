@@ -195,22 +195,27 @@ export class NhanVienInfoComponent implements OnInit {
   }
   GetByQueryString() {
     this.isShowLoading = true;
-    this.NhanVienService.GetByIDStringAsync(this.queryString).then(res => {
-      this.NhanVienService.formData = res as NhanVien;
-      this.GetNhanVienToListAsync();
-      this.GetPhongBanToListAsync();
-      this.GetHuyenToListAsync();
-      this.GetXaToListAsync();
-      this.GetMenuToListAsync();
-      this.GetDoanhNghiepToListAsync();
-      if (this.NhanVienService.formData) {
-        this.GetNhanVienKhuVucToListAsync();
-        this.GetNhanVienTaiKhoanToListAsync();
-        this.GetNhanVienMenuToListAsync();
+    this.NhanVienService.GetByIDStringAsync(this.queryString).subscribe(
+      res => {
+        this.NhanVienService.formData = res as NhanVien;
+        this.GetNhanVienToListAsync();
+        this.GetPhongBanToListAsync();
+        this.GetHuyenToListAsync();
+        this.GetXaToListAsync();
+        this.GetMenuToListAsync();
+        this.GetDoanhNghiepToListAsync();
+        if (this.NhanVienService.formData) {
+          this.GetNhanVienKhuVucToListAsync();
+          this.GetNhanVienTaiKhoanToListAsync();
+          this.GetNhanVienMenuToListAsync();
+          this.isShowLoading = false;
+        }       
+        this.isShowLoading = false;
+      },
+      err => {       
         this.isShowLoading = false;
       }
-      this.isShowLoading = false;
-    });
+    );
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;
@@ -235,7 +240,7 @@ export class NhanVienInfoComponent implements OnInit {
       }
     );
   }
-  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {   
+  onNhanVienKhuVucActiveChange(element: NhanVienKhuVuc) {
     this.NhanVienKhuVucService.SaveAsync(element).subscribe(
       res => {
         this.NotificationService.warn(environment.SaveSuccess);
@@ -249,12 +254,12 @@ export class NhanVienInfoComponent implements OnInit {
     this.isShowLoading = true;
     for (let i = 0; i < this.NhanVienKhuVucService.list.length; i++) {
       this.isShowLoading = true;
-      this.NhanVienKhuVucService.list[i].Active = this.activeAll;      
-    }    
+      this.NhanVienKhuVucService.list[i].Active = this.activeAll;
+    }
     this.NhanVienKhuVucService.SaveListAsync(this.NhanVienKhuVucService.list).subscribe(
-      res => {      
-        this.isShowLoading = false;   
-        this.NotificationService.warn(environment.SaveSuccess); 
+      res => {
+        this.isShowLoading = false;
+        this.NotificationService.warn(environment.SaveSuccess);
       },
       err => {
         this.isShowLoading = false;

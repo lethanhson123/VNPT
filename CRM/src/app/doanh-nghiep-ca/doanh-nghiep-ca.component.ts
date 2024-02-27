@@ -20,22 +20,22 @@ export class DoanhNghiepCAComponent implements OnInit {
 
   dataSourceDoanhNghiepDichVuCA: MatTableDataSource<any>;
   @ViewChild('sortDoanhNghiepDichVuCA') sortDoanhNghiepDichVuCA: MatSort;
-  @ViewChild('paginatorDoanhNghiepDichVuCA') paginatorDoanhNghiepDichVuCA: MatPaginator;  
+  @ViewChild('paginatorDoanhNghiepDichVuCA') paginatorDoanhNghiepDichVuCA: MatPaginator;
 
   isShowLoading: boolean = false;
   queryString: string = environment.InitializationString;
   URLSub: string = environment.DomainDestination + "DoanhNghiepInfo";
 
   constructor(
-    public router: Router,  
+    public router: Router,
     private dialog: MatDialog,
-    public DoanhNghiepService: DoanhNghiepService, 
+    public DoanhNghiepService: DoanhNghiepService,
     public DoanhNghiepDichVuCAService: DoanhNghiepDichVuCAService,
-  ) { 
+  ) {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.queryString = event.url;
-        this.GetByQueryString();       
+        this.GetByQueryString();
       }
     });
   }
@@ -44,13 +44,17 @@ export class DoanhNghiepCAComponent implements OnInit {
   }
   GetByQueryString() {
     this.isShowLoading = true;
-    this.DoanhNghiepService.GetByIDStringAsync(this.queryString).then(res => {
-      this.DoanhNghiepService.formData = res as DoanhNghiep;
-      if (this.DoanhNghiepService.formData) {       
-        this.GetDoanhNghiepDichVuCAToListAsync();
+    this.DoanhNghiepService.GetByIDStringAsync(this.queryString).subscribe(
+      res => {
+        this.DoanhNghiepService.formData = res as DoanhNghiep;
+        if (this.DoanhNghiepService.formData) {
+          this.GetDoanhNghiepDichVuCAToListAsync();
+        }
+        this.isShowLoading = false;
+      },
+      err => {
       }
-      this.isShowLoading = false;
-    });
+    );
   }
   GetDoanhNghiepDichVuCAToListAsync() {
     this.DoanhNghiepDichVuCAService.GetByParentIDToListAsync(this.DoanhNghiepService.formData.ID).subscribe(

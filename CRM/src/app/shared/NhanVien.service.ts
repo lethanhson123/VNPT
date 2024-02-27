@@ -30,6 +30,7 @@ export class NhanVienService extends BaseService {
         }
     }
     SaveAndUploadFileAsync(formData: NhanVien, fileToUpload: FileList) {
+        formData.Description = environment.TokenAPI;
         var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
         if (lastUpdatedMembershipID) {
             formData.LastUpdatedMembershipID = Number(lastUpdatedMembershipID);
@@ -47,10 +48,11 @@ export class NhanVienService extends BaseService {
         return this.httpClient.post(url, formUpload);
     }
     GetByIDStringAsync(ID: string) {
+        this.BaseParameter.IDString = ID;
         let url = this.aPIURL + this.controller + '/GetByIDStringAsync';
-        const params = new HttpParams()
-            .set('ID', ID)
-        return this.httpClient.get(url, { params }).toPromise();
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(this.BaseParameter));
+        return this.httpClient.post(url, formUpload);
     }
 }
 

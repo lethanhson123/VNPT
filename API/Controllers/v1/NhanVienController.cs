@@ -14,6 +14,19 @@ namespace API.Controllers.v1
 			_NhanVienBusiness = NhanVienBusiness;
 			_WebHostEnvironment = WebHostEnvironment;
 		}
+		//[HttpPost]
+		//[Route("SetMatKhau")]
+		//public async Task<int> SetMatKhauAsync()
+		//{
+		//	List<NhanVien> list = await _NhanVienBusiness.GetAllToListAsync();
+		//	foreach (NhanVien nhanVien in list)
+		//	{
+		//		nhanVien.MatKhau = "vnpt@123";
+		//		await _NhanVienBusiness.SaveAsync(nhanVien);
+		//	}
+		//	return 0;
+		//}
+
 		[HttpPost]
 		[Route("SaveAndUploadFileAsync")]
 		public async Task<NhanVien> SaveAndUploadFileAsync()
@@ -56,7 +69,7 @@ namespace API.Controllers.v1
 				}
 			}
 			catch (Exception e)
-			{				
+			{
 				model.Description = e.Message;
 			}
 
@@ -64,7 +77,7 @@ namespace API.Controllers.v1
 		}
 		[HttpPost]
 		[Route("GetByIDStringAsync")]
-		public async Task<NhanVien> GetByIDStringAsync(string ID)
+		public async Task<NhanVien> GetByIDStringAsync()
 		{
 			BaseParameter baseParameter = new BaseParameter();
 			NhanVien result = new NhanVien();
@@ -100,7 +113,7 @@ namespace API.Controllers.v1
 			NhanVien result = new NhanVien();
 			try
 			{
-				NhanVien model = JsonConvert.DeserializeObject<NhanVien>(Request.Form["data"]);				
+				NhanVien model = JsonConvert.DeserializeObject<NhanVien>(Request.Form["data"]);
 				if (model.Description == GlobalHelper.Token)
 				{
 					model.Description = GlobalHelper.APISuccessMessage;

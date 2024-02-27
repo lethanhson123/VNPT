@@ -14,6 +14,68 @@ namespace Business.Implement
 			_NhanVienRepository = NhanVienRepository;
 			_NhanVienTokenBusiness = NhanVienTokenBusiness;
 		}
+		public override async Task<NhanVien> SaveAsync(NhanVien model)
+		{
+			Initialization(model);
+			if (!string.IsNullOrEmpty(model.Code))
+			{
+				NhanVien modelExist = await GetByCodeAsync(model.Code);
+				if (model.ID > 0)
+				{
+					if (modelExist.ID == 0)
+					{
+						await UpdateAsync(model);
+					}
+					else
+					{
+						if (modelExist.ID == model.ID)
+						{
+							await UpdateAsync(model);
+						}
+					}
+				}
+				else
+				{
+					if (modelExist.ID == 0)
+					{
+						await AddAsync(model);
+					}
+				}
+			}
+			return model;
+		}
+		public virtual int CheckMatKhau(NhanVien model)
+		{
+			int result = GlobalHelper.InitializationNumber;
+			if (!string.IsNullOrEmpty(model.MatKhau))
+			{
+				if (model.MatKhau.Length > 6)
+				{
+					result = result + 1;
+				}
+			}
+			return result;
+		}
+		public override async Task<int> AddAsync(NhanVien model)
+		{
+			int result = CheckMatKhau(model);
+			if (result == 1)
+			{
+				Initialization(model);
+				result = await _NhanVienRepository.AddAsync(model);
+			}
+			return result;
+		}
+		public override async Task<int> UpdateAsync(NhanVien model)
+		{
+			int result = CheckMatKhau(model);
+			if (result == 1)
+			{
+				Initialization(model);
+				result = await _NhanVienRepository.UpdateAsync(model);
+			}
+			return result;
+		}
 		public async Task<NhanVien> AuthenticationAsync(NhanVien nhanVien)
 		{
 			NhanVien result = new NhanVien();
@@ -42,6 +104,6 @@ namespace Business.Implement
 				}
 			}
 			return result;
-		}		
+		}
 	}
 }

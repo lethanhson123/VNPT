@@ -60,11 +60,11 @@ export class DoanhNghiepInfoComponent implements OnInit {
 
   dataSourceDoanhNghiepDichVu: MatTableDataSource<any>;
   @ViewChild('sortDoanhNghiepDichVu') sortDoanhNghiepDichVu: MatSort;
-  @ViewChild('paginatorDoanhNghiepDichVu') paginatorDoanhNghiepDichVu: MatPaginator;  
+  @ViewChild('paginatorDoanhNghiepDichVu') paginatorDoanhNghiepDichVu: MatPaginator;
 
   dataSourceDoanhNghiepDichVuCA: MatTableDataSource<any>;
   @ViewChild('sortDoanhNghiepDichVuCA') sortDoanhNghiepDichVuCA: MatSort;
-  @ViewChild('paginatorDoanhNghiepDichVuCA') paginatorDoanhNghiepDichVuCA: MatPaginator;  
+  @ViewChild('paginatorDoanhNghiepDichVuCA') paginatorDoanhNghiepDichVuCA: MatPaginator;
 
   dataSourceReport001: MatTableDataSource<any>;
   @ViewChild(MatSort) sortReport001: MatSort;
@@ -104,7 +104,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.queryString = event.url;
         this.GetYearToList();
-        this.GetMonthToList();               
+        this.GetMonthToList();
       }
     });
   }
@@ -121,7 +121,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
   }
   GetYearToList() {
     this.DownloadService.GetYearToList().then(res => {
-      this.DownloadService.listYear = res as YearMonth[];      
+      this.DownloadService.listYear = res as YearMonth[];
     });
   }
   GetMonthToList() {
@@ -257,7 +257,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
         this.dataSourceDoanhNghiepDichVuLichSu = new MatTableDataSource(this.DoanhNghiepDichVuLichSuService.list.sort((a, b) => (a.GiaTien < b.GiaTien ? 1 : -1)));
         this.dataSourceDoanhNghiepDichVuLichSu.sort = this.sortDoanhNghiepDichVuLichSu;
         this.dataSourceDoanhNghiepDichVuLichSu.paginator = this.paginatorDoanhNghiepDichVuLichSu;
-        this.doanhThuByMonth = environment.InitializationNumber;        
+        this.doanhThuByMonth = environment.InitializationNumber;
         for (let i = 0; i < this.DoanhNghiepDichVuLichSuService.list.length; i++) {
           this.doanhThuByMonth = this.doanhThuByMonth + this.DoanhNghiepDichVuLichSuService.list[i].GiaTien;
         }
@@ -531,7 +531,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
         let DichVu = [];
         let DoanhThu = [];
         this.ReportService.listReport004.forEach(item => {
-          this.yearTitle = item.Year;          
+          this.yearTitle = item.Year;
           DichVu.push(item.DichVu);
           DoanhThu.push(item.DoanhThu);
         });
@@ -554,30 +554,33 @@ export class DoanhNghiepInfoComponent implements OnInit {
   }
   GetByQueryString() {
     this.isShowLoading = true;
-    this.DoanhNghiepService.GetByIDStringAsync(this.queryString).then(res => {
-      this.DoanhNghiepService.formData = res as DoanhNghiep;
-      if (this.DoanhNghiepService.formData) {
-        this.GetDoanhNghiepDichVuLichSuToListAsync();
-
-        this.GetHuyenToListAsync();
-        this.GetXaToListAsync();
-        this.GetNganhNgheKinhDoanhToListAsync();
-        this.GetLoaiDoanhNghiepToListAsync();
-        this.GetLoaiTrangThaiToListAsync();
-        this.GetNhanVienToListAsync();
-        this.GetPhongBanToListAsync();        
-        this.GetDoanhNghiepThanhVienToListAsync();
-        this.GetLoaiDoanhNghiepThanhVienToListAsync();
-        this.GetDoanhNghiepDichVuToListAsync();
-        this.GetDichVuToListAsync();        
-        this.ReportDoanhNghiep001Async();
-        this.ReportDoanhNghiep002Async();
-        this.ReportDoanhNghiep003Async();
-        this.ReportDoanhNghiep004Async();
-        this.GetDoanhNghiepDichVuCAToListAsync();
+    this.DoanhNghiepService.GetByIDStringAsync(this.queryString).subscribe(
+      res => {
+        if (this.DoanhNghiepService.formData) {
+          this.GetDoanhNghiepDichVuLichSuToListAsync();
+          this.GetHuyenToListAsync();
+          this.GetXaToListAsync();
+          this.GetNganhNgheKinhDoanhToListAsync();
+          this.GetLoaiDoanhNghiepToListAsync();
+          this.GetLoaiTrangThaiToListAsync();
+          this.GetNhanVienToListAsync();
+          this.GetPhongBanToListAsync();
+          this.GetDoanhNghiepThanhVienToListAsync();
+          this.GetLoaiDoanhNghiepThanhVienToListAsync();
+          this.GetDoanhNghiepDichVuToListAsync();
+          this.GetDichVuToListAsync();
+          this.ReportDoanhNghiep001Async();
+          this.ReportDoanhNghiep002Async();
+          this.ReportDoanhNghiep003Async();
+          this.ReportDoanhNghiep004Async();
+          this.GetDoanhNghiepDichVuCAToListAsync();
+        }
+        this.isShowLoading = false;
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
       }
-      this.isShowLoading = false;
-    });
+    );   
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;

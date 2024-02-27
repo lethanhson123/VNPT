@@ -14,9 +14,11 @@ export class HuyenService extends BaseService {
     GetSQLByNhanVienID_ActiveAsync() {
         var lastUpdatedMembershipID = localStorage.getItem(environment.NhanVienID);
         if (lastUpdatedMembershipID) {
+            this.BaseParameter.NhanVienID = Number(lastUpdatedMembershipID);      
+            this.BaseParameter.Active = true;      
             let url = this.aPIURL + this.controller + '/GetSQLByNhanVienID_ActiveAsync';
             const formUpload: FormData = new FormData();
-            formUpload.append('nhanVienID', JSON.stringify(lastUpdatedMembershipID));
+            formUpload.append('data', JSON.stringify(this.BaseParameter));    
             return this.httpClient.post(url, formUpload);
         }
     }
