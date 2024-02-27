@@ -16,251 +16,489 @@ namespace API.Controllers.v1
         [Route("Report001Async")]
         public virtual async Task<List<Report>> Report001Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);                
-                result = await _ReportBusiness.Report001Async(doanhNghiepID);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.Report001Async(baseParameter.DoanhNghiepID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("Report002Async")]
         public virtual async Task<List<Report>> Report002Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
-                result = await _ReportBusiness.Report002Async(doanhNghiepID);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.Report002Async(baseParameter.DoanhNghiepID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("Report003Async")]
         public virtual async Task<List<Report>> Report003Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
-                result = await _ReportBusiness.Report003Async(doanhNghiepID);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.Report003Async(baseParameter.DoanhNghiepID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("Report004Async")]
         public virtual async Task<List<Report>> Report004Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-                result = await _ReportBusiness.Report004Async(huyenID, xaID, searchString);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.Report004Async(baseParameter.HuyenID.Value, baseParameter.XaID.Value, baseParameter.SearchString);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportDoanhNghiep001Async")]
         public virtual async Task<List<Report>> ReportDoanhNghiep001Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportDoanhNghiep001Async(doanhNghiepID, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportDoanhNghiep001Async(baseParameter.DoanhNghiepID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportDoanhNghiep002Async")]
         public virtual async Task<List<Report>> ReportDoanhNghiep002Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportDoanhNghiep002Async(doanhNghiepID, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportDoanhNghiep002Async(baseParameter.DoanhNghiepID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportDoanhNghiep003Async")]
         public virtual async Task<List<Report>> ReportDoanhNghiep003Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportDoanhNghiep003Async(doanhNghiepID, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportDoanhNghiep003Async(baseParameter.DoanhNghiepID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportDoanhNghiep004Async")]
         public virtual async Task<List<Report>> ReportDoanhNghiep004Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long doanhNghiepID = JsonConvert.DeserializeObject<long>(Request.Form["doanhNghiepID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportDoanhNghiep004Async(doanhNghiepID, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportDoanhNghiep004Async(baseParameter.DoanhNghiepID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportVNPT001Async")]
         public virtual async Task<List<Report>> ReportVNPT001Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportVNPT001Async(huyenID, xaID, searchString, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT001Async(baseParameter.HuyenID.Value, baseParameter.XaID.Value, baseParameter.SearchString, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportVNPT002Async")]
         public virtual async Task<List<Report>> ReportVNPT002Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-                long loaiDichVuID = JsonConvert.DeserializeObject<long>(Request.Form["loaiDichVuID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportVNPT002Async(huyenID, xaID, searchString, loaiDichVuID, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT002Async(baseParameter.HuyenID.Value, baseParameter.XaID.Value, baseParameter.SearchString, baseParameter.LoaiDichVuID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportVNPT003Async")]
         public virtual async Task<List<Report>> ReportVNPT003Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-                long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-                string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-                long dichVuID = JsonConvert.DeserializeObject<long>(Request.Form["dichVuID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-                result = await _ReportBusiness.ReportVNPT003Async(huyenID, xaID, searchString, dichVuID, year, month);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT003Async(baseParameter.HuyenID.Value, baseParameter.XaID.Value, baseParameter.SearchString, baseParameter.DichVuID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportVNPT004Async")]
         public virtual async Task<List<Report>> ReportVNPT004Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long phongBanID = JsonConvert.DeserializeObject<long>(Request.Form["phongBanID"]);                              
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);                
-                result = await _ReportBusiness.ReportVNPT004Async(phongBanID, year);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT004Async(baseParameter.PhongBanID.Value, baseParameter.Year.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
         [HttpPost]
         [Route("ReportVNPT005Async")]
         public virtual async Task<List<Report>> ReportVNPT005Async()
         {
-            List<Report> result = new List<Report>();
-            try
-            {
-                long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-                int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-                result = await _ReportBusiness.ReportVNPT005Async(nhanVienID, year);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT005Async(baseParameter.NhanVienID.Value, baseParameter.Year.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
 		[HttpPost]
 		[Route("ReportCA001Async")]
 		public virtual async Task<List<Report>> ReportCA001Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA001Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA001Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -268,17 +506,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA002Async")]
 		public virtual async Task<List<Report>> ReportCA002Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA002Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA002Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -286,17 +541,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA003Async")]
 		public virtual async Task<List<Report>> ReportCA003Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA003Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA003Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -304,17 +576,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA004Async")]
 		public virtual async Task<List<Report>> ReportCA004Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA004Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA004Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -322,17 +611,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA005Async")]
 		public virtual async Task<List<Report>> ReportCA005Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA005Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA005Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -340,17 +646,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA006Async")]
 		public virtual async Task<List<Report>> ReportCA006Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA006Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA006Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -358,17 +681,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA007Async")]
 		public virtual async Task<List<Report>> ReportCA007Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA007Async(huyenID, year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA007Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -376,18 +716,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA101Async")]
 		public virtual async Task<List<Report>> ReportCA101Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA101Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA101Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -395,18 +751,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA102Async")]
 		public virtual async Task<List<Report>> ReportCA102Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA102Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA102Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -414,18 +786,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA103Async")]
 		public virtual async Task<List<Report>> ReportCA103Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA103Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA103Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -433,18 +821,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA104Async")]
 		public virtual async Task<List<Report>> ReportCA104Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA104Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA104Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -452,19 +856,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA105Async")]
 		public virtual async Task<List<Report>> ReportCA105Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
-				result = await _ReportBusiness.ReportCA105Async(huyenID, year, month, nhanVienID, hetHan);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA105Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.HetHan.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -472,18 +891,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA106Async")]
 		public virtual async Task<List<Report>> ReportCA106Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA106Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA106Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -491,18 +926,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA107Async")]
 		public virtual async Task<List<Report>> ReportCA107Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA107Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA107Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -510,19 +961,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA108Async")]
 		public virtual async Task<List<Report>> ReportCA108Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isKetLuan = JsonConvert.DeserializeObject<bool>(Request.Form["isKetLuan"]);
-				result = await _ReportBusiness.ReportCA108Async(huyenID, year, month, nhanVienID, isKetLuan);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA108Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsKetLuan.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -530,16 +996,25 @@ namespace API.Controllers.v1
 		[Route("ReportCA201Async")]
 		public virtual async Task<Report> ReportCA201Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			Report result = new Report();
 			try
-			{				
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);				
-				result = await _ReportBusiness.ReportCA201Async(year, month);
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);						
+				
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA201Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
 			}
 			return result;
 		}
@@ -547,16 +1022,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA202Async")]
 		public virtual async Task<List<Report>> ReportCA202Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA202Async(year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA202Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -564,16 +1057,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA203Async")]
 		public virtual async Task<List<Report>> ReportCA203Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA203Async(year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA203Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -581,16 +1092,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA204Async")]
 		public virtual async Task<List<Report>> ReportCA204Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA204Async(year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA204Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -598,16 +1127,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA205Async")]
 		public virtual async Task<List<Report>> ReportCA205Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA205Async(year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA205Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -615,16 +1162,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA206Async")]
 		public virtual async Task<List<Report>> ReportCA206Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA206Async(year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA206Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -632,16 +1197,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA207Async")]
 		public virtual async Task<List<Report>> ReportCA207Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				result = await _ReportBusiness.ReportCA207Async(year, month);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA207Async(baseParameter.Year.Value, baseParameter.Month.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -649,18 +1232,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA305Async")]
 		public virtual async Task<List<Report>> ReportCA305Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA305Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA305Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -668,18 +1267,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA306Async")]
 		public virtual async Task<List<Report>> ReportCA306Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA306Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA306Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -687,19 +1302,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA307Async")]
 		public virtual async Task<List<Report>> ReportCA307Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
-				result = await _ReportBusiness.ReportCA307Async(huyenID, year, month, nhanVienID, hetHan);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA307Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.HetHan.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -707,18 +1337,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA308Async")]
 		public virtual async Task<List<Report>> ReportCA308Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _ReportBusiness.ReportCA308Async(huyenID, year, month, nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA308Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -726,19 +1372,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA401Async")]
 		public virtual async Task<List<Report>> ReportCA401Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA401Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA401Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -746,19 +1407,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA402Async")]
 		public virtual async Task<List<Report>> ReportCA402Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA402Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA402Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -766,19 +1442,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA403Async")]
 		public virtual async Task<List<Report>> ReportCA403Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA403Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA403Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -786,19 +1477,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA404Async")]
 		public virtual async Task<List<Report>> ReportCA404Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA404Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA404Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -806,20 +1512,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA405Async")]
 		public virtual async Task<List<Report>> ReportCA405Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA405Async(huyenID, year, month, nhanVienID, hetHan, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA405Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.HetHan.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -827,19 +1547,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA406Async")]
 		public virtual async Task<List<Report>> ReportCA406Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA406Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA406Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -847,19 +1582,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA407Async")]
 		public virtual async Task<List<Report>> ReportCA407Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA407Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA407Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -867,20 +1617,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA408Async")]
 		public virtual async Task<List<Report>> ReportCA408Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isKetLuan = JsonConvert.DeserializeObject<bool>(Request.Form["isKetLuan"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA408Async(huyenID, year, month, nhanVienID, isKetLuan, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA408Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsKetLuan.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -888,35 +1652,60 @@ namespace API.Controllers.v1
 		[Route("ReportCA501Async")]
 		public virtual async Task<Report> ReportCA501Async()
 		{
-			Report result = new Report();
+			BaseParameter baseParameter = new BaseParameter();
+			Report result = new Report();			
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA501Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA501Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
 			}
+			result.Description = baseParameter.APIMessage;
 			return result;
 		}
 		[HttpPost]
 		[Route("ReportCA502Async")]
 		public virtual async Task<List<Report>> ReportCA502Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA502Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA502Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -924,17 +1713,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA503Async")]
 		public virtual async Task<List<Report>> ReportCA503Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA503Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA503Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -942,17 +1748,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA504Async")]
 		public virtual async Task<List<Report>> ReportCA504Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA504Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA504Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -960,17 +1783,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA505Async")]
 		public virtual async Task<List<Report>> ReportCA505Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA505Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA505Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -978,17 +1818,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA506Async")]
 		public virtual async Task<List<Report>> ReportCA506Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA506Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA506Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -996,17 +1853,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA507Async")]
 		public virtual async Task<List<Report>> ReportCA507Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA507Async(year, month, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA507Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1014,19 +1888,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA605Async")]
 		public virtual async Task<List<Report>> ReportCA605Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA605Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA605Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1034,19 +1923,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA606Async")]
 		public virtual async Task<List<Report>> ReportCA606Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA606Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA606Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1054,20 +1958,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA607Async")]
 		public virtual async Task<List<Report>> ReportCA607Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				int hetHan = JsonConvert.DeserializeObject<int>(Request.Form["hetHan"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA607Async(huyenID, year, month, nhanVienID, hetHan, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA607Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.HetHan.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1075,19 +1993,34 @@ namespace API.Controllers.v1
 		[Route("ReportCA608Async")]
 		public virtual async Task<List<Report>> ReportCA608Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA608Async(huyenID, year, month, nhanVienID, isSmartCA);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA608Async(baseParameter.HuyenID.Value, baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1095,15 +2028,34 @@ namespace API.Controllers.v1
 		[Route("ReportCASearchStringToListAsync")]
 		public virtual async Task<List<Report>> ReportCASearchStringToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);				
-				result = await _ReportBusiness.ReportCASearchStringToListAsync(searchString);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCASearchStringToListAsync(baseParameter.SearchString);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1111,14 +2063,34 @@ namespace API.Controllers.v1
 		[Route("ReportVNPT1001ToListAsync")]
 		public virtual async Task<List<Report>> ReportVNPT1001ToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
-			{				
-				result = await _ReportBusiness.ReportVNPT1001ToListAsync();
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT1001ToListAsync();
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1126,14 +2098,34 @@ namespace API.Controllers.v1
 		[Route("ReportVNPT1002ToListAsync")]
 		public virtual async Task<List<Report>> ReportVNPT1002ToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
 			try
 			{
-				result = await _ReportBusiness.ReportVNPT1002ToListAsync();
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportVNPT1002ToListAsync();
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -1142,37 +2134,54 @@ namespace API.Controllers.v1
 		[Route("ReportCA201_001Async")]
 		public virtual async Task<Report> ReportCA201_001Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			Report result = new Report();
+			Report itemResult = new Report();
 			try
-			{				
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);				
-				result = await _ReportBusiness.ReportCA201_001Async(year, month, nhanVienID);
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA201_001Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
 			}
+			result.Description = baseParameter.APIMessage;
 			return result;
 		}
 		[HttpPost]
 		[Route("ReportCA501_001Async")]
 		public virtual async Task<Report> ReportCA501_001Async()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			Report result = new Report();
+			Report itemResult = new Report();
 			try
-			{				
-				int year = JsonConvert.DeserializeObject<int>(Request.Form["year"]);
-				int month = JsonConvert.DeserializeObject<int>(Request.Form["month"]);
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool isSmartCA = JsonConvert.DeserializeObject<bool>(Request.Form["isSmartCA"]);
-				result = await _ReportBusiness.ReportCA501_001Async(year, month, nhanVienID, isSmartCA);
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCA501_001Async(baseParameter.Year.Value, baseParameter.Month.Value, baseParameter.NhanVienID.Value, baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
 			}
+			result.Description = baseParameter.APIMessage;
 			return result;
 		}
 	}

@@ -17,15 +17,34 @@ namespace API.Controllers.v1
 		[Route("GetBySearchStringToListAsync")]
 		public virtual async Task<List<DoanhNghiep>> GetBySearchStringToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			DoanhNghiep itemResult = new DoanhNghiep();
 			try
 			{
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-				result = await _DoanhNghiepBusiness.GetBySearchStringToListAsync(searchString);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetBySearchStringToListAsync(baseParameter.SearchString);					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}				
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiep>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -33,17 +52,34 @@ namespace API.Controllers.v1
 		[Route("GetByHuyenIDAndXaIDOrSearchStringToListAsync")]
 		public virtual async Task<List<DoanhNghiep>> GetByHuyenIDAndXaIDOrSearchStringToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			DoanhNghiep itemResult = new DoanhNghiep();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-				result = await _DoanhNghiepBusiness.GetByHuyenIDAndXaIDOrSearchStringToListAsync(huyenID, xaID, searchString);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetByHuyenIDAndXaIDOrSearchStringToListAsync(baseParameter.HuyenID.Value, baseParameter.XaID.Value, baseParameter.SearchString);					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}				
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiep>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -51,17 +87,34 @@ namespace API.Controllers.v1
 		[Route("GetCAByHuyenIDAndXaIDOrSearchStringToListAsync")]
 		public virtual async Task<List<DoanhNghiep>> GetCAByHuyenIDAndXaIDOrSearchStringToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			DoanhNghiep itemResult = new DoanhNghiep();
 			try
 			{
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				long xaID = JsonConvert.DeserializeObject<long>(Request.Form["xaID"]);
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-				result = await _DoanhNghiepBusiness.GetCAByHuyenIDAndXaIDOrSearchStringToListAsync(huyenID, xaID, searchString);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetCAByHuyenIDAndXaIDOrSearchStringToListAsync(baseParameter.HuyenID.Value, baseParameter.XaID.Value, baseParameter.SearchString);					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiep>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -69,16 +122,34 @@ namespace API.Controllers.v1
 		[Route("GetByNhanVienIDOrSearchStringToListAsync")]
 		public virtual async Task<List<DoanhNghiep>> GetByNhanVienIDOrSearchStringToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			DoanhNghiep itemResult = new DoanhNghiep();
 			try
 			{
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-				result = await _DoanhNghiepBusiness.GetByNhanVienIDOrSearchStringToListAsync(nhanVienID, searchString);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetByNhanVienIDOrSearchStringToListAsync(baseParameter.NhanVienID.Value, baseParameter.SearchString);					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiep>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -86,16 +157,34 @@ namespace API.Controllers.v1
 		[Route("GetByPhongBanIDOrSearchStringToListAsync")]
 		public virtual async Task<List<DoanhNghiep>> GetByPhongBanIDOrSearchStringToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			DoanhNghiep itemResult = new DoanhNghiep();
 			try
 			{
-				long phongBanID = JsonConvert.DeserializeObject<long>(Request.Form["phongBanID"]);
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-				result = await _DoanhNghiepBusiness.GetByPhongBanIDOrSearchStringToListAsync(phongBanID, searchString);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetByPhongBanIDOrSearchStringToListAsync(baseParameter.PhongBanID.Value, baseParameter.SearchString);					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiep>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -103,43 +192,101 @@ namespace API.Controllers.v1
 		[Route("GetMaSoThueKhongTonTaiToListAsync")]
 		public virtual async Task<List<DoanhNghiep>> GetMaSoThueKhongTonTaiToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
+			DoanhNghiep itemResult = new DoanhNghiep();
 			try
 			{
-				result = await _DoanhNghiepBusiness.GetMaSoThueKhongTonTaiToListAsync();
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetMaSoThueKhongTonTaiToListAsync();					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiep>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
-		[HttpGet]
+		[HttpPost]
 		[Route("GetByIDStringAsync")]
-		public async Task<DoanhNghiep> GetByIDStringAsync(string ID)
+		public async Task<DoanhNghiep> GetByIDStringAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			DoanhNghiep result = new DoanhNghiep();
-			if (!string.IsNullOrEmpty(ID))
+			try
 			{
-				ID = GlobalHelper.InitializationURLCode(ID);
-				result = await _DoanhNghiepBusiness.GetByIDAsync(int.Parse(ID));
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					if (!string.IsNullOrEmpty(baseParameter.IDString))
+					{
+						baseParameter.IDString = GlobalHelper.InitializationURLCode(baseParameter.IDString);
+						baseParameter.ID = int.Parse(baseParameter.IDString);
+						result = await _DoanhNghiepBusiness.GetByIDAsync(baseParameter.ID);
+					}					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;					
+				}
 			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;				
+			}
+			result.Description = baseParameter.APIMessage;
 			return result;
 		}
 		[HttpPost]
 		[Route("GetSQLBySearchString_HuyenIDToListTranferAsync")]
 		public virtual async Task<List<DoanhNghiepTranfer>> GetSQLBySearchString_HuyenIDToListTranferAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<DoanhNghiepTranfer> result = new List<DoanhNghiepTranfer>();
+			DoanhNghiepTranfer itemResult = new DoanhNghiepTranfer();
 			try
 			{
-				string searchString = JsonConvert.DeserializeObject<string>(Request.Form["searchString"]);
-				long huyenID = JsonConvert.DeserializeObject<long>(Request.Form["huyenID"]);
-				result = await _DoanhNghiepBusiness.GetSQLBySearchString_HuyenIDToListTranferAsync(searchString, huyenID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _DoanhNghiepBusiness.GetSQLBySearchString_HuyenIDToListTranferAsync(baseParameter.SearchString, baseParameter.HuyenID.Value);					
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+					
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;				
+			}
+			if (result == null)
+			{
+				result = new List<DoanhNghiepTranfer>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}

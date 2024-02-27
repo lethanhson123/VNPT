@@ -1,28 +1,47 @@
 ﻿namespace API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1.0")]
-    public class MenuController : BaseController<Menu, IMenuBusiness>
-    {
-        private readonly IMenuBusiness _MenuBusiness;
-        public MenuController(IMenuBusiness MenuBusiness) : base(MenuBusiness)
-        {
-            _MenuBusiness = MenuBusiness;
-        }
+	[ApiController]
+	[Route("api/v{version:apiVersion}/[controller]")]
+	[ApiVersion("1.0")]
+	public class MenuController : BaseController<Menu, IMenuBusiness>
+	{
+		private readonly IMenuBusiness _MenuBusiness;
+		public MenuController(IMenuBusiness MenuBusiness) : base(MenuBusiness)
+		{
+			_MenuBusiness = MenuBusiness;
+		}
 		[HttpPost]
 		[Route("GetByNhanVienIDToListAsync")]
 		public virtual async Task<List<Menu>> GetByNhanVienIDToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Menu> result = new List<Menu>();
+			Menu itemResult = new Menu();
 			try
 			{
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["data"]);
-				result = await _MenuBusiness.GetByNhanVienIDToListAsync(nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _MenuBusiness.GetByNhanVienIDToListAsync(baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Menu>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}
@@ -30,16 +49,34 @@
 		[Route("GetSQLByNhanVienIDAndActiveToListAsync")]
 		public virtual async Task<List<Menu>> GetSQLByNhanVienIDAndActiveToListAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Menu> result = new List<Menu>();
+			Menu itemResult = new Menu();
 			try
 			{
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				bool active = JsonConvert.DeserializeObject<bool>(Request.Form["active"]);
-				result = await _MenuBusiness.GetSQLByNhanVienIDAndActiveToListAsync(nhanVienID, active);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _MenuBusiness.GetSQLByNhanVienIDAndActiveToListAsync(baseParameter.NhanVienID.Value, baseParameter.Active.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Menu>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}

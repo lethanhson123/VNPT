@@ -1,4 +1,6 @@
-﻿namespace API.Controllers.v1
+﻿using Business.Model;
+
+namespace API.Controllers.v1
 {
 	[ApiController]
 	[Route("api/v{version:apiVersion}/[controller]")]
@@ -17,12 +19,20 @@
 			NhanVienToken result = new NhanVienToken();
 			try
 			{
-				NhanVienToken model = JsonConvert.DeserializeObject<NhanVienToken>(Request.Form["data"]);
-				result = await _NhanVienTokenBusiness.AuthenticationAsync(model);
+				NhanVienToken model = JsonConvert.DeserializeObject<NhanVienToken>(Request.Form["data"]);				
+				if (model.Description == GlobalHelper.Token)
+				{
+					model.Description = GlobalHelper.APISuccessMessage;
+					result = await _NhanVienTokenBusiness.AuthenticationAsync(model);
+				}
+				else
+				{
+					model.Description = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				result.Description = ex.Message;
 			}
 			return result;
 		}
@@ -31,14 +41,23 @@
 		public virtual async Task<NhanVienToken> GetByTokenAsync()
 		{
 			NhanVienToken result = new NhanVienToken();
+			BaseParameter baseParameter = new BaseParameter();
 			try
-			{
-				string token = JsonConvert.DeserializeObject<string>(Request.Form["token"]);
-				result = await _NhanVienTokenBusiness.GetByTokenAsync(token);
+			{			
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _NhanVienTokenBusiness.GetByTokenAsync(baseParameter.Code);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
 			}
 			return result;
 		}

@@ -14,15 +14,34 @@
 		[Route("GetSQLByNhanVienID_ActiveAsync")]
 		public virtual async Task<List<Xa>> GetSQLByNhanVienID_ActiveAsync()
 		{
+			BaseParameter baseParameter = new BaseParameter();
 			List<Xa> result = new List<Xa>();
+			Xa itemResult = new Xa();
 			try
 			{
-				long nhanVienID = JsonConvert.DeserializeObject<long>(Request.Form["nhanVienID"]);
-				result = await _XaBusiness.GetSQLByNhanVienID_ActiveAsync(nhanVienID);
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _XaBusiness.GetSQLByNhanVienID_ActiveAsync(baseParameter.NhanVienID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
 			}
 			catch (Exception ex)
 			{
-				string mes = ex.Message;
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Xa>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
 			}
 			return result;
 		}

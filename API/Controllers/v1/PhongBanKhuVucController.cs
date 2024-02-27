@@ -14,17 +14,36 @@
         [Route("GetSQLByParentIDAsync")]
         public virtual async Task<List<PhongBanKhuVuc>> GetSQLByParentIDAsync()
         {
-            List<PhongBanKhuVuc> result = new List<PhongBanKhuVuc>();
-            try
-            {
-                long parentID = JsonConvert.DeserializeObject<long>(Request.Form["parentID"]);
-                result = await _PhongBanKhuVucBusiness.GetSQLByParentIDAsync(parentID);
-            }
-            catch (Exception ex)
-            {
-                string mes = ex.Message;
-            }
-            return result;
-        }
+			BaseParameter baseParameter = new BaseParameter();
+			List<PhongBanKhuVuc> result = new List<PhongBanKhuVuc>();
+			PhongBanKhuVuc itemResult = new PhongBanKhuVuc();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _PhongBanKhuVucBusiness.GetSQLByParentIDAsync(baseParameter.ParentID.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<PhongBanKhuVuc>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
     }
 }

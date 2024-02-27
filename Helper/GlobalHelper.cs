@@ -81,7 +81,31 @@
 			}
 		}
 		#endregion
-		#region AppSettings   
+		#region AppSettings 
+		public static string Token
+		{
+			get
+			{
+				var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+				return builder.Build().GetSection("AppSettings").GetSection("Token").Value;
+			}
+		}
+		public static string APIErrorMessage
+		{
+			get
+			{
+				var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+				return builder.Build().GetSection("AppSettings").GetSection("APIErrorMessage").Value;
+			}
+		}
+		public static string APISuccessMessage
+		{
+			get
+			{
+				var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+				return builder.Build().GetSection("AppSettings").GetSection("APISuccessMessage").Value;
+			}
+		}
 		public static int DateBegin
 		{
 			get
