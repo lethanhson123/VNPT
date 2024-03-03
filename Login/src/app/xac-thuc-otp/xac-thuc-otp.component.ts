@@ -25,6 +25,7 @@ export class XacThucOTPComponent implements OnInit {
     var nhanVienID = localStorage.getItem(environment.NhanVienID);
     if (nhanVienID) {
       this.NhanVienTokenService.formData.ParentID = Number(nhanVienID);
+      this.NhanVienTokenService.formData.Description = environment.TokenAPI;
       this.NhanVienTokenService.AuthenticationAsync(this.NhanVienTokenService.formData).subscribe(
         res => {
           this.isShowLoading = false;
