@@ -1299,8 +1299,10 @@ namespace API.Controllers.v1
             table.Columns.Add("LoaiHinhThueBao");
             table.Columns.Add("DichVu");
             table.Columns.Add("PhongBan");
-            table.Columns.Add("DoanhThu");
-            if (Request.Form.Files.Count > 0)
+			table.Columns.Add("PhongBan");			
+			table.Columns.Add("DoanhThu");
+			table.Columns.Add("TrangThaiID");
+			if (Request.Form.Files.Count > 0)
             {
                 var file = Request.Form.Files[0];
                 if (file == null || file.Length == 0)
@@ -1337,7 +1339,7 @@ namespace API.Controllers.v1
                                                 row[0] = i - 1;
                                                 row[1] = yearDoanhThu;
                                                 row[2] = monthDoanhThu;
-                                                for (int j = 1; j < 14; j++)
+                                                for (int j = 1; j < 15; j++)
                                                 {
                                                     if (workSheet.Cells[i, j].Value != null)
                                                     {

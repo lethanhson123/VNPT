@@ -110,6 +110,18 @@ export class DoanhNghiepInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.GetHuyenToListAsync();
+    this.GetXaToListAsync();
+    this.GetNganhNgheKinhDoanhToListAsync();
+    this.GetLoaiDoanhNghiepToListAsync();
+    this.GetLoaiTrangThaiToListAsync();
+    this.GetNhanVienToListAsync();
+    this.GetPhongBanToListAsync();
+    this.GetDoanhNghiepThanhVienToListAsync();
+    this.GetLoaiDoanhNghiepThanhVienToListAsync();
+    this.GetDoanhNghiepDichVuToListAsync();
+    this.GetDichVuToListAsync();
+
   }
   GetYearAndMonth() {
     this.year = new Date().getFullYear();
@@ -556,19 +568,9 @@ export class DoanhNghiepInfoComponent implements OnInit {
     this.isShowLoading = true;
     this.DoanhNghiepService.GetByIDStringAsync(this.queryString).subscribe(
       res => {
+        this.DoanhNghiepService.formData = res as DoanhNghiep;
         if (this.DoanhNghiepService.formData) {
           this.GetDoanhNghiepDichVuLichSuToListAsync();
-          this.GetHuyenToListAsync();
-          this.GetXaToListAsync();
-          this.GetNganhNgheKinhDoanhToListAsync();
-          this.GetLoaiDoanhNghiepToListAsync();
-          this.GetLoaiTrangThaiToListAsync();
-          this.GetNhanVienToListAsync();
-          this.GetPhongBanToListAsync();
-          this.GetDoanhNghiepThanhVienToListAsync();
-          this.GetLoaiDoanhNghiepThanhVienToListAsync();
-          this.GetDoanhNghiepDichVuToListAsync();
-          this.GetDichVuToListAsync();
           this.ReportDoanhNghiep001Async();
           this.ReportDoanhNghiep002Async();
           this.ReportDoanhNghiep003Async();
@@ -580,7 +582,7 @@ export class DoanhNghiepInfoComponent implements OnInit {
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);
       }
-    );   
+    );
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;
