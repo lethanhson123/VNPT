@@ -534,7 +534,7 @@ namespace Business.Implement
 					new SqlParameter("@HuyenID",huyenID),
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
-					new SqlParameter("@NhanVienID", nhanVienID),					
+					new SqlParameter("@NhanVienID", nhanVienID),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA308", parameters);
 			return result;
@@ -620,7 +620,7 @@ namespace Business.Implement
 					new SqlParameter("@HuyenID",huyenID),
 					new SqlParameter("@Year", year),
 					new SqlParameter("@Month", month),
-					new SqlParameter("@NhanVienID", nhanVienID),					
+					new SqlParameter("@NhanVienID", nhanVienID),
 					new SqlParameter("@IsSmartCA", isSmartCA),
 				};
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCA406", parameters);
@@ -824,23 +824,71 @@ namespace Business.Implement
 			{
 				SqlParameter[] parameters =
 				{
-					new SqlParameter("@SearchString",searchString),					
+					new SqlParameter("@SearchString",searchString),
 				};
 				result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportCASearchString", parameters);
-			}			
+			}
 			return result;
 		}
 
 		public virtual async Task<List<Report>> ReportVNPT1001ToListAsync()
 		{
-			List<Report> result = new List<Report>();			
-			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT1001");			
+			List<Report> result = new List<Report>();
+			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT1001");
 			return result;
 		}
 		public virtual async Task<List<Report>> ReportVNPT1002ToListAsync()
 		{
 			List<Report> result = new List<Report>();
 			result = await _ReportRepository.GetByStoredProcedureToListAsync("sp_ReportVNPT1002");
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCACapBu101ToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			result = await GetByStoredProcedureToListAsync("sp_ReportCACapBu101");
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCACapBu102ToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			result = await GetByStoredProcedureToListAsync("sp_ReportCACapBu102");
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCACapBu103ToListAsync()
+		{
+			List<Report> result = new List<Report>();
+			result = await GetByStoredProcedureToListAsync("sp_ReportCACapBu103");
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCACapBu201ToListAsync(bool isSmartCA)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+				{
+					new SqlParameter("@IsSmartCA",isSmartCA),
+				};
+			result = await GetByStoredProcedureToListAsync("sp_ReportCACapBu201", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCACapBu202ToListAsync(bool isSmartCA)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+				{
+					new SqlParameter("@IsSmartCA",isSmartCA),
+				};
+			result = await GetByStoredProcedureToListAsync("sp_ReportCACapBu202", parameters);
+			return result;
+		}
+		public virtual async Task<List<Report>> ReportCACapBu203ToListAsync(bool isSmartCA)
+		{
+			List<Report> result = new List<Report>();
+			SqlParameter[] parameters =
+				{
+					new SqlParameter("@IsSmartCA",isSmartCA),
+				};
+			result = await GetByStoredProcedureToListAsync("sp_ReportCACapBu203", parameters);
 			return result;
 		}
 	}

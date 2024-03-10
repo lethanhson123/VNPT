@@ -36,6 +36,17 @@ import { EmailService } from 'src/app/shared/Email.service';
 })
 export class DashboardCAComponent implements OnInit {
 
+  dataSourceReportCACapBu101: MatTableDataSource<any>;
+  @ViewChild('sortReportCACapBu101') sortReportCACapBu101: MatSort;
+  @ViewChild('paginatorReportCACapBu101') paginatorReportCACapBu101: MatPaginator;
+
+  dataSourceReportCACapBu102: MatTableDataSource<any>;
+  @ViewChild('sortReportCACapBu102') sortReportCACapBu102: MatSort;
+  @ViewChild('paginatorReportCACapBu102') paginatorReportCACapBu102: MatPaginator;
+
+  dataSourceReportCACapBu103: MatTableDataSource<any>;
+  @ViewChild('sortReportCACapBu103') sortReportCACapBu103: MatSort;
+  @ViewChild('paginatorReportCACapBu103') paginatorReportCACapBu103: MatPaginator;
 
   dataSourceReportVNPT003: MatTableDataSource<any>;
   @ViewChild('sortReportVNPT003') sortReportVNPT003: MatSort;
@@ -148,7 +159,79 @@ export class DashboardCAComponent implements OnInit {
     this.onSearchReportCA201();
     // this.onSearchReportCA001();
     // this.onSearchReportCA002();
-    // this.onSearchReportCA008();
+    // this.onSearchReportCA008();  
+    
+  }
+
+  onSearchCACapBu() {
+    this.ReportCACapBu101ToListAsync();
+    this.ReportCACapBu102ToListAsync();
+    this.ReportCACapBu103ToListAsync();
+  }
+
+  ReportCACapBu101ToListAsync() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCACapBu101ToListAsync().subscribe(
+      res => {
+        this.ReportService.listReportCACapBu101 = (res as Report[]);
+        this.dataSourceReportCACapBu101 = new MatTableDataSource(this.ReportService.listReportCACapBu101);
+        this.dataSourceReportCACapBu101.sort = this.sortReportCACapBu101;
+        this.dataSourceReportCACapBu101.paginator = this.paginatorReportCACapBu101;       
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  ReportCACapBu102ToListAsync() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCACapBu102ToListAsync().subscribe(
+      res => {
+        this.ReportService.listReportCACapBu102 = (res as Report[]);
+        this.dataSourceReportCACapBu102 = new MatTableDataSource(this.ReportService.listReportCACapBu102);
+        this.dataSourceReportCACapBu102.sort = this.sortReportCACapBu102;
+        this.dataSourceReportCACapBu102.paginator = this.paginatorReportCACapBu102;       
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+  ReportCACapBu103ToListAsync() {
+    this.isShowLoading = true;
+    this.ReportService.ReportCACapBu103ToListAsync().subscribe(
+      res => {
+        this.ReportService.listReportCACapBu103 = (res as Report[]);
+        this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
+        this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
+        this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;       
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
+
+  onAddReportCACapBu(ID: any) {
+    this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
+      res => {
+        this.DoanhNghiepDichVuCAService.formData = res as DoanhNghiepDichVuCA;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDichVuCADetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {
+          this.onSearchCACapBu();
+        });
+      },
+      err => {
+      }
+    );
   }
 
   GetYearAndMonth() {

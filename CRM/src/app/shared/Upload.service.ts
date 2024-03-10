@@ -30,6 +30,12 @@ export class UploadService {
         formUpload.append('file', fileToUpload, fileToUpload.name);
         return this.httpClient.post(url, formUpload);
     }
+    PostCACapBuByExcelFileAsync(fileToUpload: File) {
+        let url = this.aPIURL + this.controller + '/PostCACapBuByExcelFileAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('file', fileToUpload, fileToUpload.name);
+        return this.httpClient.post(url, formUpload);
+    }
     PostDoanhThuByYearAndMonthListByExcelFileAsync(fileToUpload: File, year: number, month: number) {
         let url = this.aPIURL + this.controller + '/PostDoanhThuByYearAndMonthListByExcelFileAsync';
         const formUpload: FormData = new FormData();

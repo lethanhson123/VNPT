@@ -233,7 +233,7 @@ namespace Business.Implement
 		{
 			return await _DoanhNghiepDichVuCARepository.GetByCondition(model => model.SoChungThu == soChungThu).FirstOrDefaultAsync();
 		}
-		
+
 		public virtual async Task<bool> DongBoDuLieuAsync()
 		{
 			List<Huyen> listHuyen = await _IHuyenBusiness.GetAllToListAsync();
@@ -366,6 +366,20 @@ namespace Business.Implement
 				}
 			}
 			return true;
+		}
+
+		public virtual async Task<string> UpdateItemBySoChungThuCapBuAsync(string soChungThuCapBu)
+		{
+			string result = GlobalHelper.InitializationString;
+			if (!string.IsNullOrEmpty(soChungThuCapBu))
+			{
+				SqlParameter[] parameters =
+				 {
+					new SqlParameter("@SoChungThuCapBu",soChungThuCapBu),
+				};
+				result = await ExecuteNonQueryByStoredProcedureAsync("sp_DoanhNghiepDichVuCAUpdateItemBySoChungThuCapBu", parameters);
+			}
+			return result;
 		}
 	}
 }

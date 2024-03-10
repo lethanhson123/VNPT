@@ -35,6 +35,12 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tab-6" data-bs-toggle="tab" href="#6" role="tab"
+                                    aria-controls="6" aria-selected="false">
+                                    <span class="badge bg-primary" style="font-size: 18px;">CA - Cấp bù</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#3" role="tab"
                                     aria-controls="3" aria-selected="false">
                                     <span class="badge bg-success" style="font-size: 18px;">Doanh nghiệp</span>
@@ -148,6 +154,60 @@
                                         </div>
                                         <br />
                                         <button [disabled]="!isCA" class="btn btn-info" (click)="onSubmitCA()" style="width: 100%;">Upload</button>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-12 col-12">
+                                        <div class="card mb-4 card-info">
+                                            <div class="card-header">
+                                                <h5 class="card-title text-white">Danh sách
+                                                    <span
+                                                        *ngIf="DoanhNghiepService.list">({{DoanhNghiepService.list.length}}
+                                                        items)</span>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-outer">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped m-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Mã số</th>
+                                                                    <th>Doanh nghiệp</th>
+                                                                    <th>Điện thoại</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let element of DoanhNghiepService.list; index as i">
+                                                                    <td>{{i + 1}}</td>
+                                                                    <td>{{element.Code}}</td>
+                                                                    <td>{{element.Name}}</td>
+                                                                    <td>{{element.DienThoai}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="6" role="tabpanel">
+                                <div class="row gx-4">
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <div class="col-lg-12 col-sm-12 col-12">
+                                            <label class="form-label">Bước 01:</label> <a class="link-primary" target="_blank"
+                                                href="{{excelCACapBuURL}}" title="Tải về">Tải về</a> file excel mẫu
+                                        </div>
+                                        <div class="col-lg-12 col-sm-12 col-12">
+                                            <label class="form-label">Bước 02:</label> Chọn file
+                                        </div>
+                                        <div class="col-lg-12 col-sm-12 col-12">
+                                            <input class="form-control" type="file" #uploadCACapBu (change)="changeCACapBu($event.target.files)">
+                                        </div>
+                                        <br />
+                                        <button [disabled]="!isCACapBu" class="btn btn-info" (click)="onSubmitCACapBu()" style="width: 100%;">Upload</button>
                                     </div>
                                     <div class="col-lg-8 col-sm-12 col-12">
                                         <div class="card mb-4 card-info">
