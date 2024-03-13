@@ -202,19 +202,24 @@ export class CASmartComponent implements OnInit {
   }
   ReportCACapBu103ToListAsync() {
     this.isShowLoading = true;
-    this.ReportService.BaseParameter.IsSmartCA = this.isSmartCA;
-    this.ReportService.ReportCACapBu203ToListAsync().subscribe(
-      res => {
-        this.ReportService.listReportCACapBu103 = (res as Report[]);
-        this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
-        this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
-        this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;
-        this.isShowLoading = false;
-      },
-      err => {
-        this.isShowLoading = false;
-      }
-    );
+    if (this.searchString.length > 0) {
+      this.dataSourceReportCACapBu103.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.ReportService.BaseParameter.IsSmartCA = this.isSmartCA;
+      this.ReportService.ReportCACapBu203ToListAsync().subscribe(
+        res => {
+          this.ReportService.listReportCACapBu103 = (res as Report[]);
+          this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
+          this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
+          this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;
+          this.isShowLoading = false;
+        },
+        err => {
+          this.isShowLoading = false;
+        }
+      );
+    }
   }
 
   onAddReportCACapBu(ID: any) {

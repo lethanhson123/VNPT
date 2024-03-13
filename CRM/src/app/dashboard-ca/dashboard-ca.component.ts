@@ -160,7 +160,7 @@ export class DashboardCAComponent implements OnInit {
     // this.onSearchReportCA001();
     // this.onSearchReportCA002();
     // this.onSearchReportCA008();  
-    
+
   }
 
   onSearchCACapBu() {
@@ -176,7 +176,7 @@ export class DashboardCAComponent implements OnInit {
         this.ReportService.listReportCACapBu101 = (res as Report[]);
         this.dataSourceReportCACapBu101 = new MatTableDataSource(this.ReportService.listReportCACapBu101);
         this.dataSourceReportCACapBu101.sort = this.sortReportCACapBu101;
-        this.dataSourceReportCACapBu101.paginator = this.paginatorReportCACapBu101;       
+        this.dataSourceReportCACapBu101.paginator = this.paginatorReportCACapBu101;
         this.isShowLoading = false;
       },
       err => {
@@ -191,7 +191,7 @@ export class DashboardCAComponent implements OnInit {
         this.ReportService.listReportCACapBu102 = (res as Report[]);
         this.dataSourceReportCACapBu102 = new MatTableDataSource(this.ReportService.listReportCACapBu102);
         this.dataSourceReportCACapBu102.sort = this.sortReportCACapBu102;
-        this.dataSourceReportCACapBu102.paginator = this.paginatorReportCACapBu102;       
+        this.dataSourceReportCACapBu102.paginator = this.paginatorReportCACapBu102;
         this.isShowLoading = false;
       },
       err => {
@@ -201,18 +201,23 @@ export class DashboardCAComponent implements OnInit {
   }
   ReportCACapBu103ToListAsync() {
     this.isShowLoading = true;
-    this.ReportService.ReportCACapBu103ToListAsync().subscribe(
-      res => {
-        this.ReportService.listReportCACapBu103 = (res as Report[]);
-        this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
-        this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
-        this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;       
-        this.isShowLoading = false;
-      },
-      err => {
-        this.isShowLoading = false;
-      }
-    );
+    if (this.searchString.length > 0) {
+      this.dataSourceReportCACapBu103.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.ReportService.ReportCACapBu103ToListAsync().subscribe(
+        res => {
+          this.ReportService.listReportCACapBu103 = (res as Report[]);
+          this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
+          this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
+          this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;
+          this.isShowLoading = false;
+        },
+        err => {
+          this.isShowLoading = false;
+        }
+      );
+    }
   }
 
   onAddReportCACapBu(ID: any) {

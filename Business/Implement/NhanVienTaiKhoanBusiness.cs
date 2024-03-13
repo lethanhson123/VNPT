@@ -18,19 +18,27 @@ namespace Business.Implement
 				NhanVienTaiKhoan modelExist = new NhanVienTaiKhoan();
 				if (model.ParentID > 1)
 				{
-					modelExist = await _NhanVienTaiKhoanRepository.GetByCodeAsync(model.Code);					
+					modelExist = await GetByCondition(item => item.Code == model.Code && item.ParentID > 1).FirstOrDefaultAsync();
+				}
+				if (model.ParentID == 1)
+				{
+					modelExist = await GetByCondition(item => item.Code == model.Code && item.ParentID == 1).FirstOrDefaultAsync();
+				}
+				if (modelExist == null)
+				{
+					modelExist = new NhanVienTaiKhoan();
 				}
 				if (model.ID > 0)
 				{
 					if (modelExist.ID == 0)
 					{
-						await _NhanVienTaiKhoanRepository.UpdateAsync(model);
+						await UpdateAsync(model);
 					}
 					else
 					{
 						if (modelExist.ID == model.ID)
 						{
-							await _NhanVienTaiKhoanRepository.UpdateAsync(model);
+							await UpdateAsync(model);
 						}
 					}
 				}
@@ -38,7 +46,7 @@ namespace Business.Implement
 				{
 					if (modelExist.ID == 0)
 					{
-						await _NhanVienTaiKhoanRepository.AddAsync(model);
+						await AddAsync(model);
 					}
 				}
 			}

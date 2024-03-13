@@ -154,7 +154,7 @@ export class CAVNPTComponent implements OnInit {
   ngOnInit(): void {
     this.GetHuyenToListAsync();
     this.GetYearToList();
-    this.GetMonthToList();  
+    this.GetMonthToList();
     this.onSearchReportCA201();
     // this.onSearchReportCA001();
     // this.onSearchReportCA002();
@@ -201,19 +201,24 @@ export class CAVNPTComponent implements OnInit {
   }
   ReportCACapBu103ToListAsync() {
     this.isShowLoading = true;
-    this.ReportService.BaseParameter.IsSmartCA = this.isSmartCA;
-    this.ReportService.ReportCACapBu203ToListAsync().subscribe(
-      res => {
-        this.ReportService.listReportCACapBu103 = (res as Report[]);
-        this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
-        this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
-        this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;
-        this.isShowLoading = false;
-      },
-      err => {
-        this.isShowLoading = false;
-      }
-    );
+    if (this.searchString.length > 0) {
+      this.dataSourceReportCACapBu103.filter = this.searchString.toLowerCase();
+    }
+    else {
+      this.ReportService.BaseParameter.IsSmartCA = this.isSmartCA;
+      this.ReportService.ReportCACapBu203ToListAsync().subscribe(
+        res => {
+          this.ReportService.listReportCACapBu103 = (res as Report[]);
+          this.dataSourceReportCACapBu103 = new MatTableDataSource(this.ReportService.listReportCACapBu103);
+          this.dataSourceReportCACapBu103.sort = this.sortReportCACapBu103;
+          this.dataSourceReportCACapBu103.paginator = this.paginatorReportCACapBu103;
+          this.isShowLoading = false;
+        },
+        err => {
+          this.isShowLoading = false;
+        }
+      );
+    }
   }
 
   onAddReportCACapBu(ID: any) {
@@ -254,7 +259,7 @@ export class CAVNPTComponent implements OnInit {
       this.DownloadService.listMonth = res as YearMonth[];
       this.GetYearAndMonth();
     });
-  } 
+  }
   onReportCA() {
     this.isShowLoading = true;
     this.DownloadService.ReportCA503_504_506_507ToHTMLAsync(this.year, this.month, this.isSmartCA).subscribe(
@@ -387,11 +392,11 @@ export class CAVNPTComponent implements OnInit {
   }
 
   public ChartOptionsReportCA205SanLuong: ChartOptions = {
-    responsive: true, 
+    responsive: true,
     legend: {
       display: true,
       position: 'right'
-    },    
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -417,7 +422,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    }, 
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -443,7 +448,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },    
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -468,7 +473,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },   
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -493,7 +498,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },   
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -518,7 +523,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },   
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -543,7 +548,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },   
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -568,7 +573,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },   
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -593,7 +598,7 @@ export class CAVNPTComponent implements OnInit {
     legend: {
       display: true,
       position: 'right'
-    },   
+    },
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -654,7 +659,7 @@ export class CAVNPTComponent implements OnInit {
   ];
 
   public ChartOptionsReportCA202GiaHan: ChartOptions = {
-    responsive: true,    
+    responsive: true,
     animation: {
       duration: 1,
       onComplete: function () {
@@ -691,12 +696,12 @@ export class CAVNPTComponent implements OnInit {
   public ChartPluginsReportCA202GiaHan = [];
 
   public ChartDataReportCA202GiaHan: ChartDataSets[] = [
-  ]; 
- 
+  ];
+
   GetHuyenToListAsync() {
     this.HuyenService.GetSQLByNhanVienID_ActiveAsync().subscribe(
       res => {
-        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));        
+        this.HuyenService.list = (res as Huyen[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
       },
       err => {
       }
@@ -710,7 +715,7 @@ export class CAVNPTComponent implements OnInit {
       err => {
       }
     );
-  } 
+  }
   ReportCA001Async() {
     this.isShowLoading = true;
     this.ReportService.ReportCA401Async(this.huyenID, this.year, this.month, this.nhanVienID, this.isSmartCA).subscribe(
@@ -1119,7 +1124,7 @@ export class CAVNPTComponent implements OnInit {
         this.isShowLoading = false;
       }
     );
-  }  
+  }
 
   onAddReportCA001(ID: any) {
     this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
@@ -1250,7 +1255,7 @@ export class CAVNPTComponent implements OnInit {
   DoanhNghiepDichVuCAThieuHoSo() {
     this.isShowLoading = true;
     this.EmailService.AsyncThieuHoSoDoanhNghiepDichVuCAIsSmartCA(this.isSmartCA).subscribe(
-      res => {        
+      res => {
         this.isShowLoading = false;
       },
       err => {
@@ -1270,16 +1275,16 @@ export class CAVNPTComponent implements OnInit {
         let labelArray = [];
         let dataArray001 = [];
         let dataArray002 = [];
-        let dataArray003 = [];        
+        let dataArray003 = [];
         for (let i = 0; i < this.ReportService.listReportCA206.length; i++) {
           labelArray.push(this.ReportService.listReportCA206[i].NhanVienTaoYeuCauName);
           dataArray001.push(this.ReportService.listReportCA206[i].HoSo);
           dataArray002.push(this.ReportService.listReportCA206[i].HoSoHoanThanh);
-          dataArray003.push(this.ReportService.listReportCA206[i].HoSoChuaHoanThanh);          
+          dataArray003.push(this.ReportService.listReportCA206[i].HoSoChuaHoanThanh);
         }
         let label001: string = 'HỒ SƠ';
         let label002: string = 'HOÀN THÀNH';
-        let label003: string = 'CHƯA HOÀN THÀNH';        
+        let label003: string = 'CHƯA HOÀN THÀNH';
         this.ChartLabelsReportCA206 = labelArray;
         this.ChartDataReportCA206 = [
           { data: dataArray001, label: label001, stack: 'a', },
@@ -1306,23 +1311,23 @@ export class CAVNPTComponent implements OnInit {
         let labelArray = [];
         let dataArray001 = [];
         let dataArray002 = [];
-        let dataArray003 = [];        
+        let dataArray003 = [];
         for (let i = 0; i < this.ReportService.listReportCA207.length; i++) {
           labelArray.push(this.ReportService.listReportCA207[i].PhongBanTaoYeuCauName);
           dataArray001.push(this.ReportService.listReportCA207[i].HoSo);
           dataArray002.push(this.ReportService.listReportCA207[i].HoSoHoanThanh);
-          dataArray003.push(this.ReportService.listReportCA207[i].HoSoChuaHoanThanh);          
+          dataArray003.push(this.ReportService.listReportCA207[i].HoSoChuaHoanThanh);
         }
         let label001: string = 'HỒ SƠ';
         let label002: string = 'HOÀN THÀNH';
-        let label003: string = 'CHƯA HOÀN THÀNH';        
+        let label003: string = 'CHƯA HOÀN THÀNH';
         this.ChartLabelsReportCA207 = labelArray;
         this.ChartDataReportCA207 = [
           { data: dataArray001, label: label001, stack: 'a', },
           { data: dataArray002, label: label002, stack: 'b', type: 'line', fill: false },
           { data: dataArray003, label: label003, stack: 'c', type: 'line', fill: false }
         ];
-        
+
 
         this.isShowLoading = false;
       },
@@ -1337,7 +1342,7 @@ export class CAVNPTComponent implements OnInit {
       duration: 1,
       onComplete: function () {
         var chartInstance = this.chart,
-        ctx = chartInstance.ctx;
+          ctx = chartInstance.ctx;
         ctx.textAlign = 'center';
         ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.textBaseline = 'bottom';
@@ -1377,7 +1382,7 @@ export class CAVNPTComponent implements OnInit {
       duration: 1,
       onComplete: function () {
         var chartInstance = this.chart,
-        ctx = chartInstance.ctx;
+          ctx = chartInstance.ctx;
         ctx.textAlign = 'center';
         ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.textBaseline = 'bottom';
