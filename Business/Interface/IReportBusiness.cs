@@ -79,5 +79,13 @@ namespace Business.Interface
 		Task<Report> ReportCA201_001Async(int year, int month, long nhanVienID);
 		Task<Report> ReportCA501_001Async(int year, int month, long nhanVienID, bool isSmartCA);
 
+		Task<List<Report>> ReportCACapBu101ToListAsync();
+		Task<List<Report>> ReportCACapBu102ToListAsync();
+		Task<List<Report>> ReportCACapBu103ToListAsync();
+		Task<List<Report>> ReportCACapBu201ToListAsync(bool isSmartCA);
+		Task<List<Report>> ReportCACapBu202ToListAsync(bool isSmartCA);
+		Task<List<Report>> ReportCACapBu203ToListAsync(bool isSmartCA);
+
+
 	}
 }

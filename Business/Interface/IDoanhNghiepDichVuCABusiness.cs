@@ -13,5 +13,7 @@
 		Task<DoanhNghiepDichVuCA> GetBySoChungThuToAsync(string soChungThu);
 		Task<bool> DongBoDuLieuAsync();
 		Task<bool> DongBoDuLieuNoteAsync();
+
+		Task<string> UpdateItemBySoChungThuCapBuAsync(string soChungThuCapBu);
 	}
 }

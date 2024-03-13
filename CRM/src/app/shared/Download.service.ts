@@ -31,7 +31,7 @@ export class DownloadService {
         return this.httpClient.get(url).toPromise();
     }
     GetYearToList() {
-        let url = this.aPIURL + this.controller + '/GetYearToList';
+        let url = this.aPIURL + this.controller + '/GetYearToList';        
         return this.httpClient.get(url).toPromise();
     }
     Report0004ToExcelAsync(huyenID: number, xaID: number, searchString: string) {

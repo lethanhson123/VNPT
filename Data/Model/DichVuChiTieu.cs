@@ -15,6 +15,12 @@
 		public int? SmartCAGiaHan { get; set; }
 		public int? SmartCAPhongBanPhatTrien { get; set; }
 		public int? SmartCAPhongBanGiaHan { get; set; }
+		public decimal? DoanhThu { get; set; }
+		public decimal? PhongBanDoanhThu { get; set; }
+		public int? CACapBu { get; set; }
+		public int? CACapBuPhongBan { get; set; }
+		public int? SmartCACapBu { get; set; }
+		public int? SmartCACapBuPhongBan { get; set; }
 		public DichVuChiTieu()
 		{
 		}

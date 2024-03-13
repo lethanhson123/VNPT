@@ -2184,5 +2184,216 @@ namespace API.Controllers.v1
 			result.Description = baseParameter.APIMessage;
 			return result;
 		}
+
+		[HttpPost]
+		[Route("ReportCACapBu101ToListAsync")]
+		public virtual async Task<List<Report>> ReportCACapBu101ToListAsync()
+		{
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCACapBu101ToListAsync();
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCACapBu102ToListAsync")]
+		public virtual async Task<List<Report>> ReportCACapBu102ToListAsync()
+		{
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCACapBu102ToListAsync();
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCACapBu103ToListAsync")]
+		public virtual async Task<List<Report>> ReportCACapBu103ToListAsync()
+		{
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCACapBu103ToListAsync();
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCACapBu201ToListAsync")]
+		public virtual async Task<List<Report>> ReportCACapBu201ToListAsync()
+		{
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCACapBu201ToListAsync(baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCACapBu202ToListAsync")]
+		public virtual async Task<List<Report>> ReportCACapBu202ToListAsync()
+		{
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCACapBu202ToListAsync(baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
+		[HttpPost]
+		[Route("ReportCACapBu203ToListAsync")]
+		public virtual async Task<List<Report>> ReportCACapBu203ToListAsync()
+		{
+			BaseParameter baseParameter = new BaseParameter();
+			List<Report> result = new List<Report>();
+			Report itemResult = new Report();
+			try
+			{
+				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+				if (baseParameter.Token == GlobalHelper.Token)
+				{
+					baseParameter.APIMessage = GlobalHelper.APISuccessMessage;
+					result = await _ReportBusiness.ReportCACapBu203ToListAsync(baseParameter.IsSmartCA.Value);
+				}
+				else
+				{
+					baseParameter.APIMessage = GlobalHelper.APIErrorMessage;
+				}
+			}
+			catch (Exception ex)
+			{
+				baseParameter.APIMessage = ex.Message;
+			}
+			if (result == null)
+			{
+				result = new List<Report>();
+			}
+			if (result.Count == 0)
+			{
+				itemResult.Description = baseParameter.APIMessage;
+				result.Add(itemResult);
+			}
+			return result;
+		}
 	}
 }

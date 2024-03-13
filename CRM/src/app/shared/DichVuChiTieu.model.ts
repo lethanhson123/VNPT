@@ -14,6 +14,12 @@ export class DichVuChiTieu extends Base {
     SmartCAGiaHan?: number;
     SmartCAPhongBanPhatTrien?: number;
     SmartCAPhongBanGiaHan?: number;
+    DoanhThu?: number;
+    PhongBanDoanhThu?: number;
+    CACapBu?: number;
+    CACapBuPhongBan?: number;
+    SmartCACapBu?: number;
+    SmartCACapBuPhongBan?: number;
 }
 
 

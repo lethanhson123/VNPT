@@ -106,4 +106,6 @@ export class Report extends Base{
     CCCD?: string;
     IsKetLuan?: boolean;
     KetLuan?: string;
+
+    IsCapBu?: boolean;
 }

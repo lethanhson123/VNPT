@@ -12,12 +12,19 @@ export class ReportService extends BaseService{
     displayColumnsReportVNPT003: string[] = ['No', 'Name', 'HuyenName', 'DoanhThu', 'DoanhThu01', 'DoanhThu02', 'DoanhThu03', 'DoanhThu04', 'DoanhThu05', 'DoanhThu06', 'DoanhThu07', 'DoanhThu08', 'DoanhThu09', 'DoanhThu10', 'DoanhThu11', 'DoanhThu12']; 
     displayColumnsReportCA001: string[] = ['No', 'HuyenName', 'DoanhNghiepName', 'UserName', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'NhanVienName', 'TaiKhoanTaoYeuCau', 'TaiKhoanDuyetYeuCau']; 
     displayColumnsReportCA002: string[] = ['DoanhNghiepName', 'UserName', 'IsKetLuan', 'KetLuan', 'IsHopDong', 'IsDonXinCapChungThuSo', 'IsCCCD', 'IsGiayPhepKinhDoanh', 'IsBienBanNghiemThu', 'IsHoaDon', 'Note', 'CodeCA', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
+    
     displayColumnsReportCA002001: string[] = ['DoanhNghiepName', 'LastUpdatedDate', 'UserName', 'IsKetLuan', 'KetLuan', 'IsHopDong', 'IsDonXinCapChungThuSo', 'IsCCCD', 'IsGiayPhepKinhDoanh', 'IsBienBanNghiemThu', 'IsHoaDon', 'Note', 'CodeCA', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
     displayColumnsReportCA202312: string[] = ['DoanhNghiepName', 'UserName', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
     displayColumnsReportCA006: string[] = ['No', 'HuyenName', 'DoanhNghiepName']; 
     displayColumnsReportCA203: string[] = ['No', 'NhanVienTaoYeuCauName', 'SanLuong', 'DoanhThu']; 
     displayColumnsReportCA204: string[] = ['No', 'NhanVienTaoYeuCauName', 'SanLuong', 'PhatTrienChiTieu', 'DoanhThu', 'TyLePhatTrien']; 
-    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'HoSoChuaHoanThanh', 'TyLeHoanThanh']; 
+    displayColumnsReportCA206: string[] = ['No', 'PhongBanTaoYeuCauName', 'HoSo', 'HoSoHoanThanh', 'HoSoChuaHoanThanh', 'TyLeHoanThanh'];
+    
+    
+    displayColumnsReportCACapBu101: string[] = ['No', 'PhongBanTaoYeuCauName', 'GiaHan', 'GiaHanChiTieu', 'TyLeHoSo']; 
+    displayColumnsReportCACapBu102: string[] = ['No', 'NhanVienTaoYeuCauName', 'GiaHan', 'GiaHanChiTieu', 'TyLeHoSo']; 
+    displayColumnsReportCACapBu: string[] = ['DoanhNghiepName', 'UserName', 'IsCapBu', 'IsKetLuan', 'KetLuan', 'IsHopDong', 'IsDonXinCapChungThuSo', 'IsCCCD', 'IsGiayPhepKinhDoanh', 'IsBienBanNghiemThu', 'IsHoaDon', 'Note', 'CodeCA', 'SoChungThu', 'SoChungThuCu', 'NgayHieuLuc', 'NgayHetHan', 'TenGoiCuoc', 'LoaiGoiCuoc', 'ThoiGianGoiCuoc', 'Email', 'DienThoai', 'TaiKhoanTaoYeuCau', 'NhanVienTaoYeuCauName', 'TaiKhoanDuyetYeuCau', 'PhongBanDuyetYeuCauName', 'LoaiYeuCau', 'DoanhThu']; 
+
     listReport001: Report[] | undefined;        
     listReport002: Report[] | undefined;        
     listReport003: Report[] | undefined;        
@@ -53,11 +60,58 @@ export class ReportService extends BaseService{
     listReportCA306: Report[] | undefined;    
     listReportCA307: Report[] | undefined;    
     listReportCA308: Report[] | undefined;    
+
+    listReportCACapBu101: Report[] | undefined; 
+    listReportCACapBu102: Report[] | undefined; 
+    listReportCACapBu103: Report[] | undefined; 
+    listReportCACapBu201: Report[] | undefined; 
+    listReportCACapBu202: Report[] | undefined; 
+    listReportCACapBu203: Report[] | undefined; 
+
+
     formData!: Report;
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "Report";
     }    
+    ReportCACapBu101ToListAsync() {        
+        let url = this.aPIURL + this.controller + '/ReportCACapBu101ToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));             
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCACapBu102ToListAsync() {        
+        let url = this.aPIURL + this.controller + '/ReportCACapBu102ToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));             
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCACapBu103ToListAsync() {        
+        let url = this.aPIURL + this.controller + '/ReportCACapBu103ToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));             
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCACapBu201ToListAsync() {        
+        let url = this.aPIURL + this.controller + '/ReportCACapBu201ToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));             
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCACapBu202ToListAsync() {        
+        let url = this.aPIURL + this.controller + '/ReportCACapBu202ToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));             
+        return this.httpClient.post(url, formUpload);
+    }
+    ReportCACapBu203ToListAsync() {        
+        let url = this.aPIURL + this.controller + '/ReportCACapBu203ToListAsync';
+        const formUpload: FormData = new FormData();        
+        formUpload.append('data', JSON.stringify(this.BaseParameter));             
+        return this.httpClient.post(url, formUpload);
+    }
+
+
     Report001Async(doanhNghiepID: number) {
         this.BaseParameter.DoanhNghiepID = doanhNghiepID;      
         let url = this.aPIURL + this.controller + '/Report001Async';

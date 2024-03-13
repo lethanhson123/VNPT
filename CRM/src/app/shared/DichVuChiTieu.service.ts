@@ -7,7 +7,7 @@ import { BaseService } from './Base.service';
     providedIn: 'root'
 })
 export class DichVuChiTieuService extends BaseService {
-    displayColumns: string[] = ['Nam', 'PhongBanID', 'PhongBanPhatTrien', 'PhongBanGiaHan','SmartCAPhongBanPhatTrien', 'SmartCAPhongBanGiaHan', 'NhanVienID', 'PhatTrien', 'GiaHan','SmartCAPhatTrien', 'SmartCAGiaHan', 'Save']; 
+    displayColumns: string[] = ['Nam', 'PhongBanID', 'PhongBanPhatTrien', 'PhongBanGiaHan', 'SmartCAPhongBanPhatTrien', 'SmartCAPhongBanGiaHan', 'CACapBuPhongBan', 'SmartCACapBuPhongBan', 'PhongBanDoanhThu', 'NhanVienID', 'PhatTrien', 'GiaHan', 'SmartCAPhatTrien', 'SmartCAGiaHan', 'CACapBu','SmartCACapBu', 'DoanhThu', 'Save'];
     constructor(public httpClient: HttpClient) {
         super(httpClient);
         this.controller = "DichVuChiTieu";
@@ -16,8 +16,8 @@ export class DichVuChiTieuService extends BaseService {
         this.BaseParameter.Year = nam;
         this.BaseParameter.Month = thang;
         let url = this.aPIURL + this.controller + '/GetByNam_ThangToListAsync';
-        const formUpload: FormData = new FormData();        
-        formUpload.append('data', JSON.stringify(this.BaseParameter)); 
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(this.BaseParameter));
         return this.httpClient.post(url, formUpload);
     }
 }

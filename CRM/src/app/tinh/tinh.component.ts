@@ -189,7 +189,7 @@ export class TinhComponent implements OnInit {
   }
   GetMonthToList() {
     this.DownloadService.GetMonthToList().then(res => {
-      this.DownloadService.listMonth = res as YearMonth[];
+      this.DownloadService.listMonth = res as YearMonth[];      
     });
   }
 
