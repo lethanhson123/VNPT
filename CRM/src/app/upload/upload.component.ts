@@ -8,6 +8,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { UploadService } from 'src/app/shared/Upload.service';
 import { DoanhNghiep } from 'src/app/shared/DoanhNghiep.model';
 import { DoanhNghiepService } from 'src/app/shared/DoanhNghiep.service';
+
+import { DoanhNghiepDichVuCA } from 'src/app/shared/DoanhNghiepDichVuCA.model';
+import { DoanhNghiepDichVuCAService } from 'src/app/shared/DoanhNghiepDichVuCA.service';
+
 import { YearMonth } from 'src/app/shared/YearMonth.model';
 import { DownloadService } from 'src/app/shared/Download.service';
 
@@ -45,6 +49,7 @@ export class UploadComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     public DoanhNghiepService: DoanhNghiepService,
+    public DoanhNghiepDichVuCAService: DoanhNghiepDichVuCAService,
     public UploadService: UploadService,
     public DownloadService: DownloadService,
     public NotificationService: NotificationService,
@@ -151,6 +156,8 @@ export class UploadComponent implements OnInit {
     this.isShowLoading = true;
     this.UploadService.PostCACapBuByExcelFileAsync(fileToUpload).subscribe(
       res => {
+        this.DoanhNghiepDichVuCAService.list = (res as DoanhNghiepDichVuCA[]);
+        console.log(this.DoanhNghiepDichVuCAService.list);
         this.isShowLoading = false;
         this.NotificationService.warn(environment.UploadSuccess);
       },
@@ -166,7 +173,7 @@ export class UploadComponent implements OnInit {
     this.isShowLoading = true;
     this.UploadService.PostGoiCuocListByExcelFileAsync(fileToUpload).subscribe(
       res => {
-        this.isShowLoading = false;        
+        this.isShowLoading = false;
         this.NotificationService.warn(environment.UploadSuccess);
       },
       err => {
@@ -181,7 +188,7 @@ export class UploadComponent implements OnInit {
     this.isShowLoading = true;
     this.UploadService.PostDoanhNghiepDichVuCASoChungThuByExcelFileAsync(fileToUpload).subscribe(
       res => {
-        this.isShowLoading = false;        
+        this.isShowLoading = false;
         this.NotificationService.warn(environment.UploadSuccess);
       },
       err => {

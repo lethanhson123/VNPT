@@ -50,4 +50,5 @@ export class DoanhNghiepDichVuCA extends Base{
     CCCD?: string;
     IsKetLuan?: boolean;
     KetLuan?: string;
+    IsCapBu?: boolean;
 }

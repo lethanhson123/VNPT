@@ -111,6 +111,7 @@
 		public string? CCCD { get; set; }
 		public bool? IsKetLuan { get; set; }
 		public string? KetLuan { get; set; }
+		public bool? IsCapBu { get; set; }
 		public Report()
         {
         }

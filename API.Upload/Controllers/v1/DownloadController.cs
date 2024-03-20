@@ -105,20 +105,28 @@
 						int stt = 0;
 						foreach (Report report in listReportCA206)
 						{
-							stt = stt + 1;
-							contentReportCA206.AppendLine(@"<tr>");
-							contentReportCA206.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
-							contentReportCA206.AppendLine(@"<td><b>" + report.NhanVienTaoYeuCauName + "</b></td>");
-							contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
-							contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
-							contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
-							decimal tyLe = 0;
-							if (report.HoSo != 0)
+							try
 							{
-								tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+								stt = stt + 1;
+								contentReportCA206.AppendLine(@"<tr>");
+								contentReportCA206.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+								contentReportCA206.AppendLine(@"<td><b>" + report.NhanVienTaoYeuCauName + "</b></td>");
+								contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
+								contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
+								contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
+								decimal tyLe = 0;
+								if (report.HoSo != 0)
+								{
+									tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+								}
+								contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
+								contentReportCA206.AppendLine(@"</tr>");
 							}
-							contentReportCA206.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
-							contentReportCA206.AppendLine(@"</tr>");
+							catch (Exception ex)
+							{
+								result = ex.Message;
+							}
+
 						}
 						contentHTML = contentHTML.Replace("[NhanVienBaoCao]", contentReportCA206.ToString());
 					}
@@ -128,20 +136,27 @@
 						int stt = 0;
 						foreach (Report report in listReportCA207)
 						{
-							stt = stt + 1;
-							contentReportCA207.AppendLine(@"<tr>");
-							contentReportCA207.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
-							contentReportCA207.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
-							contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
-							contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
-							contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
-							decimal tyLe = 0;
-							if (report.HoSo != 0)
+							try
 							{
-								tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+								stt = stt + 1;
+								contentReportCA207.AppendLine(@"<tr>");
+								contentReportCA207.AppendLine(@"<td style='text-align: center;'>" + stt + "</td>");
+								contentReportCA207.AppendLine(@"<td><b>" + report.PhongBanTaoYeuCauName + "</b></td>");
+								contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSo.Value.ToString("N0") + "</td>");
+								contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoHoanThanh.Value.ToString("N0") + "</td>");
+								contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + report.HoSoChuaHoanThanh.Value.ToString("N0") + "</td>");
+								decimal tyLe = 0;
+								if (report.HoSo != 0)
+								{
+									tyLe = report.HoSoHoanThanh.Value * 100 / report.HoSo.Value;
+								}
+								contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
+								contentReportCA207.AppendLine(@"</tr>");
 							}
-							contentReportCA207.AppendLine(@"<td style='text-align: right;'>" + tyLe.ToString("N0") + " %</td>");
-							contentReportCA207.AppendLine(@"</tr>");
+							catch (Exception ex)
+							{
+								result = ex.Message;
+							}
 						}
 						contentHTML = contentHTML.Replace("[PhongBanHangBaoCao]", contentReportCA207.ToString());
 					}
@@ -314,7 +329,7 @@
 				result = ex.Message;
 			}
 
-			
+
 			return Json(result);
 		}
 		[HttpPost]
@@ -354,7 +369,7 @@
 			{
 				result = ex.Message;
 			}
-			
+
 			return Json(result);
 		}
 		[HttpPost]
@@ -375,7 +390,7 @@
 					int year = baseParameter.Year.Value;
 					int month = baseParameter.Month.Value;
 
-					
+
 					List<Report> list = await _ReportBusiness.ReportVNPT003Async(huyenID, xaID, searchString, dichVuID, year, month);
 					string fileName = @"Report_DichVu" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
 					var streamExport = new MemoryStream();
@@ -397,7 +412,7 @@
 				result = ex.Message;
 			}
 
-			
+
 			return Json(result);
 		}
 		[HttpPost]
@@ -411,8 +426,8 @@
 				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
 				if (baseParameter.Token == GlobalHelper.Token)
 				{
-					long phongBanID = baseParameter.PhongBanID.Value;					
-					int year = baseParameter.Year.Value;				
+					long phongBanID = baseParameter.PhongBanID.Value;
+					int year = baseParameter.Year.Value;
 
 
 					List<Report> list = await _ReportBusiness.ReportVNPT004Async(phongBanID, year);
@@ -441,7 +456,7 @@
 		[Route("ReportVNPT005ToExcelAsync")]
 		public async Task<JsonResult> ReportVNPT005ToExcelAsync()
 		{
-			
+
 
 			string result = GlobalHelper.InitializationString;
 			BaseParameter baseParameter = new BaseParameter();
@@ -480,8 +495,8 @@
 		[HttpPost]
 		[Route("DoanhNghiepMaSoThueKhongTonTaiToExcelAsync")]
 		public async Task<JsonResult> DoanhNghiepMaSoThueKhongTonTaiToExcelAsync()
-		{			
-			
+		{
+
 
 			string result = GlobalHelper.InitializationString;
 			BaseParameter baseParameter = new BaseParameter();
@@ -523,7 +538,7 @@
 			{
 				baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
 				if (baseParameter.Token == GlobalHelper.Token)
-				{					
+				{
 					long huyenID = baseParameter.HuyenID.Value;
 					int year = baseParameter.Year.Value;
 					int month = baseParameter.Month.Value;
@@ -554,7 +569,7 @@
 		[HttpPost]
 		[Route("ReportCA002ToExcelAsync")]
 		public async Task<JsonResult> ReportCA002ToExcelAsync()
-		{			
+		{
 
 			string result = GlobalHelper.InitializationString;
 			BaseParameter baseParameter = new BaseParameter();

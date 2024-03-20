@@ -24,6 +24,13 @@
         <div class="col-lg-3 col-sm-12 col-12">
             <div class="col-lg-12 col-sm-12 col-12">
                 <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsCapBu"
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsCapBu" />
+                    <label class="form-check-label" for="IsCapBu">Cấp bù</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
                     <input type="checkbox" class="form-check-input" name="IsKetLuan" disabled
                         [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsKetLuan" />
                     <label class="form-check-label" for="IsKetLuan">Hoàn thành</label>

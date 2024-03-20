@@ -400,7 +400,7 @@ export class DashboardCAComponent implements OnInit {
   onReportCA() {
     this.isShowLoading = true;
     this.DownloadService.ReportCA203_204_206_207ToHTMLAsync(this.year, this.month).subscribe(
-      res => {
+      res => {     
         window.open(res.toString(), "_blank");
         this.isShowLoading = false;
       },

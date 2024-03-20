@@ -214,7 +214,7 @@
                                             <div class="card-header">
                                                 <h5 class="card-title text-white">Danh sách
                                                     <span
-                                                        *ngIf="DoanhNghiepService.list">({{DoanhNghiepService.list.length}}
+                                                        *ngIf="DoanhNghiepDichVuCAService.list">({{DoanhNghiepDichVuCAService.list.length}}
                                                         items)</span>
                                                 </h5>
                                             </div>
@@ -225,18 +225,14 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>No</th>
-                                                                    <th>Mã số</th>
-                                                                    <th>Doanh nghiệp</th>
-                                                                    <th>Điện thoại</th>
+                                                                    <th>Số chứng thư không tồn tại</th>                                                                  
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr
-                                                                    *ngFor="let element of DoanhNghiepService.list; index as i">
+                                                                    *ngFor="let element of DoanhNghiepDichVuCAService.list; index as i">
                                                                     <td>{{i + 1}}</td>
-                                                                    <td>{{element.Code}}</td>
-                                                                    <td>{{element.Name}}</td>
-                                                                    <td>{{element.DienThoai}}</td>
+                                                                    <td>{{element.SoChungThu}}</td>                                                                   
                                                                 </tr>
                                                             </tbody>
                                                         </table>

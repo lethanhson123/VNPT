@@ -1628,7 +1628,17 @@ namespace API.Controllers.v1
 												if (workSheet.Cells[i, 1].Value != null)
 												{
 													doanhNghiepDichVuCA.SoChungThu = workSheet.Cells[i, 1].Value.ToString().Trim();
+													
 													await _IDoanhNghiepDichVuCABusiness.UpdateItemBySoChungThuCapBuAsync(doanhNghiepDichVuCA.SoChungThu);
+
+													doanhNghiepDichVuCA = await _IDoanhNghiepDichVuCABusiness.GetByCondition(item => item.SoChungThu == doanhNghiepDichVuCA.SoChungThu || item.SoChungThuCu == doanhNghiepDichVuCA.SoChungThu).FirstOrDefaultAsync();
+
+													if (doanhNghiepDichVuCA == null)
+													{
+														doanhNghiepDichVuCA = new DoanhNghiepDichVuCA();
+														doanhNghiepDichVuCA.SoChungThu = workSheet.Cells[i, 1].Value.ToString().Trim();
+														result.Add(doanhNghiepDichVuCA);
+													}
 												}
 											}
 										}
