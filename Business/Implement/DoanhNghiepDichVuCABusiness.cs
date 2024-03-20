@@ -21,7 +21,7 @@ namespace Business.Implement
 		{
 			if (string.IsNullOrEmpty(model.Code))
 			{
-				model.Code = GlobalHelper.InitializationDateTimeCode;
+				model.Code = model.SoChungThu;
 			}
 			model.Display = model.Name + "-" + model.Code;
 			if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))
@@ -103,6 +103,22 @@ namespace Business.Implement
 				}
 			}
 		}
+		//public override async Task<DoanhNghiepDichVuCA> SaveAsync(DoanhNghiepDichVuCA model)
+		//{
+		//	Initialization(model);
+		//	if (!string.IsNullOrEmpty(model.Code))
+		//	{
+		//		if (model.ID > 0)
+		//		{
+		//			await UpdateAsync(model);
+		//		}
+		//		else
+		//		{
+		//			await AddAsync(model);
+		//		}
+		//	}
+		//	return model;
+		//}
 
 		public virtual async Task<DoanhNghiepDichVuCA> Save001Async(DoanhNghiepDichVuCA model)
 		{

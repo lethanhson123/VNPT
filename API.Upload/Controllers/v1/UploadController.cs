@@ -603,7 +603,11 @@ namespace API.Controllers.v1
 											for (int i = 2; i <= totalRows; i++)
 											{
 												DoanhNghiepDichVuCA doanhNghiepDichVu = new DoanhNghiepDichVuCA();
-
+												if (workSheet.Cells[i, 3].Value != null)
+												{
+													doanhNghiepDichVu.Code = workSheet.Cells[i, 3].Value.ToString().Trim();
+													doanhNghiepDichVu = await _IDoanhNghiepDichVuCABusiness.GetByCodeAsync(doanhNghiepDichVu.Code);													
+												}
 												if (workSheet.Cells[i, 2].Value != null)
 												{
 													doanhNghiepDichVu.UserName = workSheet.Cells[i, 2].Value.ToString().Trim();

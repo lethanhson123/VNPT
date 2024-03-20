@@ -22,7 +22,7 @@
             {
                 if (table.Rows.Count > 0)
                 {
-                    int rowCount = 200;
+                    int rowCount = 100;
                     int rowFrom = 0;
                     int rowTo = rowCount;
                     try
@@ -42,7 +42,7 @@
                             {
                             new SqlParameter("@Table",tableSub),
                             };
-                            result = await _DoanhNghiepDichVuLichSuRepository.ExecuteNonQueryByStoredProcedureAsync("sp_DoanhNghiepDichVuLichSuInsertItemsByDoanhNghiepDichVuLichSuExcel", parameters);
+                            result = await ExecuteNonQueryByStoredProcedureAsync("sp_DoanhNghiepDichVuLichSuInsertItemsByDoanhNghiepDichVuLichSuExcel", parameters);
                             if (result != "-1")
                             {
 
@@ -63,7 +63,7 @@
                         {
                             new SqlParameter("@Table",tableSub001),
                             };
-                        result = await _DoanhNghiepDichVuLichSuRepository.ExecuteNonQueryByStoredProcedureAsync("sp_DoanhNghiepDichVuLichSuInsertItemsByDoanhNghiepDichVuLichSuExcel", parameters001);
+                        result = await ExecuteNonQueryByStoredProcedureAsync("sp_DoanhNghiepDichVuLichSuInsertItemsByDoanhNghiepDichVuLichSuExcel", parameters001);
                         if (result != "-1")
                         {
 
