@@ -1184,7 +1184,19 @@ export class DashboardCAComponent implements OnInit {
       }
     );
   }
-
+  onDownloadExcelFileReportCACapBu() {
+    this.isShowLoading = true;
+    this.DownloadService.ReportCACapBuToExcelAsync().subscribe(
+      res => {
+        console.log(res);
+        window.open(res.toString(), "_blank");
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   onDownloadExcelFileReportVNPT003() {
     this.isShowLoading = true;
     this.DownloadService.ReportVNPT003ToExcelAsync(this.huyenID, this.xaID, this.searchString, this.dichVuID, this.year, this.month).subscribe(

@@ -22,7 +22,7 @@
             {
                 if (table.Rows.Count > 0)
                 {
-                    int rowCount = 100;
+                    int rowCount = GlobalHelper.DoanhNghiepDichVuLichSuRowCount;
                     int rowFrom = 0;
                     int rowTo = rowCount;
                     try

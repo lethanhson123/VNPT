@@ -271,5 +271,11 @@ export class DownloadService {
         formUpload.append('data', JSON.stringify(this.BaseParameter));     
         return this.httpClient.post(url, formUpload);
     }
+    ReportCACapBuToExcelAsync() {
+        let url = this.aPIURL + this.controller + '/ReportCACapBuToExcelAsync';
+        const formUpload: FormData = new FormData();       
+        formUpload.append('data', JSON.stringify(this.BaseParameter));    
+        return this.httpClient.post(url, formUpload);
+    }
 }
 

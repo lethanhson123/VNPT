@@ -915,6 +915,31 @@
 			return Json(result);
 		}
 		[HttpPost]
+		[Route("ReportCACapBuToExcelAsync")]
+		public async Task<JsonResult> ReportCACapBuToExcelAsync()
+		{
+			string result = GlobalHelper.InitializationString;
+			try
+			{				
+
+				List<Report> list = await _ReportBusiness.ReportCACapBu103ToListAsync();
+				string fileName = @"Report_CA_CapBu_" + GlobalHelper.InitializationDateTimeCode + ".xlsx";
+				var streamExport = new MemoryStream();
+				InitializationExcelReportCA(list, streamExport);
+				var physicalPathCreate = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, fileName);
+				using (var stream = new FileStream(physicalPathCreate, FileMode.Create))
+				{
+					streamExport.CopyTo(stream);
+				}
+				result = GlobalHelper.APISite + GlobalHelper.Download + "/" + fileName;
+			}
+			catch (Exception ex)
+			{
+				result = ex.Message;
+			}
+			return Json(result);
+		}
+		[HttpPost]
 		[Route("ReportCA408ToExcelAsync")]
 		public async Task<JsonResult> ReportCA408ToExcelAsync()
 		{
