@@ -107,24 +107,24 @@ namespace Business.Implement
 				model.NgayHetHan = model.NgayHetHan.Value.AddDays(model.SoNgayNoKhach.Value);
 			}
 		}
-		//public override async Task<DoanhNghiepDichVuCA> SaveAsync(DoanhNghiepDichVuCA model)
-		//{
-		//	Initialization(model);
-		//	if (!string.IsNullOrEmpty(model.Code))
-		//	{
-		//		if (model.ID > 0)
-		//		{
-		//			await UpdateAsync(model);
-		//		}
-		//		else
-		//		{
-		//			await AddAsync(model);
-		//		}
-		//	}
-		//	return model;
-		//}
-
-		public virtual async Task<DoanhNghiepDichVuCA> Save001Async(DoanhNghiepDichVuCA model)
+        //public override async Task<DoanhNghiepDichVuCA> SaveAsync(DoanhNghiepDichVuCA model)
+        //{
+        //	Initialization(model);
+        //	if (!string.IsNullOrEmpty(model.Code))
+        //	{
+        //		if (model.ID > 0)
+        //		{
+        //			await UpdateAsync(model);
+        //		}
+        //		else
+        //		{
+        //			await AddAsync(model);
+        //		}
+        //	}
+        //	return model;
+        //}
+        
+        public virtual async Task<DoanhNghiepDichVuCA> Save001Async(DoanhNghiepDichVuCA model)
 		{
 			Initialization(model);
 			if (!string.IsNullOrEmpty(model.Code))
