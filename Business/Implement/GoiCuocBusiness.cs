@@ -22,7 +22,7 @@ namespace Business.Implement
 
 			if (model.Thang != null)
 			{
-				model.ThangKhuyenMai = model.Thang;
+				model.ThangKhuyenMai = model.Thang + model.ThangKhuyenMai;
 				switch (model.Thang)
 				{
 					case 12:
@@ -33,8 +33,8 @@ namespace Business.Implement
 						break;
 					case 36:
 						model.ThangKhuyenMai = 48;
-						break;
-				}
+						break;                   
+                }
 			}
 		}
 	}

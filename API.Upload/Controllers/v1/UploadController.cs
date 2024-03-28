@@ -875,26 +875,38 @@ namespace API.Controllers.v1
                                                     doanhNghiepDichVu.ParentID = doanhNghiepSearch.ID;
                                                     int thoiGianGoiCuoc = doanhNghiepDichVu.ThoiGianGoiCuoc.Value + doanhNghiepDichVu.ThoiGianKhuyenMai.Value;
                                                     GoiCuoc goiCuoc = listGoiCuoc.Where(item => item.Name == doanhNghiepDichVu.TenGoiCuoc && item.Thang <= thoiGianGoiCuoc && item.ThangKhuyenMai >= thoiGianGoiCuoc).FirstOrDefault();
+                                                    if (goiCuoc == null)
+                                                    {
+                                                        goiCuoc = new GoiCuoc();
+                                                        goiCuoc.Name = doanhNghiepDichVu.TenGoiCuoc;
+                                                        goiCuoc.Thang = doanhNghiepDichVu.ThoiGianGoiCuoc;
+                                                        goiCuoc.ThangKhuyenMai = doanhNghiepDichVu.ThoiGianKhuyenMai;
+                                                        await _IGoiCuocBusiness.SaveAsync(goiCuoc);
+                                                        listGoiCuoc = await _IGoiCuocBusiness.GetAllToListAsync();
+                                                    }
                                                     if (goiCuoc != null)
                                                     {
-                                                        doanhNghiepDichVu.GoiCuocID = goiCuoc.ID;
-                                                        doanhNghiepDichVu.GiaTien = goiCuoc.GiaCuoc;
-                                                        doanhNghiepDichVu.Code = doanhNghiepDichVu.SoChungThu;
-                                                        NhanVienTaiKhoan nhanVienTaiKhoan = listNhanVienTaiKhoan.Where(item => item.Code == doanhNghiepDichVu.TaiKhoanTaoYeuCau).FirstOrDefault();
-                                                        if (nhanVienTaiKhoan != null)
+                                                        if (goiCuoc.ID > 0)
                                                         {
-                                                            NhanVien nhanVien = listNhanVien.Where(item => item.ID == nhanVienTaiKhoan.ParentID.Value).FirstOrDefault();
-                                                            if (nhanVien != null)
+                                                            doanhNghiepDichVu.GoiCuocID = goiCuoc.ID;
+                                                            doanhNghiepDichVu.GiaTien = goiCuoc.GiaCuoc;
+                                                            doanhNghiepDichVu.Code = doanhNghiepDichVu.SoChungThu;
+                                                            NhanVienTaiKhoan nhanVienTaiKhoan = listNhanVienTaiKhoan.Where(item => item.Code == doanhNghiepDichVu.TaiKhoanTaoYeuCau).FirstOrDefault();
+                                                            if (nhanVienTaiKhoan != null)
                                                             {
-                                                                doanhNghiepDichVu.NhanVienID = nhanVien.ID;
-                                                                doanhNghiepDichVu.PhongBanID = nhanVien.ParentID;
+                                                                NhanVien nhanVien = listNhanVien.Where(item => item.ID == nhanVienTaiKhoan.ParentID.Value).FirstOrDefault();
+                                                                if (nhanVien != null)
+                                                                {
+                                                                    doanhNghiepDichVu.NhanVienID = nhanVien.ID;
+                                                                    doanhNghiepDichVu.PhongBanID = nhanVien.ParentID;
+                                                                }
                                                             }
-                                                        }
-                                                        doanhNghiepDichVu.DichVuID = 20;
-                                                        DoanhNghiepDichVuCA doanhNghiepDichVuCA = await _IDoanhNghiepDichVuCABusiness.GetByCodeAsync(doanhNghiepDichVu.Code);
-                                                        if (doanhNghiepDichVuCA.ID == 0)
-                                                        {
-                                                            await _IDoanhNghiepDichVuCABusiness.SaveAsync(doanhNghiepDichVu);
+                                                            doanhNghiepDichVu.DichVuID = 20;
+                                                            DoanhNghiepDichVuCA doanhNghiepDichVuCA = await _IDoanhNghiepDichVuCABusiness.GetByCodeAsync(doanhNghiepDichVu.Code);
+                                                            if (doanhNghiepDichVuCA.ID == 0)
+                                                            {
+                                                                await _IDoanhNghiepDichVuCABusiness.SaveAsync(doanhNghiepDichVu);
+                                                            }
                                                         }
                                                     }
                                                 }
