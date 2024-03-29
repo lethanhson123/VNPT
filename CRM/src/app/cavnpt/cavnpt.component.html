@@ -105,12 +105,12 @@
                                     <div class="col-lg-10 col-sm-12 col-14">
                                         <input [(ngModel)]="searchString" placeholder="Tìm ..." class="form-control"
                                             (keyup.enter)="onSearchCACapBu()">
-                                    </div>                         
+                                    </div>
                                     <div class="col-lg-2 col-sm-12 col-12">
                                         <a class="btn btn-success" title="Tìm" (click)="onSearchCACapBu()"><i
-                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;                                       
+                                                class="bi bi-search"></i></a>&nbsp;&nbsp;&nbsp;
                                     </div>
-                                </div>                                                              
+                                </div>
                                 <div class="row gx-4">
                                     <div class="col-lg-6 col-sm-12 col-12">
                                         <div class="card mb-4 card-info">
@@ -164,7 +164,7 @@
                                                                     number:
                                                                     '1.0-0'}}
                                                                 </td>
-                                                            </ng-container>                                                           
+                                                            </ng-container>
                                                             <ng-container matColumnDef="TyLeHoSo">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Tỷ lệ
@@ -243,7 +243,7 @@
                                                                     number:
                                                                     '1.0-0'}}
                                                                 </td>
-                                                            </ng-container>                                                            
+                                                            </ng-container>
                                                             <ng-container matColumnDef="TyLeHoSo">
                                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                                                     Tỷ lệ
@@ -282,7 +282,8 @@
                                     <div class="card-body">
                                         <div class="table-outer">
                                             <div class="table-responsive">
-                                                <table mat-table matSort #sortReportCACapBu103="matSort" [dataSource]="dataSourceReportCACapBu103"
+                                                <table mat-table matSort #sortReportCACapBu103="matSort"
+                                                    [dataSource]="dataSourceReportCACapBu103"
                                                     class="table table-striped m-0">
                                                     <ng-container matColumnDef="DoanhNghiepName">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header
@@ -291,7 +292,8 @@
                                                         </th>
                                                         <td mat-cell *matCellDef="let element index as i;"
                                                             class="sticky-col">
-                                                            <a *ngIf="element.ID>0" class="btn btn-success" title="Upload hồ sơ"
+                                                            <a *ngIf="element.ID>0" class="btn btn-success"
+                                                                title="Upload hồ sơ"
                                                                 (click)="onAddReportCACapBu(element.ID)">Upload hồ
                                                                 sơ</a>&nbsp;&nbsp;&nbsp;
                                                             <a title="{{element.DoanhNghiepName}}" class="link-primary"
@@ -1442,6 +1444,8 @@
                                                 Chưa gia hạn</option>
                                             <option [value]="2">
                                                 Gia hạn</option>
+                                            <option [value]="3">
+                                                Phát triển mới trên khách hàng cũ</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-3 col-sm-12 col-14">
