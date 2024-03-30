@@ -33,8 +33,32 @@ namespace Business.Implement
 			List<DoanhNghiep> result = new List<DoanhNghiep>();
 			if (!string.IsNullOrEmpty(searchString))
 			{
-				result = await GetByCondition(item => item.Code.Contains(searchString) || item.CodeCA.Contains(searchString) || item.Name.Contains(searchString) || item.UserName.Contains(searchString) || item.DienThoai.Contains(searchString) || item.Email.Contains(searchString) || item.DiaChi.Contains(searchString)).ToListAsync();
-			}
+				result = await GetByCondition(item => item.ID.ToString().Contains(searchString)).ToListAsync();
+                if (result.Count == 0)
+                {
+                    result = await GetByCondition(item => item.Code.Contains(searchString)).ToListAsync();
+                }
+                if (result.Count==0)
+				{
+                    result = await GetByCondition(item => item.DienThoai.Contains(searchString)).ToListAsync();
+                }                
+                if (result.Count == 0)
+                {
+                    result = await GetByCondition(item => item.Email.Contains(searchString)).ToListAsync();
+                }
+                if (result.Count == 0)
+                {
+                    result = await GetByCondition(item => item.UserName.Contains(searchString)).ToListAsync();
+                }
+                if (result.Count == 0)
+                {
+                    result = await GetByCondition(item => item.Name.Contains(searchString)).ToListAsync();
+                }
+                if (result.Count == 0)
+                {
+                    result = await GetByCondition(item => item.DiaChi.Contains(searchString)).ToListAsync();
+                }                
+            }
 			return result;
 		}
 		public virtual async Task<List<DoanhNghiep>> GetCABySearchStringToListAsync(string searchString)

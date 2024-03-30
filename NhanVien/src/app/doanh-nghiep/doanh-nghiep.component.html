@@ -41,7 +41,7 @@
                                     <div class="col-lg-12 col-sm-12 col-12">
                                         <a class="form-label" style="cursor: pointer; white-space: normal;" title="{{element.Name}}"
                                             class="link-primary"
-                                            (click)="DoanhNghiepAdd(element.ID)"><b>{{element.Name}}</b></a>
+                                            (click)="DoanhNghiepAdd(element.ID)"><b>[{{element.ID}}] {{element.Name}}</b></a>
                                     </div>
                                     <div class="col-lg-12 col-sm-12 col-12">
                                         <label>Mã số thuế: </label>
@@ -76,13 +76,21 @@
                                             </div>
                                         </div>                                       
                                     </div>
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <div *ngFor="let item of NhanVienService.List;">
+                                            <div *ngIf="element.NhanVienID==item.ID">
+                                                <label>AM quản lý: </label>
+                                                <label class="form-label">{{item.Name}}</label>
+                                            </div>
+                                        </div>                                       
+                                    </div>
                                 </div>
                             </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="DoanhNghiepService.DisplayColumnsMobile"></tr>
                         <tr mat-row *matRowDef="let row; columns: DoanhNghiepService.DisplayColumnsMobile"></tr>
                     </table>
-                    <mat-paginator *ngIf="NotificationService.IsMobile" #DoanhNghiepPaginator="matPaginator"
+                    <mat-paginator #DoanhNghiepPaginator="matPaginator"
                         [pageSizeOptions]="[10, 20, 50, 100]" [pageSize]="100000"
                         [showFirstLastButtons]></mat-paginator>
                 </div>

@@ -12,8 +12,13 @@ import { HuyenService } from 'src/app/shared/Huyen.service';
 import { Xa } from 'src/app/shared/Xa.model';
 import { XaService } from 'src/app/shared/Xa.service';
 
+import { NhanVien } from 'src/app/shared/NhanVien.model';
+import { NhanVienService } from 'src/app/shared/NhanVien.service';
+
+
 import { DoanhNghiep } from 'src/app/shared/DoanhNghiep.model';
 import { DoanhNghiepService } from 'src/app/shared/DoanhNghiep.service';
+import { DoanhNghiepDetailComponent } from '../doanh-nghiep-detail/doanh-nghiep-detail.component';
 
 @Component({
   selector: 'app-doanh-nghiep',
@@ -36,12 +41,15 @@ export class DoanhNghiepComponent implements OnInit {
     public HuyenService: HuyenService,
     public XaService: XaService,
 
+    public NhanVienService: NhanVienService,
+
     public DoanhNghiepService: DoanhNghiepService,
   ) { }
 
   ngOnInit(): void {  
     this.HuyenSearch();
     this.XaSearch();
+    this.NhanVienSearch();
   }
 
   HuyenSearch() {
@@ -50,7 +58,9 @@ export class DoanhNghiepComponent implements OnInit {
   XaSearch() {
     this.XaService.ComponentGetAllToListAsync();
   }
-
+  NhanVienSearch() {
+    this.NhanVienService.ComponentGetAllToListAsync();
+  }
   
   DoanhNghiepSearch() {
     this.DoanhNghiepService.IsShowLoading = true;    
@@ -68,7 +78,22 @@ export class DoanhNghiepComponent implements OnInit {
     );
   }
   DoanhNghiepAdd(ID: number) {
-
+    this.DoanhNghiepService.BaseParameter.ID = ID;   
+    this.DoanhNghiepService.GetByIDAsync().subscribe(
+      res => {
+        this.DoanhNghiepService.FormData = res as DoanhNghiep;
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.data = { ID: ID };
+        const dialog = this.dialog.open(DoanhNghiepDetailComponent, dialogConfig);
+        dialog.afterClosed().subscribe(() => {          
+        });
+      },
+      err => {
+      }
+    );
   }
 
   SetIsShowSearch() {

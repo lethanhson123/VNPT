@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
+import { DoanhNghiepDichVuCAHoSoComponent } from './doanh-nghiep-dich-vu-caho-so/doanh-nghiep-dich-vu-caho-so.component';
 
 
 const routes: Routes = [  
@@ -12,6 +13,9 @@ const routes: Routes = [
   {
     path: 'DoanhNghiep', component: DoanhNghiepComponent,
   },   
+  {
+    path: 'DoanhNghiepDichVuCAHoSo', component: DoanhNghiepDichVuCAHoSoComponent,
+  },  
 ];
 
 @NgModule({

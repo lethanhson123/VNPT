@@ -18,6 +18,10 @@ import { AppComponent } from './app.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
+import { DoanhNghiepDetailComponent } from './doanh-nghiep-detail/doanh-nghiep-detail.component';
+import { DoanhNghiepDichVuCAComponent } from './doanh-nghiep-dich-vu-ca/doanh-nghiep-dich-vu-ca.component';
+import { DoanhNghiepDichVuCADetailComponent } from './doanh-nghiep-dich-vu-cadetail/doanh-nghiep-dich-vu-cadetail.component';
+import { DoanhNghiepDichVuCAHoSoComponent } from './doanh-nghiep-dich-vu-caho-so/doanh-nghiep-dich-vu-caho-so.component';
 
 
 
@@ -27,7 +31,11 @@ import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
         AppComponent,
         LoadingComponent,
         HomepageComponent,
-        DoanhNghiepComponent,     
+        DoanhNghiepComponent,
+        DoanhNghiepDetailComponent,
+        DoanhNghiepDichVuCAComponent,
+        DoanhNghiepDichVuCADetailComponent,
+        DoanhNghiepDichVuCAHoSoComponent,     
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
