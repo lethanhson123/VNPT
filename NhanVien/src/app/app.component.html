@@ -1,0 +1,53 @@
+<nav id="sidebar" class="sidebar-wrapper">
+      <div class="app-brand p-3 mb-3">
+            <a href="#">
+                  <img src="/assets/image/logo.png" class="logo"
+                        alt="Trục dữ liệu lớn Nông nghiệp Đồng Bằng Sông Cửu Long"
+                        title="Trục dữ liệu lớn Nông nghiệp Đồng Bằng Sông Cửu Long" />&nbsp;&nbsp;&nbsp;</a>
+      </div>
+      <div class="sidebarMenuScroll">
+            <ul class="sidebar-menu">                
+            </ul>
+      </div>
+</nav>
+<div class="app-container">
+      <div class="app-header d-flex align-items-center">
+            <div class="d-flex">
+                  <button class="pin-sidebar">
+                        <i class="bi bi-list lh-1"></i>
+                  </button>
+            </div>
+            <div class="app-brand-sm d-lg-none d-flex">
+
+            </div>
+            <div class="search-container d-lg-block d-none mx-3">
+                  <input type="text" class="form-control"
+                        placeholder="Trục dữ liệu lớn Nông nghiệp Đồng Bằng Sông Cửu Long | Văn phòng điều phối nông nghiệp nông thôn vùng ĐBSCL | Mô hình thí điểm (V.05_VPĐP.ĐBSCL/DGK)" />
+            </div>
+            <div class="header-actions">
+                  <div class="dropdown ms-4">
+                        <a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center" href="#!"
+                              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src="/assets/image/logo.png" class="rounded-4 img-3x" />
+                              <span class="ms-2 text-truncate d-lg-block d-none"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end shadow-lg">
+                              <a class="dropdown-item d-flex align-items-center" href="#"><i
+                                          class="bi bi-person fs-4 me-2"></i>Tài khoản</a>
+                              <a class="dropdown-item d-flex align-items-center" href="#"><i
+                                          class="bi bi-shield-lock fs-4 me-2"></i>Đổi mật khẩu</a>
+                              <div class="mx-3 mt-2 d-grid">
+                                    <a style="cursor: pointer;" class="btn btn-primary">Đăng xuất</a>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="d-flex">
+                        <button class="toggle-sidebar">
+                              <i class="bi bi-list lh-1"></i>
+                        </button>
+                  </div>
+            </div>
+      </div>
+      <hr />
+      <router-outlet></router-outlet>
+</div>
