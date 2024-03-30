@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/70002327/ionic-cordova-android-no-usable-android-build-tools-found-highest-30-x-install
