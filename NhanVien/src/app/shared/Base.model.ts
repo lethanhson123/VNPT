@@ -6,16 +6,12 @@ export class Base {
     LastUpdatedDate?: Date;
     LastUpdatedMembershipID?: number;
     RowVersion?: number;
-    SortOrder?: number;
-    Active?: boolean;
-    TypeName?: string;
     Name?: string;
     Code?: string;
-    Note?: string;
     Display?: string;
-    FileName?: string;
-    Description?: string;
-    HTMLContent?: string;
-    DanhMucNgonNguID?: number;
+    Description?: string;    
+    Note?: string;
+    Active?: boolean;
+    SortOrder?: number;    
 }
 

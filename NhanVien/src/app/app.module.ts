@@ -17,6 +17,7 @@ import { NotificationService } from './shared/Notification.service';
 import { AppComponent } from './app.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { DoanhNghiepComponent } from './doanh-nghiep/doanh-nghiep.component';
 
 
 
@@ -25,7 +26,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     declarations: [
         AppComponent,
         LoadingComponent,
-        HomepageComponent,     
+        HomepageComponent,
+        DoanhNghiepComponent,     
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),

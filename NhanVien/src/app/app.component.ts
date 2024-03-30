@@ -4,7 +4,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { DownloadService } from 'src/app/shared/Download.service';
 
 
-
 import { interval } from 'rxjs';
 
 @Component({
@@ -14,14 +13,11 @@ import { interval } from 'rxjs';
 })
 export class AppComponent {
   title = 'VNPT';
-  domainName = environment.DomainDestination;
-  domainURL = environment.DomainURL;
+
   queryString: string = environment.InitializationString;
   queryStringSub: string = environment.InitializationString;
   constructor(
     public router: Router,
-    public DownloadService: DownloadService,   
-
   ) {
     this.getByQueryString();
   }
@@ -37,7 +33,7 @@ export class AppComponent {
     });
   }
   AuthenticationToken() {
-   
+    localStorage.setItem(environment.NhanVienID, "1");
   }
-  
+
 }

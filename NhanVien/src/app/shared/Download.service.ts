@@ -9,14 +9,9 @@ import { BaseParameter } from './BaseParameter.model';
 export class DownloadService {
     baseParameter!: BaseParameter;
     aPIURL: string = environment.APIUploadURL;
-    controller: string = "Download";
-
-    IPAddress: string = environment.InitializationString;
-
-
+    controller: string = "Download";   
     constructor(private httpClient: HttpClient) {
         this.initializationFormData();
-        this.GetIPAddress();
     }
     initializationFormData() {
         this.baseParameter = {
@@ -33,45 +28,6 @@ export class DownloadService {
         }
         return color;
     }
-    GetIPAddress() {
-        // if (this.IPAddress.length == 0) {
-        //     this.httpClient.get(environment.IPRegistry).toPromise().then(res => {
-        //         this.IPAddress = res["ip"];
-        //     });
-        // }      
-
-        return this.httpClient.get(environment.IPRegistry).toPromise();
-    }
-    ExportToChucQuyTrinhSanXuatToExcelAsync() {
-        let url = this.aPIURL + this.controller + '/ExportToChucQuyTrinhSanXuatToExcelAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(this.baseParameter));
-        return this.httpClient.post(url, formUpload);
-    }
-
-    ExportDanhMucNguyenVatLieuToExcelAsync() {
-        let url = this.aPIURL + this.controller + '/ExportDanhMucNguyenVatLieuToExcelAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(this.baseParameter));
-        return this.httpClient.post(url, formUpload);
-    }
-    ExportDanhMucNguyenVatLieuToHTMLAsync() {
-        let url = this.aPIURL + this.controller + '/ExportDanhMucNguyenVatLieuToHTMLAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(this.baseParameter));
-        return this.httpClient.post(url, formUpload);
-    }
-    ExportHopTacXaByIDToHTMLAsync() {
-        var lastUpdatedMembershipID = localStorage.getItem(environment.ThanhVienID);
-        if (lastUpdatedMembershipID) {
-            this.baseParameter.LastUpdatedMembershipID = Number(lastUpdatedMembershipID);
-        }
-        let url = this.aPIURL + this.controller + '/ExportHopTacXaByIDToHTMLAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(this.baseParameter));
-        return this.httpClient.post(url, formUpload);
-    }
-
-
+    
 }
 
