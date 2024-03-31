@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>QLCL Bến Tre Admin</name>
-    <description>Ứng dụng QLCL Bến Tre Admin</description>
-    <author email="info@dgk.vn" href="https://dgk.vn/">
-        Digital Kingdom JSC
+    <name>CRM</name>
+    <description>CRM</description>
+    <author email="creativegreenvn@gmail.com" href="https://crm.vnptvungtau.vn/">
+        VNPT Bà Rịa Vũng Tàu
     </author>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 
     <preference name="prerendered-icon" value="true" />
-    <icon src="www/res/icon.png"/>
+    <icon src="www/assets/image/logo.png"/>
 
     <platform name="ios">
         <!-- iOS 8.0+ -->
@@ -45,5 +45,30 @@
         <!-- iTunes Marketing Image -->
         <icon src="www/res/ios/1024.png" width="1024" height="1024" />
     </platform>
+    <platform name="android">    
 
+        <icon src="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <icon density="mdpi" src="www/res/android/mipmap-mdpi/ic_launcher.png" />
+        <icon density="hdpi" src="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <icon density="xhdpi" src="www/res/android/mipmap-xhdpi/ic_launcher.png" />
+        <icon density="xxhdpi" src="www/res/android/mipmap-xxhdpi/ic_launcher.png" />
+        <icon density="xxxhdpi" src="www/res/android/mipmap-xxxhdpi/ic_launcher.png" />
+
+        <splash density="land-hdpi" src="www/res/screen/android/splash-land-hdpi.png" />
+
+        <!-- <update src="www/res/android/mipmap-hdpi/ic_launcher.png" target="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <update src="www/res/android/mipmap-mdpi/ic_launcher.png" target="www/res/android/mipmap-mdpi/ic_launcher.png" />
+        <update src="www/res/android/mipmap-mdpi/ic_launcher.png" target="www/res/android/mipmap-mdpi/ic_launcher.png" />
+        <update src="www/res/android/mipmap-xhdpi/ic_launcher.png" target="www/res/android/mipmap-xhdpi/ic_launcher.png" />
+        <update src="www/res/android/mipmap-xxhdpi/ic_launcher.png" target="www/res/android/mipmap-xxhdpi/ic_launcher.png" /> 
+
+        <splash density="land-hdpi" src="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <splash density="land-ldpi" src="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <splash density="land-mdpi" src="www/res/android/mipmap-mdpi/ic_launcher.png" />
+        <splash density="land-xhdpi" src="www/res/android/mipmap-xhdpi/ic_launcher.png" />
+        <splash density="hdpi" src="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <splash density="ldpi" src="www/res/android/mipmap-hdpi/ic_launcher.png" />
+        <splash density="mdpi" src="www/res/android/mipmap-mdpi/ic_launcher.png" />
+        <splash density="xhdpi" src="www/res/android/mipmap-xhdpi/ic_launcher.png" /> -->
+    </platform>
 </widget>

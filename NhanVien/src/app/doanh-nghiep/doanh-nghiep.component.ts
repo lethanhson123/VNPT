@@ -30,7 +30,7 @@ export class DoanhNghiepComponent implements OnInit {
   @ViewChild('DoanhNghiepSort') DoanhNghiepSort: MatSort;
   @ViewChild('DoanhNghiepPaginator') DoanhNghiepPaginator: MatPaginator;
 
-  IsShowSearch: boolean = false;
+  IsShowSearch: boolean = true;
 
   constructor(
     private dialog: MatDialog,
@@ -46,7 +46,7 @@ export class DoanhNghiepComponent implements OnInit {
     public DoanhNghiepService: DoanhNghiepService,
   ) { }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.HuyenSearch();
     this.XaSearch();
     this.NhanVienSearch();
@@ -61,9 +61,9 @@ export class DoanhNghiepComponent implements OnInit {
   NhanVienSearch() {
     this.NhanVienService.ComponentGetAllToListAsync();
   }
-  
+
   DoanhNghiepSearch() {
-    this.DoanhNghiepService.IsShowLoading = true;    
+    this.DoanhNghiepService.IsShowLoading = true;
     this.DoanhNghiepService.GetBySearchStringToListAsync().subscribe(
       res => {
         this.DoanhNghiepService.List = (res as DoanhNghiep[]).sort((a, b) => (a.Name > b.Name ? 1 : -1));
@@ -78,17 +78,18 @@ export class DoanhNghiepComponent implements OnInit {
     );
   }
   DoanhNghiepAdd(ID: number) {
-    this.DoanhNghiepService.BaseParameter.ID = ID;   
+    this.DoanhNghiepService.BaseParameter.ID = ID;
     this.DoanhNghiepService.GetByIDAsync().subscribe(
       res => {
         this.DoanhNghiepService.FormData = res as DoanhNghiep;
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = environment.DialogConfigWidth;
+        dialogConfig.panelClass = environment.PanelClass;
+        dialogConfig.width = environment.DialogConfigWidth;     
         dialogConfig.data = { ID: ID };
         const dialog = this.dialog.open(DoanhNghiepDetailComponent, dialogConfig);
-        dialog.afterClosed().subscribe(() => {          
+        dialog.afterClosed().subscribe(() => {
         });
       },
       err => {

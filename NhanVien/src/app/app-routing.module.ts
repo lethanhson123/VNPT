@@ -6,7 +6,7 @@ import { DoanhNghiepDichVuCAHoSoComponent } from './doanh-nghiep-dich-vu-caho-so
 
 
 const routes: Routes = [  
-  { path: '', redirectTo: '/Homepage', pathMatch: 'full' },   
+  { path: '', redirectTo: '/DoanhNghiep', pathMatch: 'full' },   
   {
     path: 'Homepage', component: HomepageComponent,
   },   
