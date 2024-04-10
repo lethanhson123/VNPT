@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { DoanhNghiep } from 'src/app/shared/DoanhNghiep.model';
 import { DoanhNghiepService } from 'src/app/shared/DoanhNghiep.service';
@@ -29,6 +30,7 @@ export class DoanhNghiepCAComponent implements OnInit {
   constructor(
     public router: Router,
     private dialog: MatDialog,
+    public NotificationService: NotificationService,
     public DoanhNghiepService: DoanhNghiepService,
     public DoanhNghiepDichVuCAService: DoanhNghiepDichVuCAService,
   ) {
@@ -42,6 +44,21 @@ export class DoanhNghiepCAComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  DoanhNghiepDichVuCADelete(ID: number) {
+    this.isShowLoading = true;
+    this.DoanhNghiepDichVuCAService.RemoveAsync(ID).subscribe(
+      res => {
+      this.NotificationService.warn(environment.DeleteSuccess);
+        this.isShowLoading = false;
+      },
+      err => {
+        this.NotificationService.warn(environment.DeleteNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
+
   GetByQueryString() {
     this.isShowLoading = true;
     this.DoanhNghiepService.GetByIDStringAsync(this.queryString).subscribe(

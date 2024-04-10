@@ -163,6 +163,20 @@ export class DashboardCAComponent implements OnInit {
 
   }
 
+  DoanhNghiepDichVuCADelete(ID: number) {
+    this.isShowLoading = true;
+    this.DoanhNghiepDichVuCAService.RemoveAsync(ID).subscribe(
+      res => {
+      this.NotificationService.warn(environment.DeleteSuccess);
+        this.isShowLoading = false;
+      },
+      err => {
+        this.NotificationService.warn(environment.DeleteNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
+
   onSearchCACapBu() {
     this.ReportCACapBu101ToListAsync();
     this.ReportCACapBu102ToListAsync();
