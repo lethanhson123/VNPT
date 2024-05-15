@@ -188,7 +188,118 @@ namespace API.Controllers.v1
 			return result;
 		}
 
-		[HttpPost]
+        [HttpPost]
+        [Route("AsyncHetHanDoanhNghiepDichVuCA2024")]
+        public async Task<bool> AsyncHetHanDoanhNghiepDichVuCA2024()
+        {
+            bool result = GlobalHelper.InitializationBool;
+            try
+            {
+                BaseParameter baseParameter = JsonConvert.DeserializeObject<BaseParameter>(Request.Form["data"]);
+                DoanhNghiepDichVuCA doanhNghiepDichVuCA = await _DoanhNghiepDichVuCABusiness.GetByIDAsync(baseParameter.ID);
+                var diffOfDates = doanhNghiepDichVuCA.NgayHetHan.Value.Subtract(GlobalHelper.InitializationDateTime);
+                Helper.Model.Mail mail = new Helper.Model.Mail();
+
+                EmailConfig emailConfig = await _EmailConfigBusiness.GetByCondition(item => item.Active == true).OrderBy(item => item.SortOrder).FirstOrDefaultAsync();
+                if (emailConfig != null)
+                {
+                    mail.MailFrom = emailConfig.MasterEmailUser;
+                    mail.UserName = emailConfig.MasterEmailUser;
+                    mail.Password = emailConfig.MasterEmailPassword;
+                    mail.SMTPPort = emailConfig.SMTPPort.Value;
+                    mail.SMTPServer = emailConfig.SMTPServer;
+                    mail.IsMailBodyHtml = 0;
+                    if (emailConfig.IsMailBodyHtml == true)
+                    {
+                        mail.IsMailBodyHtml = 1;
+                    }
+                    mail.IsMailUsingSSL = 0;
+                    if (emailConfig.IsMailUsingSSL == true)
+                    {
+                        mail.IsMailUsingSSL = 1;
+                    }
+                    mail.Display = emailConfig.MasterEmailDisplay;
+                }
+                else
+                {
+                    mail.MailFrom = GlobalHelper.MasterEmailUser;
+                    mail.UserName = GlobalHelper.MasterEmailUser;
+                    mail.Password = GlobalHelper.MasterEmailPassword;
+                    mail.SMTPPort = GlobalHelper.SMTPPort;
+                    mail.SMTPServer = GlobalHelper.SMTPServer;
+                    mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+                    mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+                    mail.Display = GlobalHelper.MasterEmailDisplay;
+                }
+
+
+                mail.Subject = "Thông báo về dịch vụ chữ ký số CA - " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+                string contentHTML = GlobalHelper.InitializationString;
+                var physicalPathRead = Path.Combine(_WebHostEnvironment.WebRootPath, GlobalHelper.Download, "DoanhNghiepDichVuCAHetHan.html");
+                using (FileStream fs = new FileStream(physicalPathRead, FileMode.Open))
+                {
+                    using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+                    {
+                        contentHTML = r.ReadToEnd();
+                    }
+                }
+
+                contentHTML = contentHTML.Replace("[Year]", GlobalHelper.InitializationDateTime.Year.ToString());
+                contentHTML = contentHTML.Replace("[Month]", GlobalHelper.InitializationDateTime.Month.ToString());
+                contentHTML = contentHTML.Replace("[Day]", GlobalHelper.InitializationDateTime.Day.ToString());
+
+
+                contentHTML = contentHTML.Replace("[ChungThuSo]", doanhNghiepDichVuCA.SoChungThu);
+                contentHTML = contentHTML.Replace("[NgayHetHan]", doanhNghiepDichVuCA.NgayHetHan.Value.ToString("dd/MM/yyyy"));
+                string note = GlobalHelper.InitializationString;
+                if (doanhNghiepDichVuCA.NgayHetHan <= GlobalHelper.InitializationDateTime)
+                {
+                    note = "(Đã quá hạn)";
+                }
+                else
+                {
+                    note = "(Còn " + diffOfDates.Days + " ngày nữa)";
+                }
+                contentHTML = contentHTML.Replace("[Note]", note);
+
+                DoanhNghiep doanhNghiep = await _DoanhNghiepBusiness.GetByIDAsync(doanhNghiepDichVuCA.ParentID.Value);
+                contentHTML = contentHTML.Replace("[DoanhNghiepName]", doanhNghiep.Name);
+                contentHTML = contentHTML.Replace("[MaSoThue]", doanhNghiep.CodeCA);
+
+                NhanVienTaiKhoan nhanVienTaiKhoan = await _NhanVienTaiKhoanBusiness.GetByCondition(item => item.Code == doanhNghiepDichVuCA.TaiKhoanTaoYeuCau).FirstOrDefaultAsync();
+                NhanVien nhanVien = await _NhanVienBusiness.GetByIDAsync(nhanVienTaiKhoan.ParentID.Value);
+                PhongBan phongBan = await _PhongBanBusiness.GetByIDAsync(nhanVien.ParentID.Value);
+
+                contentHTML = contentHTML.Replace("[NhanVienName]", nhanVien.Name);
+                contentHTML = contentHTML.Replace("[NhanVienDienThoai]", nhanVien.DienThoai);
+                contentHTML = contentHTML.Replace("[NhanVienEmail]", nhanVien.Email);
+                contentHTML = contentHTML.Replace("[PhongBanHangName]", phongBan.Name);
+
+                mail.Content = contentHTML;
+                if (!string.IsNullOrEmpty(doanhNghiepDichVuCA.Email))
+                {
+                    mail.MailTo = doanhNghiepDichVuCA.Email;
+                    MailHelper.SendMail(mail);
+                }
+                if (string.IsNullOrEmpty(nhanVien.Email))
+                {
+                    nhanVien.Email = "dungnv.vtu@vnpt.vn";
+                }
+                if (!string.IsNullOrEmpty(nhanVien.Email))
+                {
+                    mail.MailTo = nhanVien.Email;
+                    MailHelper.SendMail(mail);
+                }
+            }
+            catch (Exception ex)
+            {
+                string mes = ex.Message;
+            }
+
+            return result;
+        }
+
+        [HttpPost]
 		[Route("AsyncThieuHoSoDoanhNghiepDichVuCA")]
 		public async Task<bool> AsyncThieuHoSoDoanhNghiepDichVuCA()
 		{

@@ -33,7 +33,7 @@ import { DanhMucChucNangComponent } from './danh-muc-chuc-nang/danh-muc-chuc-nan
 
 
 const routes: Routes = [  
-  { path: '', redirectTo: '/DashboardCA', pathMatch: 'full' },  
+  { path: '', redirectTo: '/CAVNPT', pathMatch: 'full' },  
   {
     path: 'Homepage', component: HomepageComponent,
   },

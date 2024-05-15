@@ -1216,6 +1216,18 @@ export class CAVNPTComponent implements OnInit {
       }
     );
   }
+  onSendEmailReportCA005(element: DoanhNghiepDichVuCA) {
+    this.isShowLoading = true;
+    this.EmailService.BaseParameter.ID = element.ID;
+    this.EmailService.AsyncHetHanDoanhNghiepDichVuCA2024().subscribe(
+      res => {
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   onEmailReportCA005(ID: any) {
     this.DoanhNghiepDichVuCAService.GetByIDAsync(ID).subscribe(
       res => {
