@@ -37,6 +37,12 @@ export class DoanhNghiepDichVuCADetailComponent implements OnInit {
   onClose() {
     this.dialogRef.close();
   }
+  DateNgayHieuLuc(value) {
+    this.DoanhNghiepDichVuCAService.formData.NgayHieuLuc = new Date(value);
+  }
+  DateNgayHetHanNguyenMau(value) {
+    this.DoanhNghiepDichVuCAService.formData.NgayHetHanNguyenMau = new Date(value);
+  }
   HopDongDelete() {
     this.DoanhNghiepDichVuCAService.formData.HopDong = environment.InitializationString;
   }

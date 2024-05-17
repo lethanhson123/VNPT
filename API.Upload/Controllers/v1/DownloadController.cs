@@ -3529,6 +3529,22 @@
 
                 workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
+                column = column + 1;
+                workSheet.Cells[row, column].Value = "Email";
+                workSheet.Cells[row, column].Style.Font.Bold = true;
+                workSheet.Cells[row, column].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+
+
+                workSheet.Cells[row, column].Style.Font.Name = "Times New Roman";
+                workSheet.Cells[row, column].Style.Font.Size = 11;
+                workSheet.Cells[row, column].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+
+                workSheet.Cells[row, column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+
+                workSheet.Cells[row, column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+
+                workSheet.Cells[row, column].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
                 column = column + 1;
                 workSheet.Cells[row, column].Value = "UserName";
@@ -3841,39 +3857,40 @@
                 {
                     workSheet.Cells[row, 1].Value = item.HuyenName;
                     workSheet.Cells[row, 2].Value = item.DoanhNghiepName;
-                    workSheet.Cells[row, 3].Value = item.UserName;
-                    workSheet.Cells[row, 4].Value = item.SoChungThu;
-                    workSheet.Cells[row, 5].Value = item.SoChungThuCu;
+                    workSheet.Cells[row, 3].Value = item.Email;
+                    workSheet.Cells[row, 4].Value = item.UserName;
+                    workSheet.Cells[row, 5].Value = item.SoChungThu;
+                    workSheet.Cells[row, 6].Value = item.SoChungThuCu;
                     try
                     {
-                        workSheet.Cells[row, 6].Value = item.NgayHieuLuc.Value.ToString("yyyy-MM-dd");
+                        workSheet.Cells[row, 7].Value = item.NgayHieuLuc.Value.ToString("yyyy-MM-dd");
                     }
                     catch (Exception ex)
                     {
-                        workSheet.Cells[row, 6].Value = "";
+                        workSheet.Cells[row, 7].Value = "";
                         string mes = ex.Message;
                     }
                     try
                     {
-                        workSheet.Cells[row, 7].Value = item.NgayHetHan.Value.ToString("yyyy-MM-dd");
+                        workSheet.Cells[row, 8].Value = item.NgayHetHan.Value.ToString("yyyy-MM-dd");
                     }
                     catch (Exception ex)
                     {
-                        workSheet.Cells[row, 67].Value = "";
+                        workSheet.Cells[row, 8].Value = "";
                         string mes = ex.Message;
                     }
-                    workSheet.Cells[row, 8].Value = item.NhanVienName;
-                    workSheet.Cells[row, 9].Value = item.TaiKhoanTaoYeuCau;
-                    workSheet.Cells[row, 10].Value = item.TaiKhoanDuyetYeuCau;
-                    workSheet.Cells[row, 11].Value = item.IsKetLuan;
-                    workSheet.Cells[row, 12].Value = item.KetLuan;
-                    workSheet.Cells[row, 13].Value = item.IsHopDong;
-                    workSheet.Cells[row, 14].Value = item.IsDonXinCapChungThuSo;
-                    workSheet.Cells[row, 15].Value = item.IsCCCD;
-                    workSheet.Cells[row, 16].Value = item.IsGiayPhepKinhDoanh;
-                    workSheet.Cells[row, 17].Value = item.IsBienBanNghiemThu;
-                    workSheet.Cells[row, 18].Value = item.IsHoaDon;
-                    workSheet.Cells[row, 19].Value = item.Note;
+                    workSheet.Cells[row, 9].Value = item.NhanVienName;
+                    workSheet.Cells[row, 10].Value = item.TaiKhoanTaoYeuCau;
+                    workSheet.Cells[row, 11].Value = item.TaiKhoanDuyetYeuCau;
+                    workSheet.Cells[row, 12].Value = item.IsKetLuan;
+                    workSheet.Cells[row, 13].Value = item.KetLuan;
+                    workSheet.Cells[row, 14].Value = item.IsHopDong;
+                    workSheet.Cells[row, 15].Value = item.IsDonXinCapChungThuSo;
+                    workSheet.Cells[row, 16].Value = item.IsCCCD;
+                    workSheet.Cells[row, 17].Value = item.IsGiayPhepKinhDoanh;
+                    workSheet.Cells[row, 18].Value = item.IsBienBanNghiemThu;
+                    workSheet.Cells[row, 19].Value = item.IsHoaDon;
+                    workSheet.Cells[row, 20].Value = item.Note;
 
 
                     for (int i = 1; i <= column; i++)

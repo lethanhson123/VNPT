@@ -17,7 +17,8 @@
 		public string? SubjectDN { get; set; }
 		public DateTime? NgayHieuLuc { get; set; }
 		public DateTime? NgayHetHan { get; set; }
-		public int? SoNgayNoKhach { get; set; }
+        public DateTime? NgayHetHanNguyenMau { get; set; }
+        public int? SoNgayNoKhach { get; set; }
 		public string? TenGoiCuoc { get; set; }
 		public int? ThoiGianGoiCuoc { get; set; }
 		public int? ThoiGianKhuyenMai { get; set; }

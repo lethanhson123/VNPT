@@ -634,15 +634,15 @@ namespace API.Controllers.v1
                                                 }
                                                 if (workSheet.Cells[i, 6].Value != null)
                                                 {
-                                                    doanhNghiepDichVu.NgayHetHan = GlobalHelper.InitializationDateTime;
+                                                    doanhNghiepDichVu.NgayHetHanNguyenMau = GlobalHelper.InitializationDateTime;
                                                     try
                                                     {
-                                                        doanhNghiepDichVu.NgayHetHan = DateTime.Parse(workSheet.Cells[i, 6].Value.ToString().Trim());
+                                                        doanhNghiepDichVu.NgayHetHanNguyenMau = DateTime.Parse(workSheet.Cells[i, 6].Value.ToString().Trim());                                                        
                                                     }
                                                     catch (Exception ex)
                                                     {
                                                         string mes = ex.Message;
-                                                    }
+                                                    }                                                    
                                                 }
                                                 if (workSheet.Cells[i, 7].Value != null)
                                                 {

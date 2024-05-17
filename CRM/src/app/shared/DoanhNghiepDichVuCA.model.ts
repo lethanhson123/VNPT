@@ -16,6 +16,7 @@ export class DoanhNghiepDichVuCA extends Base{
     SubjectDN?: string;
     NgayHieuLuc?: Date;
     NgayHetHan?: Date;
+    NgayHetHanNguyenMau?: Date;
     SoNgayNoKhach?: number;
     TenGoiCuoc?: string;
     ThoiGianGoiCuoc?: number;
