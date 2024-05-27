@@ -23,6 +23,8 @@ export class BaseService {
         };
         this.BaseParameter = {
             Token: environment.TokenAPI,
+            BatDau: new Date(),
+            KetThuc: new Date()
         };
         this.NhanVienIDLogin = Number(localStorage.getItem(environment.NhanVienID));
     }

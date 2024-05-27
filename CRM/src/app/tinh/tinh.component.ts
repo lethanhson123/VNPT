@@ -38,6 +38,9 @@ import { DownloadService } from 'src/app/shared/Download.service';
 import { Menu } from 'src/app/shared/Menu.model';
 import { MenuService } from 'src/app/shared/Menu.service';
 
+import { EmailLichSu } from 'src/app/shared/EmailLichSu.model';
+import { EmailLichSuService } from 'src/app/shared/EmailLichSu.service';
+
 @Component({
   selector: 'app-tinh',
   templateUrl: './tinh.component.html',
@@ -101,12 +104,20 @@ export class TinhComponent implements OnInit {
   @ViewChild('sortMenu') sortMenu: MatSort;
   @ViewChild('paginatorMenu') paginatorMenu: MatPaginator;
 
+  dataSourceEmailLichSu: MatTableDataSource<any>;
+  @ViewChild('sortEmailLichSu') sortEmailLichSu: MatSort;
+  @ViewChild('paginatorEmailLichSu') paginatorEmailLichSu: MatPaginator;
+
 
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
+  
   year: number = new Date().getFullYear();
   month: number = new Date().getMonth() + 1;
+
+  
   constructor(
+    public EmailLichSuService: EmailLichSuService,
     public TinhService: TinhService,
     public HuyenService: HuyenService,
     public XaService: XaService,
@@ -133,7 +144,12 @@ export class TinhComponent implements OnInit {
     this.GetYearToList();
     this.GetMonthToList();
   }
-
+  DateBatDau(value) {
+    this.EmailLichSuService.BaseParameter.BatDau = new Date(value);
+  }
+  DateKetThuc(value) {
+    this.EmailLichSuService.BaseParameter.KetThuc = new Date(value);
+  }
   DanhMucGoiCuocGetToList() {
     this.isShowLoading = true;
     this.DanhMucGoiCuocService.GetAllAndEmptyToListAsync().subscribe(
@@ -181,7 +197,21 @@ export class TinhComponent implements OnInit {
       );
     }
   }
-
+  onSearchEmailLichSu() {
+    this.isShowLoading = true;
+    this.EmailLichSuService.GetBySearchString_BatDau_KetThucToListAsync().subscribe(
+      res => {
+        this.EmailLichSuService.list = (res as EmailLichSu[]);
+        this.dataSourceEmailLichSu = new MatTableDataSource(this.EmailLichSuService.list);
+        this.dataSourceEmailLichSu.sort = this.sortEmailLichSu;
+        this.dataSourceEmailLichSu.paginator = this.paginatorEmailLichSu;
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   GetYearToList() {
     this.DownloadService.GetYearToList().then(res => {
       this.DownloadService.listYear = res as YearMonth[];
