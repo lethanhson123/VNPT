@@ -90,7 +90,23 @@
 				return int.Parse(builder.Build().GetSection("AppSettings").GetSection("DoanhNghiepDichVuLichSuRowCount").Value);
 			}
 		}
-		public static string Token
+        public static string EmailLichSuOpenAPI
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("EmailLichSuOpenAPI").Value;
+            }
+        }
+        public static string EmailLichSuOpen
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("EmailLichSuOpen").Value;
+            }
+        }
+        public static string Token
 		{
 			get
 			{

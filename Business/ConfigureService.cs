@@ -9,7 +9,8 @@ namespace Business
 			services.AddTransient<IDanhMucChucNangBusiness, DanhMucChucNangBusiness>();
 			services.AddTransient<IDanhMucGoiCuocBusiness, DanhMucGoiCuocBusiness>();
 			services.AddTransient<IEmailConfigBusiness, EmailConfigBusiness>();
-			services.AddTransient<IDichVuBusiness, DichVuBusiness>();
+            services.AddTransient<IEmailLichSuBusiness, EmailLichSuBusiness>();
+            services.AddTransient<IDichVuBusiness, DichVuBusiness>();
 			services.AddTransient<IDichVuChiTieuBusiness, DichVuChiTieuBusiness>();
 			services.AddTransient<IGoiCuocBusiness, GoiCuocBusiness>();
 			services.AddTransient<IDoanhNghiepBusiness, DoanhNghiepBusiness>();
@@ -52,7 +53,8 @@ namespace Business
 			services.AddTransient<IDanhMucChucNangRepository, DanhMucChucNangRepository>();
 			services.AddTransient<IDanhMucGoiCuocRepository, DanhMucGoiCuocRepository>();
 			services.AddTransient<IEmailConfigRepository, EmailConfigRepository>();
-			services.AddTransient<IDichVuRepository, DichVuRepository>();
+            services.AddTransient<IEmailLichSuRepository, EmailLichSuRepository>();
+            services.AddTransient<IDichVuRepository, DichVuRepository>();
 			services.AddTransient<IDichVuChiTieuRepository, DichVuChiTieuRepository>();
 			services.AddTransient<IGoiCuocRepository, GoiCuocRepository>();
             services.AddTransient<IDoanhNghiepDichVuLichSuRepository, DoanhNghiepDichVuLichSuRepository>();
