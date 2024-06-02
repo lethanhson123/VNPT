@@ -18,8 +18,9 @@
 		public long? DoanhNghiepID { get; set; }
 		public long? LoaiDichVuID { get; set; }
 		public long? DichVuID { get; set; }
-
-		public BaseParameter()
+        public DateTime? BatDau { get; set; }
+        public DateTime? KetThuc { get; set; }
+        public BaseParameter()
 		{
 		}
 	}

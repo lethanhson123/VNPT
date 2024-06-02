@@ -4,7 +4,8 @@
             <i class="bi bi-bar-chart fs-3 text-primary"></i>
         </div>
         <div>
-            <h2 class="mb-1">{{DoanhNghiepDichVuCAService.formData.Name}} - {{DoanhNghiepDichVuCAService.formData.SoChungThu}}</h2>
+            <h4 class="mb-1">{{DoanhNghiepDichVuCAService.formData.Name}} -
+                {{DoanhNghiepDichVuCAService.formData.SoChungThu}}</h4>
             <h6 class="m-0 text-dark fw-light">
                 UPLOAD HỒ SƠ KHÁCH HÀNG
             </h6>
@@ -13,6 +14,7 @@
     <div class="ms-auto d-lg-flex d-none flex-row">
         <div class="d-flex flex-row gap-2">
             <a title="Lưu thay đổi" (click)="onSubmit()" class="btn btn-info"><i class="bi bi-sd-card"></i></a>
+            <a title="Lưu thay đổi" (click)="onSendEmail()" class="btn btn-success"><i class="bi bi-envelope"></i></a>
             <a title="Đóng" class="btn btn-success" (click)="onClose()">
                 <i class="bi bi-x-lg"></i>
             </a>
@@ -20,66 +22,8 @@
     </div>
 </div>
 <div class="app-body">
-    <div class="row gx-4">
-        <div class="col-lg-3 col-sm-12 col-12">
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsCapBu" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsCapBu" />
-                    <label class="form-check-label" for="IsCapBu">Cấp bù</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsKetLuan" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsKetLuan" />
-                    <label class="form-check-label" for="IsKetLuan">Hoàn thành</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsHopDong" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsHopDong" />
-                    <label class="form-check-label" for="IsHopDong">Hợp đồng</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsDonXinCapChungThuSo" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsDonXinCapChungThuSo" />
-                    <label class="form-check-label" for="IsDonXinCapChungThuSo">Đơn xin cấp chứng thư số</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsCCCD" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsCCCD" />
-                    <label class="form-check-label" for="IsCCCD">CCCD</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsGiayPhepKinhDoanh" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsGiayPhepKinhDoanh" />
-                    <label class="form-check-label" for="IsGiayPhepKinhDoanh">Giấy phép kinh doanh</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsBienBanNghiemThu" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsBienBanNghiemThu" />
-                    <label class="form-check-label" for="IsBienBanNghiemThu">Biên bản nghiệm thu</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-check form-check-inline mb-6">
-                    <input type="checkbox" class="form-check-input" name="IsHoaDon" disabled
-                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsHoaDon" />
-                    <label class="form-check-label" for="IsHoaDon">Hoá đơn</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9 col-sm-12 col-12">
+    <div class="row gx-4">       
+        <div class="col-lg-6 col-sm-12 col-12">
             <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Kết luận</label>
                 <input name="KetLuan" [(ngModel)]="DoanhNghiepDichVuCAService.formData.KetLuan" placeholder="Kết luận"
@@ -87,14 +31,38 @@
             </div>
             <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Tài khoản tạo yêu cầu</label>
-                <input name="TaiKhoanTaoYeuCau" [(ngModel)]="DoanhNghiepDichVuCAService.formData.TaiKhoanTaoYeuCau" placeholder="Tài khoản tạo yêu cầu"
+                <input name="TaiKhoanTaoYeuCau" [(ngModel)]="DoanhNghiepDichVuCAService.formData.TaiKhoanTaoYeuCau"
+                    placeholder="Tài khoản tạo yêu cầu" type="text" class="form-control">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Email</label>
+                <input name="Email" [(ngModel)]="DoanhNghiepDichVuCAService.formData.Email" placeholder="Email"
                     type="text" class="form-control">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Hiệu lực</label>
+                <input [ngModel]="DoanhNghiepDichVuCAService.formData.NgayHieuLuc | date:'yyyy-MM-dd'"
+                    (ngModelChange)="DateNgayHieuLuc($event)" [ngModelOptions]="{ updateOn: 'blur' }" type="date"
+                    class="form-control" autocomplete="off">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Hết hạn (Trước khi cộng nợ)</label>
+                <input [ngModel]="DoanhNghiepDichVuCAService.formData.NgayHetHanNguyenMau | date:'yyyy-MM-dd'"
+                    (ngModelChange)="DateNgayHetHanNguyenMau($event)" [ngModelOptions]="{ updateOn: 'blur' }"
+                    type="date" class="form-control" autocomplete="off">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Số ngày nợ khách</label>
+                <input name="Note" [(ngModel)]="DoanhNghiepDichVuCAService.formData.SoNgayNoKhach" placeholder="0"
+                    type="number" class="form-control">
             </div>
             <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Ghi chú</label>
                 <input name="Note" [(ngModel)]="DoanhNghiepDichVuCAService.formData.Note" placeholder="Ghi chú"
                     type="text" class="form-control">
-            </div>
+            </div>            
+        </div>
+        <div class="col-lg-6 col-sm-12 col-12">
             <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Hợp đồng: <a *ngIf="DoanhNghiepDichVuCAService.formData.HopDong"
                         target="_blank" class="link-primary" href="{{DoanhNghiepDichVuCAService.formData.HopDong}}"
@@ -152,8 +120,63 @@
                 </label>
                 <input class="form-control" type="file" #uploadHoaDon>
             </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsCapBu" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsCapBu" />
+                    <label class="form-check-label" for="IsCapBu">Cấp bù</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsKetLuan" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsKetLuan" />
+                    <label class="form-check-label" for="IsKetLuan">Hoàn thành</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsHopDong" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsHopDong" />
+                    <label class="form-check-label" for="IsHopDong">Hợp đồng</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsDonXinCapChungThuSo" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsDonXinCapChungThuSo" />
+                    <label class="form-check-label" for="IsDonXinCapChungThuSo">Đơn xin cấp chứng thư số</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsCCCD" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsCCCD" />
+                    <label class="form-check-label" for="IsCCCD">CCCD</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsGiayPhepKinhDoanh" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsGiayPhepKinhDoanh" />
+                    <label class="form-check-label" for="IsGiayPhepKinhDoanh">Giấy phép kinh doanh</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsBienBanNghiemThu" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsBienBanNghiemThu" />
+                    <label class="form-check-label" for="IsBienBanNghiemThu">Biên bản nghiệm thu</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="IsHoaDon" disabled
+                        [(ngModel)]="DoanhNghiepDichVuCAService.formData.IsHoaDon" />
+                    <label class="form-check-label" for="IsHoaDon">Hoá đơn</label>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
 <app-loading *ngIf="isShowLoading"></app-loading>

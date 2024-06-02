@@ -10,6 +10,12 @@ export class EmailService extends BaseService {
         super(httpClient);
         this.controller = "Email";
     }
+    AsyncHetHanDoanhNghiepDichVuCA2024() {       
+        let url = this.aPIURL + this.controller + '/AsyncHetHanDoanhNghiepDichVuCA2024';
+        const formUpload: FormData = new FormData();    
+        formUpload.append('data', JSON.stringify(this.BaseParameter));      
+        return this.httpClient.post(url, formUpload);
+    }
     AsyncThieuHoSoDoanhNghiepDichVuCA() {       
         let url = this.aPIURL + this.controller + '/AsyncThieuHoSoDoanhNghiepDichVuCA';
         const formUpload: FormData = new FormData();        

@@ -102,9 +102,9 @@ namespace Business.Implement
 					model.KetLuan = "Thiếu hồ sơ : " + model.KetLuan;
 				}
 			}
-			if (model.NgayHetHan != null)
+			if (model.NgayHetHanNguyenMau != null)
 			{
-				model.NgayHetHan = model.NgayHetHan.Value.AddDays(model.SoNgayNoKhach.Value);
+				model.NgayHetHan = model.NgayHetHanNguyenMau.Value.AddDays(model.SoNgayNoKhach.Value);
 			}
 		}
         //public override async Task<DoanhNghiepDichVuCA> SaveAsync(DoanhNghiepDichVuCA model)
