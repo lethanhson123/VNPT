@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>CRM</name>
-    <description>CRM</description>
-    <author email="creativegreenvn@gmail.com" href="https://crm.vnptvungtau.vn/">
-        VNPT Bà Rịa Vũng Tàu
+    <name>Lúa Phát Thải Thấp</name>
+    <description>Đề Án 1 Triệu HA Lúa Phát Thải Thấp | Mô Hình Thí Điểm</description>
+    <author email="digitalkingdomplus@gmail.com" href="https://cms.zerocarbonrice.com/">
+        Văn phòng điều phối nông nghiệp nông thôn vùng ĐBSCL
     </author>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
@@ -15,45 +15,45 @@
     <platform name="ios">
         <!-- iOS 8.0+ -->
         <!-- iPhone 6 Plus  -->
-        <icon src="www/res/ios/180.png" width="180" height="180" />
+        <icon src="www/res/ios/logo.png" width="180" height="180" />
         <!-- iOS 7.0+ -->
         <!-- iPhone / iPod Touch  -->
-        <icon src="www/res/ios/60.png" width="60" height="60" />
-        <icon src="www/res/ios/120.png" width="120" height="120" />
+        <icon src="www/res/ios/logo.png" width="60" height="60" />
+        <icon src="www/res/ios/logo.png" width="120" height="120" />
         <!-- iPad -->
-        <icon src="www/res/ios/76.png" width="76" height="76" />
-        <icon src="www/res/ios/152.png" width="152" height="152" />
+        <icon src="www/res/ios/logo.png" width="76" height="76" />
+        <icon src="www/res/ios/logo.png" width="152" height="152" />
         <!-- Spotlight Icon -->
-        <icon src="www/res/ios/40.png" width="40" height="40" />
-        <icon src="www/res/ios/80.png" width="80" height="80" />
+        <icon src="www/res/ios/logo.png" width="40" height="40" />
+        <icon src="www/res/ios/logo.png" width="80" height="80" />
         <!-- iOS 6.1 -->
         <!-- iPhone / iPod Touch -->
-        <icon src="www/res/ios/57.png" width="57" height="57" />
-        <icon src="www/res/ios/114.png" width="114" height="114" />
+        <icon src="www/res/ios/logo.png" width="57" height="57" />
+        <icon src="www/res/ios/logo.png" width="114" height="114" />
         <!-- iPad -->
-        <icon src="www/res/ios/72.png" width="72" height="72" />
-        <icon src="www/res/ios/144.png" width="144" height="144" />
+        <icon src="www/res/ios/logo.png" width="72" height="72" />
+        <icon src="www/res/ios/logo.png" width="144" height="144" />
         <!-- iPad Pro -->
-        <icon src="www/res/ios/167.png" width="167" height="167" />
+        <icon src="www/res/ios/logo.png" width="167" height="167" />
         <!-- iPhone Spotlight and Settings Icon -->
-        <icon src="www/res/ios/29.png" width="29" height="29" />
-        <icon src="www/res/ios/58.png" width="58" height="58" />
-        <icon src="www/res/ios/87.png" width="87" height="87" />
+        <icon src="www/res/ios/logo.png" width="29" height="29" />
+        <icon src="www/res/ios/logo.png" width="58" height="58" />
+        <icon src="www/res/ios/logo.png" width="87" height="87" />
         <!-- iPad Spotlight and Settings Icon -->
-        <icon src="www/res/ios/50.png" width="50" height="50" />
-        <icon src="www/res/ios/100.png" width="100" height="100" />
+        <icon src="www/res/ios/logo.png" width="50" height="50" />
+        <icon src="www/res/ios/logo.png" width="100" height="100" />
         <!-- iTunes Marketing Image -->
-        <icon src="www/res/ios/1024.png" width="1024" height="1024" />
+        <icon src="www/res/ios/logo.png" width="1024" height="1024" />
     </platform>
     <platform name="android">    
 
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/res/android/mipmap-xxxhdpi/ic_launcher.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/res/android/mipmap-xxxhdpi/logo.png" />
 
-        <icon src="www/res/android/mipmap-hdpi/ic_launcher.png" />
-        <icon density="mdpi" src="www/res/android/mipmap-mdpi/ic_launcher.png" />
-        <icon density="hdpi" src="www/res/android/mipmap-hdpi/ic_launcher.png" />
-        <icon density="xhdpi" src="www/res/android/mipmap-xhdpi/ic_launcher.png" />
-        <icon density="xxhdpi" src="www/res/android/mipmap-xxhdpi/ic_launcher.png" />
-        <icon density="xxxhdpi" src="www/res/android/mipmap-xxxhdpi/ic_launcher.png" />       
+        <icon src="www/res/android/mipmap-hdpi/logo.png" />
+        <icon density="mdpi" src="www/res/android/mipmap-mdpi/logo.png" />
+        <icon density="hdpi" src="www/res/android/mipmap-hdpi/logo.png" />
+        <icon density="xhdpi" src="www/res/android/mipmap-xhdpi/logo.png" />
+        <icon density="xxhdpi" src="www/res/android/mipmap-xxhdpi/logo.png" />
+        <icon density="xxxhdpi" src="www/res/android/mipmap-xxxhdpi/logo.png" />       
     </platform>
 </widget>
