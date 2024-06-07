@@ -57,6 +57,16 @@
                     type="number" class="form-control">
             </div>
             <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Loại yêu cầu</label>
+                <input name="LoaiYeuCau" [(ngModel)]="DoanhNghiepDichVuCAService.formData.LoaiYeuCau" placeholder="Loại yêu cầu"
+                    type="text" class="form-control">
+            </div>      
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Trạng thái chứng thư</label>
+                <input name="TrangThaiChungThu" [(ngModel)]="DoanhNghiepDichVuCAService.formData.TrangThaiChungThu" placeholder="Trạng thái chứng thư"
+                    type="text" class="form-control">
+            </div>      
+            <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Ghi chú</label>
                 <input name="Note" [(ngModel)]="DoanhNghiepDichVuCAService.formData.Note" placeholder="Ghi chú"
                     type="text" class="form-control">
