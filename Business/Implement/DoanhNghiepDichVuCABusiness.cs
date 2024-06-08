@@ -28,30 +28,30 @@ namespace Business.Implement
             {
                 model.SortOrder = 1;
             }            
-            if (model.HopDong.Contains(GlobalHelper.APISite) == false)
-            {
-                model.HopDong = GlobalHelper.InitializationString;
-            }
-            if (model.DonXinCapChungThuSo.Contains(GlobalHelper.APISite) == false)
-            {
-                model.DonXinCapChungThuSo = GlobalHelper.InitializationString;
-            }
-            if (model.CCCD.Contains(GlobalHelper.APISite) == false)
-            {
-                model.CCCD = GlobalHelper.InitializationString;
-            }
-            if (model.GiayPhepKinhDoanh.Contains(GlobalHelper.APISite) == false)
-            {
-                model.GiayPhepKinhDoanh = GlobalHelper.InitializationString;
-            }
-            if (model.HoaDon.Contains(GlobalHelper.APISite) == false)
-            {
-                model.HoaDon = GlobalHelper.InitializationString;
-            }
-            if (model.BienBanNghiemThu.Contains(GlobalHelper.APISite) == false)
-            {
-                model.BienBanNghiemThu = GlobalHelper.InitializationString;
-            }
+            //if (model.HopDong.Contains(GlobalHelper.APISite) == false)
+            //{
+            //    model.HopDong = GlobalHelper.InitializationString;
+            //}
+            //if (model.DonXinCapChungThuSo.Contains(GlobalHelper.APISite) == false)
+            //{
+            //    model.DonXinCapChungThuSo = GlobalHelper.InitializationString;
+            //}
+            //if (model.CCCD.Contains(GlobalHelper.APISite) == false)
+            //{
+            //    model.CCCD = GlobalHelper.InitializationString;
+            //}
+            //if (model.GiayPhepKinhDoanh.Contains(GlobalHelper.APISite) == false)
+            //{
+            //    model.GiayPhepKinhDoanh = GlobalHelper.InitializationString;
+            //}
+            //if (model.HoaDon.Contains(GlobalHelper.APISite) == false)
+            //{
+            //    model.HoaDon = GlobalHelper.InitializationString;
+            //}
+            //if (model.BienBanNghiemThu.Contains(GlobalHelper.APISite) == false)
+            //{
+            //    model.BienBanNghiemThu = GlobalHelper.InitializationString;
+            //}
             model.IsHopDong = false;
             model.IsDonXinCapChungThuSo = false;
             model.IsCCCD = false;
