@@ -27,36 +27,42 @@ namespace Business.Implement
             if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))
             {
                 model.SortOrder = 1;
-            }
-            string file = "https://crm.vnptvungtau.vn/x";
-            if (model.HopDong == file)
+            }            
+            if (model.HopDong.Contains(GlobalHelper.APISite) == false)
             {
                 model.HopDong = GlobalHelper.InitializationString;
             }
-            if (model.DonXinCapChungThuSo == file)
+            if (model.DonXinCapChungThuSo.Contains(GlobalHelper.APISite) == false)
             {
                 model.DonXinCapChungThuSo = GlobalHelper.InitializationString;
             }
-            if (model.CCCD == file)
+            if (model.CCCD.Contains(GlobalHelper.APISite) == false)
             {
                 model.CCCD = GlobalHelper.InitializationString;
             }
-            if (model.GiayPhepKinhDoanh == file)
+            if (model.GiayPhepKinhDoanh.Contains(GlobalHelper.APISite) == false)
             {
                 model.GiayPhepKinhDoanh = GlobalHelper.InitializationString;
             }
-            if (model.HoaDon == file)
+            if (model.HoaDon.Contains(GlobalHelper.APISite) == false)
             {
                 model.HoaDon = GlobalHelper.InitializationString;
             }
-            if (model.BienBanNghiemThu == file)
+            if (model.BienBanNghiemThu.Contains(GlobalHelper.APISite) == false)
             {
                 model.BienBanNghiemThu = GlobalHelper.InitializationString;
             }
+            model.IsHopDong = false;
+            model.IsDonXinCapChungThuSo = false;
+            model.IsCCCD = false;
+            model.IsGiayPhepKinhDoanh = false;
+            model.IsHoaDon = false;
+            model.IsBienBanNghiemThu = false;
+
             if (!string.IsNullOrEmpty(model.HopDong))
             {
                 model.IsHopDong = true;
-            }
+            }           
             if (!string.IsNullOrEmpty(model.DonXinCapChungThuSo))
             {
                 model.IsDonXinCapChungThuSo = true;
