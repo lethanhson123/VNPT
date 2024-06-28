@@ -1,0 +1,61 @@
+<div class="app-hero-header d-flex align-items-center">
+    <div class="d-flex align-items-center" style="min-width: 300px;">
+        <div class="me-3 icon-box md bg-white rounded-4">
+            <i class="bi bi-envelope-check fs-3 text-primary"></i>
+        </div>
+        <div>
+            <h4 class="mb-1">{{EmailMauService.formData.Name}} -
+                {{EmailMauService.formData.ID}}</h4>
+            <h6 class="m-0 text-dark fw-light">
+                Email mẫu
+            </h6>
+        </div>
+    </div>
+    <div class="ms-auto d-lg-flex d-none flex-row">
+        <div class="d-flex flex-row gap-2">
+            <a title="Lưu thay đổi" (click)="Save()" class="btn btn-info"><i class="bi bi-sd-card"></i></a>
+            <a title="Đóng" class="btn btn-danger" (click)="Close()">
+                <i class="bi bi-x-lg"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="app-body">
+    <div class="row gx-4">
+        <div class="col-lg-6 col-sm-12 col-12">
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Tiêu đề</label>
+                <input name="Name" [(ngModel)]="EmailMauService.formData.Name" placeholder="Tiêu đề" type="text"
+                    class="form-control">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Sắp xếp</label>
+                <input name="SortOrder" [(ngModel)]="EmailMauService.formData.SortOrder" placeholder="0" type="number"
+                    style="text-align: right;" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-12">
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Tập tin đính kèm (File word): </label>
+                <br />
+                <input type="file" (change)="ChangeFileName($event.target.files)" accept=".docx">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-check form-check-inline mb-6">
+                    <input type="checkbox" class="form-check-input" name="Active"
+                        [(ngModel)]="EmailMauService.formData.Active" />
+                    <label class="form-check-label" for="Active">Kích hoạt</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row gx-4">
+        <div class="col-lg-12 col-sm-12 col-12">
+            <ck-editor [config]="{'height': 500, 'width': 1200}" name="HTMLContent"
+                [(ngModel)]="EmailMauService.formData.HTMLContent" skin="moono-lisa" language="en"
+                [fullPage]="true"></ck-editor>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="isShowLoading"></app-loading>

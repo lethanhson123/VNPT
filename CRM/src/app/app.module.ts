@@ -46,6 +46,8 @@ import { PhanQuyenMenuComponent } from './phan-quyen-menu/phan-quyen-menu.compon
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
 import { DoanhNghiepCAComponent } from './doanh-nghiep-ca/doanh-nghiep-ca.component';
 import { DanhMucChucNangComponent } from './danh-muc-chuc-nang/danh-muc-chuc-nang.component';
+import { EmailMauComponent } from './email-mau/email-mau.component';
+import { EmailMauDetailComponent } from './email-mau-detail/email-mau-detail.component';
 
 
 
@@ -85,7 +87,9 @@ import { DanhMucChucNangComponent } from './danh-muc-chuc-nang/danh-muc-chuc-nan
     PhanQuyenMenuComponent,
     KhachHangComponent,
     DoanhNghiepCAComponent,
-    DanhMucChucNangComponent,    
+    DanhMucChucNangComponent,
+    EmailMauComponent,
+    EmailMauDetailComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

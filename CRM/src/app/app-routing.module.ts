@@ -30,6 +30,7 @@ import { PhanQuyenMenuComponent } from './phan-quyen-menu/phan-quyen-menu.compon
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
 import { DoanhNghiepCAComponent } from './doanh-nghiep-ca/doanh-nghiep-ca.component';
 import { DanhMucChucNangComponent } from './danh-muc-chuc-nang/danh-muc-chuc-nang.component';
+import { EmailMauComponent } from './email-mau/email-mau.component';
 
 
 const routes: Routes = [  
@@ -123,6 +124,9 @@ const routes: Routes = [
   },  
   {
     path: 'DanhMucChucNang', component: DanhMucChucNangComponent,
+  },  
+  {
+    path: 'EmailMau', component: EmailMauComponent,
   },  
 ];
 

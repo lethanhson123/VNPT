@@ -7,9 +7,7 @@ namespace Business
         public static IServiceCollection AddBusinessService(this IServiceCollection services)
         {
 			services.AddTransient<IDanhMucChucNangBusiness, DanhMucChucNangBusiness>();
-			services.AddTransient<IDanhMucGoiCuocBusiness, DanhMucGoiCuocBusiness>();
-			services.AddTransient<IEmailConfigBusiness, EmailConfigBusiness>();
-            services.AddTransient<IEmailLichSuBusiness, EmailLichSuBusiness>();
+			services.AddTransient<IDanhMucGoiCuocBusiness, DanhMucGoiCuocBusiness>();			
             services.AddTransient<IDichVuBusiness, DichVuBusiness>();
 			services.AddTransient<IDichVuChiTieuBusiness, DichVuChiTieuBusiness>();
 			services.AddTransient<IGoiCuocBusiness, GoiCuocBusiness>();
@@ -36,7 +34,13 @@ namespace Business
             services.AddTransient<IXaBusiness, XaBusiness>();
 			services.AddTransient<IMenuBusiness, MenuBusiness>();
 
-			services.AddTransient<IReportBusiness, ReportBusiness>();
+            services.AddTransient<IEmailConfigBusiness, EmailConfigBusiness>();
+            services.AddTransient<IEmailLichSuBusiness, EmailLichSuBusiness>();
+            services.AddTransient<IEmailMauBusiness, EmailMauBusiness>();
+            services.AddTransient<IEmailChienDichBusiness, EmailChienDichBusiness>();
+            services.AddTransient<IEmailChienDichChiTietBusiness, EmailChienDichChiTietBusiness>();
+
+            services.AddTransient<IReportBusiness, ReportBusiness>();
 
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             return services;
@@ -51,9 +55,7 @@ namespace Business
         public static IServiceCollection AddRepositoryService(this IServiceCollection services)
         {
 			services.AddTransient<IDanhMucChucNangRepository, DanhMucChucNangRepository>();
-			services.AddTransient<IDanhMucGoiCuocRepository, DanhMucGoiCuocRepository>();
-			services.AddTransient<IEmailConfigRepository, EmailConfigRepository>();
-            services.AddTransient<IEmailLichSuRepository, EmailLichSuRepository>();
+			services.AddTransient<IDanhMucGoiCuocRepository, DanhMucGoiCuocRepository>();			
             services.AddTransient<IDichVuRepository, DichVuRepository>();
 			services.AddTransient<IDichVuChiTieuRepository, DichVuChiTieuRepository>();
 			services.AddTransient<IGoiCuocRepository, GoiCuocRepository>();
@@ -80,7 +82,13 @@ namespace Business
             services.AddTransient<IXaRepository, XaRepository>();
 			services.AddTransient<IMenuRepository, MenuRepository>();
 
-			services.AddTransient<IReportRepository, ReportRepository>();
+            services.AddTransient<IEmailConfigRepository, EmailConfigRepository>();
+            services.AddTransient<IEmailLichSuRepository, EmailLichSuRepository>();
+            services.AddTransient<IEmailMauRepository, EmailMauRepository>();
+            services.AddTransient<IEmailChienDichRepository, EmailChienDichRepository>();
+            services.AddTransient<IEmailChienDichChiTietRepository, EmailChienDichChiTietRepository>();
+
+            services.AddTransient<IReportRepository, ReportRepository>();
 
             return services;
         }

@@ -12,8 +12,7 @@
 
 		public virtual DbSet<Data.Model.DanhMucChucNang> DanhMucChucNang { get; set; }
 		public virtual DbSet<Data.Model.DanhMucGoiCuoc> DanhMucGoiCuoc { get; set; }
-		public virtual DbSet<Data.Model.EmailConfig> EmailConfig { get; set; }
-        public virtual DbSet<Data.Model.EmailLichSu> EmailLichSu { get; set; }
+		
         public virtual DbSet<Data.Model.DichVu> DichVu { get; set; }
 		public virtual DbSet<Data.Model.DichVuChiTieu> DichVuChiTieu { get; set; }
 		public virtual DbSet<Data.Model.GoiCuoc> GoiCuoc { get; set; }
@@ -40,7 +39,13 @@
         public virtual DbSet<Data.Model.Xa> Xa { get; set; }
 		public virtual DbSet<Data.Model.Menu> Menu { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public virtual DbSet<Data.Model.EmailConfig> EmailConfig { get; set; }
+        public virtual DbSet<Data.Model.EmailLichSu> EmailLichSu { get; set; }
+        public virtual DbSet<Data.Model.EmailMau> EmailMau { get; set; }
+        public virtual DbSet<Data.Model.EmailChienDich> EmailChienDich { get; set; }
+        public virtual DbSet<Data.Model.EmailChienDichChiTiet> EmailChienDichChiTiet { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
