@@ -20,3 +20,8 @@ global using OfficeOpenXml.Style;
 global using System.Text;
 
 
+global using DocumentFormat.OpenXml.Packaging;
+global using OpenXmlPowerTools;
+
+global using Microsoft.AspNetCore.Hosting;
+global using System.Xml.Linq;

@@ -37,6 +37,7 @@ namespace Business
             services.AddTransient<IEmailConfigBusiness, EmailConfigBusiness>();
             services.AddTransient<IEmailLichSuBusiness, EmailLichSuBusiness>();
             services.AddTransient<IEmailMauBusiness, EmailMauBusiness>();
+            services.AddTransient<IEmailMauTapTinDinhKemBusiness, EmailMauTapTinDinhKemBusiness>();
             services.AddTransient<IEmailChienDichBusiness, EmailChienDichBusiness>();
             services.AddTransient<IEmailChienDichChiTietBusiness, EmailChienDichChiTietBusiness>();
 
@@ -85,6 +86,7 @@ namespace Business
             services.AddTransient<IEmailConfigRepository, EmailConfigRepository>();
             services.AddTransient<IEmailLichSuRepository, EmailLichSuRepository>();
             services.AddTransient<IEmailMauRepository, EmailMauRepository>();
+            services.AddTransient<IEmailMauTapTinDinhKemRepository, EmailMauTapTinDinhKemRepository>();
             services.AddTransient<IEmailChienDichRepository, EmailChienDichRepository>();
             services.AddTransient<IEmailChienDichChiTietRepository, EmailChienDichChiTietRepository>();
 

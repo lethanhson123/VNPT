@@ -42,6 +42,7 @@
         public virtual DbSet<Data.Model.EmailConfig> EmailConfig { get; set; }
         public virtual DbSet<Data.Model.EmailLichSu> EmailLichSu { get; set; }
         public virtual DbSet<Data.Model.EmailMau> EmailMau { get; set; }
+        public virtual DbSet<Data.Model.EmailMauTapTinDinhKem> EmailMauTapTinDinhKem { get; set; }
         public virtual DbSet<Data.Model.EmailChienDich> EmailChienDich { get; set; }
         public virtual DbSet<Data.Model.EmailChienDichChiTiet> EmailChienDichChiTiet { get; set; }
 

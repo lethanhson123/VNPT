@@ -107,4 +107,17 @@ export class EmailMauComponent implements OnInit {
       }
     );
   }
+  EmailMauDelete(element: EmailMau) {
+    if (confirm(environment.DeleteConfirm)) {
+      this.EmailMauService.RemoveAsync(element.ID).subscribe(
+        res => {
+          this.EmailMauSearch();
+          this.NotificationService.warn(environment.DeleteSuccess);
+        },
+        err => {
+          this.NotificationService.warn(environment.DeleteNotSuccess);
+        }
+      );
+    }
+  }
 }

@@ -3,9 +3,11 @@ import { NgForm } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/shared/notification.service';
+
 import { EmailMau } from 'src/app/shared/EmailMau.model';
 import { EmailMauService } from 'src/app/shared/EmailMau.service';
-
+import { EmailMauTapTinDinhKem } from 'src/app/shared/EmailMauTapTinDinhKem.model';
+import { EmailMauTapTinDinhKemService } from 'src/app/shared/EmailMauTapTinDinhKem.service';
 
 @Component({
   selector: 'app-email-mau-detail',
@@ -16,12 +18,6 @@ export class EmailMauDetailComponent implements OnInit {
 
   ID: number = environment.InitializationNumber;
   isShowLoading: boolean = false;
-  @ViewChild('uploadHopDong') uploadHopDong!: ElementRef;
-  @ViewChild('uploadDonXinCapChungThuSo') uploadDonXinCapChungThuSo!: ElementRef;
-  @ViewChild('uploadCCCD') uploadCCCD!: ElementRef;
-  @ViewChild('uploadGiayPhepKinhDoanh') uploadGiayPhepKinhDoanh!: ElementRef;
-  @ViewChild('uploadBienBanNghiemThu') uploadBienBanNghiemThu!: ElementRef;
-  @ViewChild('uploadHoaDon') uploadHoaDon!: ElementRef;
 
   constructor(
 
@@ -29,14 +25,16 @@ export class EmailMauDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
 
     public NotificationService: NotificationService,
+
     public EmailMauService: EmailMauService,
-    
-    
+    public EmailMauTapTinDinhKemService: EmailMauTapTinDinhKemService,
+
   ) {
     this.ID = data["ID"] as number;
   }
 
   ngOnInit(): void {
+    this.EmailMauTapTinDinhKemSearch();
   }
 
   Close() {
@@ -44,14 +42,21 @@ export class EmailMauDetailComponent implements OnInit {
   }
   ChangeFileName(files: FileList) {
     if (files) {
-      this.EmailMauService.FileToUpload = files;      
+      this.EmailMauService.FileToUpload = files;
     }
   }
-  Save() {    
-    this.isShowLoading = true;    
+  EmailMauTapTinDinhKemChangeFileName(files: FileList) {
+    if (files) {
+      this.EmailMauTapTinDinhKemService.FileToUpload = files;
+    }
+  }
+
+  Save() {
+    this.isShowLoading = true;
     this.EmailMauService.SaveAndUploadFileAsync().subscribe(
       res => {
         this.EmailMauService.formData = res as EmailMau;
+        this.EmailMauTapTinDinhKemSave();
         this.isShowLoading = false;
         this.NotificationService.warn(environment.SaveSuccess);
       },
@@ -60,5 +65,30 @@ export class EmailMauDetailComponent implements OnInit {
         this.NotificationService.warn(environment.SaveNotSuccess);
       }
     );
-  } 
+  }
+  EmailMauTapTinDinhKemSave() {
+    this.isShowLoading = true;
+    this.EmailMauTapTinDinhKemService.formData.ParentID = this.EmailMauService.formData.ID;
+    this.EmailMauTapTinDinhKemService.SaveAndUploadFilesAsync().subscribe(
+      res => {
+        this.EmailMauTapTinDinhKemSearch();
+        this.isShowLoading = false;        
+      },
+      err => {
+        this.isShowLoading = false;        
+      }
+    );
+  }
+  EmailMauTapTinDinhKemSearch() {
+    this.isShowLoading = true;
+    this.EmailMauTapTinDinhKemService.GetByParentIDToListAsync(this.EmailMauService.formData.ID).subscribe(
+      res => {
+        this.EmailMauTapTinDinhKemService.list = (res as EmailMauTapTinDinhKem[]);
+        this.isShowLoading = false;
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
 }

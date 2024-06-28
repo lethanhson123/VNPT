@@ -22,7 +22,7 @@
 </div>
 <div class="app-body">
     <div class="row gx-4">
-        <div class="col-lg-6 col-sm-12 col-12">
+        <div class="col-lg-4 col-sm-12 col-12">
             <div class="col-lg-12 col-sm-12 col-12">
                 <label class="form-label">Tiêu đề</label>
                 <input name="Name" [(ngModel)]="EmailMauService.formData.Name" placeholder="Tiêu đề" type="text"
@@ -33,13 +33,6 @@
                 <input name="SortOrder" [(ngModel)]="EmailMauService.formData.SortOrder" placeholder="0" type="number"
                     style="text-align: right;" class="form-control">
             </div>
-        </div>
-        <div class="col-lg-6 col-sm-12 col-12">
-            <div class="col-lg-12 col-sm-12 col-12">
-                <label class="form-label">Tập tin đính kèm (File word): </label>
-                <br />
-                <input type="file" (change)="ChangeFileName($event.target.files)" accept=".docx">
-            </div>
             <div class="col-lg-12 col-sm-12 col-12">
                 <div class="form-check form-check-inline mb-6">
                     <input type="checkbox" class="form-check-input" name="Active"
@@ -47,14 +40,34 @@
                     <label class="form-check-label" for="Active">Kích hoạt</label>
                 </div>
             </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">File word mẫu (01 file, nếu có): </label>
+                <br />
+                <input type="file" (change)="ChangeFileName($event.target.files)" accept=".docx">
+            </div>
+            <div class="col-lg-12 col-sm-12 col-12">
+                <label class="form-label">Hình ảnh (Nhều file, nếu có): </label>
+                <br />
+                <input type="file" multiple (change)="EmailMauTapTinDinhKemChangeFileName($event.target.files)"
+                    accept="image/*">
+            </div>
+            <br />
+            <div class="col-lg-12 col-sm-12 col-12"
+                *ngFor="let EmailMauTapTinDinhKem of EmailMauTapTinDinhKemService.list;">
+                <input value="{{EmailMauTapTinDinhKem.Code}}" type="text" class="form-control">
+                <a href="{{EmailMauTapTinDinhKem.Code}}" target="_blank"><img class="img-fluid rounded" width="120"
+                        height="80" title="{{EmailMauTapTinDinhKem.Code}}" alt="EmailMauTapTinDinhKem.Code"
+                        [src]="EmailMauTapTinDinhKem.Code"></a>
+                <br />
+                <br />
+            </div>
         </div>
-    </div>
-    <br />
-    <div class="row gx-4">
-        <div class="col-lg-12 col-sm-12 col-12">
-            <ck-editor [config]="{'height': 500, 'width': 1200}" name="HTMLContent"
-                [(ngModel)]="EmailMauService.formData.HTMLContent" skin="moono-lisa" language="en"
-                [fullPage]="true"></ck-editor>
+        <div class="col-lg-8 col-sm-12 col-12">
+            <div class="col-lg-12 col-sm-12 col-12">
+                <ck-editor [config]="{'height': 500, 'width': 900}" name="HTMLContent"
+                    [(ngModel)]="EmailMauService.formData.HTMLContent" skin="moono-lisa" language="en"
+                    [fullPage]="true"></ck-editor>
+            </div>
         </div>
     </div>
 </div>
