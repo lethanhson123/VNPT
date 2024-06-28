@@ -493,7 +493,7 @@
                                                         <td mat-cell *matCellDef="let element"> {{element.CodeCA}}
                                                         </td>
                                                     </ng-container>
-                                                    <ng-container matColumnDef="Code">
+                                                    <ng-container matColumnDef="SoChungThu">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Chứng thư
                                                         </th>
                                                         <td mat-cell *matCellDef="let element">{{element.Code}}
@@ -614,7 +614,7 @@
                                                     </tr>
                                                 </table>
                                                 <mat-paginator #paginatorReportCACapBu103="matPaginator"
-                                                    [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                                                [pageSizeOptions]="[5,100,200,500,1000]" [pageSize]="5"
                                                     [showFirstLastButtons]></mat-paginator>
                                             </div>
                                         </div>
