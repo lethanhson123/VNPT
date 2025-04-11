@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Lúa Phát Thải Thấp (LCR)</name>
-    <description>Đề Án 1 Triệu HA Lúa Phát Thải Thấp | Mô Hình Thí Điểm</description>
-    <author email="digitalkingdomplus@gmail.com" href="https://cms.zerocarbonrice.com/">
-        Văn phòng điều phối nông nghiệp nông thôn vùng ĐBSCL
+    <name>Đồng Nai</name>
+    <description>Hệ sinh thái số</description>
+    <author email="lethanhson123@gmail.com" href="https://benhviendakhoadongnai.com/">        
+        Bệnh viện đa khoa
     </author>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
